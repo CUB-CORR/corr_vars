@@ -80,6 +80,11 @@ authors:
   given-names: Felix
   affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
 - name: CORR Group
+doi: 10.5281/zenodo.22346472
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22346472
+    description: Zenodo archive of the released versions
 repository-code: https://github.com/CUB-CORR/corr-vars
 url: https://docs.corr-vars.de
 license: MIT

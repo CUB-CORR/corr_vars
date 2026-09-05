@@ -1,6 +1,6 @@
 # CORR-VARS – Streamlining Real-World Evidence Studies and Bedside Use <img src="docs/_static/corr_favicon.png" align="right" width="100"/>
 [![CI](https://img.shields.io/github/actions/workflow/status/CUB-CORR/corr_vars/tests.yml?branch=main)](https://github.com/CUB-CORR/corr_vars/actions/workflows/tests.yml)
-[![DOI](https://zenodo.org/badge/DOI/UPCOMING.svg)](https://doi.org/UPCOMING)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22346472.svg)](https://doi.org/10.5281/zenodo.22346472)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Build and manage clinical study cohorts from ICU and hospital data sources. Add, filter and export variables whose definitions are served — and versioned — by the CORR Concepts API.
