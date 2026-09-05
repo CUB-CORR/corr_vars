@@ -1,0 +1,1125 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time Primitives &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils_time';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Base Utilities" href="utils_base.html" />
+    <link rel="prev" title="Utils" href="utils.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="utils.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/utils_time.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/utils_time.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/utils_time.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time Primitives</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor"><code class="docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.column"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.column</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.delta"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.delta</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.expr"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.is_relative"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.is_relative</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.is_literal"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.is_literal</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.copy"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.shifted_by"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.shifted_by()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow"><code class="docutils literal notranslate"><span class="pre">TimeWindow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmax"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.from_obs_level"><code class="docutils literal notranslate"><span class="pre">TimeWindow.from_obs_level()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.from_anchor_and_duration"><code class="docutils literal notranslate"><span class="pre">TimeWindow.from_anchor_and_duration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.anchored_to_day"><code class="docutils literal notranslate"><span class="pre">TimeWindow.anchored_to_day()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.time_difference"><code class="docutils literal notranslate"><span class="pre">TimeWindow.time_difference()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.filled_tmin_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.filled_tmin_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmax_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.filled_tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.filled_tmax_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmid_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmid_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.duration_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.duration_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.is_relative"><code class="docutils literal notranslate"><span class="pre">TimeWindow.is_relative</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.is_literal"><code class="docutils literal notranslate"><span class="pre">TimeWindow.is_literal</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.any_timebound_in_year_9999_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.any_timebound_in_year_9999_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.any_timebound_null_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.any_timebound_null_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin_after_tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin_after_tmax_expr</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation"><code class="docutils literal notranslate"><span class="pre">WindowRelation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.CONTAINED"><code class="docutils literal notranslate"><span class="pre">WindowRelation.CONTAINED</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_LEFT"><code class="docutils literal notranslate"><span class="pre">WindowRelation.OVERLAPS_LEFT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_RIGHT"><code class="docutils literal notranslate"><span class="pre">WindowRelation.OVERLAPS_RIGHT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.COVERS_WINDOW"><code class="docutils literal notranslate"><span class="pre">WindowRelation.COVERS_WINDOW</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_LEFT_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_LEFT_OVERLAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_RIGHT_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_RIGHT_OVERLAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_OVERLAP</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap"><code class="docutils literal notranslate"><span class="pre">WindowOverlap</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.contains_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.contains_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.relation_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.relation_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.overlap_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.overlap_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.classify_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.classify_expr()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.compatible_with_time_anchor"><code class="docutils literal notranslate"><span class="pre">compatible_with_time_anchor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.compatible_with_time_window"><code class="docutils literal notranslate"><span class="pre">compatible_with_time_window()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.resolve_time_anchor"><code class="docutils literal notranslate"><span class="pre">resolve_time_anchor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.truncate_to_day"><code class="docutils literal notranslate"><span class="pre">truncate_to_day()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.format_delta"><code class="docutils literal notranslate"><span class="pre">format_delta()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="time-primitives">
+<h1>Time Primitives<a class="headerlink" href="#time-primitives" title="Link to this heading">#</a></h1>
+<p>Classes that represent time anchors and time windows used throughout variable extraction. <code class="docutils literal notranslate"><span class="pre">TimeAnchor</span></code> wraps a column name and an optional offset; <code class="docutils literal notranslate"><span class="pre">TimeWindow</span></code> pairs a <code class="docutils literal notranslate"><span class="pre">tmin</span></code> and <code class="docutils literal notranslate"><span class="pre">tmax</span></code> anchor into a single object passed through the extraction pipeline.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">TimeAnchor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bound</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeAnchor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bound</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.column">
+<span class="sig-name descname"><span class="pre">column</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.column" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.delta">
+<span class="sig-name descname"><span class="pre">delta</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.delta" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.expr">
+<span class="sig-name descname"><span class="pre">expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.is_relative">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_relative</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.is_relative" title="Link to this definition">#</a></dt>
+<dd><p>Whether a delta was applied — independently of what it was applied to.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.is_literal">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_literal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.is_literal" title="Link to this definition">#</a></dt>
+<dd><p>Whether this anchor is a fixed timestamp rather than a column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeAnchor.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.copy" title="Link to this definition">#</a></dt>
+<dd><p>Return a copy of this anchor.</p>
+<p>The copy shares only immutable state — column, delta and the polars
+expression — so re-pointing one of them leaves the original alone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeAnchor.shifted_by">
+<span class="sig-name descname"><span class="pre">shifted_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeAnchor.shifted_by"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeAnchor.shifted_by" title="Link to this definition">#</a></dt>
+<dd><p>Return a copy of this anchor moved by <em>delta</em>.</p>
+<p>Deltas stack: shifting <code class="docutils literal notranslate"><span class="pre">(&quot;icu_admission&quot;,</span> <span class="pre">&quot;+2h&quot;)</span></code> by <code class="docutils literal notranslate"><span class="pre">&quot;-1h&quot;</span></code> keeps
+the column, applies both offsets and appends to <a class="reference internal" href="#corr_vars.utils.time.TimeAnchor.delta" title="corr_vars.utils.time.TimeAnchor.delta"><code class="xref py py-attr docutils literal notranslate"><span class="pre">delta</span></code></a>.  A fixed
+timestamp is moved to the offset timestamp.</p>
+<p>Either way the result reports <a class="reference internal" href="#corr_vars.utils.time.TimeAnchor.is_relative" title="corr_vars.utils.time.TimeAnchor.is_relative"><code class="xref py py-attr docutils literal notranslate"><span class="pre">is_relative</span></code></a>, and a shifted literal
+stays <a class="reference internal" href="#corr_vars.utils.time.TimeAnchor.is_literal" title="corr_vars.utils.time.TimeAnchor.is_literal"><code class="xref py py-attr docutils literal notranslate"><span class="pre">is_literal</span></code></a>: the two describe different things — what the
+anchor is fixed to, and whether it was moved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></span>) – Offset such as <code class="docutils literal notranslate"><span class="pre">&quot;24h&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;-30m&quot;</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The shifted anchor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor">TimeAnchor</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <em>delta</em> is not a valid offset, or if shifting a fixed
+    timestamp leaves the representable datetime range — which is what
+    moving <code class="xref py py-data docutils literal notranslate"><span class="pre">UNBOUNDED_TMIN</span></code> further back or
+    <code class="xref py py-data docutils literal notranslate"><span class="pre">UNBOUNDED_TMAX</span></code> further forward does.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">TimeWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeWindow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmin">
+<span class="sig-name descname"><span class="pre">tmin</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><span class="pre">TimeAnchor</span></a></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmin" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmax">
+<span class="sig-name descname"><span class="pre">tmax</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><span class="pre">TimeAnchor</span></a></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmax" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.from_obs_level">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_obs_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeWindow.from_obs_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.from_obs_level" title="Link to this definition">#</a></dt>
+<dd><p>Build a <a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a> from an observation level’s <code class="docutils literal notranslate"><span class="pre">t_min</span></code> / <code class="docutils literal notranslate"><span class="pre">t_max</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObsLevel</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.from_anchor_and_duration">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_anchor_and_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anchor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeWindow.from_anchor_and_duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.from_anchor_and_duration" title="Link to this definition">#</a></dt>
+<dd><p>Build <code class="docutils literal notranslate"><span class="pre">[anchor,</span> <span class="pre">anchor</span> <span class="pre">+</span> <span class="pre">duration]</span></code> from one anchor and a length.</p>
+<p>Spares callers from repeating the anchor on both bounds — instead of
+<code class="docutils literal notranslate"><span class="pre">TimeWindow(&quot;icu_admission&quot;,</span> <span class="pre">(&quot;icu_admission&quot;,</span> <span class="pre">&quot;+28d&quot;))</span></code> write
+<code class="docutils literal notranslate"><span class="pre">TimeWindow.from_anchor_and_duration(&quot;icu_admission&quot;,</span> <span class="pre">&quot;28d&quot;)</span></code>. This is the
+natural shape for a T0-plus-horizon follow-up window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>anchor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></span>) – The window start (T0). A column name, <code class="docutils literal notranslate"><span class="pre">(column,</span> <span class="pre">delta)</span></code> tuple,
+datetime/date literal, or an existing <a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a>.</p></li>
+<li><p><strong>duration</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></span>) – Horizon length as a polars-duration string (<code class="docutils literal notranslate"><span class="pre">&quot;28d&quot;</span></code>) or a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code>. A leading sign is optional (<code class="docutils literal notranslate"><span class="pre">+</span></code>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.anchored_to_day">
+<span class="sig-name descname"><span class="pre">anchored_to_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeWindow.anchored_to_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.anchored_to_day" title="Link to this definition">#</a></dt>
+<dd><p>Return a copy with both bounds snapped to a day boundary.</p>
+<p>Snaps <code class="docutils literal notranslate"><span class="pre">tmin</span></code> and <code class="docutils literal notranslate"><span class="pre">tmax</span></code> via <a class="reference internal" href="#corr_vars.utils.time.truncate_to_day" title="corr_vars.utils.time.truncate_to_day"><code class="xref py py-func docutils literal notranslate"><span class="pre">truncate_to_day()</span></code></a> (<code class="docutils literal notranslate"><span class="pre">day_start=None</span></code>
+for calendar days, <code class="docutils literal notranslate"><span class="pre">&quot;6h&quot;</span></code> for ICU days). The original window is unchanged, so
+only the caller that wants day-anchored bounds is affected. When <code class="docutils literal notranslate"><span class="pre">tmax</span></code> is
+<code class="docutils literal notranslate"><span class="pre">tmin</span> <span class="pre">+</span> <span class="pre">Nd</span></code> both bounds shift by the same intra-day amount, so the horizon
+length is preserved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>day_start</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.time_difference">
+<span class="sig-name descname"><span class="pre">time_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#TimeWindow.time_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.time_difference" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'h'</span></code>, <code class="docutils literal notranslate"><span class="pre">'d'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w'</span></code>]</span>)</p></li>
+<li><p><strong>total</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmin_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">tmin_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmin_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.filled_tmin_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">filled_tmin_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.filled_tmin_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmax_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">tmax_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmax_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.filled_tmax_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">filled_tmax_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.filled_tmax_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmid_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">tmid_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmid_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.duration_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">duration_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.duration_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.is_relative">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_relative</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.is_relative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.is_literal">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_literal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.is_literal" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.any_timebound_in_year_9999_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">any_timebound_in_year_9999_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.any_timebound_in_year_9999_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.any_timebound_null_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">any_timebound_null_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.any_timebound_null_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="corr_vars.utils.time.TimeWindow.tmin_after_tmax_expr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">tmin_after_tmax_expr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Expr</span></span><a class="headerlink" href="#corr_vars.utils.time.TimeWindow.tmin_after_tmax_expr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">WindowRelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowRelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowRelation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.CONTAINED">
+<span class="sig-name descname"><span class="pre">CONTAINED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.CONTAINED" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.OVERLAPS_LEFT">
+<span class="sig-name descname"><span class="pre">OVERLAPS_LEFT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_LEFT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.OVERLAPS_RIGHT">
+<span class="sig-name descname"><span class="pre">OVERLAPS_RIGHT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_RIGHT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.COVERS_WINDOW">
+<span class="sig-name descname"><span class="pre">COVERS_WINDOW</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.COVERS_WINDOW" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.ANY_LEFT_OVERLAP">
+<span class="sig-name descname"><span class="pre">ANY_LEFT_OVERLAP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.ANY_LEFT_OVERLAP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.ANY_RIGHT_OVERLAP">
+<span class="sig-name descname"><span class="pre">ANY_RIGHT_OVERLAP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.ANY_RIGHT_OVERLAP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowRelation.ANY_OVERLAP">
+<span class="sig-name descname"><span class="pre">ANY_OVERLAP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></span><a class="headerlink" href="#corr_vars.utils.time.WindowRelation.ANY_OVERLAP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowOverlap">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">WindowOverlap</span></span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowOverlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowOverlap" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowOverlap.contains_expr">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">contains_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'both'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowOverlap.contains_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowOverlap.contains_expr" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a></span>)</p></li>
+<li><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>closed</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'left'</span></code>, <code class="docutils literal notranslate"><span class="pre">'right'</span></code>, <code class="docutils literal notranslate"><span class="pre">'both'</span></code>, <code class="docutils literal notranslate"><span class="pre">'none'</span></code>]</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowOverlap.relation_expr">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">relation_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowOverlap.relation_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowOverlap.relation_expr" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<a class="reference internal" href="#corr_vars.utils.time.WindowRelation" title="corr_vars.utils.time.WindowRelation"><code class="xref py py-class docutils literal notranslate"><span class="pre">WindowRelation</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowOverlap.overlap_expr">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">overlap_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowOverlap.overlap_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowOverlap.overlap_expr" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>relation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.WindowRelation" title="corr_vars.utils.time.WindowRelation"><code class="xref py py-class docutils literal notranslate"><span class="pre">WindowRelation</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.utils.time.WindowOverlap.classify_expr">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">classify_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#WindowOverlap.classify_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.WindowOverlap.classify_expr" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+<li><p><strong>default</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.WindowRelation" title="corr_vars.utils.time.WindowRelation"><code class="xref py py-class docutils literal notranslate"><span class="pre">WindowRelation</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.time.compatible_with_time_anchor">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">compatible_with_time_anchor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_anchor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#compatible_with_time_anchor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.compatible_with_time_anchor" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code></span>)</p></li>
+<li><p><strong>time_anchor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.time.compatible_with_time_window">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">compatible_with_time_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#compatible_with_time_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.compatible_with_time_window" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code></span>)</p></li>
+<li><p><strong>time_window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.time.resolve_time_anchor">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">resolve_time_anchor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#resolve_time_anchor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.resolve_time_anchor" title="Link to this definition">#</a></dt>
+<dd><p>Resolve a requirement’s <code class="docutils literal notranslate"><span class="pre">tmin</span></code> / <code class="docutils literal notranslate"><span class="pre">tmax</span></code> against the parent’s anchor.</p>
+<p>Four notations are accepted:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;inherit&quot;</span></code> — the parent’s anchor unchanged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;inherit&quot;,</span> <span class="pre">&quot;-1h&quot;)</span></code> — the parent’s anchor shifted by the delta.
+In <code class="docutils literal notranslate"><span class="pre">vars.json</span></code> this is written as <code class="docutils literal notranslate"><span class="pre">[&quot;inherit&quot;,</span> <span class="pre">&quot;-1h&quot;]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;-1h&quot;</span></code> — shorthand for the previous form; any bare delta is read
+relative to the parent, since no column is named like one.</p></li>
+<li><p>anything else — an anchor of its own (column, <code class="docutils literal notranslate"><span class="pre">(column,</span> <span class="pre">delta)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">None</span></code> for unbounded), returned untouched.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'inherit'</span></code>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]</span>) – The requirement’s configured anchor.</p></li>
+<li><p><strong>parent</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a></span>) – The anchor of the same side of the parent variable’s window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The resolved anchor, ready to be passed to <a class="reference internal" href="#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.time.truncate_to_day">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">truncate_to_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">day_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#truncate_to_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.truncate_to_day" title="Link to this definition">#</a></dt>
+<dd><p>Snap a datetime expression to the start of the day it falls in.</p>
+<p><code class="docutils literal notranslate"><span class="pre">day_start</span></code> shifts where a “day” begins, letting the same helper express
+different day conventions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> — calendar day: the boundary is midnight (<code class="docutils literal notranslate"><span class="pre">00:00</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;6h&quot;</span></code> — ICU day: the boundary is <code class="docutils literal notranslate"><span class="pre">06:00</span></code>, so timestamps between midnight
+and <code class="docutils literal notranslate"><span class="pre">06:00</span></code> roll into the <em>previous</em> day (<code class="docutils literal notranslate"><span class="pre">05:59</span></code> → <code class="docutils literal notranslate"><span class="pre">06:00</span></code> yesterday,
+<code class="docutils literal notranslate"><span class="pre">06:00</span></code> → <code class="docutils literal notranslate"><span class="pre">06:00</span></code> today). The offset-truncate-offset form handles this wrap
+without any hour-of-day branching.</p></li>
+</ul>
+<p>The result keeps the <code class="docutils literal notranslate"><span class="pre">Datetime</span></code> dtype (at the boundary time), so downstream
+datetime arithmetic is unaffected. <code class="docutils literal notranslate"><span class="pre">day_start</span></code> is a non-negative offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span>)</p></li>
+<li><p><strong>day_start</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.time.format_delta">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.time.</span></span><span class="sig-name descname"><span class="pre">format_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/time.html#format_delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.time.format_delta" title="Link to this definition">#</a></dt>
+<dd><p>Render a chain of offsets with an explicit sign in front of each.</p>
+<p>A positive offset is stored without a sign, so spelling every sign out is
+what keeps a chain readable: <code class="docutils literal notranslate"><span class="pre">(&quot;2h&quot;,</span> <span class="pre">&quot;-1h&quot;,</span> <span class="pre">&quot;3d&quot;)</span></code> becomes
+<code class="docutils literal notranslate"><span class="pre">&quot;+</span> <span class="pre">2h</span> <span class="pre">-</span> <span class="pre">1h</span> <span class="pre">+</span> <span class="pre">3d&quot;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The offsets, or a single one.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The chain with an operator in front of every offset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="utils.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Utils</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils_base.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Base Utilities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor"><code class="docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.column"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.column</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.delta"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.delta</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.expr"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.is_relative"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.is_relative</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.is_literal"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.is_literal</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.copy"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeAnchor.shifted_by"><code class="docutils literal notranslate"><span class="pre">TimeAnchor.shifted_by()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow"><code class="docutils literal notranslate"><span class="pre">TimeWindow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmax"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.from_obs_level"><code class="docutils literal notranslate"><span class="pre">TimeWindow.from_obs_level()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.from_anchor_and_duration"><code class="docutils literal notranslate"><span class="pre">TimeWindow.from_anchor_and_duration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.anchored_to_day"><code class="docutils literal notranslate"><span class="pre">TimeWindow.anchored_to_day()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.time_difference"><code class="docutils literal notranslate"><span class="pre">TimeWindow.time_difference()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.filled_tmin_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.filled_tmin_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmax_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.filled_tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.filled_tmax_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmid_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmid_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.duration_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.duration_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.is_relative"><code class="docutils literal notranslate"><span class="pre">TimeWindow.is_relative</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.is_literal"><code class="docutils literal notranslate"><span class="pre">TimeWindow.is_literal</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.any_timebound_in_year_9999_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.any_timebound_in_year_9999_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.any_timebound_null_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.any_timebound_null_expr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.TimeWindow.tmin_after_tmax_expr"><code class="docutils literal notranslate"><span class="pre">TimeWindow.tmin_after_tmax_expr</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation"><code class="docutils literal notranslate"><span class="pre">WindowRelation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.CONTAINED"><code class="docutils literal notranslate"><span class="pre">WindowRelation.CONTAINED</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_LEFT"><code class="docutils literal notranslate"><span class="pre">WindowRelation.OVERLAPS_LEFT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.OVERLAPS_RIGHT"><code class="docutils literal notranslate"><span class="pre">WindowRelation.OVERLAPS_RIGHT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.COVERS_WINDOW"><code class="docutils literal notranslate"><span class="pre">WindowRelation.COVERS_WINDOW</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_LEFT_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_LEFT_OVERLAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_RIGHT_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_RIGHT_OVERLAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowRelation.ANY_OVERLAP"><code class="docutils literal notranslate"><span class="pre">WindowRelation.ANY_OVERLAP</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap"><code class="docutils literal notranslate"><span class="pre">WindowOverlap</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.contains_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.contains_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.relation_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.relation_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.overlap_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.overlap_expr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.WindowOverlap.classify_expr"><code class="docutils literal notranslate"><span class="pre">WindowOverlap.classify_expr()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.compatible_with_time_anchor"><code class="docutils literal notranslate"><span class="pre">compatible_with_time_anchor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.compatible_with_time_window"><code class="docutils literal notranslate"><span class="pre">compatible_with_time_window()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.resolve_time_anchor"><code class="docutils literal notranslate"><span class="pre">resolve_time_anchor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.truncate_to_day"><code class="docutils literal notranslate"><span class="pre">truncate_to_day()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.time.format_delta"><code class="docutils literal notranslate"><span class="pre">format_delta()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

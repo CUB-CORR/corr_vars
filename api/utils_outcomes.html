@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Free-Day Outcomes &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils_outcomes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extraction Helpers" href="utils_helpers.html" />
+    <link rel="prev" title="DataFrame Utilities" href="utils_frames.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="utils.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/utils_outcomes.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/utils_outcomes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/utils_outcomes.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Free-Day Outcomes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.free_days"><code class="docutils literal notranslate"><span class="pre">free_days()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type Aliases</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.FreeDaysMethod"><code class="docutils literal notranslate"><span class="pre">FreeDaysMethod</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.DeathRule"><code class="docutils literal notranslate"><span class="pre">DeathRule</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.EventType"><code class="docutils literal notranslate"><span class="pre">EventType</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="free-day-outcomes">
+<h1>Free-Day Outcomes<a class="headerlink" href="#free-day-outcomes" title="Link to this heading">#</a></h1>
+<p>Source-agnostic “free-days-through-day-N” outcomes — ventilator-free days,
+RRT-free days, vasopressor-free days, and so on. <code class="xref py py-func docutils literal notranslate"><span class="pre">free_days()</span></code> counts the days in a
+follow-up horizon free of a clinical event and, optionally, emits the competing-risk
+components the VFD literature recommends reporting alongside the composite.</p>
+<p>The <a class="reference internal" href="core.html#corr_vars.core.variable.FreeDaysVariable" title="corr_vars.core.variable.FreeDaysVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeDaysVariable</span></code></a> variable type wraps this engine
+so an outcome is declared entirely in <code class="docutils literal notranslate"><span class="pre">vars.json</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;free_days&quot;</span></code>) with a
+single episode dependency, and <a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort.add_horizon_variable" title="corr_vars.core.cohort.Cohort.add_horizon_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_horizon_variable()</span></code></a>
+adds one over a <code class="docutils literal notranslate"><span class="pre">[t0,</span> <span class="pre">t0</span> <span class="pre">+</span> <span class="pre">horizon]</span></code> window.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.outcomes.free_days">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.outcomes.</span></span><span class="sig-name descname"><span class="pre">free_days</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">episodes</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'last_event'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">death_rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zero_if_dead'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recovery_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">death_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'recordtime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'recordtime_end'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'free_days'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_detail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/outcomes.html#free_days"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.outcomes.free_days" title="Link to this definition">#</a></dt>
+<dd><p>Count the days in a follow-up horizon free of some clinical event.</p>
+<p>The horizon <code class="docutils literal notranslate"><span class="pre">[T0,</span> <span class="pre">T0</span> <span class="pre">+</span> <span class="pre">H]</span></code> is taken from <code class="docutils literal notranslate"><span class="pre">window</span></code> (<code class="docutils literal notranslate"><span class="pre">T0</span> <span class="pre">=</span> <span class="pre">tmin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">H</span> <span class="pre">=</span> <span class="pre">tmax</span> <span class="pre">-</span> <span class="pre">tmin</span></code> in whole 24h days) and split into <code class="docutils literal notranslate"><span class="pre">H</span></code> day-blocks anchored at
+<code class="docutils literal notranslate"><span class="pre">T0</span></code>. Each block is scored free or not by <code class="docutils literal notranslate"><span class="pre">method</span></code>; the free blocks are summed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>) – One row per observation, providing the window anchor columns, the death
+column and (optionally) the censoring expression’s inputs.</p></li>
+<li><p><strong>episodes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>) – Event intervals (<code class="docutils literal notranslate"><span class="pre">recordtime</span></code> / <code class="docutils literal notranslate"><span class="pre">recordtime_end</span></code>) for the
+underlying concept, e.g. ventilation or vasopressor episodes. May hold
+several rows per observation, or none (then every day is free).</p></li>
+<li><p><strong>primary_key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The observation key shared by <code class="docutils literal notranslate"><span class="pre">obs</span></code> and <code class="docutils literal notranslate"><span class="pre">episodes</span></code>.</p></li>
+<li><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a></span>) – The follow-up window; <code class="docutils literal notranslate"><span class="pre">tmin</span></code> is T0, <code class="docutils literal notranslate"><span class="pre">tmax</span></code> is <code class="docutils literal notranslate"><span class="pre">T0</span> <span class="pre">+</span> <span class="pre">horizon</span></code>.</p></li>
+<li><p><strong>method</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'last_event'</span></code>, <code class="docutils literal notranslate"><span class="pre">'day_grid'</span></code>]</span>) – <code class="docutils literal notranslate"><span class="pre">&quot;last_event&quot;</span></code> (free tail after the last episode end) or
+<code class="docutils literal notranslate"><span class="pre">&quot;day_grid&quot;</span></code> (per-day union; gaps restore freedom).</p></li>
+<li><p><strong>death_rule</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'zero_if_dead'</span></code>, <code class="docutils literal notranslate"><span class="pre">'alive_days'</span></code>, <code class="docutils literal notranslate"><span class="pre">'negative_if_death'</span></code>]</span>) – <code class="docutils literal notranslate"><span class="pre">&quot;zero_if_dead&quot;</span></code> (any death in the horizon scores 0, ARDSnet),
+<code class="docutils literal notranslate"><span class="pre">&quot;negative_if_death&quot;</span></code> (death scores -1, the newer ordinal definition that
+ranks death below every survivor), or <code class="docutils literal notranslate"><span class="pre">&quot;alive_days&quot;</span></code> (days before death
+still count).</p></li>
+<li><p><strong>recovery_threshold</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – <code class="docutils literal notranslate"><span class="pre">day_grid</span></code> only — a day stays non-free until this long
+after the last episode end (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;7d&quot;</span></code> for RRT recovery).</p></li>
+<li><p><strong>death_col</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Column name or expression over <code class="docutils literal notranslate"><span class="pre">obs</span></code> giving the death timestamp.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> (the default, source-agnostic) or a name absent from <code class="docutils literal notranslate"><span class="pre">obs</span></code>
+disables the death rule.</p></li>
+<li><p><strong>censor_col</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Column name or expression over <code class="docutils literal notranslate"><span class="pre">obs</span></code> giving the last observable
+time per observation; when it precedes <code class="docutils literal notranslate"><span class="pre">END</span></code> the horizon is unobserved and
+the result is null. <code class="docutils literal notranslate"><span class="pre">None</span></code> or a name absent from <code class="docutils literal notranslate"><span class="pre">obs</span></code> disables
+censoring.</p></li>
+<li><p><strong>presence</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional observation-window intervals (<code class="docutils literal notranslate"><span class="pre">recordtime</span></code> /
+<code class="docutils literal notranslate"><span class="pre">recordtime_end</span></code>, e.g. in-hospital stays), keyed by <code class="docutils literal notranslate"><span class="pre">primary_key</span></code>. When
+given, a day counts as free only if it is <strong>also</strong> observed (covered by a
+presence interval) — the standard scoring intersected with presence — so an
+unobserved gap (discharge → readmission) is not miscredited as free. An open
+(null-end) interval is treated as observed through <code class="docutils literal notranslate"><span class="pre">END</span></code>. <code class="docutils literal notranslate"><span class="pre">None</span></code> keeps
+the standard behaviour (every day in <code class="docutils literal notranslate"><span class="pre">[T0,</span> <span class="pre">END]</span></code> is a candidate).</p></li>
+<li><p><strong>recordtime_end</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Episode interval columns in <code class="docutils literal notranslate"><span class="pre">episodes</span></code>.</p></li>
+<li><p><strong>merge_gap</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – When set (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;48h&quot;</span></code>), episodes separated by at most this long
+are first merged into one continuous interval (<code class="xref py py-func docutils literal notranslate"><span class="pre">_merge_episodes()</span></code>), so
+a short gap — a reintubation within 48h — does not count as free. Under
+<code class="docutils literal notranslate"><span class="pre">last_event</span></code> this bites when a re-event just past the horizon bridges the
+last in-horizon episode; under <code class="docutils literal notranslate"><span class="pre">day_grid</span></code> it also drops short interior
+gaps while keeping genuine long ones.</p></li>
+<li><p><strong>output_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Name of the produced count column.</p></li>
+<li><p><strong>with_detail</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Also emit a <code class="docutils literal notranslate"><span class="pre">{output_name}_detail</span></code> struct carrying the
+competing-risk components (<code class="docutils literal notranslate"><span class="pre">event_time_days</span></code>, <code class="docutils literal notranslate"><span class="pre">event_type</span></code>,
+<code class="docutils literal notranslate"><span class="pre">died_in_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">censored</span></code>, <code class="docutils literal notranslate"><span class="pre">n_episodes</span></code>) plus <code class="docutils literal notranslate"><span class="pre">unobserved_days</span></code>
+(free days removed by the <code class="docutils literal notranslate"><span class="pre">presence</span></code> intersection, else <code class="docutils literal notranslate"><span class="pre">0</span></code>). See
+<code class="xref py py-func docutils literal notranslate"><span class="pre">_detail_frame()</span></code>.</p></li>
+<li><p><strong>recordtime</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>recordtime_end</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">[primary_key,</span> <span class="pre">output_name]</span></code> (one row per observation, an
+<code class="docutils literal notranslate"><span class="pre">Int32</span></code> free-day count, null where censored), plus a
+<code class="docutils literal notranslate"><span class="pre">{output_name}_detail</span></code> struct column when <code class="docutils literal notranslate"><span class="pre">with_detail</span></code> is set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="type-aliases">
+<h2>Type Aliases<a class="headerlink" href="#type-aliases" title="Link to this heading">#</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="corr_vars.utils.outcomes.FreeDaysMethod">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.outcomes.</span></span><span class="sig-name descname"><span class="pre">FreeDaysMethod</span></span><a class="headerlink" href="#corr_vars.utils.outcomes.FreeDaysMethod" title="Link to this definition">#</a></dt>
+<dd><p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘last_event’, ‘day_grid’]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="corr_vars.utils.outcomes.DeathRule">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.outcomes.</span></span><span class="sig-name descname"><span class="pre">DeathRule</span></span><a class="headerlink" href="#corr_vars.utils.outcomes.DeathRule" title="Link to this definition">#</a></dt>
+<dd><p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘zero_if_dead’, ‘alive_days’, ‘negative_if_death’]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="corr_vars.utils.outcomes.EventType">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.outcomes.</span></span><span class="sig-name descname"><span class="pre">EventType</span></span><a class="headerlink" href="#corr_vars.utils.outcomes.EventType" title="Link to this definition">#</a></dt>
+<dd><p>Terminal follow-up status recorded in the detail struct. Concept-neutral so the
+same schema serves ventilation, vasopressor, RRT, … — the “event” is named by the
+variable itself.</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘liberated’, ‘died’, ‘censored’, ‘ongoing_at_horizon’]</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="utils_frames.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DataFrame Utilities</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils_helpers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Extraction Helpers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.free_days"><code class="docutils literal notranslate"><span class="pre">free_days()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type Aliases</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.FreeDaysMethod"><code class="docutils literal notranslate"><span class="pre">FreeDaysMethod</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.DeathRule"><code class="docutils literal notranslate"><span class="pre">DeathRule</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.outcomes.EventType"><code class="docutils literal notranslate"><span class="pre">EventType</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

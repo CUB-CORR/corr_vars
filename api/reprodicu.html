@@ -1,0 +1,976 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>reprodICU Data Source &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/reprodicu';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Local Data Source (skeleton)" href="local_datasource.html" />
+    <link rel="prev" title="Data Sources" href="sources.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sources.html">Data Sources</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/reprodicu.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/reprodicu.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/reprodicu.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>reprodICU Data Source</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-datasets">Included Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-axioms-and-concepts">Architecture: Axioms and Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-source-configuration">Multi-Source Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-filtering">Dataset Filtering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-reprodicu-cohort">Basic reprodICU Cohort</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-extraction">Variable Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-specific-analysis">Dataset-Specific Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-international-analysis">Combined International Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analysis-with-reprodicu">Temporal Analysis with reprodICU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-reprodicu">Best Practices for reprodICU</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-development">Future Development</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.reprodicu.cohort.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="reprodicu-data-source">
+<h1>reprodICU Data Source<a class="headerlink" href="#reprodicu-data-source" title="Link to this heading">#</a></h1>
+<p>The <strong>reprodICU</strong> source provides access to the largest harmonized critical care dataset publicly available, integrating data from <strong>469,822 ICU admissions</strong> across <strong>seven major public datasets</strong> from <strong>four countries</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">🌍 <strong>Unprecedented Scale and Scope</strong></p>
+<p>reprodICU is a <strong>freely accessible critical care dataset</strong> developed at the <strong>Institute of Medical Informatics (IMI)</strong> at <strong>Charité - Universitätsmedizin Berlin</strong>. It harmonizes data from multiple healthcare centers across the <strong>US and Europe</strong>, spanning from <strong>2001 to 2022</strong>.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">📊 <strong>Dataset Overview</strong></p>
+<ul class="simple">
+<li><p><strong>📈 Scale</strong>: 469,822 ICU admissions from ~350k patients</p></li>
+<li><p><strong>🗓️ Time Range</strong>: 2001-2022 (21 years of data)</p></li>
+<li><p><strong>📍 Geographic</strong>: Multiple centers across US and Europe</p></li>
+<li><p><strong>🔬 Variables</strong>: 136 routinely collected physiological variables, diagnostic test results, and treatment parameters</p></li>
+<li><p><strong>🔗 GitHub</strong>: <a class="reference external" href="https://github.com/cub-corr/reprodicu">cub-corr/reprodicu</a></p></li>
+<li><p><strong>📚 Documentation</strong>: <a class="reference external" href="http://wiki.reprodicu.org/">wiki.reprodicu.org</a></p></li>
+</ul>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>reprodICU represents a breakthrough in critical care research by providing <strong>standardized access</strong> to previously incompatible datasets. The harmonization process uses <strong>established clinical vocabularies</strong> (SNOMED, LOINC, RxNorm) and follows the structure of <strong>German Medical Informatics Initiative modules</strong> while applying <strong>minimal preprocessing</strong> to preserve source fidelity.</p>
+</section>
+<section id="included-datasets">
+<h2>Included Datasets<a class="headerlink" href="#included-datasets" title="Link to this heading">#</a></h2>
+<p>reprodICU harmonizes <strong>seven major public ICU datasets</strong> from multiple countries and healthcare systems:</p>
+<a class="reference internal image-reference" href="../_images/reprodicu_datasets.png"><img alt="reprodICU Integrated Datasets Overview" class="align-center" src="../_images/reprodicu_datasets.png" style="width: 100%;" />
+</a>
+<div class="tip admonition">
+<p class="admonition-title">🌍 <strong>Global Coverage</strong></p>
+<p>The integrated datasets span <strong>4 countries</strong> (US, Netherlands, Switzerland, Austria) and represent diverse healthcare systems, patient populations, and clinical practices, enabling robust external validation and generalizability studies.</p>
+</div>
+</section>
+<section id="architecture-axioms-and-concepts">
+<h2>Architecture: Axioms and Concepts<a class="headerlink" href="#architecture-axioms-and-concepts" title="Link to this heading">#</a></h2>
+<p>reprodICU follows a <strong>principled data architecture</strong> distinguishing between:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔬 <strong>Axioms</strong></div>
+<p class="sd-card-text"><strong>Underivable datapoints</strong> that cannot be calculated:</p>
+<ul class="simple">
+<li><p class="sd-card-text">Patient heart rate</p></li>
+<li><p class="sd-card-text">Laboratory measurements</p></li>
+<li><p class="sd-card-text">Basic demographics</p></li>
+<li><p class="sd-card-text">Raw physiological signals</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🧮 <strong>Concepts</strong></div>
+<p class="sd-card-text"><strong>Calculable variables</strong> derived from axioms:</p>
+<ul class="simple">
+<li><p class="sd-card-text">Clinical scores (SOFA, APACHE, SAPS)</p></li>
+<li><p class="sd-card-text">Mortality predictions</p></li>
+<li><p class="sd-card-text">Derived vital signs</p></li>
+<li><p class="sd-card-text">Complex clinical indices</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<div class="info admonition">
+<p class="admonition-title">✅ <strong>Variable Extraction Support</strong></p>
+<p>The reprodICU data source supports extraction of 30+ variables including:</p>
+<ul class="simple">
+<li><p><strong>Laboratory values</strong>: Sodium, Potassium, Creatinine, Glucose, Hemoglobin, etc.</p></li>
+<li><p><strong>Vital signs</strong>: Heart rate, Blood pressure, Temperature, Respiratory rate, etc.</p></li>
+<li><p><strong>Patient information</strong>: Age, Weight, BMI, Mortality outcomes, etc.</p></li>
+<li><p><strong>Clinical scores</strong>: Glasgow Coma Scale components, etc.</p></li>
+</ul>
+<p>Variables are extracted from parquet files using structured and non-structured data patterns.</p>
+</div>
+<section id="basic-setup">
+<h3>Basic Setup<a class="headerlink" href="#basic-setup" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="c1"># Configure reprodICU data source</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"reprodICU cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> ICU admissions"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">🔐 <strong>Access Requirements</strong></p>
+<p>You must have access to the reprodICU dataset files.</p>
+</div>
+</section>
+<section id="multi-source-configuration">
+<h3>Multi-Source Configuration<a class="headerlink" href="#multi-source-configuration" title="Link to this heading">#</a></h3>
+<p>reprodICU can be combined with any other configured source in a single cohort:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">},</span>
+        <span class="c1"># "my_source": {...},</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Analyze data source distribution</span>
+<span class="n">source_counts</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"data_source"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Multi-source cohort:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">source_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dataset-filtering">
+<h3>Dataset Filtering<a class="headerlink" href="#dataset-filtering" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exclude specific datasets from analysis</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">,</span>
+            <span class="s2">"exclude_datasets"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"hirid"</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">#</a></h2>
+<section id="basic-reprodicu-cohort">
+<h3>Basic reprodICU Cohort<a class="headerlink" href="#basic-reprodicu-cohort" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="c1"># Load harmonized critical care dataset</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"reprodICU cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> ICU admissions"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unique patients: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'patient_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dataset sources: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'data_source'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="variable-extraction">
+<h3>Variable Extraction<a class="headerlink" href="#variable-extraction" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.reprodicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
+
+<span class="c1"># Create cohort with variable extraction</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract laboratory values</span>
+<span class="n">sodium</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"blood_sodium"</span><span class="p">)</span>
+<span class="n">potassium</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"blood_potassium"</span><span class="p">)</span>
+<span class="n">creatinine</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"blood_creatinine"</span><span class="p">)</span>
+
+<span class="c1"># Extract vital signs</span>
+<span class="n">heart_rate</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"heart_rate"</span><span class="p">)</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span>
+<span class="n">oxygen_saturation</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">"oxygen_saturation"</span><span class="p">)</span>
+
+<span class="c1"># Add variables to cohort</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variables</span><span class="p">([</span><span class="n">sodium</span><span class="p">,</span> <span class="n">potassium</span><span class="p">,</span> <span class="n">creatinine</span><span class="p">,</span> <span class="n">heart_rate</span><span class="p">,</span> <span class="n">temperature</span><span class="p">])</span>
+
+<span class="c1"># Access extracted data</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Extracted </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sodium</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> sodium measurements"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Heart rate data shape: </span><span class="si">{</span><span class="n">heart_rate</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Available variables include:</span>
+<span class="c1"># Labs: blood_sodium, blood_potassium, blood_chloride, blood_creatinine,</span>
+<span class="c1">#       blood_glucose, blood_hemoglobin, blood_hematocrit, blood_platelets,</span>
+<span class="c1">#       blood_wbc, blood_lactate, blood_bicarbonate, blood_bilirubin, blood_ph</span>
+<span class="c1"># Vitals: heart_rate, temperature, respiratory_rate, oxygen_saturation,</span>
+<span class="c1">#         systolic_bp_invasive, systolic_bp_noninvasive, diastolic_bp_invasive,</span>
+<span class="c1">#         diastolic_bp_noninvasive, mean_bp_invasive, mean_bp_noninvasive, cvp</span>
+<span class="c1"># Patient: age_on_admission, height_on_admission, weight_on_admission, sex,</span>
+<span class="c1">#          inhospital_death</span>
+<span class="c1"># Scores: gcs_total, gcs_eye, gcs_verbal, gcs_motor</span>
+</pre></div>
+</div>
+</section>
+<section id="dataset-specific-analysis">
+<h3>Dataset-Specific Analysis<a class="headerlink" href="#dataset-specific-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze specific datasets within reprodICU</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Old server path</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">,</span>
+            <span class="s2">"include_datasets"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mimic_iv"</span><span class="p">,</span> <span class="s2">"eicu"</span><span class="p">,</span> <span class="s2">"hirid"</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Analyze dataset distribution</span>
+<span class="n">dataset_stats</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"data_source"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_admissions"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"patient_id"</span><span class="p">)</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_patients"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"earliest_admission"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"latest_admission"</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset statistics:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset_stats</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="combined-international-analysis">
+<h3>Combined International Analysis<a class="headerlink" href="#combined-international-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine reprodICU with another configured source</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">},</span>
+        <span class="c1"># "my_source": {...},</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Compare the characteristics of each contributing source</span>
+<span class="n">source_comparison</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"data_source"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_patients"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_age"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_length_of_stay"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_los"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mortality_rate"</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"International vs Local comparison:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">source_comparison</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="temporal-analysis-with-reprodicu">
+<h3>Temporal Analysis with reprodICU<a class="headerlink" href="#temporal-analysis-with-reprodicu" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze trends across the 21-year span (2001-2022)</span>
+<span class="n">temporal_trends</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"admission_year"</span><span class="p">)</span>
+<span class="p">])</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"admission_year"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_admissions"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_age"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mortality_rate"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_length_of_stay"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_los"</span><span class="p">)</span>
+<span class="p">])</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"admission_year"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Temporal trends in critical care (2001-2022):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temporal_trends</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices-for-reprodicu">
+<h3>Best Practices for reprodICU<a class="headerlink" href="#best-practices-for-reprodicu" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Best practice: Always check dataset source distribution</span>
+<span class="n">source_quality</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"data_source"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_admissions"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"missing_age"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"missing_sex"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"missing_outcome"</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data quality by source dataset:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">source_quality</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="future-development">
+<h2>Future Development<a class="headerlink" href="#future-development" title="Link to this heading">#</a></h2>
+<p>reprodICU is continuously evolving with planned enhancements:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔄 <strong>Data Updates</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text">Regular updates with newer dataset versions</p></li>
+<li><p class="sd-card-text">Additional source datasets integration</p></li>
+<li><p class="sd-card-text">Improved harmonization algorithms</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🧮 <strong>Enhanced Concepts</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text">More derived clinical variables</p></li>
+<li><p class="sd-card-text">Advanced scoring systems</p></li>
+<li><p class="sd-card-text">Machine learning-ready features</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<p>When working with reprodICU data:</p>
+<ol class="arabic simple">
+<li><p><strong>Dataset Selection</strong>: Choose appropriate source datasets based on your research question</p></li>
+<li><p><strong>Temporal Considerations</strong>: Account for data collection periods and practices across different eras (2001-2022)</p></li>
+<li><p><strong>Source Heterogeneity</strong>: Always consider differences between source datasets in analysis and interpretation</p></li>
+<li><p><strong>Data Quality Assessment</strong>: Verify data completeness for key variables across different source datasets</p></li>
+<li><p><strong>International Scope</strong>: Leverage the multi-country nature for external validation and generalizability studies</p></li>
+<li><p><strong>Harmonization Awareness</strong>: Understand that variables are harmonized but may have different underlying measurement practices</p></li>
+</ol>
+</section>
+<section id="class-reference">
+<h2>Class Reference<a class="headerlink" href="#class-reference" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.sources.reprodicu.cohort.load_data">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.sources.reprodicu.cohort.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/reprodicu/cohort.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.reprodicu.cohort.load_data" title="Link to this definition">#</a></dt>
+<dd><p>Load data from reprodicu parquet files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obs_level</strong> (<em>ObsLevel</em>) – Level of observation (“icu_stay”, “hospital_stay”, “procedure”)</p></li>
+<li><p><strong>source_kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">SourceDict</span></code></span>) – Dictionary containing source configuration
+- path: Path to reprodicu parquet files
+- exclude_datasets: List of datasets to exclude (optional)
+- include_datasets: List of datasets to include (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded observation data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sources.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Sources</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="local_datasource.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Local Data Source (skeleton)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-datasets">Included Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-axioms-and-concepts">Architecture: Axioms and Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-source-configuration">Multi-Source Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-filtering">Dataset Filtering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-reprodicu-cohort">Basic reprodICU Cohort</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-extraction">Variable Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-specific-analysis">Dataset-Specific Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-international-analysis">Combined International Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analysis-with-reprodicu">Temporal Analysis with reprodICU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-reprodicu">Best Practices for reprodICU</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-development">Future Development</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.reprodicu.cohort.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1250 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Aggregated Variables &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/aggregation';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="Local Data Source (skeleton)" href="local_datasource.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sources.html">Data Sources</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/aggregation.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/aggregation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/aggregation.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Aggregated Variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-types">Variable Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nativestatic-variables">NativeStatic Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivedstatic-variables">DerivedStatic Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriveddynamic-variables">DerivedDynamic Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-form">Declarative form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-constraints-and-filtering">Time Constraints and Filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-with-where-clauses">Filtering with WHERE Clauses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-clinical-indicators">Complex Clinical Indicators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outcome-variables">Outcome Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-indicators">Quality Indicators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic"><code class="docutils literal notranslate"><span class="pre">NativeStatic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic.base_var"><code class="docutils literal notranslate"><span class="pre">NativeStatic.base_var</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic.extract"><code class="docutils literal notranslate"><span class="pre">NativeStatic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedStatic"><code class="docutils literal notranslate"><span class="pre">DerivedStatic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedStatic.extract"><code class="docutils literal notranslate"><span class="pre">DerivedStatic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic"><code class="docutils literal notranslate"><span class="pre">DerivedDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic.extract"><code class="docutils literal notranslate"><span class="pre">DerivedDynamic.extract()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="aggregated-variables">
+<h1>Aggregated Variables<a class="headerlink" href="#aggregated-variables" title="Link to this heading">#</a></h1>
+<p>Aggregation variables create new variables by computing statistics or transformations
+from variables that are already in the cohort. They never touch a backing store, so they
+work on <strong>any</strong> cohort, whatever source supplies the underlying data.</p>
+<p>The classes live in <code class="xref py py-mod docutils literal notranslate"><span class="pre">corr_vars.sources.local_datasource</span></code> and are imported from there:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DerivedDynamic</span><span class="p">,</span>
+    <span class="n">DerivedStatic</span><span class="p">,</span>
+    <span class="n">NativeStatic</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>NativeStatic</strong>: one value per observation, aggregated from one dynamic <code class="docutils literal notranslate"><span class="pre">base_var</span></code>
+(e.g. first, last, mean, max)</p></li>
+<li><p><strong>DerivedStatic</strong>: one value per observation, computed from existing columns via an
+SQL-like <code class="docutils literal notranslate"><span class="pre">expression</span></code> or a <code class="docutils literal notranslate"><span class="pre">py</span></code> function</p></li>
+<li><p><strong>DerivedDynamic</strong>: a new time series computed from the variables in <code class="docutils literal notranslate"><span class="pre">requires</span></code> via a
+<code class="docutils literal notranslate"><span class="pre">py</span></code> function</p></li>
+</ul>
+</section>
+<section id="variable-types">
+<h2>Variable Types<a class="headerlink" href="#variable-types" title="Link to this heading">#</a></h2>
+<section id="nativestatic-variables">
+<h3>NativeStatic Variables<a class="headerlink" href="#nativestatic-variables" title="Link to this heading">#</a></h3>
+<p>NativeStatic collapses a dynamic variable into a single value per observation.</p>
+<p><strong>Available Aggregation Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!first</span> <span class="pre">[columns]</span></code>: First recorded row</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!last</span> <span class="pre">[columns]</span></code>: Last recorded row</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!any</span></code>: True if any value exists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!sum</span> <span class="pre">[column]</span></code>: Sum of values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!mean</span> <span class="pre">[column]</span></code>: Mean value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!median</span> <span class="pre">[column]</span></code>: Median value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!perc(quantile)</span> <span class="pre">[column]</span></code>: Percentile, e.g. <code class="docutils literal notranslate"><span class="pre">!perc(75)</span> <span class="pre">value</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!closest(to_column[,</span> <span class="pre">timedelta[,</span> <span class="pre">plusminus]])</span> <span class="pre">[columns]</span></code>: Value closest to a
+reference time</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The class docstring lists the functions above, but the implementation supports more.
+<code class="docutils literal notranslate"><span class="pre">!min</span></code>, <code class="docutils literal notranslate"><span class="pre">!max</span></code>, <code class="docutils literal notranslate"><span class="pre">!count</span></code>, <code class="docutils literal notranslate"><span class="pre">!std</span></code> and <code class="docutils literal notranslate"><span class="pre">!sum_interval</span></code> are also available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!min</span> <span class="pre">[column]</span></code> / <code class="docutils literal notranslate"><span class="pre">!max</span> <span class="pre">[column]</span></code>: Minimum / maximum value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!count</span> <span class="pre">[column]</span></code>: Number of rows in the window</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!std</span> <span class="pre">[column]</span></code>: Standard deviation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!sum_interval</span> <span class="pre">[column]</span></code>: Sum of interval values weighted by the overlap of each
+interval with the time window. Requires a <code class="docutils literal notranslate"><span class="pre">recordtime_end</span></code> column on the base
+variable.</p></li>
+</ul>
+</div>
+<p><strong>Examples:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">NativeStatic</span>
+
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># First blood pressure measurement</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"first_blood_pressure"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!first value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_pressure_sys"</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># Maximum heart rate during the ICU stay</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"max_heart_rate"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"heart_rate"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># Blood pressure closest to admission, within two hours</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"admission_blood_pressure"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!closest(icu_admission, 0, 2h) value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_pressure_sys"</span><span class="p">,</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">base_var</span></code> names an existing dynamic variable. It is resolved through the cohort’s own
+sources, so <code class="docutils literal notranslate"><span class="pre">blood_pressure_sys</span></code> above comes from <code class="docutils literal notranslate"><span class="pre">reprodicu</span></code>. Pass <code class="docutils literal notranslate"><span class="pre">tmin</span></code>/<code class="docutils literal notranslate"><span class="pre">tmax</span></code>
+inside the constructor — passing them to <code class="docutils literal notranslate"><span class="pre">add_variable()</span></code> for an object emits a
+<code class="docutils literal notranslate"><span class="pre">UserWarning</span></code>.</p>
+</section>
+<section id="derivedstatic-variables">
+<h3>DerivedStatic Variables<a class="headerlink" href="#derivedstatic-variables" title="Link to this heading">#</a></h3>
+<p>DerivedStatic computes one value per observation from columns that are already on the
+observation frame, either with an <code class="docutils literal notranslate"><span class="pre">expression</span></code> (parsed by <code class="docutils literal notranslate"><span class="pre">polars.sql_expr</span></code>) or with a
+<code class="docutils literal notranslate"><span class="pre">py</span></code> function.</p>
+<p><strong>Expression-Based Variables:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivedStatic</span>
+
+<span class="c1"># Body mass index</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"bmi"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"weight_on_admission"</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"weight_on_admission / (height / 100) ** 2"</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># Threshold flag on an aggregated value</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"hypernatremia"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"max_sodium_icu"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"max_sodium_icu &gt; 145"</span><span class="p">,</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Custom Function Variables:</strong></p>
+<p>For anything an expression cannot express, pass a <code class="docutils literal notranslate"><span class="pre">py</span></code> function. It receives the
+variable and the cohort, and returns a frame keyed on the cohort’s primary key:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">lactate_clearance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">agg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"last_lactate"</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">agg</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+        <span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"last_lactate"</span><span class="p">))</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_clearance"</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"lactate_clearance"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">],</span>
+    <span class="n">py</span><span class="o">=</span><span class="n">lactate_clearance</span><span class="p">,</span>
+    <span class="n">py_ready_polars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="deriveddynamic-variables">
+<h3>DerivedDynamic Variables<a class="headerlink" href="#deriveddynamic-variables" title="Link to this heading">#</a></h3>
+<p>DerivedDynamic builds a new time series from the variables in <code class="docutils literal notranslate"><span class="pre">requires</span></code>. The <code class="docutils literal notranslate"><span class="pre">py</span></code>
+function returns rows carrying the primary key, <code class="docutils literal notranslate"><span class="pre">recordtime</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivedDynamic</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pf_ratio</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+    <span class="n">pao2</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"blood_pao2_arterial"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">fio2</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"vent_fio2"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">joined</span> <span class="o">=</span> <span class="n">pao2</span><span class="o">.</span><span class="n">join_asof</span><span class="p">(</span>
+        <span class="n">fio2</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"fio2"</span><span class="p">}),</span>
+        <span class="n">on</span><span class="o">=</span><span class="s2">"recordtime"</span><span class="p">,</span>
+        <span class="n">by</span><span class="o">=</span><span class="s2">"icu_stay_id"</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="o">=</span><span class="s2">"1h"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">joined</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+        <span class="s2">"recordtime"</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"fio2"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"value"</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedDynamic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"pf_ratio"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"blood_pao2_arterial"</span><span class="p">,</span> <span class="s2">"vent_fio2"</span><span class="p">],</span>
+    <span class="n">py</span><span class="o">=</span><span class="n">pf_ratio</span><span class="p">,</span>
+    <span class="n">py_ready_polars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cleaning</span><span class="o">=</span><span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"low"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mi">800</span><span class="p">}},</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="declarative-form">
+<h2>Declarative form<a class="headerlink" href="#declarative-form" title="Link to this heading">#</a></h2>
+<p>The same variables can be written as declarative definitions instead of objects. This is
+the shape a source’s bundled <code class="docutils literal notranslate"><span class="pre">vars.json</span></code> and the CORR Concepts API use, and
+<code class="docutils literal notranslate"><span class="pre">Cohort.add_variable_definition()</span></code> accepts it for a single project:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span><span class="o">.</span><span class="n">add_variable_definition</span><span class="p">(</span><span class="s2">"max_sodium_icu"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"native_static"</span><span class="p">,</span>
+    <span class="s2">"select"</span><span class="p">:</span> <span class="s2">"!max value"</span><span class="p">,</span>
+    <span class="s2">"base_var"</span><span class="p">:</span> <span class="s2">"blood_sodium"</span><span class="p">,</span>   <span class="c1"># NOT "requires"</span>
+<span class="p">})</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"max_sodium_icu"</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">native_static</span></code> the field naming the aggregated variable is <code class="docutils literal notranslate"><span class="pre">base_var</span></code> (the legacy
+alias <code class="docutils literal notranslate"><span class="pre">variable</span></code> is still accepted), never <code class="docutils literal notranslate"><span class="pre">requires</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A project-local definition is dispatched to the <code class="docutils literal notranslate"><span class="pre">VariableLoader</span></code> of <strong>every</strong> source
+configured on the cohort, and only a loader that knows the type can build it.
+<a class="reference internal" href="local_datasource.html#corr_vars.sources.local_datasource.extract.VariableLoader" title="corr_vars.sources.local_datasource.extract.VariableLoader"><code class="xref py py-func docutils literal notranslate"><span class="pre">VariableLoader()</span></code></a> knows
+<code class="docutils literal notranslate"><span class="pre">native_static</span></code>, <code class="docutils literal notranslate"><span class="pre">derived_static</span></code>, <code class="docutils literal notranslate"><span class="pre">derived_dynamic</span></code>, <code class="docutils literal notranslate"><span class="pre">native_dynamic</span></code>,
+<code class="docutils literal notranslate"><span class="pre">complex</span></code> and <code class="docutils literal notranslate"><span class="pre">free_days</span></code>; the <code class="docutils literal notranslate"><span class="pre">reprodicu</span></code> loader does not — it raises
+<code class="docutils literal notranslate"><span class="pre">TypeError</span></code> on <code class="docutils literal notranslate"><span class="pre">select</span></code> / <code class="docutils literal notranslate"><span class="pre">base_var</span></code> / <code class="docutils literal notranslate"><span class="pre">expression</span></code>.</p>
+<p>So on a reprodICU-only cohort, use the declarative form for <strong>overrides of served
+definitions</strong> (<code class="docutils literal notranslate"><span class="pre">cleaning</span></code>, <code class="docutils literal notranslate"><span class="pre">filter</span></code>, …) and for reprodICU’s own fields, and use
+direct construction for the aggregation types. The declarative form for aggregation
+types is for deployments that bound <code class="docutils literal notranslate"><span class="pre">local_datasource</span></code> (see
+<a class="reference internal" href="local_datasource.html"><span class="doc">Local Data Source (skeleton)</span></a>) and for authoring definitions in <code class="docutils literal notranslate"><span class="pre">vars.json</span></code> or the
+Concepts API.</p>
+</div>
+</section>
+<section id="time-constraints-and-filtering">
+<h2>Time Constraints and Filtering<a class="headerlink" href="#time-constraints-and-filtering" title="Link to this heading">#</a></h2>
+<p>All aggregation variables support time constraints. <code class="docutils literal notranslate"><span class="pre">tmin</span></code>/<code class="docutils literal notranslate"><span class="pre">tmax</span></code> accept a column name
+or a <code class="docutils literal notranslate"><span class="pre">(column,</span> <span class="pre">offset)</span></code> tuple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Values only from the first 24 hours</span>
+<span class="n">early_lactate</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"max_lactate_24h"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_lactate"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+24h"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Values before a specific event</span>
+<span class="n">pre_intubation_spo2</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"last_spo2_before_intubation"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!last value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"spo2"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"first_intubation_dtime"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="filtering-with-where-clauses">
+<h3>Filtering with WHERE Clauses<a class="headerlink" href="#filtering-with-where-clauses" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">where</span></code> filters the base variable’s rows before aggregation. It takes an SQL-style
+boolean expression, or one of <code class="docutils literal notranslate"><span class="pre">!isin</span></code> / <code class="docutils literal notranslate"><span class="pre">!startswith</span></code> / <code class="docutils literal notranslate"><span class="pre">!endswith</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only febrile values</span>
+<span class="n">high_temp</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"max_fever_temperature"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"body_temperature"</span><span class="p">,</span>
+    <span class="n">where</span><span class="o">=</span><span class="s2">"value &gt; 38.0"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Specific medication labels</span>
+<span class="n">max_norepinephrine</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"max_norepinephrine_dose"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"med_norepinephrine"</span><span class="p">,</span>
+    <span class="n">where</span><span class="o">=</span><span class="s2">"!isin(description, ['Norepinephrine', 'Noradrenaline'])"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-examples">
+<h2>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Link to this heading">#</a></h2>
+<section id="complex-clinical-indicators">
+<h3>Complex Clinical Indicators<a class="headerlink" href="#complex-clinical-indicators" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shock index at admission, from two aggregated values</span>
+<span class="n">shock_index</span> <span class="o">=</span> <span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"shock_index_admission"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"first_heart_rate"</span><span class="p">,</span> <span class="s2">"first_blood_pressure_sys"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"first_heart_rate / first_blood_pressure_sys"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># APACHE II acute physiology components</span>
+<span class="n">apache_temp</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"apache_temperature"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!closest(icu_admission, 0, 24h) value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"body_temperature"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">apache_map</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"apache_mean_arterial_pressure"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!closest(icu_admission, 0, 24h) value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_pressure_mean"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="outcome-variables">
+<h3>Outcome Variables<a class="headerlink" href="#outcome-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ICU length of stay in days</span>
+<span class="n">icu_los</span> <span class="o">=</span> <span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"icu_length_of_stay_days"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"icu_discharge"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"(icu_discharge - icu_admission).dt.total_seconds() / 86400"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Free-day outcomes (ventilator-, ICU-, RRT-free days, …) are no longer hand-rolled as
+<code class="docutils literal notranslate"><span class="pre">DerivedStatic</span></code> variables. They are declarative <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;free_days&quot;</span></code> variables
+backed by <a class="reference internal" href="core.html#corr_vars.core.variable.FreeDaysVariable" title="corr_vars.core.variable.FreeDaysVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeDaysVariable</span></code></a>; add them with
+<a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort.add_horizon_variable" title="corr_vars.core.cohort.Cohort.add_horizon_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_horizon_variable()</span></code></a>, e.g.
+<code class="docutils literal notranslate"><span class="pre">cohort.add_horizon_variable(&quot;vent_free_days&quot;,</span> <span class="pre">t0=&quot;icu_admission&quot;,</span> <span class="pre">horizon=28)</span></code>.
+See <a class="reference internal" href="utils_outcomes.html"><span class="doc">Free-Day Outcomes</span></a>.</p>
+</div>
+</section>
+<section id="quality-indicators">
+<h3>Quality Indicators<a class="headerlink" href="#quality-indicators" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of blood pressure measurements during the stay</span>
+<span class="n">bp_frequency</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"bp_measurement_count"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!count value"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_pressure_sys"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Time of the first antibiotic administration</span>
+<span class="n">time_to_abx</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"first_antibiotic_time"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!first recordtime"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"any_antibiotic_icu"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Use appropriate aggregation functions</strong>: choose the one that matches the clinical
+question rather than post-processing a broader one.</p></li>
+<li><p><strong>Set time constraints</strong>: specify <code class="docutils literal notranslate"><span class="pre">tmin</span></code>/<code class="docutils literal notranslate"><span class="pre">tmax</span></code> to avoid temporal bias.</p></li>
+<li><p><strong>Apply cleaning rules</strong>: use <code class="docutils literal notranslate"><span class="pre">cleaning</span></code> to drop physiologically impossible values.</p></li>
+<li><p><strong>Prefer expressions over ``py``</strong>: an <code class="docutils literal notranslate"><span class="pre">expression</span></code> is cheaper and easier to review.</p></li>
+<li><p><strong>Validate results</strong>: check aggregated values for clinical plausibility before use.</p></li>
+</ol>
+</section>
+<section id="class-reference">
+<h2>Class Reference<a class="headerlink" href="#class-reference" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeStatic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">NativeStatic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeStatic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeStatic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ScreenedRequirements</span></code>, <a class="reference internal" href="core.html#corr_vars.core.variable.Variable" title="corr_vars.core.variable.base.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
+<p>Aggregated variables represent simple aggregations of dynamic variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<em>str</em>) – Name of the variable.</p></li>
+<li><p><strong>select</strong> (<em>str</em>) – Select clause specifying aggregation function and columns.</p></li>
+<li><p><strong>base_var</strong> (<em>str</em>) – Name of the base variable (must be a native_dynamic variable).</p></li>
+<li><p><strong>where</strong> (<em>str</em><em>, </em><em>optional</em>) – Optional WHERE clause (in format for polars).</p></li>
+<li><p><strong>tmin</strong> (<em>str</em><em>, </em><em>optional</em>) – Minimum time for the extraction.</p></li>
+<li><p><strong>tmax</strong> (<em>str</em><em>, </em><em>optional</em>) – Maximum time for the extraction.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The select argument supports several aggregation functions:</p>
+<ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!first</span> <span class="pre">[columns]</span></code>: Returns the first row within this case</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!first value"</span>  <span class="c1"># Single column</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"!first value, recordtime"</span>  <span class="c1"># Multiple columns</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!last</span> <span class="pre">[columns]</span></code>: Returns the last row within this case</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!last value"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"!last value, recordtime"</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!any</span></code>: Returns True if any value exists</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!any"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"!any value"</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!sum</span> <span class="pre">[column]</span></code>: Calculates sum of values</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!sum value"</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!closest(to_column,</span> <span class="pre">timedelta,</span> <span class="pre">plusminus)</span> <span class="pre">[columns]</span></code>: Selects value closest to specified column</dt><dd><dl class="simple">
+<dt>Args:</dt><dd><p>to_column: Column to compare “recordtime” against
+timedelta: Time to add to “to_column” for comparison
+plusminus: Allowed time mismatch (can specify different before/after with space)</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!closest(hospital_admission) value, recordtime"</span>  <span class="c1"># Closest to admission</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"!closest(hospital_admission, 0, 2h 3h) value"</span>  <span class="c1"># 2h before to 3h after</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"!closest(first_intubation_dtime, 6h, 2h) value"</span>  <span class="c1"># 6h after intubation ±2h</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!mean</span> <span class="pre">[column]</span></code>: Calculates mean value</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!mean value"</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!median</span> <span class="pre">[column]</span></code>: Calculates median value</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!median value"</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">!perc(quantile)</span> <span class="pre">[column]</span></code>: Calculates specified percentile</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">"!perc(75) value"</span>  <span class="c1"># 75th percentile</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The where argument supports SQL-style boolean expressions. These are evaluated in the context of the base variable by column_selector().
+Where also supports magic commands (starting with !) to filter the data. Supported commands are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!isin(column,</span> <span class="pre">[values])</span></code>: Filters rows where the value in column is in values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!startswith(column,</span> <span class="pre">[values])</span></code>: Filters rows where the value in column starts with any of the values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!endswith(column,</span> <span class="pre">[values])</span></code>: Filters rows where the value in column ends with any of the values</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeStatic.base_var">
+<span class="sig-name descname"><span class="pre">base_var</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><span class="pre">TimeWindow</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">VariableProtocol</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">MultiSourceVariable</span></span><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeStatic.base_var" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeStatic.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeStatic.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeStatic.extract" title="Link to this definition">#</a></dt>
+<dd><p>Extract the variable. You do not need to call this yourself, as it is called internally when you add the variable to a cohort.
+However, you may call it directly to obtain variable data independently of the cohort. You still need a cohort object for case ids and other metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>) – Cohort object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Extracted variable.</p>
+</dd>
+</dl>
+<p>After extraction, you may also access the data as <code class="docutils literal notranslate"><span class="pre">Variable.data</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="n">NativeStatic</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">var_name</span><span class="o">=</span><span class="s2">"first_sodium_recordtime"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">select</span><span class="o">=</span><span class="s2">"!first recordtime"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_sodium"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">tmin</span><span class="o">=</span><span class="s2">"hospital_admission"</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cohort</span>
+<span class="gp">... </span><span class="p">)</span>  <span class="c1"># With var.extract(), the data will not be added to the cohort.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># You can access the data as a polars dataframe.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.DerivedStatic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">DerivedStatic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py_ready_polars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#DerivedStatic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.DerivedStatic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ScreenedRequirements</span></code>, <a class="reference internal" href="core.html#corr_vars.core.variable.Variable" title="corr_vars.core.variable.base.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
+<p>DerivedStatic: These variables are derivations on existing columns in the cohort.obs dataframe based on the expression argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> – Name of the variable.</p></li>
+<li><p><strong>requires</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RequirementsDict</span></code>]</span>) – List of required variables.</p></li>
+<li><p><strong>expression</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Expression to extract the variable.</p></li>
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Minimum time for the extraction.</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Maximum time for the extraction.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that DerivedStatic variables are executed on the cohort.obs dataframe and must reference existing columns in cohort.obs.</p>
+<p>For DerivedStatic variables, you may either provide an SQL-Like expression (which will be parsed by <cite>column_selector</cite>) or a custom function in variables.py.
+Use expressions where possible, but custom functions if you require more complex logic.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DerivedStatic</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">var_name</span><span class="o">=</span><span class="s2">"inhospital_death"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"hospital_discharge"</span><span class="p">,</span> <span class="s2">"death_timestamp"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">expression</span><span class="o">=</span><span class="s2">"hospital_discharge &lt;= death_timestamp"</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DerivedStatic</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">var_name</span><span class="o">=</span><span class="s2">"any_va_ecmo_icu"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"ecmo_va_icu_ops"</span><span class="p">,</span> <span class="s2">"ecmo_va_icu"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">expression</span><span class="o">=</span><span class="p">(</span><span class="n">ecmo_va_icu_ops</span> <span class="o">|</span> <span class="n">ecmo_va_icu</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>py</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableCallable</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>py_ready_polars</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>dynamic</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.DerivedStatic.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#DerivedStatic.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.DerivedStatic.extract" title="Link to this definition">#</a></dt>
+<dd><p>Extracts data from the datasource. Usually follows this pattern.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load &amp; Extract required variables</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_get_required_vars</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># This should change self.data either by returning or side effect</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_extraction</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># Calls variable function to transform extracted data</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_call_var_function</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_add_time_window</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+    <span class="c1"># Expects case_tmin, case_tmax for each primary key</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_timefilter</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_apply_cleaning</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.DerivedDynamic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">DerivedDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py_ready_polars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#DerivedDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ScreenedRequirements</span></code>, <a class="reference internal" href="core.html#corr_vars.core.variable.Variable" title="corr_vars.core.variable.base.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
+<p>Derived dynamic variables are extracted using a custom function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> – Name of the variable.</p></li>
+<li><p><strong>requires</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RequirementsDict</span></code>]</span>) – List of required variables.</p></li>
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Cleaning parameters ({column_name: {low: int, high: int}})</p></li>
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Minimum time for the extraction.</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Maximum time for the extraction.</p></li>
+<li><p><strong>py</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableCallable</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Custom function.</p></li>
+<li><p><strong>py_ready_polars</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether the custom function is already prepared for polars. Default is False (input and output are pandas dataframes).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">var_func</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># Note that this simplified example only works if blood_pao2_arterial and vent_fio2 are of the same length (which is proabably not the case).</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="p">(</span>
+<span class="gp">... </span>            <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"blood_pao2_arterial"</span><span class="p">]</span>
+<span class="gp">... </span>            <span class="o">/</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"vent_fio2"</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pf_ratio"</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DerivedDynamic</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">var_name</span><span class="o">=</span><span class="s2">"pf_ratio"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"blood_pao2_arterial"</span><span class="p">,</span> <span class="s2">"vent_fio2"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">py</span><span class="o">=</span><span class="n">var_func</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">py_ready_polars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dynamic</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.DerivedDynamic.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#DerivedDynamic.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic.extract" title="Link to this definition">#</a></dt>
+<dd><p>Extract the variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cohort</strong> (<a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><em>Cohort</em></a>) – Cohort object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Extracted variable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="local_datasource.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Local Data Source (skeleton)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Utils</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-types">Variable Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nativestatic-variables">NativeStatic Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivedstatic-variables">DerivedStatic Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriveddynamic-variables">DerivedDynamic Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-form">Declarative form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-constraints-and-filtering">Time Constraints and Filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-with-where-clauses">Filtering with WHERE Clauses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-clinical-indicators">Complex Clinical Indicators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outcome-variables">Outcome Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-indicators">Quality Indicators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic"><code class="docutils literal notranslate"><span class="pre">NativeStatic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic.base_var"><code class="docutils literal notranslate"><span class="pre">NativeStatic.base_var</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeStatic.extract"><code class="docutils literal notranslate"><span class="pre">NativeStatic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedStatic"><code class="docutils literal notranslate"><span class="pre">DerivedStatic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedStatic.extract"><code class="docutils literal notranslate"><span class="pre">DerivedStatic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic"><code class="docutils literal notranslate"><span class="pre">DerivedDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.DerivedDynamic.extract"><code class="docutils literal notranslate"><span class="pre">DerivedDynamic.extract()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

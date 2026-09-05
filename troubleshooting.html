@@ -1,0 +1,1188 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Troubleshooting Guide &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=ce394494"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'troubleshooting';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cohort" href="api/cohort.html" />
+    <link rel="prev" title="Contributing New Variables" href="contributing_variables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/troubleshooting.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Ftroubleshooting.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/troubleshooting.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Troubleshooting Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-api-issues">Concepts API Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-a-cohort-refuses-to-build"><strong>Problem</strong>: A cohort refuses to build</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-source-data-cannot-be-read"><strong>Problem</strong>: Source data cannot be read</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-loading-issues">Variable Loading Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-variable-not-found"><strong>Problem</strong>: Variable not found</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-variable-extraction-takes-too-long"><strong>Problem</strong>: Variable extraction takes too long</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues">Memory Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-out-of-memory-errors"><strong>Problem</strong>: Out of memory errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-issues">Data Quality Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-unexpected-or-missing-values"><strong>Problem</strong>: Unexpected or missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-related-issues">Time-Related Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-incorrect-time-filtering"><strong>Problem</strong>: Incorrect time filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-time-zones-and-timestamp-issues"><strong>Problem</strong>: Time zones and timestamp issues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-variable-issues">Custom Variable Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-custom-function-not-working"><strong>Problem</strong>: Custom function not working</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-issues">Performance Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-queries-are-very-slow"><strong>Problem</strong>: Queries are very slow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-and-save-load-issues">File and Save/Load Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cannot-save-or-load-cohort-files"><strong>Problem</strong>: Cannot save or load cohort files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="troubleshooting-guide">
+<h1>Troubleshooting Guide<a class="headerlink" href="#troubleshooting-guide" title="Link to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title"><strong>AI-generated content</strong></p>
+<p>This page was generated by AI and has not been fully reviewed by a human. Content may be inaccurate or incomplete.
+If you find any issues, please create an issue on the <a class="reference external" href="https://github.com/CUB-CORR/corr-vars/issues">GitHub repository</a>.</p>
+</div>
+<p>This guide covers common issues you might encounter while using CORR-Vars and their solutions.</p>
+<section id="concepts-api-issues">
+<h2>Concepts API Issues<a class="headerlink" href="#concepts-api-issues" title="Link to this heading">#</a></h2>
+<section id="problem-a-cohort-refuses-to-build">
+<h3><strong>Problem</strong>: A cohort refuses to build<a class="headerlink" href="#problem-a-cohort-refuses-to-build" title="Link to this heading">#</a></h3>
+<p><strong>Error messages you might see:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ConceptsApiConfigurationError:</span> <span class="pre">The</span> <span class="pre">Concepts</span> <span class="pre">API</span> <span class="pre">requires</span> <span class="pre">a</span> <span class="pre">project</span> <span class="pre">on</span> <span class="pre">every</span> <span class="pre">read.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ConceptsApiConfigurationError:</span> <span class="pre">...</span> <span class="pre">CORR_CONCEPTS_API_KEY</span> <span class="pre">...</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ProjectNotFoundError:</span> <span class="pre">'my_project'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ConceptsLicenseError</span></code></p></li>
+</ul>
+<p>Credentials are checked while the cohort is constructed, before any data is
+loaded, so these surface immediately rather than as a variable that resolves to
+nothing.</p>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Pass a project and a key:</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CORR_CONCEPTS_API_KEY</span><span class="o">=</span><span class="s2">"corr_..."</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>          <span class="c1"># required by the API on every read</span>
+    <span class="c1"># api_key="corr_...",          # or CORR_CONCEPTS_API_KEY</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Check which endpoint a source is routed to:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">concepts</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"reprodicu"</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Routing is declared in <code class="docutils literal notranslate"><span class="pre">src/corr_vars/concepts/routing.toml</span></code> and can be
+overridden per cohort with <code class="docutils literal notranslate"><span class="pre">Cohort(concepts_api_url=...)</span></code>.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>A 403 means the project’s licence was not accepted</strong> — there is no
+corr_vars-side remedy; a project lead has to accept it.</p></li>
+</ol>
+</section>
+<section id="problem-source-data-cannot-be-read">
+<h3><strong>Problem</strong>: Source data cannot be read<a class="headerlink" href="#problem-source-data-cannot-be-read" title="Link to this heading">#</a></h3>
+<p><strong>Error messages you might see:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> when a source reads its data files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">No</span> <span class="pre">path</span> <span class="pre">specified</span> <span class="pre">for</span> <span class="pre">variable</span> <span class="pre">...</span></code></p></li>
+</ul>
+<p><strong>Solutions:</strong></p>
+<p>Check the source’s own configuration. For reprodICU that is the <code class="docutils literal notranslate"><span class="pre">path</span></code> to the
+dataset files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="variable-loading-issues">
+<h2>Variable Loading Issues<a class="headerlink" href="#variable-loading-issues" title="Link to this heading">#</a></h2>
+<section id="problem-variable-not-found">
+<h3><strong>Problem</strong>: Variable not found<a class="headerlink" href="#problem-variable-not-found" title="Link to this heading">#</a></h3>
+<p><strong>Error</strong>: <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Variable</span> <span class="pre">'my_variable'</span> <span class="pre">not</span> <span class="pre">found</span></code></p>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Check variable name spelling:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Browse the catalogue in the Concepts Browser web app</span>
+
+<span class="c1"># Or list the variable names the Concepts API serves for a source.</span>
+<span class="c1"># This is a remote read, so the cohort needs its project and key.</span>
+<span class="n">configs</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">to_search_widget</span><span class="p">(</span><span class="n">include_sources</span><span class="o">=</span><span class="p">[</span><span class="s2">"reprodicu"</span><span class="p">])</span>
+
+<span class="c1"># Names come back fully qualified, e.g. "corr_v1/blood_sodium"</span>
+<span class="n">search_term</span> <span class="o">=</span> <span class="s2">"sodium"</span>
+<span class="n">matching</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">[</span><span class="s2">"reprodicu"</span><span class="p">]</span> <span class="k">if</span> <span class="n">search_term</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variables containing '</span><span class="si">{</span><span class="n">search_term</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">matching</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Check if variable exists for your observation level:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Some variables are only available for certain observation levels</span>
+<span class="n">cohort_icu</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span><span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span> <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">cohort_hospital</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span><span class="n">obs_level</span><span class="o">=</span><span class="s2">"hospital_stay"</span><span class="p">,</span> <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Try adding the variable to different observation levels</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">cohort_icu</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"your_variable"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Variable available for ICU stays"</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Variable not available for ICU stays"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="problem-variable-extraction-takes-too-long">
+<h3><strong>Problem</strong>: Variable extraction takes too long<a class="headerlink" href="#problem-variable-extraction-takes-too-long" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Use time constraints to limit data:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of loading all data</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_sodium"</span><span class="p">)</span>  <span class="c1"># Might be slow</span>
+
+<span class="c1"># Load only recent data</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span>
+    <span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"-24h"</span><span class="p">),</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+48h"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Filter your cohort first:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter cohort before adding expensive variables</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">,</span>
+            <span class="s2">"include_datasets"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mimic"</span><span class="p">],</span>  <span class="c1"># Only one dataset</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Apply inclusion criteria early</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adults"</span><span class="p">}</span>
+<span class="p">])</span>
+
+<span class="c1"># Then add expensive variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"complex_variable"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Use load_default_vars=False for large cohorts:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don't load all default variables automatically</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span><span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span> <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Add only the variables you need</span>
+<span class="n">needed_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"inhospital_death"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">needed_vars</span><span class="p">:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="memory-issues">
+<h2>Memory Issues<a class="headerlink" href="#memory-issues" title="Link to this heading">#</a></h2>
+<section id="problem-out-of-memory-errors">
+<h3><strong>Problem</strong>: Out of memory errors<a class="headerlink" href="#problem-out-of-memory-errors" title="Link to this heading">#</a></h3>
+<p><strong>Error messages:</strong>
+- <code class="docutils literal notranslate"><span class="pre">MemoryError:</span> <span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">allocate</span> <span class="pre">array</span></code>
+- <code class="docutils literal notranslate"><span class="pre">Kernel</span> <span class="pre">died</span></code> (in Jupyter)</p>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Work with smaller cohorts:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict the cohort to fewer datasets</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">,</span>
+            <span class="s2">"include_datasets"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mimic"</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Process variables in batches:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of loading all variables at once</span>
+<span class="n">all_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"var1"</span><span class="p">,</span> <span class="s2">"var2"</span><span class="p">,</span> <span class="s2">"var3"</span><span class="p">,</span> <span class="s2">"var4"</span><span class="p">,</span> <span class="s2">"var5"</span><span class="p">]</span>
+
+<span class="c1"># Load in smaller batches</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_vars</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">all_vars</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+        <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+    <span class="c1"># Optionally save intermediate results</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cohort_batch_</span><span class="si">{</span><span class="n">i</span><span class="o">//</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">.corr2"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Use Polars instead of Pandas (new API):</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the new Polars-based API (more memory efficient)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>  <span class="c1"># New API</span>
+
+<span class="c1"># Instead of legacy pandas API</span>
+<span class="c1"># from corr_vars.legacy_v1 import Cohort  # Legacy API</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Monitor memory usage:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_memory</span><span class="p">():</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+    <span class="n">memory_mb</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Memory usage: </span><span class="si">{</span><span class="n">memory_mb</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB"</span><span class="p">)</span>
+
+<span class="c1"># Check memory before/after operations</span>
+<span class="n">check_memory</span><span class="p">()</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"large_variable"</span><span class="p">)</span>
+<span class="n">check_memory</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-quality-issues">
+<h2>Data Quality Issues<a class="headerlink" href="#data-quality-issues" title="Link to this heading">#</a></h2>
+<section id="problem-unexpected-or-missing-values">
+<h3><strong>Problem</strong>: Unexpected or missing values<a class="headerlink" href="#problem-unexpected-or-missing-values" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Inspect data quality:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for missing data</span>
+<span class="n">missing_counts</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Missing data per column:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">missing_counts</span><span class="p">)</span>
+
+<span class="c1"># Check data ranges</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">NUMERIC_DTYPES</span><span class="p">))</span><span class="o">.</span><span class="n">columns</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> statistics:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Validate time-series data:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check dynamic variable data quality</span>
+<span class="n">sodium_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"blood_sodium"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total sodium measurements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sodium_data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Patients with sodium data: </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'icu_stay_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Value range: </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Check for impossible values</span>
+<span class="n">impossible</span> <span class="o">=</span> <span class="n">sodium_data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Impossible sodium values: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">impossible</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Apply data cleaning:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Override a served definition with project-local cleaning bounds</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable_definition</span><span class="p">(</span>
+    <span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">"cleaning"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"low"</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mi">180</span><span class="p">}}},</span>  <span class="c1"># Physiologically plausible</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_sodium"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="time-related-issues">
+<h2>Time-Related Issues<a class="headerlink" href="#time-related-issues" title="Link to this heading">#</a></h2>
+<section id="problem-incorrect-time-filtering">
+<h3><strong>Problem</strong>: Incorrect time filtering<a class="headerlink" href="#problem-incorrect-time-filtering" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Debug time constraints:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check your time anchor columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Available time columns:"</span><span class="p">)</span>
+<span class="n">time_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">'time'</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">'date'</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time_cols</span><span class="p">)</span>
+
+<span class="c1"># Verify time anchor values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ICU admission range: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'icu_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'icu_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Test time constraints step by step:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple time constraint first</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span>
+    <span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="n">save_as</span><span class="o">=</span><span class="s2">"sodium_full_stay"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Then try relative constraints</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span>
+    <span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="n">save_as</span><span class="o">=</span><span class="s2">"sodium_first_24h"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+24h"</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="problem-time-zones-and-timestamp-issues">
+<h3><strong>Problem</strong>: Time zones and timestamp issues<a class="headerlink" href="#problem-time-zones-and-timestamp-issues" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check timestamp formats</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Timestamp columns info:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"icu_discharge"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">sample_vals</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sample_vals</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ensure consistent time zones (data should be in UTC or local hospital time)</span>
+<span class="c1"># CORR-Vars handles this automatically, but check if times look reasonable</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="custom-variable-issues">
+<h2>Custom Variable Issues<a class="headerlink" href="#custom-variable-issues" title="Link to this heading">#</a></h2>
+<section id="problem-custom-function-not-working">
+<h3><strong>Problem</strong>: Custom function not working<a class="headerlink" href="#problem-custom-function-not-working" title="Link to this heading">#</a></h3>
+<p><strong>Error</strong>: <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">module</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'my_function'</span></code></p>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Check function definition location:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For an API-routed source the function is part of the published concept and</span>
+<span class="c1"># is served with it — there is no variables.py in the package to inspect.</span>
+<span class="c1"># Check the definition in the Concepts Browser, and check that every name it</span>
+<span class="c1"># uses is declared in the source's exec namespace:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.concepts.compile</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_py_compiler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_src_module</span>
+
+<span class="n">py_env</span> <span class="o">=</span> <span class="n">get_src_module</span><span class="p">(</span><span class="s2">"my_source"</span><span class="p">,</span> <span class="s2">"py_env"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">py_env</span><span class="o">.</span><span class="n">NAMESPACE_NAMES</span><span class="p">)</span>  <span class="c1"># names a served snippet may use</span>
+
+<span class="c1"># A `NameError` from inside a variable function usually means the snippet</span>
+<span class="c1"># reads something the namespace does not carry. `get_py_compiler(source)`</span>
+<span class="c1"># returns None for a source that ships no py_env at all.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Test custom function separately:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test your function with sample data</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_custom_function</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+    <span class="c1"># Your function logic here</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processing variable: </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">var_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Required variables: </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">requires</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cohort size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Return test data</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+    <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">"icu_stay_id"</span><span class="p">:</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"icu_stay_id"</span><span class="p">],</span>
+        <span class="s2">"test_value"</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="c1"># Test with a simple variable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.reprodicu</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
+<span class="n">test_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"test_custom"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"age_on_admission"</span><span class="p">],</span>
+    <span class="nb">complex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">dynamic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">py</span><span class="o">=</span><span class="n">my_custom_function</span><span class="p">,</span>
+    <span class="n">py_ready_polars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">test_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-issues">
+<h2>Performance Issues<a class="headerlink" href="#performance-issues" title="Link to this heading">#</a></h2>
+<section id="problem-queries-are-very-slow">
+<h3><strong>Problem</strong>: Queries are very slow<a class="headerlink" href="#problem-queries-are-very-slow" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Optimize database queries:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict the source to fewer datasets to reduce data volume</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">,</span>
+            <span class="s2">"include_datasets"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mimic"</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Load variables strategically:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load cheap variables first for filtering</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span>  <span class="c1"># Fast</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span>               <span class="c1"># Fast</span>
+
+<span class="c1"># Apply filters</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adults"</span><span class="p">}</span>
+<span class="p">])</span>
+
+<span class="c1"># Then load expensive variables on smaller cohort</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"complex_time_series_variable"</span><span class="p">)</span>  <span class="c1"># Slower</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Use caching:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save intermediate results</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"cohort_after_filtering.corr2"</span><span class="p">)</span>
+
+<span class="c1"># Load saved cohort instead of re-extracting</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"cohort_after_filtering.corr2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-and-save-load-issues">
+<h2>File and Save/Load Issues<a class="headerlink" href="#file-and-save-load-issues" title="Link to this heading">#</a></h2>
+<section id="problem-cannot-save-or-load-cohort-files">
+<h3><strong>Problem</strong>: Cannot save or load cohort files<a class="headerlink" href="#problem-cannot-save-or-load-cohort-files" title="Link to this heading">#</a></h3>
+<p><strong>Solutions:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Check file permissions and paths:</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if directory is writable</span>
+touch<span class="w"> </span>test_file.txt
+rm<span class="w"> </span>test_file.txt
+
+<span class="c1"># Use absolute paths</span>
+import<span class="w"> </span>os
+<span class="nv">save_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.abspath<span class="o">(</span><span class="s2">"my_cohort.corr2"</span><span class="o">)</span>
+print<span class="o">(</span>f<span class="s2">"Saving to: {save_path}"</span><span class="o">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Handle large file sizes:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For very large cohorts, save without some variables</span>
+<span class="n">large_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"variable_with_millions_of_rows"</span><span class="p">]</span>
+
+<span class="c1"># Temporarily remove large variables</span>
+<span class="n">saved_data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">large_vars</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">:</span>
+        <span class="n">saved_data</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">_obsm</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+<span class="c1"># Save smaller cohort</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"cohort_without_large_vars.corr2"</span><span class="p">)</span>
+
+<span class="c1"># Restore variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">_obsm</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">saved_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Migrate from old file formats:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load old format and save as new</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">old_cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"old_file.corr"</span><span class="p">)</span>  <span class="c1"># Legacy format</span>
+    <span class="n">old_cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"new_file.corr2"</span><span class="p">)</span>          <span class="c1"># New format</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Successfully migrated file format"</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Migration failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>When you encounter issues not covered here:</p>
+<ol class="arabic simple">
+<li><p><strong>Check the logs:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable verbose logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># Or configure CORR-Vars logging</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">logger_args</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"level"</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="s2">"colored_output"</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Create a minimal reproducible example:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simplify your code to the minimal case that reproduces the error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Try the operation that's failing</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"problematic_variable"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Gather system information:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get debug information</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">debug_print</span><span class="p">()</span>
+
+<span class="c1"># Check versions</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">corr_vars</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CORR-Vars version: </span><span class="si">{</span><span class="n">corr_vars</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Polars version: </span><span class="si">{</span><span class="n">pl</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Pandas version: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Contact support:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Create an issue on GitHub: <a class="github reference external" href="https://github.com/cub-corr/corr-vars/issues">cub-corr/corr-vars#issues</a></p></li>
+<li><p>Include your minimal reproducible example</p></li>
+<li><p>Include the error message and debug information</p></li>
+<li><p>Describe what you expected to happen vs. what actually happened</p></li>
+</ul>
+<p><strong>Remember</strong>: Most issues can be resolved by starting with a smaller dataset and gradually increasing complexity!</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="contributing_variables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Contributing New Variables</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/cohort.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cohort</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-api-issues">Concepts API Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-a-cohort-refuses-to-build"><strong>Problem</strong>: A cohort refuses to build</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-source-data-cannot-be-read"><strong>Problem</strong>: Source data cannot be read</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-loading-issues">Variable Loading Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-variable-not-found"><strong>Problem</strong>: Variable not found</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-variable-extraction-takes-too-long"><strong>Problem</strong>: Variable extraction takes too long</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues">Memory Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-out-of-memory-errors"><strong>Problem</strong>: Out of memory errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-issues">Data Quality Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-unexpected-or-missing-values"><strong>Problem</strong>: Unexpected or missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-related-issues">Time-Related Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-incorrect-time-filtering"><strong>Problem</strong>: Incorrect time filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-time-zones-and-timestamp-issues"><strong>Problem</strong>: Time zones and timestamp issues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-variable-issues">Custom Variable Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-custom-function-not-working"><strong>Problem</strong>: Custom function not working</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-issues">Performance Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-queries-are-very-slow"><strong>Problem</strong>: Queries are very slow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-and-save-load-issues">File and Save/Load Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cannot-save-or-load-cohort-files"><strong>Problem</strong>: Cannot save or load cohort files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

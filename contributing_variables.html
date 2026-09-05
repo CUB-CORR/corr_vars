@@ -1,0 +1,1535 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Contributing New Variables &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=ce394494"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contributing_variables';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting Guide" href="troubleshooting.html" />
+    <link rel="prev" title="Custom Variables Guide" href="custom_variables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/contributing_variables.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fcontributing_variables.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/contributing_variables.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Contributing New Variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow-overview">Development Workflow Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-a-github-issue">Step 1: Create a GitHub Issue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-development-environment-and-create-feature-branch">Step 2: Set Up Development Environment and Create Feature Branch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-explore-and-prototype-in-jupyter-notebook">Step 3: Explore and Prototype in Jupyter Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-implement-clean-code-in-configuration-files">Step 4: Implement Clean Code in Configuration Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify-everything-works">Step 5: Verify Everything Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-pull-request">Step 6: Create Pull Request</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-continuous-integration">Step 7: Continuous Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-request-review-and-merge">Step 8: Request Review and Merge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-merge-follow-up">Post-Merge Follow-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-and-tips">Common Pitfalls and Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="contributing-new-variables">
+<h1>Contributing New Variables<a class="headerlink" href="#contributing-new-variables" title="Link to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title"><strong>AI-generated content</strong></p>
+<p>This page was generated by AI and has not been fully reviewed by a human. Content may be inaccurate or incomplete.
+If you find any issues, please create an issue on the <a class="reference external" href="https://github.com/CUB-CORR/corr-vars/issues">GitHub repository</a>.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">🚀 <strong>Contribute to CORR-Vars</strong></p>
+<p>Help expand the CORR-Vars variable catalog! Follow this step-by-step guide to add new clinical variables that benefit the entire research community.</p>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">⚠️ <strong>Where variable definitions live now</strong></p>
+<p>Variable definitions are served by the CORR Concepts API. They are <strong>not</strong>
+files in this repository: there is no
+<code class="docutils literal notranslate"><span class="pre">vars.json</span></code> and no <code class="docutils literal notranslate"><span class="pre">variables.py</span></code> to edit, and the data files a
+definition reads live in the API’s file store, addressed with
+<code class="docutils literal notranslate"><span class="pre">getfile(&quot;&lt;uuid&gt;&quot;)</span></code>. A definition is authored, versioned and published in
+the Concepts Browser web app, and <code class="docutils literal notranslate"><span class="pre">corr_vars</span></code> fetches it at load time.</p>
+<p>What still applies unchanged: the clinical framing (Step 1), the exploratory
+work (Step 3), the shape of a variable configuration and its <code class="docutils literal notranslate"><span class="pre">py</span></code> function
+(Step 4), and the verification (Step 5). What does not: the git branch and
+pull-request mechanics (Steps 2, 6-8) — those cover changes to the library
+itself and to a pinned-local source, not publishing a concept.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">py</span></code> function that will be published is served as bare function source,
+so it must be self-contained: only the names in the source’s
+<code class="docutils literal notranslate"><span class="pre">py_env.NAMESPACE_NAMES</span></code> are available to it, and it may not call another
+variable’s function — declare that dependency with <code class="docutils literal notranslate"><span class="pre">requires</span></code>.</p>
+</div>
+<nav class="contents local" id="tutorial-steps">
+<p class="topic-title"><strong>Tutorial Steps</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#development-workflow-overview" id="id2">Development Workflow Overview</a></p></li>
+<li><p><a class="reference internal" href="#step-1-create-a-github-issue" id="id3">Step 1: Create a GitHub Issue</a></p></li>
+<li><p><a class="reference internal" href="#step-2-set-up-development-environment-and-create-feature-branch" id="id4">Step 2: Set Up Development Environment and Create Feature Branch</a></p></li>
+<li><p><a class="reference internal" href="#step-3-explore-and-prototype-in-jupyter-notebook" id="id5">Step 3: Explore and Prototype in Jupyter Notebook</a></p></li>
+<li><p><a class="reference internal" href="#step-4-implement-clean-code-in-configuration-files" id="id6">Step 4: Implement Clean Code in Configuration Files</a></p></li>
+<li><p><a class="reference internal" href="#step-5-verify-everything-works" id="id7">Step 5: Verify Everything Works</a></p></li>
+<li><p><a class="reference internal" href="#step-6-create-pull-request" id="id8">Step 6: Create Pull Request</a></p></li>
+<li><p><a class="reference internal" href="#step-7-continuous-integration" id="id9">Step 7: Continuous Integration</a></p></li>
+<li><p><a class="reference internal" href="#step-8-request-review-and-merge" id="id10">Step 8: Request Review and Merge</a></p></li>
+<li><p><a class="reference internal" href="#post-merge-follow-up" id="id11">Post-Merge Follow-up</a></p></li>
+<li><p><a class="reference internal" href="#common-pitfalls-and-tips" id="id12">Common Pitfalls and Tips</a></p></li>
+<li><p><a class="reference internal" href="#additional-resources" id="id13">Additional Resources</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Contributing new variables to CORR-Vars involves a structured development workflow that ensures quality, reproducibility, and proper integration. This tutorial walks you through the complete process from idea to merged pull request.</p>
+<div class="note admonition">
+<p class="admonition-title">📋 <strong>Prerequisites</strong></p>
+<ul class="simple">
+<li><p>Access to the CORR-Vars GitHub repository</p></li>
+<li><p>Development environment set up (see the project README)</p></li>
+<li><p>Basic familiarity with Git and GitHub workflows</p></li>
+</ul>
+</div>
+</section>
+<section id="development-workflow-overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Development Workflow Overview</a><a class="headerlink" href="#development-workflow-overview" title="Link to this heading">#</a></h2>
+<div style="text-align: center; margin: 20px 0;">
+  <div style="display: inline-block; background: #f8f9fa; border: 2px solid #dee2e6; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>💡 Idea</strong><br/>
+    <span style="font-size: 12px;">Clinical variable need</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #e3f2fd; border: 2px solid #1976d2; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🐛 GitHub Issue</strong><br/>
+    <span style="font-size: 12px;">Document requirement</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #fff3e0; border: 2px solid #f57c00; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🌿 Feature Branch</strong><br/>
+    <span style="font-size: 12px;">Isolated development</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #e8f5e8; border: 2px solid #4caf50; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🔬 Exploration</strong><br/>
+    <span style="font-size: 12px;">Jupyter notebook</span>
+  </div>
+</div>
+<div style="text-align: center; margin: 20px 0;">
+  <div style="display: inline-block; background: #fce4ec; border: 2px solid #e91e63; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🧹 Implementation</strong><br/>
+    <span style="font-size: 12px;">Clean variable configuration</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>✅ Testing</strong><br/>
+    <span style="font-size: 12px;">Verify functionality</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #e1f5fe; border: 2px solid #00bcd4; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🔄 Pull Request</strong><br/>
+    <span style="font-size: 12px;">Code review</span>
+  </div>
+  <div style="display: inline-block; margin: 0 5px; font-size: 18px;">→</div>
+  <div style="display: inline-block; background: #e8f5e8; border: 2px solid #4caf50; border-radius: 8px; padding: 10px; margin: 5px;">
+    <strong>🎉 Merge</strong><br/>
+    <span style="font-size: 12px;">Available to all</span>
+  </div>
+</div></section>
+<section id="step-1-create-a-github-issue">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Step 1: Create a GitHub Issue</a><a class="headerlink" href="#step-1-create-a-github-issue" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">🎯 <strong>Why Start with an Issue?</strong></p>
+<p>GitHub issues help track variable requests, avoid duplicate work, and provide a place for community discussion about the clinical relevance and implementation approach.</p>
+</div>
+<p><strong>Check for Existing Issues</strong></p>
+<p>Before creating a new issue, search existing issues to avoid duplicates:</p>
+<ol class="arabic simple">
+<li><p>Visit the <a class="reference external" href="https://github.com/CUB-CORR/corr-vars">CORR-Vars GitHub repository</a></p></li>
+<li><p>Click on the <strong>Issues</strong> tab</p></li>
+<li><p>Search for keywords related to your variable (e.g., “lactate”, “SOFA”, “mechanical ventilation”)</p></li>
+</ol>
+<p><strong>Create a New Issue</strong></p>
+<p>If no existing issue covers your variable, create a new one:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Title: Add [Variable Name] variable
+Example: "Add blood lactate clearance variable"
+</pre></div>
+</div>
+<p><strong>Issue Template:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Variable Request: [Variable Name]</span>
+
+<span class="gu">### Clinical Context</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Purpose**</span>: Brief description of clinical use case
+<span class="k">-</span><span class="w"> </span><span class="gs">**Population**</span>: Target patient population (ICU, hospital, specific conditions)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Evidence**</span>: Reference to literature or clinical guidelines if available
+
+<span class="gu">### Technical Requirements</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Variable Type**</span>: Static/Dynamic, Derived/Native
+<span class="k">-</span><span class="w"> </span><span class="gs">**Data Sources**</span>: Which database tables/sources contain the data
+<span class="k">-</span><span class="w"> </span><span class="gs">**Dependencies**</span>: Any variables this depends on
+<span class="k">-</span><span class="w"> </span><span class="gs">**Time Constraints**</span>: Relevant time windows (admission, 24h, etc.)
+
+<span class="gu">### Expected Output</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Data Type**</span>: Numeric/Boolean/Categorical
+<span class="k">-</span><span class="w"> </span><span class="gs">**Units**</span>: Expected units of measurement
+<span class="k">-</span><span class="w"> </span><span class="gs">**Range**</span>: Expected value ranges
+<span class="k">-</span><span class="w"> </span><span class="gs">**Example**</span>: Sample output for a few patients
+
+<span class="gu">### Additional Information</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Priority**</span>: High/Medium/Low
+<span class="k">-</span><span class="w"> </span><span class="gs">**Complexity**</span>: Simple aggregation/Complex calculation/Database extraction
+<span class="k">-</span><span class="w"> </span><span class="gs">**Timeline**</span>: When this variable is needed
+</pre></div>
+</div>
+<p><strong>Example Issue:</strong></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-info sd-bg-text-info">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-code" viewBox="0 0 16 16" aria-hidden="true"><path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"></path></svg></span><span class="sd-summary-text"><strong>Real Example: Blood Lactate Clearance</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Variable Request: Blood Lactate Clearance</span>
+
+<span class="gu">### Clinical Context</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Purpose**</span>: Calculate lactate clearance as a marker of shock resolution
+<span class="k">-</span><span class="w"> </span><span class="gs">**Population**</span>: ICU patients with elevated lactate levels
+<span class="k">-</span><span class="w"> </span><span class="gs">**Evidence**</span>: Strong evidence for prognostic value in septic shock (Nguyen et al., Crit Care Med 2004)
+
+<span class="gu">### Technical Requirements</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Variable Type**</span>: Derived Static
+<span class="k">-</span><span class="w"> </span><span class="gs">**Data Sources**</span>: Existing blood_lactate variable
+<span class="k">-</span><span class="w"> </span><span class="gs">**Dependencies**</span>: blood_lactate (dynamic variable)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Time Constraints**</span>: First 6-24 hours of ICU stay
+
+<span class="gu">### Expected Output</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Data Type**</span>: Numeric (percentage)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Units**</span>: Percentage improvement
+<span class="k">-</span><span class="w"> </span><span class="gs">**Range**</span>: -100% to +100% (negative = worsening)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Example**</span>: Patient with initial lactate 4.0 mmol/L, 6h lactate 2.0 mmol/L → 50% clearance
+
+<span class="gu">### Additional Information</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Priority**</span>: High (frequently requested by researchers)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Complexity**</span>: Medium (requires time-based aggregation)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Timeline**</span>: Needed for upcoming sepsis study
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="step-2-set-up-development-environment-and-create-feature-branch">
+<span id="dev-environment-setup"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">Step 2: Set Up Development Environment and Create Feature Branch</a><a class="headerlink" href="#step-2-set-up-development-environment-and-create-feature-branch" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">📚 <strong>Development Environment Setup</strong></p>
+<p>If you haven’t set up your development environment yet, follow the detailed setup guide:</p>
+<ul class="simple">
+<li><p><strong>Written Guide</strong>: see the project <a class="reference external" href="https://github.com/CUB-CORR/corr-vars">README</a> or this page <a class="reference internal" href="#dev-environment-setup"><span class="std std-ref">Step 2: Set Up Development Environment and Create Feature Branch</span></a></p></li>
+<li><p><strong>Video Tutorial</strong>: <a class="reference external" href="https://youtu.be/fTAzdro2VY0">YouTube: CORR-Vars Development Setup</a></p></li>
+</ul>
+</div>
+<p><strong>Clone and Setup (if first time)</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/CUB-CORR/corr-vars.git
+<span class="nb">cd</span><span class="w"> </span>corr-vars
+
+<span class="c1"># Install in development mode with development dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>dev
+</pre></div>
+</div>
+<p><strong>Create Feature Branch</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure you're on main and up to date</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Create feature branch (use descriptive name referencing issue)</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/add-lactate-clearance-variable
+
+<span class="c1"># Alternative naming patterns:</span>
+<span class="c1"># git checkout -b feature/issue-123-lactate-clearance</span>
+<span class="c1"># git checkout -b variable/blood-lactate-clearance</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">🌿 <strong>Branch Naming Conventions</strong></p>
+<p>Use descriptive branch names that reference the GitHub issue:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feature/add-[variable-name]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable/[clinical-concept]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature/issue-[number]-[description]</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="step-3-explore-and-prototype-in-jupyter-notebook">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Step 3: Explore and Prototype in Jupyter Notebook</a><a class="headerlink" href="#step-3-explore-and-prototype-in-jupyter-notebook" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">🔬 <strong>Exploration Phase Goals</strong></p>
+<ul class="simple">
+<li><p>Understand the data structure and quality</p></li>
+<li><p>Test different calculation approaches</p></li>
+<li><p>Validate results against clinical expectations</p></li>
+<li><p>Document any edge cases or limitations</p></li>
+</ul>
+</div>
+<p><strong>Start Jupyter for Exploration</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your development directory</span>
+<span class="nb">cd</span><span class="w"> </span>/path/to/corr-vars
+
+<span class="c1"># Start Jupyter notebook</span>
+jupyter<span class="w"> </span>lab
+</pre></div>
+</div>
+<p><strong>Create Exploration Notebook</strong></p>
+<p>Create a new notebook: <code class="docutils literal notranslate"><span class="pre">exploration/[variable-name]-development.ipynb</span></code></p>
+<p><strong>Exploration Template:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variable Development: Blood Lactate Clearance</span>
+<span class="c1"># GitHub Issue: #123</span>
+<span class="c1"># Developer: [Your Name]</span>
+<span class="c1"># Date: [Today's Date]</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># 1. Load a test cohort</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test cohort size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Data Exploration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Add required base variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_lactate"</span><span class="p">)</span>
+
+<span class="c1"># 3. Explore the data structure</span>
+<span class="n">lactate_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Lactate measurements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lactate_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> records"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Patients with lactate: </span><span class="si">{</span><span class="n">lactate_data</span><span class="p">[</span><span class="s1">'icu_stay_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Value range: </span><span class="si">{</span><span class="n">lactate_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">lactate_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># 4. Check data quality</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Missing values: </span><span class="si">{</span><span class="n">lactate_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Negative values: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lactate_data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'value'</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># 5. Sample data inspection</span>
+<span class="n">sample_patient</span> <span class="o">=</span> <span class="n">lactate_data</span><span class="p">[</span><span class="s1">'icu_stay_id'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">patient_data</span> <span class="o">=</span> <span class="n">lactate_data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">'icu_stay_id'</span><span class="p">)</span> <span class="o">==</span> <span class="n">sample_patient</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sample patient </span><span class="si">{</span><span class="n">sample_patient</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">patient_data</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Prototype the Calculation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Prototype lactate clearance calculation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_lactate_clearance_prototype</span><span class="p">(</span><span class="n">lactate_df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Prototype function to calculate lactate clearance.</span>
+
+<span class="sd">    Clearance = (Initial - Final) / Initial * 100</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Group by patient and calculate first/last values in first 24 hours</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">lactate_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span> <span class="o">+</span> <span class="n">pl</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"initial_time"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"final_time"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span>
+    <span class="p">])</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+        <span class="c1"># Calculate clearance percentage</span>
+        <span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">))</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span>
+    <span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test the prototype</span>
+<span class="n">clearance_result</span> <span class="o">=</span> <span class="n">calculate_lactate_clearance_prototype</span><span class="p">(</span><span class="n">lactate_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lactate clearance results:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clearance_result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Validate Results:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7. Validate results</span>
+<span class="c1"># Check for reasonable ranges</span>
+<span class="n">clearance_stats</span> <span class="o">=</span> <span class="n">clearance_result</span><span class="p">[</span><span class="s2">"lactate_clearance_24h"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Clearance statistics:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clearance_stats</span><span class="p">)</span>
+
+<span class="c1"># Plot distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">clearance_result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()[</span><span class="s2">"lactate_clearance_24h"</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Lactate Clearance Distribution"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Clearance (%)"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">clearance_result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()[</span><span class="s2">"initial_lactate"</span><span class="p">],</span>
+            <span class="n">clearance_result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()[</span><span class="s2">"lactate_clearance_24h"</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Initial Lactate (mmol/L)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Clearance (%)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Clearance vs Initial Lactate"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Identify potential edge cases</span>
+<span class="n">extreme_cases</span> <span class="o">=</span> <span class="n">clearance_result</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">50</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Extreme clearance values: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">extreme_cases</span><span class="p">)</span><span class="si">}</span><span class="s2"> cases"</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extreme_cases</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">extreme_cases</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Refine the Implementation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8. Refine based on exploration findings</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_lactate_clearance_v2</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Refined lactate clearance calculation for CORR-Vars.</span>
+<span class="sd">    """</span>
+
+    <span class="n">lactate_var</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">]</span>
+    <span class="n">lactate_data</span> <span class="o">=</span> <span class="n">lactate_var</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="c1"># Calculate clearance with improved logic</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">lactate_data</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+        <span class="c1"># Get first and last measurements in first 24h</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span>
+    <span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+        <span class="c1"># Only include patients with at least 2 measurements</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+        <span class="c1"># Calculate clearance with bounds checking</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">then</span><span class="p">(</span>
+            <span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">))</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Reasonable bounds</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span>
+    <span class="p">])</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"lactate_clearance_24h"</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test refined version</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Testing refined calculation..."</span><span class="p">)</span>
+<span class="c1"># [Include test code here]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-implement-clean-code-in-configuration-files">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Step 4: Implement Clean Code in Configuration Files</a><a class="headerlink" href="#step-4-implement-clean-code-in-configuration-files" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">🧹 <strong>Clean Implementation Goals</strong></p>
+<ul class="simple">
+<li><p>Minimal, production-ready code</p></li>
+<li><p>Proper error handling</p></li>
+<li><p>Clear documentation</p></li>
+<li><p>Follows project conventions</p></li>
+</ul>
+</div>
+<p>Based on your exploration, implement the clean version in the appropriate configuration files.</p>
+<p><strong>For Simple Variables (No Custom Function Needed)</strong></p>
+<p>Most variables need only a declarative configuration, with no custom Python code:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="simple" for="sd-tab-item-0">
+Simple Aggregation</label><div class="sd-tab-content docutils">
+<p><strong>Where</strong>: the source’s concept configuration, in the Concepts Browser</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"first_lactate_value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aggregation"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"base_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blood_lactate"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"select"</span><span class="p">:</span><span class="w"> </span><span class="s2">"!first value"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First blood lactate measurement during ICU stay"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"max_lactate_24h"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aggregation"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"base_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blood_lactate"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"select"</span><span class="p">:</span><span class="w"> </span><span class="s2">"!max value"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"tmin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"icu_admission"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"tmax"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"icu_admission"</span><span class="p">,</span><span class="w"> </span><span class="s2">"+24h"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maximum blood lactate in first 24 hours of ICU"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="expression" for="sd-tab-item-1">
+Expression-Based</label><div class="sd-tab-content docutils">
+<p><strong>Where</strong>: the concept configuration of the source that provides it</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"shock_index_admission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"derived_static"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requires"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"admission_heart_rate"</span><span class="p">,</span><span class="w"> </span><span class="s2">"admission_sbp"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admission_heart_rate / admission_sbp"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"cleaning"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="nt">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">}},</span>
+<span class="w">      </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shock index calculated from admission vital signs"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>For Complex Variables (Custom Function Required)</strong></p>
+<p>For complex calculations that cannot be expressed as simple aggregations or expressions:</p>
+<p><strong>Step 4a: Write the variable configuration</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"lactate_clearance_24h"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complex"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requires"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"py_ready_polars"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blood lactate clearance percentage over first 24 hours of ICU stay"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Step 4b: Implement the ``py`` Function</strong></p>
+<p><strong>Where</strong>: the <code class="docutils literal notranslate"><span class="pre">py</span></code> field of the same concept configuration</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lactate_clearance_24h</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cohort</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculate blood lactate clearance over the first 24 hours of ICU stay.</span>
+
+<span class="sd">    Clearance is calculated as: (Initial - Final) / Initial * 100</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var: Variable object containing metadata and required variables</span>
+<span class="sd">        cohort: Cohort object with access to patient data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        polars.DataFrame: DataFrame with icu_stay_id and lactate_clearance_24h columns</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Requires at least 2 lactate measurements within 24h of ICU admission</span>
+<span class="sd">        - Initial lactate must be &gt; 0 to calculate meaningful clearance</span>
+<span class="sd">        - Results are bounded between -200% and +200% to handle outliers</span>
+<span class="sd">        - Missing or insufficient data results in null values</span>
+<span class="sd">    """</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get lactate data</span>
+        <span class="n">lactate_var</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">lactate_var</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No lactate data available"</span><span class="p">)</span>
+
+        <span class="n">lactate_data</span> <span class="o">=</span> <span class="n">lactate_var</span><span class="o">.</span><span class="n">data</span>
+
+        <span class="c1"># Calculate 24h window from ICU admission for each patient</span>
+        <span class="n">cohort_times</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"icu_admission"</span><span class="p">])</span>
+
+        <span class="c1"># Join with lactate data and filter to 24h window</span>
+        <span class="n">windowed_data</span> <span class="o">=</span> <span class="n">lactate_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">cohort_times</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">))</span> <span class="o">&amp;</span>
+            <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span> <span class="o">+</span> <span class="n">pl</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate clearance</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">windowed_data</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span>
+        <span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="c1"># Require at least 2 measurements</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+            <span class="c1"># Calculate clearance with proper bounds</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">then</span><span class="p">(</span>
+                <span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"final_lactate"</span><span class="p">))</span> <span class="o">/</span>
+                 <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"initial_lactate"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span>
+        <span class="p">])</span>
+
+        <span class="c1"># Return only required columns</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"lactate_clearance_24h"</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Log error and return empty result with correct schema</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error calculating lactate clearance: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s2">"icu_stay_id"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"lactate_clearance_24h"</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">})</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">🔧 <strong>When a ``py`` Function Is Needed</strong></p>
+<p><strong>Configuration alone is enough for:</strong></p>
+<ul class="simple">
+<li><p>Simple aggregations (first, last, max, min, mean, count)</p></li>
+<li><p>Basic expressions involving arithmetic operations</p></li>
+<li><p>Standard time window filtering</p></li>
+</ul>
+<p><strong>Add a ``py`` function for:</strong></p>
+<ul class="simple">
+<li><p>Complex multi-step calculations</p></li>
+<li><p>Custom business logic or clinical rules</p></li>
+<li><p>Advanced data transformations</p></li>
+<li><p>Error handling for edge cases</p></li>
+<li><p>Integration of multiple data sources</p></li>
+</ul>
+</div>
+</section>
+<section id="step-5-verify-everything-works">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Step 5: Verify Everything Works</a><a class="headerlink" href="#step-5-verify-everything-works" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">✅ <strong>Testing Checklist</strong></p>
+<p>Thoroughly test your implementation before creating a pull request.</p>
+</div>
+<p><strong>Create a Test Script</strong></p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">test_[variable_name].py</span></code> in your development directory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
+<span class="sd">Test script for lactate clearance variable</span>
+<span class="sd">Run this before submitting PR to ensure everything works</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_lactate_clearance</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test the new lactate clearance variable"""</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"🧪 Testing lactate clearance variable..."</span><span class="p">)</span>
+
+    <span class="c1"># 1. Create test cohort</span>
+    <span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+        <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+        <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+        <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Test cohort created: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+
+    <span class="c1"># 2. Add the new variable</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"✓ Variable added successfully"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ Error adding variable: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># 3. Check results</span>
+    <span class="k">if</span> <span class="s2">"lactate_clearance_24h"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"✗ Variable not found in cohort.obs"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">clearance_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"lactate_clearance_24h"</span><span class="p">]</span>
+    <span class="n">n_valid</span> <span class="o">=</span> <span class="n">clearance_data</span><span class="o">.</span><span class="n">drop_nulls</span><span class="p">()</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+    <span class="n">n_total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">clearance_data</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Results: </span><span class="si">{</span><span class="n">n_valid</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_total</span><span class="si">}</span><span class="s2"> patients have clearance values"</span><span class="p">)</span>
+
+    <span class="c1"># 4. Validate data quality</span>
+    <span class="k">if</span> <span class="n">n_valid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">clearance_data</span><span class="o">.</span><span class="n">drop_nulls</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Value range: </span><span class="si">{</span><span class="n">clearance_data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% to </span><span class="si">{</span><span class="n">clearance_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+
+        <span class="c1"># Check for reasonable values</span>
+        <span class="n">extreme_count</span> <span class="o">=</span> <span class="n">clearance_data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">200</span><span class="p">)</span> <span class="o">|</span>
+            <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">extreme_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"⚠️  Warning: </span><span class="si">{</span><span class="n">extreme_count</span><span class="si">}</span><span class="s2"> extreme values found"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"✓ All values within reasonable range"</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"🎉 Testing completed successfully!"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">test_lactate_clearance</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Ready to create pull request!"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">❌ Fix issues before creating pull request"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Run the Test</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>test_lactate_clearance.py
+</pre></div>
+</div>
+<p><strong>Manual Verification</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quick manual check in Jupyter or Python shell</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"lactate_clearance_24h"</span><span class="p">)</span>
+
+<span class="c1"># Check a few patients manually</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"lactate_clearance_24h"</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="step-6-create-pull-request">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Step 6: Create Pull Request</a><a class="headerlink" href="#step-6-create-pull-request" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">🔄 <strong>Pull Request Best Practices</strong></p>
+<p>A well-structured pull request makes review faster and increases the likelihood of acceptance.</p>
+</div>
+<p><strong>Commit Your Changes</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your changes</span>
+git<span class="w"> </span>add<span class="w"> </span>src/corr_vars/sources/&lt;source&gt;/mapping/vars.json
+git<span class="w"> </span>add<span class="w"> </span>src/corr_vars/sources/&lt;source&gt;/mapping/variables.py<span class="w">  </span><span class="c1"># if needed</span>
+
+<span class="c1"># Commit with descriptive message</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add lactate clearance variable (closes #123)</span>
+
+<span class="s2">- Implements 24-hour lactate clearance calculation</span>
+<span class="s2">- Requires minimum 2 measurements for reliability</span>
+<span class="s2">- Handles edge cases with proper bounds (-200% to +200%)</span>
+<span class="s2">- Tested on sample cohort with good data quality"</span>
+
+<span class="c1"># Push to your feature branch</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/add-lactate-clearance-variable
+</pre></div>
+</div>
+<p><strong>Create Pull Request on GitHub</strong></p>
+<ol class="arabic simple">
+<li><p>Visit the <a class="reference external" href="https://github.com/CUB-CORR/corr-vars">CORR-Vars repository</a></p></li>
+<li><p>Click <strong>“Compare &amp; pull request”</strong> (should appear after pushing)</p></li>
+<li><p>Fill out the pull request template:</p></li>
+</ol>
+<p><strong>PR Template:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Add [Variable Name] Variable</span>
+
+Closes #[issue-number]
+
+<span class="gu">### Summary</span>
+Brief description of what this variable calculates and its clinical relevance.
+
+<span class="gu">### Changes Made</span>
+<span class="k">- [ ]</span> Added the variable configuration
+<span class="k">- [ ]</span> Implemented the calculation function (if needed)
+<span class="k">- [ ]</span> Tested on sample cohort
+<span class="k">- [ ]</span> Verified data quality and reasonable value ranges
+
+<span class="gu">### Variable Details</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Type**</span>: Static/Dynamic, Derived/Native
+<span class="k">-</span><span class="w"> </span><span class="gs">**Dependencies**</span>: List of required variables
+<span class="k">-</span><span class="w"> </span><span class="gs">**Output**</span>: Data type and expected range
+<span class="k">-</span><span class="w"> </span><span class="gs">**Clinical Use**</span>: Brief clinical context
+
+<span class="gu">### Testing</span>
+<span class="k">- [ ]</span> Manual testing completed
+<span class="k">- [ ]</span> Edge cases handled
+<span class="k">- [ ]</span> Performance acceptable on large cohorts
+<span class="k">- [ ]</span> Documentation/comments added
+
+<span class="gu">### Review Checklist</span>
+<span class="k">- [ ]</span> Code follows project style guidelines
+<span class="k">- [ ]</span> Variable name is descriptive and follows naming conventions
+<span class="k">- [ ]</span> Function includes proper docstring
+<span class="k">- [ ]</span> Error handling implemented
+<span class="k">- [ ]</span> No breaking changes to existing functionality
+</pre></div>
+</div>
+<p><strong>Example Pull Request:</strong></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-success sd-bg-text-success">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-git-pull-request" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"></path></svg></span><span class="sd-summary-text"><strong>Complete PR Example</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Add Blood Lactate Clearance Variable</span>
+
+Closes <span class="ni">#123</span>
+
+<span class="gu">### Summary</span>
+Implements blood lactate clearance calculation as a prognostic marker for septic shock patients. Calculates the percentage change in lactate levels over the first 24 hours of ICU stay.
+
+<span class="gu">### Changes Made</span>
+<span class="k">- [x]</span> Added the <span class="sb">`lactate_clearance_24h`</span> configuration
+<span class="k">- [x]</span> Implemented its calculation function
+<span class="k">- [x]</span> Tested on sample cohort (n=150 patients)
+<span class="k">- [x]</span> Verified 89% of patients with lactate data have valid clearance values
+
+<span class="gu">### Variable Details</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Type**</span>: Derived Static
+<span class="k">-</span><span class="w"> </span><span class="gs">**Dependencies**</span>: <span class="sb">`blood_lactate`</span> (dynamic variable)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Output**</span>: Numeric percentage (-200% to +200%)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Clinical Use**</span>: Prognostic marker in sepsis, shock resolution monitoring
+
+<span class="gu">### Testing</span>
+<span class="k">- [x]</span> Manual testing completed on _d1 filter cohort
+<span class="k">- [x]</span> Edge cases: handles single measurements, zero/negative lactate
+<span class="k">- [x]</span> Performance: &lt;2 seconds on 10k patient cohort
+<span class="k">- [x]</span> Comprehensive docstring and error handling added
+
+<span class="gu">### Additional Notes</span>
+Formula: <span class="sb">`(Initial_Lactate - Final_Lactate) / Initial_Lactate * 100`</span>
+<span class="k">-</span><span class="w"> </span>Requires minimum 2 lactate measurements within 24h
+<span class="k">-</span><span class="w"> </span>Uses first and last measurements in the time window
+<span class="k">-</span><span class="w"> </span>Returns null for insufficient data
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="step-7-continuous-integration">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Step 7: Continuous Integration</a><a class="headerlink" href="#step-7-continuous-integration" title="Link to this heading">#</a></h2>
+<p>Opening the pull request runs the offline test suite
+(<code class="docutils literal notranslate"><span class="pre">.github/workflows/tests.yml</span></code>): <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">tests/integration</span></code> on the supported
+Python versions, with the report attached to the pull request. It needs no
+credentials and touches no network. Do not merge until it passes.</p>
+</section>
+<section id="step-8-request-review-and-merge">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Step 8: Request Review and Merge</a><a class="headerlink" href="#step-8-request-review-and-merge" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">👥 <strong>Code Review Process</strong></p>
+<p>Code review ensures quality, shares knowledge, and catches issues before merge. Be patient and responsive to feedback!</p>
+</div>
+<p><strong>Tag Reviewers</strong></p>
+<p>Once tests pass, tag appropriate reviewers in a comment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>@mthiele @nkronenberg Tests are passing! This lactate clearance variable is ready for review.
+
+Key points for review:
+- Clinical validation: Formula matches literature standard
+- Edge case handling: Tested with zero/negative lactate values
+- Performance: &lt;2s overhead on 10k patient cohorts
+- Documentation: Full docstring with clinical context
+</pre></div>
+</div>
+<p><strong>Respond to Review Feedback</strong></p>
+<p>Reviewers may request changes or ask questions:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-warning sd-bg-text-warning">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-comment-discussion" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 1h8.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 10.25 10H7.061l-2.574 2.573A1.458 1.458 0 0 1 2 11.543V10h-.25A1.75 1.75 0 0 1 0 8.25v-5.5C0 1.784.784 1 1.75 1ZM1.5 2.75v5.5c0 .138.112.25.25.25h1a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h3.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13 2a.25.25 0 0 0-.25-.25h-.5a.75.75 0 0 1 0-1.5h.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 12H14v1.543a1.458 1.458 0 0 1-2.487 1.03L9.22 12.28a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l2.22 2.22v-2.19a.75.75 0 0 1 .75-.75h1a.25.25 0 0 0 .25-.25Z"></path></svg></span><span class="sd-summary-text"><strong>Example Review Feedback</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Reviewer Comment:</strong></p>
+<p class="sd-card-text"><em>“Thanks for this contribution! The implementation looks solid. A few suggestions:</em></p>
+<p class="sd-card-text"><em>1. Could you add validation for extremely high initial lactate values (&gt;20 mmol/L)? These might be measurement errors.</em></p>
+<p class="sd-card-text"><em>2. Consider using 6-hour clearance as an additional option, as some studies show this is more predictive.</em></p>
+<p class="sd-card-text"><em>3. Minor: The variable name could be more specific - maybe `lactate_clearance_24h` instead of just `lactate_clearance`?”</em></p>
+</div>
+</details><p><strong>Address Feedback:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make requested changes</span>
+<span class="c1"># Add validation to the calculation function and rename the variable</span>
+
+git<span class="w"> </span>add<span class="w"> </span>-u
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Address review feedback:</span>
+
+<span class="s2">- Add validation for lactate &gt;20 mmol/L</span>
+<span class="s2">- Rename to lactate_clearance_24h for clarity</span>
+<span class="s2">- Add TODO for 6-hour clearance variant"</span>
+
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/add-lactate-clearance-variable
+</pre></div>
+</div>
+<p><strong>Final Approval and Merge</strong></p>
+<p>Once reviewers approve:</p>
+<ol class="arabic simple">
+<li><p><strong>Maintainer merges</strong> your pull request</p></li>
+<li><p><strong>Variable becomes available</strong> in the next release</p></li>
+<li><p><strong>GitHub issue closes</strong> automatically</p></li>
+<li><p><strong>Your contribution is live!</strong> 🎉</p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">🎊 <strong>Congratulations!</strong></p>
+<p>Your variable is now part of CORR-Vars and available to researchers worldwide! You’ve contributed to advancing clinical research with real-world data.</p>
+</div>
+</section>
+<section id="post-merge-follow-up">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Post-Merge Follow-up</a><a class="headerlink" href="#post-merge-follow-up" title="Link to this heading">#</a></h2>
+<p><strong>Clean Up Your Local Environment</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch back to main and update</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Delete your feature branch (optional)</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>feature/add-lactate-clearance-variable
+</pre></div>
+</div>
+<p><strong>Monitor Usage and Feedback</strong></p>
+<ul class="simple">
+<li><p>Watch for any issues reported with your variable</p></li>
+<li><p>Consider contributing documentation or examples</p></li>
+<li><p>Think about related variables that could be added</p></li>
+</ul>
+<p><strong>Share Your Success</strong></p>
+<ul class="simple">
+<li><p>Add your contribution to your CV/portfolio</p></li>
+<li><p>Share with your research team</p></li>
+<li><p>Consider presenting at department meetings</p></li>
+</ul>
+</section>
+<section id="common-pitfalls-and-tips">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Common Pitfalls and Tips</a><a class="headerlink" href="#common-pitfalls-and-tips" title="Link to this heading">#</a></h2>
+<div class="warning admonition">
+<p class="admonition-title">⚠️ <strong>Common Mistakes to Avoid</strong></p>
+<p>Learn from others’ experiences to avoid these common issues:</p>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🐛 <strong>Data Quality Issues</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Problem</strong>: Not handling missing/invalid data</p></li>
+<li><p class="sd-card-text"><strong>Solution</strong>: Always validate inputs and handle edge cases</p></li>
+<li><p class="sd-card-text"><strong>Example</strong>: Check for null values, negative measurements, extreme outliers</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+⏱️ <strong>Performance Problems</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Problem</strong>: Slow calculations on large cohorts</p></li>
+<li><p class="sd-card-text"><strong>Solution</strong>: Use efficient Polars operations, avoid loops</p></li>
+<li><p class="sd-card-text"><strong>Example</strong>: Use <cite>.group_by()</cite> instead of patient-by-patient processing</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📝 <strong>Poor Documentation</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Problem</strong>: Unclear variable purpose or calculation</p></li>
+<li><p class="sd-card-text"><strong>Solution</strong>: Write comprehensive docstrings with clinical context</p></li>
+<li><p class="sd-card-text"><strong>Example</strong>: Include formula, units, expected ranges, clinical use</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🧪 <strong>Insufficient Testing</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Problem</strong>: Edge cases not discovered until production</p></li>
+<li><p class="sd-card-text"><strong>Solution</strong>: Test with diverse patient populations and data scenarios</p></li>
+<li><p class="sd-card-text"><strong>Example</strong>: Test with single measurements, extreme values, missing data</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Pro Tips for Success:</strong></p>
+<div class="tip admonition">
+<p class="admonition-title">💡 <strong>Expert Tips</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Start Simple</strong>: Begin with basic aggregations before complex calculations</p></li>
+<li><p><strong>Clinical Validation</strong>: Verify results match clinical expectations</p></li>
+<li><p><strong>Performance First</strong>: Optimize for speed from the beginning</p></li>
+<li><p><strong>Document Everything</strong>: Future users (including yourself) will thank you</p></li>
+<li><p><strong>Ask for Help</strong>: Engage with the community early and often</p></li>
+<li><p><strong>Iterative Development</strong>: Get feedback on design before full implementation</p></li>
+</ol>
+</div>
+</section>
+<section id="additional-resources">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Additional Resources</a><a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">📚 <strong>Helpful Links</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting Guide</span></a> - Solutions for common development issues</p></li>
+<li><p><a class="reference external" href="https://github.com/CUB-CORR/corr-vars">GitHub Repository</a> - Source code and issues</p></li>
+<li><p><a class="reference external" href="https://concepts.example.edu">Concept Browser</a> - Browse existing variables</p></li>
+</ul>
+</div>
+<p><strong>Development Tools:</strong></p>
+<ul class="simple">
+<li><p><strong>Code Style</strong>: Follow PEP 8, use <cite>black</cite> for formatting</p></li>
+<li><p><strong>Testing</strong>: Write unit tests for complex functions</p></li>
+<li><p><strong>Documentation</strong>: Use clear docstrings and type hints</p></li>
+<li><p><strong>Version Control</strong>: Make atomic commits with descriptive messages</p></li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">🤝 <strong>Join the Community</strong></p>
+<p>Become an active contributor to the CORR-Vars ecosystem:</p>
+<ul class="simple">
+<li><p><strong>Contribute Variables</strong>: Start with this tutorial</p></li>
+<li><p><strong>Improve Documentation</strong>: Help other researchers learn</p></li>
+<li><p><strong>Report Issues</strong>: Identify bugs and suggest improvements</p></li>
+<li><p><strong>Share Experience</strong>: Present your work at conferences</p></li>
+<li><p><strong>Mentor Others</strong>: Help new contributors get started</p></li>
+</ul>
+</div>
+<p>—</p>
+<p><strong>Happy contributing! Your clinical expertise combined with this development workflow will help advance medical research worldwide.</strong> 🚀</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="custom_variables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Custom Variables Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="troubleshooting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Troubleshooting Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow-overview">Development Workflow Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-a-github-issue">Step 1: Create a GitHub Issue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-development-environment-and-create-feature-branch">Step 2: Set Up Development Environment and Create Feature Branch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-explore-and-prototype-in-jupyter-notebook">Step 3: Explore and Prototype in Jupyter Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-implement-clean-code-in-configuration-files">Step 4: Implement Clean Code in Configuration Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify-everything-works">Step 5: Verify Everything Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-pull-request">Step 6: Create Pull Request</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-continuous-integration">Step 7: Continuous Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-request-review-and-merge">Step 8: Request Review and Merge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-merge-follow-up">Post-Merge Follow-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-and-tips">Common Pitfalls and Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

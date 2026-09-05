@@ -1,0 +1,1452 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tutorials and Getting Started &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=ce394494"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Custom Variables Guide" href="custom_variables.html" />
+    <link rel="prev" title="Quick Start" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/tutorials.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Ftutorials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/tutorials.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tutorials and Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tutorials and Getting Started</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-analysis">Getting Started - Your First Analysis</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-environment-setup">Step 1: Environment Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-basic-cohort-creation">Step 2: Basic Cohort Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-exploring-your-cohort">Step 3: Exploring Your Cohort</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-adding-your-first-variables">Step 4: Adding Your First Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-examining-the-data">Step 5: Examining the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-creating-aggregated-variables">Step 6: Creating Aggregated Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-setting-eligibility-and-inclusion-criteria">Step 7: Setting Eligibility and Inclusion Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-applying-inclusion-criteria">Step 8: Applying Inclusion Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-generate-summary-statistics">Step 9: Generate Summary Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-save-your-work">Step 10: Save Your Work</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-advanced-variable-creation">Tutorial 2: Advanced Variable Creation</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-aggregation-variables">Custom Aggregation Variables</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-3-multi-source-analysis">Tutorial 3: Multi-Source Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-4-working-with-time-series-data">Tutorial 4: Working with Time-Series Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-5-complete-research-workflow-template">Tutorial 5: Complete Research Workflow Template</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-in-your-corr-vars-journey">Next Steps in Your CORR-Vars Journey</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tutorials-and-getting-started">
+<h1>Tutorials and Getting Started<a class="headerlink" href="#tutorials-and-getting-started" title="Link to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title"><strong>AI-generated content</strong></p>
+<p>This page was generated by AI and has not been fully reviewed by a human. Content may be inaccurate or incomplete.
+If you find any issues, please create an issue on the <a class="reference external" href="https://github.com/CUB-CORR/corr-vars/issues">GitHub repository</a>.</p>
+</div>
+<div style="text-align: center; margin: 40px 0;">
+  <img src="_static/corr_favicon.png" alt="CORR-Vars Logo" style="width: 80px; height: 80px; margin-bottom: 20px;">
+  <p style="font-size: 1.2em; color: #7f8c8d; margin: 10px 0 30px 0;">
+    Step-by-step guides to master CORR-Vars for clinical research
+  </p>
+</div><div class="tip admonition">
+<p class="admonition-title">🚀 <strong>Learning Path Overview</strong></p>
+<p>This section provides <strong>hands-on tutorials</strong> to help you get started with CORR-Vars and accomplish common research tasks. Each tutorial builds on the previous one, taking you from basic concepts to advanced research workflows.</p>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🎯 <strong>Tutorial 1: First Analysis</strong></div>
+<p class="sd-card-text"><strong>⏱️ 30 minutes</strong></p>
+<p class="sd-card-text">Create your first cohort, add variables, and generate summary statistics</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="#getting-started-your-first-analysis"><span class="std std-ref">Getting Started - Your First Analysis</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔧 <strong>Tutorial 2: Advanced Variables</strong></div>
+<p class="sd-card-text"><strong>⏱️ 45 minutes</strong></p>
+<p class="sd-card-text">Custom aggregations, time-specific windows, and derived calculations</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="#tutorial-2-advanced-variable-creation"><span class="std std-ref">Tutorial 2: Advanced Variable Creation</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🌍 <strong>Tutorial 3: Multi-Source Analysis</strong></div>
+<p class="sd-card-text"><strong>⏱️ 20 minutes</strong></p>
+<p class="sd-card-text">Combine several data sources in one cohort for multi-center studies</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="#tutorial-3-multi-source-analysis"><span class="std std-ref">Tutorial 3: Multi-Source Analysis</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📈 <strong>Tutorial 4: Time-Series Analysis</strong></div>
+<p class="sd-card-text"><strong>⏱️ 35 minutes</strong></p>
+<p class="sd-card-text">Advanced time-series analysis and dynamic variable patterns</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="#tutorial-4-working-with-time-series-data"><span class="std std-ref">Tutorial 4: Working with Time-Series Data</span></a></div>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-started-your-first-analysis">
+<span id="id1"></span><h1>Getting Started - Your First Analysis<a class="headerlink" href="#getting-started-your-first-analysis" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Tutorial Goals</strong></p>
+<p><strong>What you’ll learn:</strong> Create your first cohort, add variables, apply inclusion criteria, and generate publication-ready summary tables.</p>
+<p><strong>Time required:</strong> ~30 minutes</p>
+<p><strong>Prerequisites:</strong> Access to IMI server or local CORR-Vars installation</p>
+</div>
+<div style="background: #004d9b; color: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🏥 Your First Research Journey</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    In this tutorial, we'll build an ICU cohort studying <strong>hypernatremia</strong> (elevated sodium levels) and generate a summary table comparing patient characteristics by sex. This mirrors real clinical research workflows used in critical care studies.
+  </p>
+</div><section id="step-1-environment-setup">
+<h2>Step 1: Environment Setup<a class="headerlink" href="#step-1-environment-setup" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+📦 <strong>Install</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>git+https://github.com/CUB-CORR/corr-vars.git
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+💻 <strong>Local Development</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/CUB-CORR/corr-vars.git
+<span class="nb">cd</span><span class="w"> </span>corr-vars
+uv<span class="w"> </span>sync<span class="w"> </span>--group<span class="w"> </span>dev
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+🔐 <strong>Concepts API access</strong></label><div class="sd-tab-content docutils">
+<p>Variable definitions are served by the CORR Concepts API:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CORR_CONCEPTS_API_KEY</span><span class="o">=</span><span class="s2">"corr_..."</span>
+</pre></div>
+</div>
+<p>The project is passed per cohort: <code class="docutils literal notranslate"><span class="pre">Cohort(project=&quot;my_project&quot;)</span></code>.</p>
+</div>
+</div>
+<p><strong>Start Jupyter:</strong> In VS Code: Create new .ipynb file and select the CORR-Vars kernel.</p>
+</section>
+<section id="step-2-basic-cohort-creation">
+<h2>Step 2: Basic Cohort Creation<a class="headerlink" href="#step-2-basic-cohort-creation" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">💡 <strong>Understanding the Code</strong></p>
+<p>We’ll start with a <strong>minimal cohort</strong> to understand the basics before adding complexity.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the main CORR-Vars class</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="c1"># Create your first cohort - start small for learning</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>           <span class="c1"># Each row = one ICU admission</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>        <span class="c1"># Start clean (we'll add variables manually)</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>           <span class="c1"># Project on the CORR Concepts API</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"🏥 Created cohort with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> ICU stays"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📊 Available columns: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="tip admonition" open="open">
+<summary class="admonition-title">✅ <strong>Expected Output</strong></summary>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>🏥 Created cohort with 45,123 ICU stays
+📊 Available columns: ['icu_stay_id', 'patient_id', 'case_id', 'icu_admission', 'icu_discharge', ...]
+</pre></div>
+</div>
+<p><strong>What happened:</strong> CORR-Vars connected to the database and loaded basic ICU stay information. The exact number will vary depending on database updates.</p>
+</details>
+</section>
+<section id="step-3-exploring-your-cohort">
+<h2>Step 3: Exploring Your Cohort<a class="headerlink" href="#step-3-exploring-your-cohort" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">🔍 <strong>Data Exploration Best Practice</strong></p>
+<p><strong>Always explore your data first!</strong> Understanding the scope and characteristics of your cohort is crucial before analysis.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Look at the first few rows to understand the data structure</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📋 First 5 rows:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Check the temporal scope of your data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📅 Temporal coverage:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Earliest admission: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'icu_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Latest admission:   </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'icu_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Basic cohort statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 Cohort statistics:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Total ICU stays:     </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Unique patients:     </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'patient_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Unique hospital cases: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'case_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Calculate readmission rate</span>
+<span class="n">total_stays</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+<span class="n">unique_patients</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'patient_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span>
+<span class="n">readmission_rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_stays</span> <span class="o">-</span> <span class="n">unique_patients</span><span class="p">)</span> <span class="o">/</span> <span class="n">unique_patients</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Readmission rate:    </span><span class="si">{</span><span class="n">readmission_rate</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="note admonition" open="open">
+<summary class="admonition-title">📊 <strong>Understanding the Output</strong></summary>
+<ul class="simple">
+<li><p><strong>ICU stays &gt; Patients</strong>: Some patients have multiple ICU admissions</p></li>
+<li><p><strong>Hospital cases</strong>: A single hospitalization may include multiple ICU stays</p></li>
+<li><p><strong>Readmission rate</strong>: Percentage indicating how often patients return to ICU</p></li>
+</ul>
+</details>
+</section>
+<section id="step-4-adding-your-first-variables">
+<h2>Step 4: Adding Your First Variables<a class="headerlink" href="#step-4-adding-your-first-variables" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">🧩 <strong>Variable Types in CORR-Vars</strong></p>
+<ul class="simple">
+<li><p><strong>Static variables</strong> (<code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code>): One value per ICU stay (age, sex, outcome)</p></li>
+<li><p><strong>Dynamic variables</strong> (<code class="docutils literal notranslate"><span class="pre">cohort.obsm</span></code>): Time-series data (lab values, vital signs)</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add static (single value per ICU stay) variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"🔧 Adding static variables..."</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"hospital_length_of_stay"</span><span class="p">)</span>  <span class="c1"># Days in hospital</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"campus_id"</span><span class="p">)</span>                <span class="c1"># Which hospital campus</span>
+
+<span class="c1"># Add a dynamic (time-series) variable - this will be key for our analysis!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📈 Adding dynamic variables..."</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_sodium"</span><span class="p">)</span>             <span class="c1"># Sodium lab values over time</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Variables added successfully!"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📊 Static variables in cohort.obs: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> columns"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📈 Dynamic variables in cohort.obsm: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Quick look at our sodium data</span>
+<span class="n">sodium_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">'blood_sodium'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🧪 Sodium measurements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sodium_data</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> total records"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Patients with sodium data: </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'icu_stay_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Value range: </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mmol/L"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-info sd-bg-text-info">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-graph" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 1.75V13.5h13.75a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1-.75-.75V1.75a.75.75 0 0 1 1.5 0Zm14.28 2.53-5.25 5.25a.75.75 0 0 1-1.06 0L7 7.06 4.28 9.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.25-3.25a.75.75 0 0 1 1.06 0L10 7.94l4.72-4.72a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"></path></svg></span><span class="sd-summary-text"><strong>🔬 Understanding Dynamic Variables</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Dynamic variables contain multiple measurements per patient over time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Peek at sodium data structure</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sodium_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="c1"># Shows: icu_stay_id, recordtime, value columns</span>
+</pre></div>
+</div>
+<p class="sd-card-text">This time-series structure enables powerful temporal analyses like calculating trends, clearances, and time-to-event outcomes.</p>
+</div>
+</details></section>
+<section id="step-5-examining-the-data">
+<h2>Step 5: Examining the Data<a class="headerlink" href="#step-5-examining-the-data" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">🔍 <strong>Data Quality Check</strong></p>
+<p>Always examine your data before analysis to understand completeness and identify potential issues.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examine static data (one row per ICU stay)</span>
+<span class="c1"># Note: Basic demographics are automatically included</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📋 Static data sample (first 5 patients):"</span><span class="p">)</span>
+<span class="n">static_sample</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">([</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"sex"</span><span class="p">,</span>
+    <span class="s2">"inhospital_death"</span><span class="p">,</span> <span class="s2">"hospital_length_of_stay"</span><span class="p">,</span> <span class="s2">"campus_id"</span>
+<span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">static_sample</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Examine dynamic data (time-series)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"🧪 Sodium measurements overview:"</span><span class="p">)</span>
+<span class="n">sodium_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">'blood_sodium'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Total measurements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sodium_data</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Date range: </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'recordtime'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">sodium_data</span><span class="p">[</span><span class="s1">'recordtime'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 Sample sodium data:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sodium_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Data completeness assessment</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"🔍 Data completeness check:"</span><span class="p">)</span>
+<span class="n">total_patients</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Age missing:        </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'age_on_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_patients</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'age_on_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Sex missing:        </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_patients</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Hospital LOS missing: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'hospital_length_of_stay'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_patients</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'hospital_length_of_stay'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+
+<span class="c1"># Sodium data availability</span>
+<span class="n">patients_with_sodium</span> <span class="o">=</span> <span class="n">sodium_data</span><span class="p">[</span><span class="s1">'icu_stay_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Patients with sodium: </span><span class="si">{</span><span class="n">patients_with_sodium</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_patients</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">patients_with_sodium</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="note admonition" open="open">
+<summary class="admonition-title">💡 <strong>What to Look For</strong></summary>
+<ul class="simple">
+<li><p><strong>Missing data patterns</strong>: High missingness may indicate data quality issues</p></li>
+<li><p><strong>Value ranges</strong>: Should be clinically plausible</p></li>
+<li><p><strong>Temporal coverage</strong>: Ensure data spans your study period</p></li>
+<li><p><strong>Sample sizes</strong>: Sufficient for your intended analysis</p></li>
+</ul>
+</details>
+</section>
+<section id="step-6-creating-aggregated-variables">
+<h2>Step 6: Creating Aggregated Variables<a class="headerlink" href="#step-6-creating-aggregated-variables" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Aggregated Variables Concept</strong></p>
+<p><strong>Transform time-series → single values</strong>: Convert multiple sodium measurements per patient into clinically meaningful summary statistics (first value, maximum, trends, etc.)</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">NativeStatic</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"🔧 Creating aggregated sodium variables..."</span><span class="p">)</span>
+
+<span class="c1"># Variable 1: First sodium measurement (baseline value)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"first_sodium_value"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!first value"</span><span class="p">,</span>                <span class="c1"># Get the first measurement</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_sodium"</span><span class="p">,</span>              <span class="c1"># From the sodium time-series</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>                 <span class="c1"># Start from ICU admission</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>                 <span class="c1"># End at ICU discharge</span>
+<span class="p">))</span>
+
+<span class="c1"># Variable 2: Maximum sodium during ICU stay (peak value)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"max_sodium_icu"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span>                  <span class="c1"># Get the maximum measurement</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>
+<span class="p">))</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Aggregated variables created successfully!"</span><span class="p">)</span>
+
+<span class="c1"># Examine the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 Sample of aggregated sodium data:"</span><span class="p">)</span>
+<span class="n">sodium_summary</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">([</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"first_sodium_value"</span><span class="p">,</span> <span class="s2">"max_sodium_icu"</span>
+<span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sodium_summary</span><span class="p">)</span>
+
+<span class="c1"># Quick statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📈 Summary statistics:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   First sodium - Mean: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'first_sodium_value'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mmol/L"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Max sodium - Mean:   </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'max_sodium_icu'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mmol/L"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Patients with data:  </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'first_sodium_value'</span><span class="p">]</span><span class="o">.</span><span class="n">drop_nulls</span><span class="p">()</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-info sd-bg-text-info">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg></span><span class="sd-summary-text"><strong>🧪 Understanding Aggregation Syntax</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">CORR-Vars aggregation syntax follows this pattern:</p>
+<ul class="simple">
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">select=&quot;!first</span> <span class="pre">value&quot;</span></code> → Get first measurement</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">select=&quot;!max</span> <span class="pre">value&quot;</span></code> → Get maximum measurement</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">select=&quot;!mean</span> <span class="pre">value&quot;</span></code> → Get average</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">tmin/tmax</span></code> → Define time window for aggregation</p></li>
+</ul>
+<p class="sd-card-text">This powerful syntax enables complex clinical variable definitions with simple, readable code.</p>
+<p class="sd-card-text">The same <code class="docutils literal notranslate"><span class="pre">select</span></code> string is also used in a declarative variable definition
+(<code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;native_static&quot;,</span> <span class="pre">&quot;select&quot;:</span> <span class="pre">&quot;!max</span> <span class="pre">value&quot;,</span> <span class="pre">&quot;base_var&quot;:</span> <span class="pre">&quot;blood_sodium&quot;}</span></code>)
+in a source’s <code class="docutils literal notranslate"><span class="pre">vars.json</span></code> or in the Concepts API. See <a class="reference internal" href="api/aggregation.html"><span class="doc">Aggregated Variables</span></a> for the
+full list of aggregation functions and for when to use which form.</p>
+</div>
+</details></section>
+<section id="step-7-setting-eligibility-and-inclusion-criteria">
+<h2>Step 7: Setting Eligibility and Inclusion Criteria<a class="headerlink" href="#step-7-setting-eligibility-and-inclusion-criteria" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Clinical Research Focus: Hypernatremia</strong></p>
+<p><strong>Hypernatremia</strong> (sodium &gt;145 mmol/L) is a common electrolyte disorder in ICU patients, associated with increased mortality. We’ll study patients who develop this condition.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a time anchor: when did hypernatremia first occur?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"🔍 Identifying hypernatremia onset..."</span><span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"hypernatremia_onset_time"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!first recordtime"</span><span class="p">,</span>           <span class="c1"># Get the TIME of first occurrence</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_sodium"</span><span class="p">,</span>
+    <span class="n">where</span><span class="o">=</span><span class="s2">"value &gt; 145"</span><span class="p">,</span>                  <span class="c1"># Clinical threshold for hypernatremia</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="s2">"icu_discharge"</span><span class="p">,</span>
+<span class="p">))</span>
+
+
+<span class="c1"># Set this as our eligibility timepoint (study entry)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">set_t_eligible</span><span class="p">(</span><span class="s2">"hypernatremia_onset_time"</span><span class="p">)</span>
+
+<span class="c1"># Analyze the results</span>
+<span class="n">total_patients</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+<span class="n">patients_with_hypernatremia</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'hypernatremia_onset_time'</span><span class="p">]</span><span class="o">.</span><span class="n">drop_nulls</span><span class="p">()</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="n">patients_without</span> <span class="o">=</span> <span class="n">total_patients</span> <span class="o">-</span> <span class="n">patients_with_hypernatremia</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 Hypernatremia analysis:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Total patients:           </span><span class="si">{</span><span class="n">total_patients</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Developed hypernatremia:  </span><span class="si">{</span><span class="n">patients_with_hypernatremia</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">patients_with_hypernatremia</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Never hypernatremic:      </span><span class="si">{</span><span class="n">patients_without</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">patients_without</span><span class="o">/</span><span class="n">total_patients</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+
+<span class="c1"># Show some example onset times</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🕐 Sample hypernatremia onset times:"</span><span class="p">)</span>
+<span class="n">onset_examples</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'hypernatremia_onset_time'</span><span class="p">]</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span>
+<span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">'icu_stay_id'</span><span class="p">,</span> <span class="s1">'icu_admission'</span><span class="p">,</span> <span class="s1">'hypernatremia_onset_time'</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">onset_examples</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="tip admonition" open="open">
+<summary class="admonition-title">⚡ <strong>What is t_eligible?</strong></summary>
+<p><strong>t_eligible</strong> sets the “study entry time” for each patient. This is crucial for:</p>
+<ul class="simple">
+<li><p><strong>Time-to-event analysis</strong>: Measuring outcomes from a clinically meaningful starting point</p></li>
+<li><p><strong>Avoiding bias</strong>: Ensuring all patients have the same “opportunity” to develop outcomes</p></li>
+<li><p><strong>Standardizing follow-up</strong>: Creating comparable observation periods</p></li>
+</ul>
+</details>
+</section>
+<section id="step-8-applying-inclusion-criteria">
+<h2>Step 8: Applying Inclusion Criteria<a class="headerlink" href="#step-8-applying-inclusion-criteria" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">📋 <strong>Inclusion/Exclusion Criteria</strong></p>
+<p><strong>Systematic filtering</strong> ensures your study population is appropriate for your research question and meets clinical/regulatory standards.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply systematic inclusion criteria</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📋 Applying inclusion criteria..."</span><span class="p">)</span>
+
+<span class="c1"># Track cohort size at each step</span>
+<span class="n">initial_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🏥 Starting cohort size: </span><span class="si">{</span><span class="n">initial_size</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+
+<span class="n">ct</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span>
+        <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adult patients"</span><span class="p">,</span>
+        <span class="s2">"operations_done"</span><span class="p">:</span> <span class="s2">"Include only patients &gt;= 18 years old"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"hypernatremia_onset_time"</span><span class="p">,</span>
+        <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"is_not_null"</span><span class="p">,</span>  <span class="c1"># Has hypernatremia (corrected syntax)</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Developed hypernatremia"</span><span class="p">,</span>
+        <span class="s2">"operations_done"</span><span class="p">:</span> <span class="s2">"Include only patients with hypernatremia (Na &gt; 145 mmol/L)"</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+
+<span class="n">final_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Final study cohort: </span><span class="si">{</span><span class="n">final_size</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📉 Excluded: </span><span class="si">{</span><span class="n">initial_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">final_size</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> patients (</span><span class="si">{</span><span class="p">(</span><span class="n">initial_size</span><span class="o">-</span><span class="n">final_size</span><span class="p">)</span><span class="o">/</span><span class="n">initial_size</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+
+<span class="c1"># Show the inclusion flow</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 Inclusion criteria results:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span>  <span class="c1"># Shows detailed inclusion flow table</span>
+</pre></div>
+</div>
+<details class="tip admonition" open="open">
+<summary class="admonition-title">📊 <strong>Inclusion Flow Interpretation</strong></summary>
+<p>The inclusion table shows:</p>
+<ul class="simple">
+<li><p><strong>Starting N</strong>: Patients before each criterion</p></li>
+<li><p><strong>Excluded</strong>: How many patients each criterion removed</p></li>
+<li><p><strong>Remaining N</strong>: Patients after each criterion</p></li>
+<li><p><strong>Cumulative %</strong>: Percentage of original cohort remaining</p></li>
+</ul>
+<p>This flow table is <strong>essential for research publications</strong> and regulatory submissions.</p>
+</details>
+</section>
+<section id="step-9-generate-summary-statistics">
+<h2>Step 9: Generate Summary Statistics<a class="headerlink" href="#step-9-generate-summary-statistics" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">📊 <strong>Table 1: Baseline Characteristics</strong></p>
+<p><strong>Table 1</strong> is the standard first table in medical research papers, showing baseline characteristics of your study population, often stratified by key variables.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a publication-ready Table 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📊 Generating baseline characteristics table..."</span><span class="p">)</span>
+
+<span class="n">table1</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">tableone</span><span class="p">(</span>
+    <span class="n">groupby</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span>                        <span class="c1"># Compare males vs females</span>
+    <span class="n">ignore_cols</span><span class="o">=</span><span class="p">[</span>                        <span class="c1"># Exclude non-clinical variables</span>
+        <span class="s2">"hypernatremia_onset_time"</span><span class="p">,</span>
+        <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+        <span class="s2">"patient_id"</span><span class="p">,</span>
+        <span class="s2">"case_id"</span>
+    <span class="p">],</span>
+    <span class="n">pval</span><span class="o">=</span><span class="kc">True</span>                           <span class="c1"># Include statistical tests</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📋 Baseline Characteristics by Sex:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table1</span><span class="p">)</span>
+
+<span class="c1"># Save the results</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="s2">"hypernatremia_study_table1.csv"</span>
+<span class="n">table1</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">💾 Table saved to: </span><span class="si">{</span><span class="n">output_filename</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Generate additional summary statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📈 Quick summary statistics:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Mean age: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'age_on_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'age_on_admission'</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> years"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Male patients: </span><span class="si">{</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'M'</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'M'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Hospital mortality: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'inhospital_death'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Median hospital LOS: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'hospital_length_of_stay'</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> days"</span><span class="p">)</span>
+</pre></div>
+</div>
+<details class="tip admonition" open="open">
+<summary class="admonition-title">📋 <strong>Understanding Table 1</strong></summary>
+<p>Your Table 1 will include:</p>
+<ul class="simple">
+<li><p><strong>Demographics</strong>: Age, sex distribution</p></li>
+<li><p><strong>Clinical variables</strong>: Severity scores, comorbidities</p></li>
+<li><p><strong>Outcomes</strong>: Mortality, length of stay</p></li>
+<li><p><strong>Statistical tests</strong>: P-values for group comparisons</p></li>
+<li><p><strong>Missing data</strong>: Indicated where applicable</p></li>
+</ul>
+<p>This table forms the foundation for describing your study population in publications.</p>
+</details>
+</section>
+<section id="step-10-save-your-work">
+<h2>Step 10: Save Your Work<a class="headerlink" href="#step-10-save-your-work" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">💾 <strong>Reproducible Research</strong></p>
+<p><strong>Always save your work!</strong> CORR-Vars provides multiple formats for different downstream analyses.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the cohort in CORR-Vars native format (fastest for future loading)</span>
+<span class="n">cohort_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"hypernatremia_study_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2">patients.corr2"</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">cohort_filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"💾 Cohort saved to: </span><span class="si">{</span><span class="n">cohort_filename</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Export to CSV files for external analysis (R, SPSS, Excel, etc.)</span>
+<span class="n">csv_directory</span> <span class="o">=</span> <span class="s2">"hypernatremia_study_exports"</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_directory</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📁 CSV exports saved to: </span><span class="si">{</span><span class="n">csv_directory</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - obs.csv: Static variables (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - obsm_blood_sodium.csv: Sodium time-series (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">'blood_sodium'</span><span class="p">])</span><span class="si">}</span><span class="s2"> measurements)"</span><span class="p">)</span>
+
+<span class="c1"># Quick verification of saved files</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Verification - files created:"</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cohort_filename</span><span class="p">):</span>
+    <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">cohort_filename</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>  <span class="c1"># MB</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   🗂️  </span><span class="si">{</span><span class="n">cohort_filename</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">file_size</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB)"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">csv_directory</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   📁 </span><span class="si">{</span><span class="n">csv_directory</span><span class="si">}</span><span class="s2">/ directory with CSV files"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   📋 hypernatremia_study_table1.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 25px; border-radius: 12px; margin: 20px 0; text-align: center;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🎉 Congratulations!</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    You've completed your first CORR-Vars analysis! You now have:<br/>
+    ✅ A filtered cohort of adult ICU patients with hypernatremia<br/>
+    ✅ Baseline characteristics and clinical variables<br/>
+    ✅ Publication-ready summary statistics<br/>
+    ✅ Saved data for further analysis<br/><br/>
+    <strong>Ready for the next tutorial? 🚀</strong>
+  </p>
+</div></section>
+</section>
+<section id="tutorial-2-advanced-variable-creation">
+<span id="id2"></span><h1>Tutorial 2: Advanced Variable Creation<a class="headerlink" href="#tutorial-2-advanced-variable-creation" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Tutorial Goals</strong></p>
+<p><strong>What you’ll learn:</strong> Create sophisticated clinical variables using time-specific windows, custom aggregations, and mathematical expressions.</p>
+<p><strong>Time required:</strong> ~45 minutes</p>
+<p><strong>Prerequisites:</strong> Completion of Tutorial 1</p>
+</div>
+<div style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); color: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🔬 Advanced Clinical Variables</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    In this tutorial, we'll create sophisticated variables used in real clinical research: admission vital signs, derived indices like shock index, and complex time-based calculations. These techniques form the backbone of advanced ICU outcomes research.
+  </p>
+</div><p>This tutorial covers creating custom variables and working with complex data transformations that mirror real clinical research needs.</p>
+<section id="custom-aggregation-variables">
+<h2>Custom Aggregation Variables<a class="headerlink" href="#custom-aggregation-variables" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivedStatic</span><span class="p">,</span> <span class="n">NativeStatic</span>
+
+<span class="c1"># Initialize cohort</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span><span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span> <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Add base variables first</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"systolic_blood_pressure"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"heart_rate"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"body_temperature"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Time-Specific Aggregations:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variables from specific time windows</span>
+<span class="n">admission_vitals</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"admission_sbp"</span><span class="p">,</span> <span class="s2">"!closest(icu_admission, 0, 2h) value"</span><span class="p">,</span>
+     <span class="s2">"systolic_blood_pressure"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"admission_hr"</span><span class="p">,</span> <span class="s2">"!closest(icu_admission, 0, 2h) value"</span><span class="p">,</span> <span class="s2">"heart_rate"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"max_temp_24h"</span><span class="p">,</span> <span class="s2">"!max value"</span><span class="p">,</span> <span class="s2">"body_temperature"</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">base_var</span> <span class="ow">in</span> <span class="n">admission_vitals</span><span class="p">:</span>
+    <span class="c1"># tmin and tmax filter the data that is considered for the aggregation.</span>
+    <span class="c1"># Note that !closest still only considers ±2h around the time of interest,</span>
+    <span class="c1"># as specified in the select clause.</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+        <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+        <span class="n">select</span><span class="o">=</span><span class="n">select</span><span class="p">,</span>
+        <span class="n">base_var</span><span class="o">=</span><span class="n">base_var</span><span class="p">,</span>
+        <span class="n">tmin</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"-2h"</span><span class="p">),</span>
+        <span class="n">tmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+24h"</span><span class="p">),</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Derived Variables with Expressions:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate shock index (HR/SBP)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"shock_index_admission"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"admission_hr"</span><span class="p">,</span> <span class="s2">"admission_sbp"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"admission_hr / admission_sbp"</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># Classify fever</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"fever_in_24h"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"max_temp_24h"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"max_temp_24h &gt;= 38.0"</span><span class="p">,</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tutorial-3-multi-source-analysis">
+<span id="id3"></span><h1>Tutorial 3: Multi-Source Analysis<a class="headerlink" href="#tutorial-3-multi-source-analysis" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Tutorial Goals</strong></p>
+<p><strong>What you’ll learn:</strong> Combine several configured data sources in one cohort for comprehensive, multi-center analysis.</p>
+<p><strong>Time required:</strong> ~20 minutes</p>
+<p><strong>Prerequisites:</strong> Access to the reprodICU dataset files</p>
+</div>
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🌍 International Multi-Center Research</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    Combine your own institution's data with <strong>international critical care data</strong> (reprodICU: 469K+ admissions from US/Europe) for unprecedented scale and external validation capabilities.
+  </p>
+</div><div class="warning admonition">
+<p class="admonition-title">🔐 <strong>Access Requirements</strong></p>
+<ul class="simple">
+<li><p><strong>reprodICU path verification</strong>: Check that the reprodICU files are readable at the path you configure</p></li>
+</ul>
+</div>
+<p>Working with multiple data sources enables comprehensive analysis combining local expertise with international generalizability.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure multiple sources</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">},</span>
+        <span class="c1"># "my_source": {...},</span>
+    <span class="p">},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Check source distribution</span>
+<span class="n">source_counts</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"data_source"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Patients by data source:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">source_counts</span><span class="p">)</span>
+
+<span class="c1"># Add variables (will be available from applicable sources)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"apache_ii_score"</span><span class="p">)</span>  <span class="c1"># May not be available from all sources</span>
+
+<span class="c1"># Analyze by source</span>
+<span class="n">summary_by_source</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"data_source"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_patients"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_age"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"apache_ii_score"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean_apache"</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary_by_source</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tutorial-4-working-with-time-series-data">
+<span id="id4"></span><h1>Tutorial 4: Working with Time-Series Data<a class="headerlink" href="#tutorial-4-working-with-time-series-data" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Tutorial Goals</strong></p>
+<p><strong>What you’ll learn:</strong> Master time-series analysis in CORR-Vars: trend detection, rolling windows, time-to-event analysis, and temporal pattern recognition.</p>
+<p><strong>Time required:</strong> ~35 minutes</p>
+<p><strong>Prerequisites:</strong> Basic understanding of Polars DataFrames</p>
+</div>
+<div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
+  <h3 style="margin: 0 0 15px 0; color: white;">📈 Temporal Clinical Patterns</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    Time-series analysis reveals <strong>dynamic clinical patterns</strong>: deteriorating lactate trends, blood pressure trajectories, medication responses, and early warning signals that static variables miss.
+  </p>
+</div><p>Advanced techniques for analyzing dynamic variables and extracting clinically meaningful temporal patterns.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add time-series variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_lactate"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_pressure_mean"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"spo2"</span><span class="p">)</span>
+
+<span class="c1"># Examine time-series patterns</span>
+<span class="n">lactate_data</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"blood_lactate"</span><span class="p">]</span>
+
+<span class="c1"># Find patients with rising lactate</span>
+<span class="n">lactate_trends</span> <span class="o">=</span> <span class="n">lactate_data</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"last_lactate"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max_lactate"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_measurements"</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Calculate lactate change</span>
+<span class="n">lactate_trends</span> <span class="o">=</span> <span class="n">lactate_trends</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"last_lactate"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_change"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"max_lactate"</span><span class="p">)</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"first_lactate"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"lactate_ratio"</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lactate trends analysis:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lactate_trends</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="tutorial-5-complete-research-workflow-template">
+<span id="tutorial-5-research-workflow-template"></span><h1>Tutorial 5: Complete Research Workflow Template<a class="headerlink" href="#tutorial-5-complete-research-workflow-template" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">🎯 <strong>Tutorial Goals</strong></p>
+<p><strong>What you’ll learn:</strong> End-to-end research workflow from hypothesis to publication-ready results using CORR-Vars best practices.</p>
+<p><strong>Time required:</strong> ~60 minutes</p>
+<p><strong>Use case:</strong> ICU outcomes study template</p>
+</div>
+<div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #2c3e50; padding: 25px; border-radius: 12px; margin: 20px 0;">
+  <h3 style="margin: 0 0 15px 0; color: #2c3e50;">🏥 Complete ICU Outcomes Study</h3>
+  <p style="margin: 0; font-size: 1.1em; line-height: 1.4;">
+    This comprehensive template demonstrates a <strong>complete research workflow</strong>: from initial cohort definition through statistical analysis to publication-ready outputs. Perfect for ICU outcomes research, quality improvement studies, and clinical epidemiology.
+  </p>
+</div><p>A complete, production-ready template for conducting sophisticated ICU outcomes studies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivedStatic</span><span class="p">,</span> <span class="n">NativeStatic</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="c1"># 1. Initialize cohort</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Initial cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> ICU stays"</span><span class="p">)</span>
+
+<span class="c1"># 2. Add core variables</span>
+<span class="n">core_vars</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"weight"</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">,</span>
+    <span class="s2">"apache_ii_score"</span><span class="p">,</span> <span class="s2">"sofa_score_admission"</span><span class="p">,</span>
+    <span class="s2">"icu_length_of_stay"</span><span class="p">,</span> <span class="s2">"inhospital_death"</span><span class="p">,</span>
+    <span class="s2">"any_mechanical_ventilation"</span><span class="p">,</span> <span class="s2">"any_vasopressors"</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">core_vars</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Added </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ Failed to add </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># 3. Add exposure variable (example: early goal-directed therapy)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"received_egdt"</span><span class="p">,</span>
+    <span class="n">select</span><span class="o">=</span><span class="s2">"!any"</span><span class="p">,</span>
+    <span class="n">base_var</span><span class="o">=</span><span class="s2">"any_vasopressors"</span><span class="p">,</span>  <span class="c1"># Simplified example</span>
+    <span class="n">tmin</span><span class="o">=</span><span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="n">tmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+6h"</span><span class="p">),</span>
+<span class="p">))</span>
+
+<span class="c1"># 4. Apply inclusion/exclusion criteria</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span>
+        <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adult patients"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"icu_length_of_stay"</span><span class="p">,</span>
+        <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt; 1"</span><span class="p">,</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"ICU stay &gt; 24h"</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">exclude_list</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"apache_ii_score"</span><span class="p">,</span>
+        <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt; 40"</span><span class="p">,</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Exclude APACHE II &gt; 40"</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Final study cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+
+<span class="c1"># 5. Create analysis variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">DerivedStatic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"bmi"</span><span class="p">,</span>
+    <span class="n">requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"body_weight"</span><span class="p">,</span> <span class="s2">"body_height"</span><span class="p">],</span>
+    <span class="n">expression</span><span class="o">=</span><span class="s2">"body_weight / (body_height / 100) ** 2"</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># 6. Generate descriptive statistics</span>
+<span class="n">baseline_table</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">tableone</span><span class="p">(</span>
+    <span class="n">groupby</span><span class="o">=</span><span class="s2">"received_egdt"</span><span class="p">,</span>
+    <span class="n">ignore_cols</span><span class="o">=</span><span class="p">[</span><span class="s2">"icu_id"</span><span class="p">],</span>
+    <span class="n">pval</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Baseline characteristics by exposure:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">baseline_table</span><span class="p">)</span>
+
+<span class="c1"># 7. Save everything</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">"icu_outcomes_study_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2">patients.corr2"</span><span class="p">)</span>
+<span class="n">baseline_table</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"baseline_characteristics.csv"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"study_data_export"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Study setup complete!"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps-in-your-corr-vars-journey">
+<span id="next-steps"></span><h1>Next Steps in Your CORR-Vars Journey<a class="headerlink" href="#next-steps-in-your-corr-vars-journey" title="Link to this heading">#</a></h1>
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; margin: 20px 0; text-align: center;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🚀 Continue Your Learning Journey</h3>
+  <p style="margin: 0; font-size: 1.1em;">
+    You've mastered the fundamentals! Ready to become a CORR-Vars expert?
+  </p>
+</div><div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔍 <strong>Explore Variables</strong></div>
+<p class="sd-card-text"><strong>Concept Browser</strong></p>
+<p class="sd-card-text">Browse 300+ pre-defined clinical variables with interactive filtering and documentation</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://concepts.example.edu"><span>https://concepts.example.edu</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📚 <strong>API Deep Dive</strong></div>
+<p class="sd-card-text"><strong>API Documentation</strong></p>
+<p class="sd-card-text">Comprehensive technical documentation for advanced features and customization</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="api/cohort.html"><span class="doc">Cohort</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🛠️ <strong>Contributing Variables</strong></div>
+<p class="sd-card-text"><strong>Variable Creation Guide</strong></p>
+<p class="sd-card-text">Learn to create your own clinical variables and contribute to the community</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="contributing_variables.html"><span class="doc">Contributing New Variables</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔧 <strong>Troubleshooting</strong></div>
+<p class="sd-card-text"><strong>Problem Solving</strong></p>
+<p class="sd-card-text">Solutions for common issues, performance tips, and debugging strategies</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting Guide</span></a></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">🎯 <strong>Suggested Learning Path</strong></p>
+<ol class="arabic simple">
+<li><p><strong>📊 Master the Concept Browser</strong> → Understand available clinical variables</p></li>
+<li><p><strong>🧪 Try Custom Variables</strong> → Create variables specific to your research</p></li>
+<li><p><strong>🤝 Contribute Back</strong> → Share useful variables with the community</p></li>
+<li><p><strong>📖 Read Advanced Docs</strong> → Explore power-user features</p></li>
+<li><p><strong>💬 Join the Community</strong> → Connect with other CORR-Vars researchers</p></li>
+</ol>
+</div>
+<div style="background: #004d9b; color: white; padding: 20px; border-radius: 10px; margin: 30px 0; text-align: center;">
+  <h3 style="margin: 0 0 10px 0; color: white;">🏥 Happy Coding with CORR-Vars!</h3>
+  <p style="margin: 0; font-style: italic;">
+    "Advancing clinical research through innovative data science"
+  </p>
+</div></section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quick Start</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="custom_variables.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Custom Variables Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tutorials and Getting Started</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-analysis">Getting Started - Your First Analysis</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-environment-setup">Step 1: Environment Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-basic-cohort-creation">Step 2: Basic Cohort Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-exploring-your-cohort">Step 3: Exploring Your Cohort</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-adding-your-first-variables">Step 4: Adding Your First Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-examining-the-data">Step 5: Examining the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-creating-aggregated-variables">Step 6: Creating Aggregated Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-setting-eligibility-and-inclusion-criteria">Step 7: Setting Eligibility and Inclusion Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-applying-inclusion-criteria">Step 8: Applying Inclusion Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-generate-summary-statistics">Step 9: Generate Summary Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-save-your-work">Step 10: Save Your Work</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-advanced-variable-creation">Tutorial 2: Advanced Variable Creation</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-aggregation-variables">Custom Aggregation Variables</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-3-multi-source-analysis">Tutorial 3: Multi-Source Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-4-working-with-time-series-data">Tutorial 4: Working with Time-Series Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-5-complete-research-workflow-template">Tutorial 5: Complete Research Workflow Template</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-in-your-corr-vars-journey">Next Steps in Your CORR-Vars Journey</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

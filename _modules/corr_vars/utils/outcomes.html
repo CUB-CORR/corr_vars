@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>corr_vars.utils.outcomes &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/corr_vars/utils/outcomes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../../../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2F_modules/corr_vars/utils/outcomes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for corr_vars.utils.outcomes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">__</span><span class="p">,</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">as_expr</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">normalize_offset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.frames</span><span class="w"> </span><span class="kn">import</span> <span class="n">time_difference</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeWindow</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OffsetLike</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"DeathRule"</span><span class="p">,</span>
+    <span class="s2">"EventType"</span><span class="p">,</span>
+    <span class="s2">"FreeDaysMethod"</span><span class="p">,</span>
+    <span class="s2">"free_days"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">FreeDaysMethod</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"last_event"</span><span class="p">,</span> <span class="s2">"day_grid"</span><span class="p">]</span>
+<span class="n">DeathRule</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"zero_if_dead"</span><span class="p">,</span> <span class="s2">"alive_days"</span><span class="p">,</span> <span class="s2">"negative_if_death"</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_column_expr</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">available</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Coerce a column name or expression to an expression, or ``None`` if unset/absent.</span>
+
+<span class="sd">    Unifies the two ways a column argument (``death_col`` / ``censor_col``) can be</span>
+<span class="sd">    given — a column name or a ready polars expression — via</span>
+<span class="sd">    :func:`~corr_vars.utils.base.as_expr`. A name referring to a column not present in</span>
+<span class="sd">    ``obs`` yields ``None`` so the feature is simply skipped (a source without a death or</span>
+<span class="sd">    censor column is handled gracefully rather than erroring).</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">as_expr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="c1"># Canonical column names used inside the day-grid pipeline.</span>
+<span class="n">_T0</span> <span class="o">=</span> <span class="s2">"__t0"</span>
+<span class="n">_END</span> <span class="o">=</span> <span class="s2">"__end"</span>
+<span class="n">_N_DAYS</span> <span class="o">=</span> <span class="s2">"__n_days"</span>
+<span class="n">_DEATH</span> <span class="o">=</span> <span class="s2">"__death"</span>
+<span class="n">_CENSORED</span> <span class="o">=</span> <span class="s2">"__censored"</span>
+<span class="n">_DAY</span> <span class="o">=</span> <span class="s2">"__day"</span>
+<span class="n">_BLOCK_START</span> <span class="o">=</span> <span class="s2">"__block_start"</span>
+<span class="n">_BLOCK_END</span> <span class="o">=</span> <span class="s2">"__block_end"</span>
+<span class="n">_EP_START</span> <span class="o">=</span> <span class="s2">"__ep_start"</span>
+<span class="n">_EP_END</span> <span class="o">=</span> <span class="s2">"__ep_end"</span>
+<span class="n">_BLOCKED</span> <span class="o">=</span> <span class="s2">"__blocked"</span>
+<span class="n">_FREE</span> <span class="o">=</span> <span class="s2">"__free"</span>
+<span class="n">_LAST_END</span> <span class="o">=</span> <span class="s2">"__last_end"</span>
+<span class="n">_N_EPISODES</span> <span class="o">=</span> <span class="s2">"__n_episodes"</span>
+<span class="n">_MERGE_GROUP</span> <span class="o">=</span> <span class="s2">"__merge_group"</span>
+<span class="n">_STARTS_NEW</span> <span class="o">=</span> <span class="s2">"__starts_new"</span>
+<span class="n">_OBSERVED</span> <span class="o">=</span> <span class="s2">"__observed"</span>
+<span class="n">_UNOBSERVED</span> <span class="o">=</span> <span class="s2">"__unobserved"</span>
+
+<span class="n">_ONE_DAY</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_merge_episodes</span><span class="p">(</span>
+    <span class="n">episodes</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime_end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">gap</span><span class="p">:</span> <span class="n">OffsetLike</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Merge episodes separated by at most ``gap`` into one continuous interval.</span>
+
+<span class="sd">    Interval union with a tolerance, per key: sorted by start, a new merged interval</span>
+<span class="sd">    begins only when an episode starts more than ``gap`` after the furthest end seen so</span>
+<span class="sd">    far. This bridges short gaps — e.g. a reintubation within 48h — so the brief window</span>
+<span class="sd">    between the two runs is not treated as event-free. Genuine long gaps (beyond</span>
+<span class="sd">    ``gap``) are left as separate episodes.</span>
+
+<span class="sd">    Returns the merged intervals under the original ``recordtime`` / ``recordtime_end``</span>
+<span class="sd">    names (other columns are dropped; only the interval is used downstream).</span>
+<span class="sd">    """</span>
+    <span class="n">intervals</span> <span class="o">=</span> <span class="n">episodes</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="n">primary_key</span><span class="p">,</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime_end</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">),</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">())</span>
+
+    <span class="c1"># Furthest end among all earlier episodes of this key (nested/overlapping safe).</span>
+    <span class="n">prior_max_end</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">cum_max</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="n">_EP_START</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">starts_new</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">prior_max_end</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">offset_by</span><span class="p">(</span><span class="n">normalize_offset</span><span class="p">(</span><span class="n">gap</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># ``starts_new`` is itself a windowed expression (via ``prior_max_end``), so it</span>
+    <span class="c1"># must be materialised into a plain column before the second window — nesting a</span>
+    <span class="c1"># window inside another window's context is rejected by polars</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">intervals</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">starts_new</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_STARTS_NEW</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_STARTS_NEW</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">cum_sum</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="n">_EP_START</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_MERGE_GROUP</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_MERGE_GROUP</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">recordtime</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">recordtime_end</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">_MERGE_GROUP</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="c1">#: Terminal follow-up status recorded in the detail struct. Concept-neutral so the</span>
+<span class="c1">#: same schema serves ventilation, vasopressor, RRT, ... — the "event" is named by the</span>
+<span class="c1">#: variable itself.</span>
+<span class="n">EventType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"liberated"</span><span class="p">,</span> <span class="s2">"died"</span><span class="p">,</span> <span class="s2">"censored"</span><span class="p">,</span> <span class="s2">"ongoing_at_horizon"</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_horizon_bounds</span><span class="p">(</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+    <span class="n">death_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">censor_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""One row per observation carrying the follow-up window and its censoring state.</span>
+
+<span class="sd">    ``T0`` is the window's ``tmin`` (time zero) and ``END`` is its ``tmax``</span>
+<span class="sd">    (``T0 + horizon``); the horizon length in whole 24h days is derived from them.</span>
+<span class="sd">    ``censored`` marks observations whose horizon reaches past the last observable</span>
+<span class="sd">    time, so the outcome cannot be known and must become null.</span>
+<span class="sd">    """</span>
+    <span class="n">available</span> <span class="o">=</span> <span class="n">columns</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+    <span class="n">death_expr</span> <span class="o">=</span> <span class="n">_optional_column_expr</span><span class="p">(</span><span class="n">death_col</span><span class="p">,</span> <span class="n">available</span><span class="p">)</span>
+    <span class="n">death</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">death_expr</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">death_expr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">Datetime</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">censor_expr</span> <span class="o">=</span> <span class="n">_optional_column_expr</span><span class="p">(</span><span class="n">censor_col</span><span class="p">,</span> <span class="n">available</span><span class="p">)</span>
+    <span class="n">censored</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">censor_expr</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">tmax_expr</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_CENSORED</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">censor_expr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_CENSORED</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="n">primary_key</span><span class="p">,</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">tmin_expr</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_T0</span><span class="p">),</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">tmax_expr</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_END</span><span class="p">),</span>
+        <span class="c1"># Round (not floor) so a DST transition inside the horizon (a 28-day window</span>
+        <span class="c1"># spanning a clock change is 671h or 673h, not 672h) still yields 28 days.</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">time_difference</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">"d"</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">round</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int64</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_N_DAYS</span><span class="p">),</span>
+        <span class="n">death</span><span class="p">,</span>
+        <span class="n">censored</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_day_grid</span><span class="p">(</span><span class="n">bounds</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Explode each observation into its ``n_days`` fixed 24h blocks anchored at T0.</span>
+
+<span class="sd">    Block ``d`` covers ``[T0 + d*24h, T0 + (d+1)*24h)``. Observations with a</span>
+<span class="sd">    non-positive horizon contribute no blocks (and score 0 free days).</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">bounds</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">int_ranges</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">max_horizontal</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_N_DAYS</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_DAY</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">_DAY</span><span class="p">)</span>
+        <span class="c1"># Exploding an empty range yields a single null row, not zero rows; a</span>
+        <span class="c1"># non-positive horizon must contribute no day-blocks at all.</span>
+        <span class="o">.</span><span class="n">drop_nulls</span><span class="p">(</span><span class="n">_DAY</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_T0</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DAY</span><span class="p">)))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_BLOCK_START</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_START</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_ONE_DAY</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">))</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_relevant_episodes</span><span class="p">(</span>
+    <span class="n">episodes</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime_end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Episodes overlapping the horizon, with their end clipped to ``END``.</span>
+
+<span class="sd">    Clipping the end to ``END`` implements the "within horizon" cap: an episode</span>
+<span class="sd">    running past the horizon counts only up to it. Starts are left untouched — the</span>
+<span class="sd">    daily predicate only compares them against block ends.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">episodes</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="n">primary_key</span><span class="p">,</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime_end</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="c1"># An episode needs a genuine interval end. A null end cannot be clipped</span>
+        <span class="c1"># (min_horizontal(null, END) would spuriously stretch it to END and block</span>
+        <span class="c1"># the rest of the horizon), so such rows are dropped: the episode source</span>
+        <span class="c1"># must supply recordtime_end, not point events.</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">())</span>
+        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_T0</span><span class="p">,</span> <span class="n">_END</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">min_horizontal</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">,</span> <span class="n">_END</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_T0</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_EP_START</span><span class="p">,</span> <span class="n">_EP_END</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_observed_days</span><span class="p">(</span>
+    <span class="n">presence</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">grid</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">recordtime_end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Per day-block flag: is the block covered by an observation (presence) interval.</span>
+
+<span class="sd">    Presence intervals are clipped to the horizon; an open (null-end) interval is read</span>
+<span class="sd">    as observed through ``END`` (still admitted at the horizon end) rather than dropped</span>
+<span class="sd">    as :func:`_relevant_episodes` does for events. A block is observed when any presence</span>
+<span class="sd">    interval overlaps it.</span>
+<span class="sd">    """</span>
+    <span class="n">intervals</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">presence</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="n">primary_key</span><span class="p">,</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">recordtime_end</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">())</span>
+        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_T0</span><span class="p">,</span> <span class="n">_END</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+        <span class="c1"># Open interval (still admitted) -&gt; observed through END, not dropped.</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">min_horizontal</span><span class="p">(</span>
+                <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">)),</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_T0</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_EP_START</span><span class="p">,</span> <span class="n">_EP_END</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">overlaps</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_START</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_DAY</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">overlaps</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_OBSERVED</span><span class="p">))</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_blocked_predicate</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">FreeDaysMethod</span><span class="p">,</span> <span class="n">recovery_threshold</span><span class="p">:</span> <span class="n">OffsetLike</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Whether an episode blocks (makes non-free) the day it is joined against.</span>
+
+<span class="sd">    - ``last_event``: any episode ending after the block start blocks the day, so</span>
+<span class="sd">      the free tail is everything after the single last episode end — gaps do not</span>
+<span class="sd">      restore freedom.</span>
+<span class="sd">    - ``day_grid``: an episode blocks the day if it starts before the block ends and</span>
+<span class="sd">      ends after ``block_start - recovery_threshold``. With no threshold this is plain</span>
+<span class="sd">      overlap; with one, a recently ended episode keeps the day non-free until the</span>
+<span class="sd">      recovery period has elapsed.</span>
+<span class="sd">    """</span>
+    <span class="n">recovery_start</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_START</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">recovery_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">normalize_offset</span><span class="p">(</span><span class="n">recovery_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"+"</span><span class="p">)</span>
+        <span class="n">recovery_start</span> <span class="o">=</span> <span class="n">recovery_start</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">offset_by</span><span class="p">(</span><span class="sa">f</span><span class="s2">"-</span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"last_event"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_START</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_START</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">recovery_start</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_detail_frame</span><span class="p">(</span>
+    <span class="n">bounds</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">relevant</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">unobserved</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Build the ``{output_name}_detail`` struct of method-agnostic components.</span>
+
+<span class="sd">    The struct reports what the paper (Yehya et al. 2019) insists be reported</span>
+<span class="sd">    alongside the composite: the mortality component, the duration component, and the</span>
+<span class="sd">    follow-up status — the inputs to a competing-risk (Fine-Gray) analysis. These are</span>
+<span class="sd">    *ground truth*, independent of the scalar's ``method`` / ``death_rule``.</span>
+
+<span class="sd">    Fields:</span>
+<span class="sd">        event_time_days: Elapsed days T0 → final liberation, i.e. the duration</span>
+<span class="sd">            component. Populated only for the ``"liberated"`` terminal status (survivors</span>
+<span class="sd">            who came off the event), matching the paper's "ventilator days in 28-d</span>
+<span class="sd">            survivors"; ``null`` otherwise.</span>
+<span class="sd">        event_type: Terminal status, in precedence order ``censored`` &gt;</span>
+<span class="sd">            ``died`` &gt; ``ongoing_at_horizon`` &gt; ``liberated``.</span>
+<span class="sd">        died_in_horizon: A recorded death within ``[T0, END]`` (the mortality</span>
+<span class="sd">            component); an independent fact, so it may be ``True`` even when</span>
+<span class="sd">            ``event_type`` is ``"censored"``.</span>
+<span class="sd">        censored: The horizon was not fully observed.</span>
+<span class="sd">        n_episodes: Number of (post-merge) event runs overlapping the horizon — e.g.</span>
+<span class="sd">            distinct ventilation runs. ``&gt; 1`` marks a genuine re-event (a gap wider</span>
+<span class="sd">            than any ``merge_gap``); short reintubations are already merged away.</span>
+<span class="sd">        unobserved_days: Days that would have counted as free but were removed because</span>
+<span class="sd">            the patient was not observed (only when a ``presence`` window is given, else</span>
+<span class="sd">            ``0``) — the size of the observation-gap correction. See :func:`free_days`.</span>
+<span class="sd">    """</span>
+    <span class="n">per_key</span> <span class="o">=</span> <span class="n">relevant</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">_EP_END</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_LAST_END</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_N_EPISODES</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_T0</span><span class="p">,</span> <span class="n">_END</span><span class="p">,</span> <span class="n">_DEATH</span><span class="p">,</span> <span class="n">_CENSORED</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">per_key</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">unobserved</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unobserved</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+    <span class="n">unobserved_days</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_UNOBSERVED</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unobserved</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">died</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">))</span>
+    <span class="c1"># Episode ends are clipped to END, so last_end == END means the patient was still</span>
+    <span class="c1"># on the event at the horizon end (never liberated within it).</span>
+    <span class="n">ongoing</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_LAST_END</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_LAST_END</span><span class="p">)</span><span class="o">.</span><span class="n">ge</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">))</span>
+    <span class="n">event_type</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_CENSORED</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"censored"</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">died</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"died"</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">ongoing</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"ongoing_at_horizon"</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"liberated"</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="c1"># No episodes at all -&gt; never on the event -&gt; liberated at day 0.</span>
+    <span class="n">liberation_days</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_LAST_END</span><span class="p">)</span><span class="o">.</span><span class="n">is_null</span><span class="p">())</span>
+        <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">time_difference</span><span class="p">(</span><span class="n">_LAST_END</span><span class="p">,</span> <span class="n">_T0</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"d"</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="n">event_time_days</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">event_type</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">"liberated"</span><span class="p">))</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">liberation_days</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">detail</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span>
+        <span class="n">event_time_days</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Float64</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"event_time_days"</span><span class="p">),</span>
+        <span class="n">event_type</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"event_type"</span><span class="p">),</span>
+        <span class="n">died</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"died_in_horizon"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_CENSORED</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"censored"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_N_EPISODES</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n_episodes"</span><span class="p">),</span>
+        <span class="n">unobserved_days</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"unobserved_days"</span><span class="p">),</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">output_name</span><span class="si">}</span><span class="s2">_detail"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">base</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">detail</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="free_days">
+<a class="viewcode-back" href="../../../api/utils_outcomes.html#corr_vars.utils.outcomes.free_days">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">free_days</span><span class="p">(</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">episodes</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">FreeDaysMethod</span> <span class="o">=</span> <span class="s2">"last_event"</span><span class="p">,</span>
+    <span class="n">death_rule</span><span class="p">:</span> <span class="n">DeathRule</span> <span class="o">=</span> <span class="s2">"zero_if_dead"</span><span class="p">,</span>
+    <span class="n">recovery_threshold</span><span class="p">:</span> <span class="n">OffsetLike</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">death_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">censor_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">Expr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">presence</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">recordtime</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"recordtime"</span><span class="p">,</span>
+    <span class="n">recordtime_end</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"recordtime_end"</span><span class="p">,</span>
+    <span class="n">merge_gap</span><span class="p">:</span> <span class="n">OffsetLike</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">output_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"free_days"</span><span class="p">,</span>
+    <span class="n">with_detail</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Count the days in a follow-up horizon free of some clinical event.</span>
+
+<span class="sd">    The horizon ``[T0, T0 + H]`` is taken from ``window`` (``T0 = tmin``,</span>
+<span class="sd">    ``H = tmax - tmin`` in whole 24h days) and split into ``H`` day-blocks anchored at</span>
+<span class="sd">    ``T0``. Each block is scored free or not by ``method``; the free blocks are summed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obs: One row per observation, providing the window anchor columns, the death</span>
+<span class="sd">            column and (optionally) the censoring expression's inputs.</span>
+<span class="sd">        episodes: Event intervals (``recordtime`` / ``recordtime_end``) for the</span>
+<span class="sd">            underlying concept, e.g. ventilation or vasopressor episodes. May hold</span>
+<span class="sd">            several rows per observation, or none (then every day is free).</span>
+<span class="sd">        primary_key: The observation key shared by ``obs`` and ``episodes``.</span>
+<span class="sd">        window: The follow-up window; ``tmin`` is T0, ``tmax`` is ``T0 + horizon``.</span>
+<span class="sd">        method: ``"last_event"`` (free tail after the last episode end) or</span>
+<span class="sd">            ``"day_grid"`` (per-day union; gaps restore freedom).</span>
+<span class="sd">        death_rule: ``"zero_if_dead"`` (any death in the horizon scores 0, ARDSnet),</span>
+<span class="sd">            ``"negative_if_death"`` (death scores -1, the newer ordinal definition that</span>
+<span class="sd">            ranks death below every survivor), or ``"alive_days"`` (days before death</span>
+<span class="sd">            still count).</span>
+<span class="sd">        recovery_threshold: ``day_grid`` only — a day stays non-free until this long</span>
+<span class="sd">            after the last episode end (e.g. ``"7d"`` for RRT recovery).</span>
+<span class="sd">        death_col: Column name or expression over ``obs`` giving the death timestamp.</span>
+<span class="sd">            ``None`` (the default, source-agnostic) or a name absent from ``obs``</span>
+<span class="sd">            disables the death rule.</span>
+<span class="sd">        censor_col: Column name or expression over ``obs`` giving the last observable</span>
+<span class="sd">            time per observation; when it precedes ``END`` the horizon is unobserved and</span>
+<span class="sd">            the result is null. ``None`` or a name absent from ``obs`` disables</span>
+<span class="sd">            censoring.</span>
+<span class="sd">        presence: Optional observation-window intervals (``recordtime`` /</span>
+<span class="sd">            ``recordtime_end``, e.g. in-hospital stays), keyed by ``primary_key``. When</span>
+<span class="sd">            given, a day counts as free only if it is **also** observed (covered by a</span>
+<span class="sd">            presence interval) — the standard scoring intersected with presence — so an</span>
+<span class="sd">            unobserved gap (discharge → readmission) is not miscredited as free. An open</span>
+<span class="sd">            (null-end) interval is treated as observed through ``END``. ``None`` keeps</span>
+<span class="sd">            the standard behaviour (every day in ``[T0, END]`` is a candidate).</span>
+<span class="sd">        recordtime / recordtime_end: Episode interval columns in ``episodes``.</span>
+<span class="sd">        merge_gap: When set (e.g. ``"48h"``), episodes separated by at most this long</span>
+<span class="sd">            are first merged into one continuous interval (:func:`_merge_episodes`), so</span>
+<span class="sd">            a short gap — a reintubation within 48h — does not count as free. Under</span>
+<span class="sd">            ``last_event`` this bites when a re-event just past the horizon bridges the</span>
+<span class="sd">            last in-horizon episode; under ``day_grid`` it also drops short interior</span>
+<span class="sd">            gaps while keeping genuine long ones.</span>
+<span class="sd">        output_name: Name of the produced count column.</span>
+<span class="sd">        with_detail: Also emit a ``{output_name}_detail`` struct carrying the</span>
+<span class="sd">            competing-risk components (``event_time_days``, ``event_type``,</span>
+<span class="sd">            ``died_in_horizon``, ``censored``, ``n_episodes``) plus ``unobserved_days``</span>
+<span class="sd">            (free days removed by the ``presence`` intersection, else ``0``). See</span>
+<span class="sd">            :func:`_detail_frame`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pl.DataFrame: ``[primary_key, output_name]`` (one row per observation, an</span>
+<span class="sd">        ``Int32`` free-day count, null where censored), plus a</span>
+<span class="sd">        ``{output_name}_detail`` struct column when ``with_detail`` is set.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">recovery_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">"day_grid"</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"recovery_threshold is only used by method='day_grid'; ignoring it "</span>
+                <span class="s2">"for method='</span><span class="si">{method}</span><span class="s2">'."</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">recovery_threshold</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">merge_gap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">episodes</span> <span class="o">=</span> <span class="n">_merge_episodes</span><span class="p">(</span>
+            <span class="n">episodes</span><span class="p">,</span>
+            <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span>
+            <span class="n">recordtime</span><span class="o">=</span><span class="n">recordtime</span><span class="p">,</span>
+            <span class="n">recordtime_end</span><span class="o">=</span><span class="n">recordtime_end</span><span class="p">,</span>
+            <span class="n">gap</span><span class="o">=</span><span class="n">merge_gap</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">_horizon_bounds</span><span class="p">(</span>
+        <span class="n">obs</span><span class="p">,</span>
+        <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span>
+        <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
+        <span class="n">death_col</span><span class="o">=</span><span class="n">death_col</span><span class="p">,</span>
+        <span class="n">censor_col</span><span class="o">=</span><span class="n">censor_col</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">_day_grid</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">)</span>
+    <span class="n">relevant</span> <span class="o">=</span> <span class="n">_relevant_episodes</span><span class="p">(</span>
+        <span class="n">episodes</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="p">,</span>
+        <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span>
+        <span class="n">recordtime</span><span class="o">=</span><span class="n">recordtime</span><span class="p">,</span>
+        <span class="n">recordtime_end</span><span class="o">=</span><span class="n">recordtime_end</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">blocked</span> <span class="o">=</span> <span class="n">_blocked_predicate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">recovery_threshold</span><span class="o">=</span><span class="n">recovery_threshold</span><span class="p">)</span>
+
+    <span class="c1"># A day is free unless some episode blocks it. Days survive death only under</span>
+    <span class="c1"># alive_days; under zero_if_dead that is overridden to 0 below.</span>
+    <span class="n">day_is_free</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCKED</span><span class="p">)</span><span class="o">.</span><span class="n">not_</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">death_rule</span> <span class="o">==</span> <span class="s2">"alive_days"</span><span class="p">:</span>
+        <span class="n">day_is_free</span> <span class="o">=</span> <span class="n">day_is_free</span> <span class="o">&amp;</span> <span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">is_null</span><span class="p">()</span> <span class="o">|</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">ge</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">))</span>
+        <span class="p">)</span>
+
+    <span class="n">per_day</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relevant</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_DAY</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+            <span class="n">blocked</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_BLOCKED</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_BLOCK_END</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">day_is_free</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_FREE</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Presence intersection: a day counts as free only if it is also observed. Only</span>
+    <span class="c1"># days inside a presence interval survive; the standard scoring is otherwise kept.</span>
+    <span class="n">unobserved_counts</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">presence</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">_observed_days</span><span class="p">(</span>
+            <span class="n">presence</span><span class="p">,</span>
+            <span class="n">grid</span><span class="p">,</span>
+            <span class="n">bounds</span><span class="p">,</span>
+            <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span>
+            <span class="n">recordtime</span><span class="o">=</span><span class="n">recordtime</span><span class="p">,</span>
+            <span class="n">recordtime_end</span><span class="o">=</span><span class="n">recordtime_end</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">per_day</span> <span class="o">=</span> <span class="n">per_day</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">observed</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_DAY</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_OBSERVED</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_OBSERVED</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">with_detail</span><span class="p">:</span>
+            <span class="c1"># Days that would have counted as free but fall outside the observation</span>
+            <span class="c1"># window (removed by the intersection): for day_grid every such day, for</span>
+            <span class="c1"># last_event those in the free tail after the last episode.</span>
+            <span class="n">unobserved_counts</span> <span class="o">=</span> <span class="n">per_day</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+                <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_FREE</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">and_</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_OBSERVED</span><span class="p">)</span><span class="o">.</span><span class="n">not_</span><span class="p">())</span>
+                <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_UNOBSERVED</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">per_day</span> <span class="o">=</span> <span class="n">per_day</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_FREE</span><span class="p">)</span><span class="o">.</span><span class="n">and_</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_OBSERVED</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">_FREE</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">per_day</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">primary_key</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_FREE</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Observations with no day-blocks (non-positive horizon) dropped out of the grid;</span>
+    <span class="c1"># restore them at 0, then apply the death and censoring overrides.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">_END</span><span class="p">,</span> <span class="n">_DEATH</span><span class="p">,</span> <span class="n">_CENSORED</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">counts</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span>
+    <span class="p">)</span>
+
+    <span class="n">free</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span><span class="o">.</span><span class="n">fill_null</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">death_rule</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"zero_if_dead"</span><span class="p">,</span> <span class="s2">"negative_if_death"</span><span class="p">):</span>
+        <span class="c1"># Death in the horizon overrides the count: 0 (ARDSnet) or -1 (the newer</span>
+        <span class="c1"># ordinal definition that weights death below every survivor outcome).</span>
+        <span class="n">dead_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">death_rule</span> <span class="o">==</span> <span class="s2">"negative_if_death"</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">died_in_horizon</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_null</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_DEATH</span><span class="p">)</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_END</span><span class="p">))</span>
+        <span class="n">free</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">died_in_horizon</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="n">dead_score</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">Int32</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">free</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># Censored horizons are unobservable -&gt; null wins over any count.</span>
+    <span class="n">free</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">_CENSORED</span><span class="p">))</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">free</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">free</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">output_name</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">with_detail</span><span class="p">:</span>
+        <span class="n">detail</span> <span class="o">=</span> <span class="n">_detail_frame</span><span class="p">(</span>
+            <span class="n">bounds</span><span class="p">,</span>
+            <span class="n">relevant</span><span class="p">,</span>
+            <span class="n">primary_key</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span>
+            <span class="n">output_name</span><span class="o">=</span><span class="n">output_name</span><span class="p">,</span>
+            <span class="n">unobserved</span><span class="o">=</span><span class="n">unobserved_counts</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">detail</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">primary_key</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

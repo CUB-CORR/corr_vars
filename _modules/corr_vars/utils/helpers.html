@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>corr_vars.utils.helpers &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/corr_vars/utils/helpers';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../../../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2F_modules/corr_vars/utils/helpers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for corr_vars.utils.helpers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">difflib</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_close_matches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">__</span><span class="p">,</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">IntoExprColumn</span><span class="p">,</span>
+    <span class="n">PandasDataframe</span><span class="p">,</span>
+    <span class="n">PolarsDataframe</span><span class="p">,</span>
+    <span class="n">PolarsFrame</span><span class="p">,</span>
+    <span class="n">PolarsLazyframe</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">MutableMapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">overload</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.groupby</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrameGroupBy</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeWindow</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"T"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"F"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">PandasDataframe</span> <span class="o">|</span> <span class="n">PolarsDataframe</span> <span class="o">|</span> <span class="n">PolarsLazyframe</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"get_cb"</span><span class="p">,</span>
+    <span class="s2">"add_time_window_expr"</span><span class="p">,</span>
+    <span class="s2">"harmonize_str_list_cols"</span><span class="p">,</span>
+    <span class="s2">"deep_merge"</span><span class="p">,</span>
+    <span class="s2">"flatten_args"</span><span class="p">,</span>
+    <span class="s2">"raise_error_with_nearest_matches"</span><span class="p">,</span>
+    <span class="c1"># TODO: Remove/migrate the functions below</span>
+    <span class="s2">"merge_consecutive"</span><span class="p">,</span>
+    <span class="s2">"clean_timeseries"</span><span class="p">,</span>
+    <span class="s2">"extract_df_data"</span><span class="p">,</span>
+    <span class="s2">"filter_by_condition"</span><span class="p">,</span>
+    <span class="s2">"df_find_closest"</span><span class="p">,</span>
+    <span class="s2">"aggregate_column"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cb</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">PolarsDataframe</span><span class="p">,</span>
+    <span class="n">join_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">tmin_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">tmax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">ttarget_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PolarsDataframe</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cb</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">PandasDataframe</span><span class="p">,</span>
+    <span class="n">join_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">tmin_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">tmax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">ttarget_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PandasDataframe</span><span class="p">:</span> <span class="o">...</span>
+
+
+<div class="viewcode-block" id="get_cb">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.get_cb">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cb</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">PandasDataframe</span> <span class="o">|</span> <span class="n">PolarsDataframe</span><span class="p">,</span>
+    <span class="n">join_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"case_id"</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"case_id"</span><span class="p">,</span>
+    <span class="n">tmin_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"case_tmin"</span><span class="p">,</span>
+    <span class="n">tmax_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"case_tmax"</span><span class="p">,</span>
+    <span class="n">ttarget_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"case_tmin"</span><span class="p">,</span> <span class="s2">"case_tmax"</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PandasDataframe</span> <span class="o">|</span> <span class="n">PolarsDataframe</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Get the case bounds Dataframe. This is used to apply a time filter to a native dynamic variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame | pl.DataFrame): The cohort dataframe.</span>
+<span class="sd">        join_key (str): The join key column. Defaults to "case_id".</span>
+<span class="sd">        primary_key (str): The primary key column. Defaults to "case_id".</span>
+<span class="sd">        tmin_col (str): The column containing the tmin. Defaults to "tmin".</span>
+<span class="sd">        tmax_col (str): The column containing the tmax. Defaults to "tmax".</span>
+<span class="sd">        ttarget_col (str | None): The column containing the target time. Defaults to None. (For !closest)</span>
+<span class="sd">        aliases (tuple[str, str]): The aliases for tmin and tmax. Defaults to ("tmin", "tmax").</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        result: The case bounds Dataframe with the same type as `df`.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Build columns list</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">join_key</span><span class="p">,</span> <span class="n">tmin_col</span><span class="p">,</span> <span class="n">tmax_col</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ttarget_col</span><span class="p">:</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ttarget_col</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">primary_key</span> <span class="o">!=</span> <span class="n">join_key</span><span class="p">:</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">primary_key</span><span class="p">)</span>
+
+    <span class="c1"># Create renamer</span>
+    <span class="n">tmin_alias</span><span class="p">,</span> <span class="n">tmax_alias</span> <span class="o">=</span> <span class="n">aliases</span>
+    <span class="n">column_rename</span> <span class="o">=</span> <span class="p">{</span><span class="n">tmin_col</span><span class="p">:</span> <span class="n">tmin_alias</span><span class="p">,</span> <span class="n">tmax_col</span><span class="p">:</span> <span class="n">tmax_alias</span><span class="p">}</span>
+
+    <span class="c1"># Select columns and rename</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">column_rename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">column_rename</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># "Compiles" and adds a tmin/tmax expressions from TimeWindo to a DataFrame</span>
+<span class="c1"># Used for cohort timefiltering</span>
+<div class="viewcode-block" id="add_time_window_expr">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.add_time_window_expr">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_time_window_expr</span><span class="p">(</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="n">PolarsFrame</span><span class="p">,</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"case_tmin"</span><span class="p">,</span> <span class="s2">"case_tmax"</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PolarsFrame</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
+        <span class="n">tmin_alias</span><span class="p">,</span> <span class="n">tmax_alias</span> <span class="o">=</span> <span class="n">aliases</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">time_window</span><span class="o">.</span><span class="n">filled_tmin_expr</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">tmin_alias</span><span class="p">),</span>
+            <span class="n">time_window</span><span class="o">.</span><span class="n">filled_tmax_expr</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">tmax_alias</span><span class="p">),</span>
+        <span class="p">)</span>  <span class="c1"># type: ignore[assignment]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="n">time_window</span><span class="o">.</span><span class="n">filled_tmin_expr</span><span class="p">,</span> <span class="n">time_window</span><span class="o">.</span><span class="n">filled_tmax_expr</span>
+        <span class="p">)</span>  <span class="c1"># type: ignore[assignment]</span>
+    <span class="k">return</span> <span class="n">obs</span></div>
+
+
+
+<span class="c1"># Used to harmonize obs dfs when loading cohorts from different sources</span>
+<div class="viewcode-block" id="harmonize_str_list_cols">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.harmonize_str_list_cols">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">harmonize_str_list_cols</span><span class="p">(</span><span class="n">dfs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Harmonises columns with str and list[str] dtypes in different DataFrames</span>
+<span class="sd">    by converting str to list[str] as well.</span>
+<span class="sd">    """</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"All dataframes are empty."</span><span class="p">)</span>
+
+    <span class="n">harmonized</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">{</span><span class="n">df</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">pl</span><span class="o">.</span><span class="n">String</span> <span class="ow">in</span> <span class="n">types</span> <span class="ow">and</span> <span class="n">pl</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">String</span><span class="p">)</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="n">harmonized</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+                    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">String</span><span class="p">),</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+                    <span class="k">else</span> <span class="p">[]</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span>
+            <span class="p">]</span>
+    <span class="k">return</span> <span class="n">harmonized</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Used to merge overrides for default cohort source configurations</span>
+<div class="viewcode-block" id="deep_merge">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.deep_merge">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">deep_merge</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">override</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Recursively merge `override` into `base` with override taking precedence.</span>
+<span class="sd">    Works on normal dictionaries, compatible with TypedDict runtime dicts.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">override</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">key</span> <span class="ow">in</span> <span class="n">base</span>
+            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">MutableMapping</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">deep_merge</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">base</span></div>
+
+
+
+<span class="c1"># Flattens arguments similar to polars</span>
+<div class="viewcode-block" id="flatten_args">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.flatten_args">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">flatten_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">A</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">A</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">chain</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">))</span> <span class="k">else</span> <span class="n">k</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">args</span>
+    <span class="p">)</span>  <span class="c1"># type: ignore</span></div>
+
+
+
+<span class="c1"># Used to suggest nearest columns when a column is missed in obs/obsm</span>
+<div class="viewcode-block" id="raise_error_with_nearest_matches">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.raise_error_with_nearest_matches">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">raise_error_with_nearest_matches</span><span class="p">(</span>
+    <span class="n">item</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">available_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Item"</span><span class="p">,</span>
+    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">error_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">Exception</span><span class="p">]</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Finds closest matches and raises a descriptive error."""</span>
+    <span class="n">packed_items</span> <span class="o">=</span> <span class="n">item</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="n">suggestions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">packed_items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">it</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_items</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="n">get_close_matches</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">available_items</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">suggestions</span><span class="p">[</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="n">matches</span>
+
+    <span class="k">if</span> <span class="n">suggestions</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> '</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">' not found. Did you mean: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s2">?"</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">suggestions</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">error_cls</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+
+<span class="c1">#################################################</span>
+<span class="c1">#                 Pandas pipes                  #</span>
+<span class="c1">#################################################</span>
+
+
+<div class="viewcode-block" id="merge_consecutive">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.merge_consecutive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_consecutive</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>  <span class="c1"># Deprecated!</span>
+    <span class="n">recordtime</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"recordtime"</span><span class="p">,</span>
+    <span class="n">recordtime_end</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"recordtime_end"</span><span class="p">,</span>
+    <span class="n">time_threshold</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Combine consecutive sessions (&lt;30min separation) of ecmo_vv_icu into a single session.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): The data to merge.</span>
+<span class="sd">        primary_key (str): The primary key column. Deprecated! Will not be used, case_id will be used instead.</span>
+<span class="sd">        recordtime (str): The recordtime column. Defaults to "recordtime".</span>
+<span class="sd">        recordtime_end (str): The recordtime_end column. Defaults to "recordtime_end".</span>
+<span class="sd">        time_threshold (pd.Timedelta): The time threshold. Defaults to 30 minutes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The merged data.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Sort by primary_key and recordtime</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">"case_id"</span><span class="p">,</span> <span class="n">recordtime</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">combine_consecutive_sessions</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+        <span class="n">group</span><span class="p">[</span><span class="s2">"last_event_recordtime_end"</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">"recordtime_end"</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">group</span><span class="p">[</span><span class="s2">"time_since_last_event"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">group</span><span class="p">[</span><span class="s2">"recordtime"</span><span class="p">]</span> <span class="o">-</span> <span class="n">group</span><span class="p">[</span><span class="s2">"last_event_recordtime_end"</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">group</span><span class="p">[</span><span class="s2">"merge_with_previous"</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">"time_since_last_event"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">time_threshold</span>
+
+        <span class="n">group</span><span class="p">[</span><span class="s2">"merge_group"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">group</span><span class="p">[</span><span class="s2">"merge_with_previous"</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">group</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">"case_id"</span><span class="p">,</span> <span class="s2">"merge_group"</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"first"</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">:</span> <span class="s2">"first"</span><span class="p">,</span> <span class="s2">"recordtime_end"</span><span class="p">:</span> <span class="s2">"last"</span><span class="p">})</span>
+            <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"case_id"</span><span class="p">)</span>
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">combine_consecutive_sessions</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">grouped</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_timeseries</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">PolarsDataframe</span><span class="p">,</span>
+    <span class="n">max_roc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">time_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">value_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">identifier_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PolarsDataframe</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_timeseries</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">PandasDataframe</span><span class="p">,</span>
+    <span class="n">max_roc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">time_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">value_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">identifier_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PandasDataframe</span><span class="p">:</span> <span class="o">...</span>
+
+
+<div class="viewcode-block" id="clean_timeseries">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.clean_timeseries">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_timeseries</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">PandasDataframe</span> <span class="o">|</span> <span class="n">PolarsDataframe</span><span class="p">,</span>
+    <span class="n">max_roc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">time_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"recordtime"</span><span class="p">,</span>
+    <span class="n">value_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"value"</span><span class="p">,</span>
+    <span class="n">identifier_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PandasDataframe</span> <span class="o">|</span> <span class="n">PolarsDataframe</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Clean timeseries by removing values that create impossible rates of change</span>
+<span class="sd">    using vectorized operations with Polars for maximum performance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pl.DataFrame): The data to clean.</span>
+<span class="sd">        max_roc (float): The maximum rate of change.</span>
+<span class="sd">        time_col (str): The time column.</span>
+<span class="sd">        value_col (str): The value column.</span>
+<span class="sd">        identifier_col (str): The identifier column.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        result: The cleaned data with the same type as `data`.</span>
+<span class="sd">    """</span>
+    <span class="n">return_pandas</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># Convert to Polars if necessary</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">return_pandas</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">clean_group</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"current_roc"</span><span class="p">))</span>
+
+        <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">time_col</span><span class="p">)</span>
+
+        <span class="n">times</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">time_col</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">value_col</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+        <span class="n">keep_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+            <span class="n">last_kept_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">keep_mask</span><span class="p">[:</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">time_diff</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">times</span><span class="p">[</span><span class="n">last_kept_idx</span><span class="p">]</span>
+            <span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span>  <span class="c1"># Convert seconds to hours</span>
+            <span class="n">value_diff</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">values</span><span class="p">[</span><span class="n">last_kept_idx</span><span class="p">]</span>
+            <span class="n">current_roc</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value_diff</span> <span class="o">/</span> <span class="n">time_diff</span><span class="p">)</span> <span class="k">if</span> <span class="n">time_diff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">current_roc</span><span class="p">)</span> <span class="ow">or</span> <span class="n">current_roc</span> <span class="o">&gt;=</span> <span class="n">max_roc</span><span class="p">:</span>
+                <span class="n">keep_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">filtered_group</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="n">keep_mask</span><span class="p">))</span>
+
+        <span class="c1"># Calculate RoC for kept values</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_group</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">filtered_group</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"current_roc"</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">filtered_group</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="o">/</span> <span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">time_col</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">time_col</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"current_roc"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">partition_by</span><span class="p">(</span><span class="n">identifier_col</span><span class="p">)</span>
+    <span class="n">cleaned_groups</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">clean_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Cleaning timeseries"</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">cleaned_groups</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"vertical_relaxed"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cleaned_groups</span>
+        <span class="k">else</span> <span class="n">data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span> <span class="k">if</span> <span class="n">return_pandas</span> <span class="k">else</span> <span class="n">res</span></div>
+
+
+
+<span class="c1">#################################################</span>
+<span class="c1">#                    Unused                     #</span>
+<span class="c1">#################################################</span>
+
+
+<span class="c1"># Unused. Written for pandas.</span>
+<div class="viewcode-block" id="extract_df_data">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.extract_df_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_df_data</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">col_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">filter_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exact_match</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">remove_prefix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">drop</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Extracts data from a DataFrame.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df (pandas.DataFrame): The DataFrame to operate on.</span>
+<span class="sd">        col_dict (dict, optional): A dictionary mapping column names to new names. Defaults to None.</span>
+<span class="sd">        filter_dict (dict[str, list:str], optional): A dictionary where keys are column names and values are lists of values to filter rows by (may include regex pattern for exact_match=False). Defaults to None.</span>
+<span class="sd">        exact_match (bool, optional): If True, performs exact matching when filtering. Defaults to False.</span>
+<span class="sd">        remove_prefix (bool, optional): If True, removes prefix from default_key. Defaults to False.</span>
+<span class="sd">        drop (bool, optional): If True, drop all columns not specified in col_dict.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: A DataFrame containing the extracted data from the original DataFrame.</span>
+<span class="sd">    """</span>
+    <span class="c1"># rename columns if applicable</span>
+    <span class="k">if</span> <span class="n">col_dict</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col_dict</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">drop</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">col_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="c1"># filter rows for given values</span>
+    <span class="k">if</span> <span class="n">filter_dict</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">filter_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">exact_match</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">"object"</span><span class="p">:</span>
+                <span class="n">regex</span> <span class="o">=</span> <span class="s2">"|"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># Unused.</span>
+<div class="viewcode-block" id="filter_by_condition">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.filter_by_condition">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_by_condition</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">expression</span><span class="p">:</span> <span class="p">(</span>
+        <span class="n">IntoExprColumn</span>
+        <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">IntoExprColumn</span><span class="p">]</span>
+        <span class="o">|</span> <span class="nb">bool</span>
+        <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+        <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">),</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"filter_by_condition call"</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"drop"</span><span class="p">,</span> <span class="s2">"keep"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"drop"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Drop rows from a DataFrame based on a condition function.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df (pl.DataFrame): The input DataFrame.</span>
+<span class="sd">        expression: Expression(s) that evaluate to a boolean Series.</span>
+<span class="sd">        description (str): Description of the condition.</span>
+<span class="sd">        mode (str): Whether to drop or keep the rows. Can be "drop" or "keep".</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The DataFrame with rows dropped based on the condition.</span>
+<span class="sd">    """</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Boolean</span> <span class="k">for</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="n">mask</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Conditional expression must return a boolean Series/Dataframe."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">any_horizontal</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span><span class="o">.</span><span class="n">item</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">"Condition expression should return a boolean Series/Dataframe without NA values. Consider the use of `fillna`."</span><span class="p">,</span>
+            <span class="ne">UserWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"drop"</span><span class="p">:</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"keep"</span><span class="p">:</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mode must be 'drop' or 'keep'. Got </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">true_count</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum_horizontal</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"</span><span class="si">{mode}</span><span class="s2">: </span><span class="si">{true_count}</span><span class="s2"> rows (</span><span class="si">{true_count_pct:.2%}</span><span class="s2">) due to </span><span class="si">{description}</span><span class="s2">"</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+                <span class="n">true_count</span><span class="o">=</span><span class="n">true_count</span><span class="p">,</span>
+                <span class="n">true_count_pct</span><span class="o">=</span><span class="n">true_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df2</span></div>
+
+
+
+<span class="c1"># Unused. Written for pandas.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">df_find_closest</span><span class="p">(</span>
+    <span class="n">group</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">to_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tdelta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="n">pm_before</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"52w"</span><span class="p">,</span>
+    <span class="n">pm_after</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"52w"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Find the closest record to the target time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group (pd.DataFrame): The input dataframe.</span>
+<span class="sd">        to_col (str): The column containing the target time.</span>
+<span class="sd">        tdelta (str): The time delta. Defaults to "0".</span>
+<span class="sd">        pm_before (str): The time range before the target time. Defaults to "52w".</span>
+<span class="sd">        pm_after (str): The time range after the target time. Defaults to "52w".</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series[Any] | pd.DataFrame: The closest record.</span>
+<span class="sd">    """</span>
+    <span class="n">parsed_tdelta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">tdelta</span><span class="p">)</span>
+    <span class="n">parsed_pm_before</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">pm_before</span><span class="p">)</span>
+    <span class="n">parsed_pm_after</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">pm_after</span><span class="p">)</span>
+
+    <span class="n">target_time</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="n">to_col</span><span class="p">]</span> <span class="o">+</span> <span class="n">parsed_tdelta</span>
+
+    <span class="n">group</span><span class="p">[</span><span class="s2">"timediff"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"recordtime"</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_time</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+
+    <span class="n">within_range</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span>
+        <span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"recordtime"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">target_time</span> <span class="o">-</span> <span class="n">parsed_pm_before</span><span class="p">))</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"recordtime"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">target_time</span> <span class="o">+</span> <span class="n">parsed_pm_after</span><span class="p">))</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">within_range</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">closest</span> <span class="o">=</span> <span class="n">within_range</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">within_range</span><span class="p">[</span><span class="s2">"timediff"</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+    <span class="n">closest</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"timediff"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">closest</span>
+
+
+<span class="c1"># Unused. Written for pandas.</span>
+<div class="viewcode-block" id="aggregate_column">
+<a class="viewcode-back" href="../../../api/utils_helpers.html#corr_vars.utils.helpers.aggregate_column">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">aggregate_column</span><span class="p">(</span>
+    <span class="n">group</span><span class="p">:</span> <span class="n">DataFrameGroupBy</span><span class="p">,</span> <span class="n">agg_func</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">match</span> <span class="n">agg_func</span><span class="p">:</span>
+        <span class="k">case</span> <span class="s2">"median"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s2">"mean"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s2">"perc"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">case</span> <span class="s2">"count"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown aggregation function: </span><span class="si">{</span><span class="n">agg_func</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

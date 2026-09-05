@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>DataFrame Utilities &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils_frames';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Free-Day Outcomes" href="utils_outcomes.html" />
+    <link rel="prev" title="Base Utilities" href="utils_base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="utils.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/utils_frames.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/utils_frames.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/utils_frames.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DataFrame Utilities</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion">Conversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_polars_df"><code class="docutils literal notranslate"><span class="pre">convert_to_polars_df()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_polars_lf"><code class="docutils literal notranslate"><span class="pre">convert_to_polars_lf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_pandas_df"><code class="docutils literal notranslate"><span class="pre">convert_to_pandas_df()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_stata"><code class="docutils literal notranslate"><span class="pre">convert_to_stata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_tableone"><code class="docutils literal notranslate"><span class="pre">convert_to_tableone()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-operations">Time-Series Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.time_difference"><code class="docutils literal notranslate"><span class="pre">time_difference()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.remove_asof"><code class="docutils literal notranslate"><span class="pre">remove_asof()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.find_nearest"><code class="docutils literal notranslate"><span class="pre">find_nearest()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.interval_bucket_agg"><code class="docutils literal notranslate"><span class="pre">interval_bucket_agg()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-operations">Value Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.apply_cleaning"><code class="docutils literal notranslate"><span class="pre">apply_cleaning()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.absolute_and_relative_value_counts"><code class="docutils literal notranslate"><span class="pre">absolute_and_relative_value_counts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.unique_sucessive"><code class="docutils literal notranslate"><span class="pre">unique_sucessive()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="dataframe-utilities">
+<h1>DataFrame Utilities<a class="headerlink" href="#dataframe-utilities" title="Link to this heading">#</a></h1>
+<p>Conversion helpers (Polars ↔ Pandas ↔ Stata ↔ TableOne), time-series joins, value cleaning, and aggregation utilities for clinical data frames.</p>
+<section id="conversion">
+<h2>Conversion<a class="headerlink" href="#conversion" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.convert_to_polars_df">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">convert_to_polars_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#convert_to_polars_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.convert_to_polars_df" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.convert_to_polars_lf">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">convert_to_polars_lf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#convert_to_polars_lf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.convert_to_polars_lf" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.convert_to_pandas_df">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">convert_to_pandas_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#convert_to_pandas_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.convert_to_pandas_df" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.convert_to_stata">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">convert_to_stata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_dates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#convert_to_stata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.convert_to_stata" title="Link to this definition">#</a></dt>
+<dd><p>Convert a pandas DataFrame to a Stata compatible DataFrame or writes the DataFrame to a Stata file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The DataFrame to be converted to Stata format.</p></li>
+<li><p><strong>convert_dates</strong> (<em>dict</em><em>[</em><em>Hashable</em><em>, </em><em>str</em><em>]</em>) – Dictionary of columns to convert to Stata date format.</p></li>
+<li><p><strong>write_index</strong> (<em>bool</em>) – Whether to write the index as a column.</p></li>
+<li><p><strong>to_file</strong> (<em>str</em><em> | </em><em>None</em>) – Path to save as .dta file. If left unspecified, the DataFrame will not be saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Pandas Dataframe compatible with Stata if <cite>to_file</cite> is None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.convert_to_tableone">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">convert_to_tableone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_booleans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Yes',</span> <span class="pre">'No')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groupby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overall</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#convert_to_tableone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.convert_to_tableone" title="Link to this definition">#</a></dt>
+<dd><p>Create a <a class="reference external" href="https://tableone.readthedocs.io/en/latest/index.html">TableOne</a> object for the pandas DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pl.DataFrame</em>) – The input.</p></li>
+<li><p><strong>ignore_cols</strong> (<em>list</em><em> | </em><em>str</em><em> | </em><em>None</em>) – Column(s) to ignore.</p></li>
+<li><p><strong>filter_query</strong> (<em>str</em><em> | </em><em>None</em>) – Filter to apply to the data.</p></li>
+<li><p><strong>replace_booleans</strong> (<em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>] </em><em>| </em><em>None</em>) – Replace booleans with the given strings.</p></li>
+<li><p><strong>display_all</strong> (<em>bool</em>) – Whether to display all columns.</p></li>
+<li><p><strong>groupby</strong> (<em>str</em><em> | </em><em>None</em>) – Column to group by.</p></li>
+<li><p><strong>normal_cols</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Columns to treat as normally distributed.</p></li>
+<li><p><strong>overall</strong> (<em>bool</em>) – Whether to add an “overall” column to the table. If left unspecified the overall column will be dropped if groupby is specified.</p></li>
+<li><p><strong>order</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>] </em><em>| </em><em>None</em>) – Order of categorical columns.</p></li>
+<li><p><strong>pval</strong> (<em>bool</em>) – Whether to calculate p-values.</p></li>
+<li><p><strong>**kwargs</strong> – Additional arguments to pass to TableOne.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A TableOne object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TableOne</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="time-series-operations">
+<h2>Time-Series Operations<a class="headerlink" href="#time-series-operations" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.time_difference">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">time_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_col</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#time_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.time_difference" title="Link to this definition">#</a></dt>
+<dd><p>Signed time difference <code class="docutils literal notranslate"><span class="pre">time_col</span> <span class="pre">-</span> <span class="pre">reference_col</span></code> as a numeric expression.</p>
+<p>Computes the elapsed time from <em>reference_col</em> to <em>time_col</em> — positive when
+<em>time_col</em> is the later timestamp, negative otherwise — and converts it to the
+requested <em>unit</em>. Both operands may be column names or expressions, and the
+result is a <code class="xref py py-class docutils literal notranslate"><span class="pre">polars.Expr</span></code>, so it composes inside <code class="docutils literal notranslate"><span class="pre">select</span></code> /
+<code class="docutils literal notranslate"><span class="pre">with_columns</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_col</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The (typically later) timestamp, as a column name or expression.</p></li>
+<li><p><strong>reference_col</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The timestamp subtracted from <em>time_col</em>, as a column name or
+expression.</p></li>
+<li><p><strong>unit</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'h'</span></code>, <code class="docutils literal notranslate"><span class="pre">'d'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w'</span></code>]</span>) – Output unit — one of <code class="docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code> (seconds), <code class="docutils literal notranslate"><span class="pre">&quot;m&quot;</span></code> (minutes), <code class="docutils literal notranslate"><span class="pre">&quot;h&quot;</span></code>
+(hours), <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code> (days = 24 hours), <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> (weeks = 7 days). Defaults
+to <code class="docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code>.</p></li>
+<li><p><strong>total</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – How sub-unit remainders are handled for non-second units. <code class="docutils literal notranslate"><span class="pre">True</span></code>
+(default) returns whole units via floor division; <code class="docutils literal notranslate"><span class="pre">False</span></code> returns the
+fractional value via true division. Ignored for <code class="docutils literal notranslate"><span class="pre">unit=&quot;s&quot;</span></code>, which
+always yields total whole seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">polars.Expr</span></code> yielding the signed difference expressed in <em>unit</em>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <em>unit</em> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;m&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;h&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Whole hours from ICU admission to first lab</span>
+<span class="n">time_difference</span><span class="p">(</span><span class="s2">"first_lab_time"</span><span class="p">,</span> <span class="s2">"icu_admission"</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"h"</span><span class="p">)</span>
+
+<span class="c1"># Fractional days of ICU stay</span>
+<span class="n">time_difference</span><span class="p">(</span><span class="s2">"icu_discharge"</span><span class="p">,</span> <span class="s2">"icu_admission"</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"d"</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.remove_asof">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">remove_asof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'case_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'recordtime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1d'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#remove_asof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.remove_asof" title="Link to this definition">#</a></dt>
+<dd><p>Remove every <em>main</em> entry that has a <em>ref</em> entry within <em>tolerance</em>.</p>
+<p>Rows are keyed by <em>by</em> and ordered by <em>on</em>.  A <em>main</em> row is dropped when at
+least one <em>ref</em> row (same <em>by</em>) lies within <em>tolerance</em> of it, following
+<em>strategy</em> (<code class="docutils literal notranslate"><span class="pre">&quot;backward&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;forward&quot;</span></code> restrict the match to ref rows
+before / after the main row; <code class="docutils literal notranslate"><span class="pre">&quot;nearest&quot;</span></code> allows either direction).  Used to
+prefer a higher-priority source whenever it has a nearby measurement.</p>
+<p>Unlike a plain as-of join — which pairs each row only once — this removes
+<em>all</em> matching <em>main</em> rows and is therefore idempotent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>main</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">PolarsFrame</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code>)</span>)</p></li>
+<li><p><strong>ref</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">PolarsFrame</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code>)</span>)</p></li>
+<li><p><strong>strategy</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'backward'</span></code>, <code class="docutils literal notranslate"><span class="pre">'forward'</span></code>, <code class="docutils literal notranslate"><span class="pre">'nearest'</span></code>]</span>)</p></li>
+<li><p><strong>by</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>on</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>tolerance</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">PolarsFrame</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code>)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.find_nearest">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pm_before</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'52w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pm_after</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'52w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'recordtime'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#find_nearest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.find_nearest" title="Link to this definition">#</a></dt>
+<dd><p>Find the closest record to the target time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pl.DataFrame</em>) – The input dataframe.</p></li>
+<li><p><strong>to_col</strong> (<em>str</em>) – The column containing the target time.</p></li>
+<li><p><strong>tdelta</strong> (<em>str</em>) – The time delta. Defaults to “0”.</p></li>
+<li><p><strong>pm_before</strong> (<em>OffsetLike</em>) – The time range before the target time. Defaults to
+<code class="docutils literal notranslate"><span class="pre">&quot;52w&quot;</span></code>. A polars-duration string or a timedelta.</p></li>
+<li><p><strong>pm_after</strong> (<em>OffsetLike</em>) – The time range after the target time. Defaults to
+<code class="docutils literal notranslate"><span class="pre">&quot;52w&quot;</span></code>.</p></li>
+<li><p><strong>time</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>)</p></li>
+<li><p><strong>recordtime</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The closest record.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.interval_bucket_agg">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">interval_bucket_agg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'case_id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'recordtime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime_end_gap_treshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordtime_end_gap_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_empty_impute_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'value'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_missing_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">granularity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1h'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">same_bin_aggregation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#interval_bucket_agg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.interval_bucket_agg" title="Link to this definition">#</a></dt>
+<dd><p>Bins intervals clipped between tmin and tmax into bins aligned to t0 and aggregates on these bins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pl.DataFrame</em><em> | </em><em>pl.LazyFrame</em>) – The data to transform.</p></li>
+<li><p><strong>primary_key</strong> (<em>str</em>) – The primary key column. Defaults to “case_id”.</p></li>
+<li><p><strong>recordtime</strong> (<em>str</em>) – The recordtime column. Defaults to “recordtime”.</p></li>
+<li><p><strong>recordtime_end</strong> (<em>str</em><em> | </em><em>None</em>) – The recordtime_end column. Defaults to <cite>None</cite>. Will impute recordtime_end from the next recordtime if set to <cite>None</cite>.</p></li>
+<li><p><strong>recordtime_end_gap_treshold</strong> (<em>str</em><em> | </em><em>None</em>) – Maximum allowed gap for recordtime_end. Only applies if recordtime_end is set to <cite>None</cite>.</p></li>
+<li><p><strong>recordtime_end_gap_behavior</strong> (<em>str</em><em> | </em><em>None</em>) – Determines whether to impute or drop rows when the <cite>recordtime_end_gap_treshold</cite> is exceeded.</p></li>
+<li><p><strong>duration_empty_impute_duration</strong> (<em>str</em><em> | </em><em>None</em>) – The duration to be imputed by offsetting recordtime_end. Drops rows if set to default of <cite>None</cite> or ≤0s.</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – The value column. Defaults to “value”.</p></li>
+<li><p><strong>tmin</strong> (<em>str</em><em> | </em><em>None</em>) – The tmin column. Defaults to <cite>None</cite>.</p></li>
+<li><p><strong>tmax</strong> (<em>str</em><em> | </em><em>None</em>) – The tmax column. Defaults to <cite>None</cite>.</p></li>
+<li><p><strong>t0</strong> (<em>str</em><em> | </em><em>None</em>) – The t0 column. Bins will align to this datetime col if specified. Defaults to <cite>None</cite>.</p></li>
+<li><p><strong>t_missing_behavior</strong> (<em>str</em><em> | </em><em>None</em>) – Determines whether to drop or keep rows when <cite>t0</cite>, <cite>tmin</cite> or <cite>tmax</cite> columns are specified and values are missing in <cite>data</cite>. Defaults to “drop”.</p></li>
+<li><p><strong>granularity</strong> (<em>str</em><em> | </em><em>None</em>) – The size of the bucket intervals. Defaults to 1 hour.</p></li>
+<li><p><strong>same_bin_aggregation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – (Callable[[pl.Expr], pl.Expr] | None): The aggregation to perform on <cite>value</cite> for each bin. Uses <cite>pl.sum()</cite> if set to <cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>granularity</cite>, <cite>recordtime_end_impute_gap_treshold</cite> and <cite>duration_empty_impute_duration</cite> arguments are created with
+the following string language:</p>
+<ul class="simple">
+<li><p>1ns   (1 nanosecond) # nanoseconds are not supported by our DataFrames.</p></li>
+<li><p>1us   (1 microsecond)</p></li>
+<li><p>1ms   (1 millisecond)</p></li>
+<li><p>1s    (1 second)</p></li>
+<li><p>1m    (1 minute)</p></li>
+<li><p>1h    (1 hour)</p></li>
+<li><p>1d    (1 calendar day)</p></li>
+<li><p>1w    (1 calendar week)</p></li>
+<li><p>1mo   (1 calendar month)</p></li>
+<li><p>1q    (1 calendar quarter)</p></li>
+<li><p>1y    (1 calendar year)</p></li>
+</ul>
+<p>Or combine them: “3d12h4m25s” # 3 days, 12 hours, 4 minutes, and 25 seconds</p>
+<p>By “calendar day”, we mean the corresponding time on the next day (which may
+not be 24 hours, due to daylight savings). Similarly for “calendar week”,
+“calendar month”, “calendar quarter”, and “calendar year”.</p>
+<p>If you do not wish to use “calendar day” or any other “calendar” durations, specify the duration in hours or smaller units instead.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The clipped and binned data. Same type as <cite>data</cite>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>clip_bin_data (pl.DataFrame | pl.LazyFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="value-operations">
+<h2>Value Operations<a class="headerlink" href="#value-operations" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.apply_cleaning">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">apply_cleaning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#apply_cleaning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.apply_cleaning" title="Link to this definition">#</a></dt>
+<dd><p>Apply cleaning rules to filter out invalid values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pl.DataFrame</em><em> | </em><em>pl.LazyFrame</em>) – The input dataframe.</p></li>
+<li><p><strong>cleaning</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em>) – A dictionary where keys are column names and values are dictionaries with optional “low” and “high” keys specifying the bounds for valid values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cleaned DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cleaned (pl.DataFrame | pl.LazyFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.absolute_and_relative_value_counts">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">absolute_and_relative_value_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'counts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#absolute_and_relative_value_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.absolute_and_relative_value_counts" title="Link to this definition">#</a></dt>
+<dd><p>Returns the absolute and relative value_counts for the column(s) <cite>cols</cite> of a <cite>pl.LazyFrame</cite> or <cite>pl.DataFrame</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyFrame</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>)</p></li>
+<li><p><strong>cols</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>sort</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'cols'</span></code>, <code class="docutils literal notranslate"><span class="pre">'counts'</span></code>]]</span>)</p></li>
+<li><p><strong>decimals</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.utils.frames.unique_sucessive">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.utils.frames.</span></span><span class="sig-name descname"><span class="pre">unique_sucessive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/utils/frames.html#unique_sucessive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.utils.frames.unique_sucessive" title="Link to this definition">#</a></dt>
+<dd><p>Drop sucessive duplicate values of a list column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="utils_base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Base Utilities</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils_outcomes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Free-Day Outcomes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion">Conversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_polars_df"><code class="docutils literal notranslate"><span class="pre">convert_to_polars_df()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_polars_lf"><code class="docutils literal notranslate"><span class="pre">convert_to_polars_lf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_pandas_df"><code class="docutils literal notranslate"><span class="pre">convert_to_pandas_df()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_stata"><code class="docutils literal notranslate"><span class="pre">convert_to_stata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.convert_to_tableone"><code class="docutils literal notranslate"><span class="pre">convert_to_tableone()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-operations">Time-Series Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.time_difference"><code class="docutils literal notranslate"><span class="pre">time_difference()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.remove_asof"><code class="docutils literal notranslate"><span class="pre">remove_asof()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.find_nearest"><code class="docutils literal notranslate"><span class="pre">find_nearest()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.interval_bucket_agg"><code class="docutils literal notranslate"><span class="pre">interval_bucket_agg()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-operations">Value Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.apply_cleaning"><code class="docutils literal notranslate"><span class="pre">apply_cleaning()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.absolute_and_relative_value_counts"><code class="docutils literal notranslate"><span class="pre">absolute_and_relative_value_counts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.utils.frames.unique_sucessive"><code class="docutils literal notranslate"><span class="pre">unique_sucessive()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

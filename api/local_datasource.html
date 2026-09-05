@@ -1,0 +1,1174 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Local Data Source (skeleton) &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/local_datasource';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Aggregated Variables" href="aggregation.html" />
+    <link rel="prev" title="reprodICU Data Source" href="reprodicu.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sources.html">Data Sources</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/api/local_datasource.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Fapi/local_datasource.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/local_datasource.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Local Data Source (skeleton)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-seams">The two seams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-load-data-the-observation-frame">1. <code class="docutils literal notranslate"><span class="pre">cohort.load_data</span></code> — the observation frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nativeextractor-extract-the-raw-rows">2. <code class="docutils literal notranslate"><span class="pre">NativeExtractor.extract</span></code> — the raw rows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-a-folder-of-parquet-files">Worked example: a folder of parquet files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-definitions">Variable definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-vars-json"><code class="docutils literal notranslate"><span class="pre">mapping/vars.json</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-variables-py"><code class="docutils literal notranslate"><span class="pre">mapping/variables.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.screened_obs_level"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.screened_obs_level</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract_from_db"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.extract_from_db()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor"><code class="docutils literal notranslate"><span class="pre">NativeExtractor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.value_dtype"><code class="docutils literal notranslate"><span class="pre">NativeExtractor.value_dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.extract"><code class="docutils literal notranslate"><span class="pre">NativeExtractor.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic"><code class="docutils literal notranslate"><span class="pre">NativeDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class"><code class="docutils literal notranslate"><span class="pre">NativeDynamic.extractor_class</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extract_from_db"><code class="docutils literal notranslate"><span class="pre">NativeDynamic.extract_from_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable"><code class="docutils literal notranslate"><span class="pre">ComplexVariable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract_from_db"><code class="docutils literal notranslate"><span class="pre">ComplexVariable.extract_from_db()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract"><code class="docutils literal notranslate"><span class="pre">ComplexVariable.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.VariableLoader"><code class="docutils literal notranslate"><span class="pre">VariableLoader()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.cohort.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="local-data-source-skeleton">
+<h1>Local Data Source (skeleton)<a class="headerlink" href="#local-data-source-skeleton" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">local_datasource</span></code> is the <strong>source skeleton</strong> that ships with CORR-Vars. It carries the
+variable classes and the extraction pipeline, but no connection to any store: the query
+that reaches a warehouse table, a folder of parquet files, or an HTTP service is
+deployment-specific and is not part of the published package.</p>
+<p>Two things follow from that:</p>
+<ul class="simple">
+<li><p>The aggregation and derivation classes (<code class="xref py py-class docutils literal notranslate"><span class="pre">NativeStatic</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DerivedStatic</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">DerivedDynamic</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexVariable</span></code>) compute from data that is already in
+the cohort. They need <strong>no</strong> store and work on any cohort — see <a class="reference internal" href="aggregation.html"><span class="doc">Aggregated Variables</span></a> and
+<a class="reference internal" href="../custom_variables.html"><span class="doc">Custom Variables Guide</span></a>.</p></li>
+<li><p>Only <code class="xref py py-class docutils literal notranslate"><span class="pre">NativeDynamic</span></code>, which fetches new rows, needs a store. That is what binding
+the skeleton is for.</p></li>
+</ul>
+<p>The source is pinned as local under <code class="docutils literal notranslate"><span class="pre">[local].sources</span></code> in
+<code class="docutils literal notranslate"><span class="pre">src/corr_vars/concepts/routing.toml</span></code>: its definitions are never fetched from the
+Concepts API, so it works with no network and no API key. Definitions come from the
+bundled <code class="docutils literal notranslate"><span class="pre">mapping/vars.json</span></code>, and <code class="docutils literal notranslate"><span class="pre">py</span></code> functions from <code class="docutils literal notranslate"><span class="pre">mapping/variables.py</span></code>, looked
+up by variable name.</p>
+<section id="the-two-seams">
+<h2>The two seams<a class="headerlink" href="#the-two-seams" title="Link to this heading">#</a></h2>
+<p>Binding the skeleton to a store means replacing exactly two things.</p>
+<section id="cohort-load-data-the-observation-frame">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">cohort.load_data</span></code> — the observation frame<a class="headerlink" href="#cohort-load-data-the-observation-frame" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="#corr_vars.sources.local_datasource.cohort.load_data" title="corr_vars.sources.local_datasource.cohort.load_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_data()</span></code></a> raises
+<code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Replace it to build the cohort’s observation frame: one row per
+observation, carrying at least the level’s primary key and its <code class="docutils literal notranslate"><span class="pre">t_min</span></code> / <code class="docutils literal notranslate"><span class="pre">t_max</span></code> anchor
+columns (for <code class="docutils literal notranslate"><span class="pre">icu_stay</span></code>: <code class="docutils literal notranslate"><span class="pre">icu_stay_id</span></code>, <code class="docutils literal notranslate"><span class="pre">icu_admission</span></code>, <code class="docutils literal notranslate"><span class="pre">icu_discharge</span></code>).</p>
+</section>
+<section id="nativeextractor-extract-the-raw-rows">
+<h3>2. <code class="docutils literal notranslate"><span class="pre">NativeExtractor.extract</span></code> — the raw rows<a class="headerlink" href="#nativeextractor-extract-the-raw-rows" title="Link to this heading">#</a></h3>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">NativeExtractor.extract()</span></code> also raises <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Subclass it,
+implement <code class="docutils literal notranslate"><span class="pre">extract(cohort,</span> <span class="pre">id_column)</span></code> to return rows carrying at least <code class="docutils literal notranslate"><span class="pre">id_column</span></code>,
+<code class="docutils literal notranslate"><span class="pre">recordtime</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code>, and point <code class="xref py py-attr docutils literal notranslate"><span class="pre">NativeDynamic.extractor_class</span></code> at the
+subclass. <code class="xref py py-class docutils literal notranslate"><span class="pre">NativeDynamic</span></code> wraps the extractor in the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDynamic</span></code> pipeline:
+cache → <code class="docutils literal notranslate"><span class="pre">extract_from_db</span></code> → time filter → cleaning → optional <code class="docutils literal notranslate"><span class="pre">py</span></code> post-processing.</p>
+</section>
+</section>
+<section id="worked-example-a-folder-of-parquet-files">
+<h2>Worked example: a folder of parquet files<a class="headerlink" href="#worked-example-a-folder-of-parquet-files" title="Link to this heading">#</a></h2>
+<p>The following binds the skeleton to a directory in which each table is one parquet file,
+keyed on <code class="docutils literal notranslate"><span class="pre">icu_stay_id</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource.cohort</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ld_cohort</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.local_datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">NativeDynamic</span><span class="p">,</span> <span class="n">NativeExtractor</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"/path/to/my_store"</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyExtractor</span><span class="p">(</span><span class="n">NativeExtractor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Read one parquet file per table and restrict it to the cohort's ids."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">id_column</span><span class="p">):</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">scan_parquet</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="si">}</span><span class="s2">.parquet"</span><span class="p">)</span>
+
+        <span class="c1"># `where` is optional; when set it is an SQL-style boolean on the table.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">where</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">sql_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">where</span><span class="p">))</span>
+
+        <span class="n">ids</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">id_column</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ids</span><span class="o">.</span><span class="n">lazy</span><span class="p">(),</span> <span class="n">on</span><span class="o">=</span><span class="n">id_column</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">id_column</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_dtype</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+                <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_dtype</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">frame</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+
+<span class="n">NativeDynamic</span><span class="o">.</span><span class="n">extractor_class</span> <span class="o">=</span> <span class="n">MyExtractor</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="n">obs_level</span><span class="p">,</span> <span class="n">source_kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Build the observation frame for `obs_level`."""</span>
+    <span class="n">stays</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">"icu_stays.parquet"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stays</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"icu_discharge"</span><span class="p">)</span>
+
+
+<span class="n">ld_cohort</span><span class="o">.</span><span class="n">load_data</span> <span class="o">=</span> <span class="n">load_data</span>
+</pre></div>
+</div>
+<p>With both seams filled, a <code class="docutils literal notranslate"><span class="pre">NativeDynamic</span></code> variable extracts from the store like any
+other native variable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"local_datasource"</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">NativeDynamic</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="o">=</span><span class="s2">"blood_lactate"</span><span class="p">,</span>
+    <span class="n">dynamic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="s2">"labs"</span><span class="p">,</span>
+    <span class="n">where</span><span class="o">=</span><span class="s2">"analyte = 'lactate'"</span><span class="p">,</span>
+    <span class="n">value_dtype</span><span class="o">=</span><span class="s2">"Float64"</span><span class="p">,</span>
+    <span class="n">cleaning</span><span class="o">=</span><span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">}},</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">corr_vars.sources.local_datasource.config</span></code> defines the <code class="docutils literal notranslate"><span class="pre">SourceDict</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SourceDictPartial</span></code> TypedDicts, plus <code class="docutils literal notranslate"><span class="pre">DEFAULTS</span></code> and <code class="docutils literal notranslate"><span class="pre">MIGRATIONS</span></code>. The published
+schema is deliberately small — a <code class="docutils literal notranslate"><span class="pre">database</span></code> name and <code class="docutils literal notranslate"><span class="pre">conn_args</span></code>
+(<code class="docutils literal notranslate"><span class="pre">hostname</span></code>, <code class="docutils literal notranslate"><span class="pre">username</span></code>, <code class="docutils literal notranslate"><span class="pre">password</span></code>, <code class="docutils literal notranslate"><span class="pre">password_file</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DEFAULTS</span><span class="p">:</span> <span class="n">SourceDict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"database"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"conn_args"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"hostname"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"username"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"password"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"password_file"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A deployment extends these with whatever its store needs. <code class="docutils literal notranslate"><span class="pre">MIGRATIONS</span></code> maps legacy
+top-level keys to their canonical nested position, so old configuration files keep
+loading.</p>
+</section>
+<section id="variable-definitions">
+<h2>Variable definitions<a class="headerlink" href="#variable-definitions" title="Link to this heading">#</a></h2>
+<p>Once the store is bound, the source needs definitions. Either fill the bundled mapping, or
+route the source to a Concepts API endpoint in <code class="docutils literal notranslate"><span class="pre">concepts/routing.toml</span></code> (which unpins it
+from <code class="docutils literal notranslate"><span class="pre">[local].sources</span></code>).</p>
+<section id="mapping-vars-json">
+<h3><code class="docutils literal notranslate"><span class="pre">mapping/vars.json</span></code><a class="headerlink" href="#mapping-vars-json" title="Link to this heading">#</a></h3>
+<p>The bundled file declares no variables. Add them under <code class="docutils literal notranslate"><span class="pre">variables</span></code>, and list the ones
+that should load automatically under <code class="docutils literal notranslate"><span class="pre">corr_defaults.default_vars</span></code> per observation level.
+The main definition fields are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">native_dynamic</span></code>, <code class="docutils literal notranslate"><span class="pre">native_static</span></code>, <code class="docutils literal notranslate"><span class="pre">derived_static</span></code>, <code class="docutils literal notranslate"><span class="pre">derived_dynamic</span></code>,
+<code class="docutils literal notranslate"><span class="pre">complex</span></code> or <code class="docutils literal notranslate"><span class="pre">free_days</span></code>. Selects the class the loader builds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p>Table in the backing store (native variables only).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">where</span></code></p></td>
+<td><p>Row filter for the extraction, in the store’s dialect (native variables only).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">value_dtype</span></code></p></td>
+<td><p>Polars dtype name the <code class="docutils literal notranslate"><span class="pre">value</span></code> column is cast to, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Float64&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cleaning</span></code></p></td>
+<td><p>Per-column plausibility bounds, e.g. <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">{&quot;low&quot;:</span> <span class="pre">0,</span> <span class="pre">&quot;high&quot;:</span> <span class="pre">300}}</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requires</span></code> / <code class="docutils literal notranslate"><span class="pre">base_var</span></code></p></td>
+<td><p>Dependencies. Derived and complex variables take a <code class="docutils literal notranslate"><span class="pre">requires</span></code> list;
+<code class="docutils literal notranslate"><span class="pre">native_static</span></code> takes a single <code class="docutils literal notranslate"><span class="pre">base_var</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compatible_with</span></code></p></td>
+<td><p>Observation levels the definition is valid for.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mapping-variables-py">
+<h3><code class="docutils literal notranslate"><span class="pre">mapping/variables.py</span></code><a class="headerlink" href="#mapping-variables-py" title="Link to this heading">#</a></h3>
+<p>One module-level function per variable that needs a <code class="docutils literal notranslate"><span class="pre">py</span></code> transformation, named exactly
+like its key in <code class="docutils literal notranslate"><span class="pre">vars.json</span></code>. The loader looks the function up by that name and injects
+it into the config as <code class="docutils literal notranslate"><span class="pre">&quot;py&quot;</span></code>. A variable with no transformation needs no entry.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A variable published through the CORR Concepts API carries its <code class="docutils literal notranslate"><span class="pre">py</span></code> source with it,
+so <code class="docutils literal notranslate"><span class="pre">variables.py</span></code> is only for the definitions a source bundles itself.</p>
+</div>
+</section>
+</section>
+<section id="class-reference">
+<h2>Class Reference<a class="headerlink" href="#class-reference" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.BaseDynamic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">BaseDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py_ready_polars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_caching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#BaseDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.BaseDynamic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ScreenedRequirements</span></code>, <a class="reference internal" href="core.html#corr_vars.core.variable.Variable" title="corr_vars.core.variable.base.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base for all dynamic variables of this source.</p>
+<p>Provides the shared extraction pipeline: optimised obs-level selection,
+caching, attribute building, time-filtering, and cleaning.  Subclasses
+implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">_extract_from_db()</span></code> to supply the raw data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Variable name.</p></li>
+<li><p><strong>dynamic</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether the variable is dynamic (time-series).</p></li>
+<li><p><strong>requires</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RequirementsDict</span></code>]</span>) – Dependency variables loaded before extraction.</p></li>
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Minimum time anchor.</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Maximum time anchor.</p></li>
+<li><p><strong>py</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableCallable</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional transformation function applied after raw extraction.</p></li>
+<li><p><strong>py_ready_polars</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether <code class="docutils literal notranslate"><span class="pre">py</span></code> accepts and returns polars DataFrames.</p></li>
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Value-range cleaning rules.</p></li>
+<li><p><strong>allow_caching</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether to cache raw data in the cohort’s tmpdir.</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>) – Default observation level used to scope DB queries
+when the time window is not bounded by hospital-stay bounds.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.BaseDynamic.screened_obs_level">
+<span class="sig-name descname"><span class="pre">screened_obs_level</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="pre">ObsLevel.HOSPITAL_STAY</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ObsLevel.PATIENT</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.screened_obs_level" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.BaseDynamic.extract_from_db">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">extract_from_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#BaseDynamic.extract_from_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract_from_db" title="Link to this definition">#</a></dt>
+<dd><p>Return raw variable data; called by <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract" title="corr_vars.sources.local_datasource.extract.BaseDynamic.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a> on a cache miss.</p>
+<p>The returned DataFrame must <strong>not</strong> yet have time-window columns or
+cleaning applied — those are handled by the shared pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p></li>
+<li><p><strong>id_column</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'case_id'</span></code>, <code class="docutils literal notranslate"><span class="pre">'patient_id'</span></code>]</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.BaseDynamic.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#BaseDynamic.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract" title="Link to this definition">#</a></dt>
+<dd><p>Extracts data from the datasource. Usually follows this pattern.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load &amp; Extract required variables</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_get_required_vars</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># This should change self.data either by returning or side effect</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_extraction</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># Calls variable function to transform extracted data</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_call_var_function</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_add_time_window</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+    <span class="c1"># Expects case_tmin, case_tmax for each primary key</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_timefilter</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_apply_cleaning</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeExtractor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">NativeExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeExtractor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Raw extractor satisfying VariableProtocol.</p>
+<p>Fetches a variable’s rows from the source’s backing store. No caching,
+time-filtering, or cleaning — those are handled by the wrapping
+<a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeDynamic" title="corr_vars.sources.local_datasource.extract.NativeDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">NativeDynamic</span></code></a> pipeline, which is what makes this class worth
+separating: an extractor can be swapped without touching that pipeline.</p>
+<p><a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.extract" title="corr_vars.sources.local_datasource.extract.NativeExtractor.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a> is deliberately <strong>not implemented here</strong>. A deployment binds
+this source to its own store — a warehouse table, a set of parquet files, an
+HTTP service — and the query that reaches it is deployment-specific, so it
+is not part of the published package. Subclass this and implement
+<a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.extract" title="corr_vars.sources.local_datasource.extract.NativeExtractor.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a>, then point <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeDynamic" title="corr_vars.sources.local_datasource.extract.NativeDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">NativeDynamic</span></code></a> at the subclass through
+<a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class" title="corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NativeDynamic.extractor_class</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Variable name.</p></li>
+<li><p><strong>table</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Table name in the backing store.</p></li>
+<li><p><strong>where</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Row filter, in whatever dialect the store speaks.</p></li>
+<li><p><strong>columns</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Column alias/cast mapping for the query.</p></li>
+<li><p><strong>value_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Polars dtype name the <code class="docutils literal notranslate"><span class="pre">value</span></code> column is cast to.</p></li>
+<li><p><strong>time_window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Time window (stored to satisfy the protocol).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeExtractor.value_dtype">
+<span class="sig-name descname"><span class="pre">value_dtype</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.value_dtype" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeExtractor.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeExtractor.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.extract" title="Link to this definition">#</a></dt>
+<dd><p>Fetch this variable’s raw rows, restricted to the cohort’s ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cohort</strong> (<a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><em>Cohort</em></a>) – Cohort whose ids the extract is restricted to.</p></li>
+<li><p><strong>id_column</strong> (<em>Literal</em><em>[</em><em>&quot;case_id&quot;</em><em>, </em><em>&quot;patient_id&quot;</em><em>]</em>) – Key the store is
+queried and joined on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One row per record, carrying at least <cite>id_column</cite>,
+<code class="docutils literal notranslate"><span class="pre">recordtime</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Always. See the class docstring — the query
+    that reaches a deployment’s store is not part of this package.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeDynamic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">NativeDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py_ready_polars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_caching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeDynamic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.BaseDynamic" title="corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a></p>
+<p>Store-backed dynamic variable with the full <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.BaseDynamic" title="corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a> pipeline.</p>
+<p>Wraps a <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeExtractor" title="corr_vars.sources.local_datasource.extract.NativeExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">NativeExtractor</span></code></a> to provide caching, time-filtering,
+cleaning, and optional <code class="docutils literal notranslate"><span class="pre">py</span></code> post-processing.</p>
+<p>The extractor is the only part that touches a backing store, and the
+published <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeExtractor" title="corr_vars.sources.local_datasource.extract.NativeExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">NativeExtractor</span></code></a> raises <code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Bind
+this source to a store by subclassing it and setting
+<a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class" title="corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">extractor_class</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyExtractor</span><span class="p">(</span><span class="n">NativeExtractor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">id_column</span><span class="p">):</span>
+        <span class="o">...</span>  <span class="c1"># query your store, return one row per record</span>
+
+<span class="n">NativeDynamic</span><span class="o">.</span><span class="n">extractor_class</span> <span class="o">=</span> <span class="n">MyExtractor</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Table name in the backing store.</p></li>
+<li><p><strong>where</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Row filter appended to the generated query.</p></li>
+<li><p><strong>value_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional polars dtype name applied to the <code class="docutils literal notranslate"><span class="pre">value</span></code> column
+after extraction (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Float64&quot;</span></code>).</p></li>
+<li><p><strong>columns</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Column alias/cast mapping for the query.</p></li>
+</ul>
+</dd>
+</dl>
+<p>All other args are forwarded to <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.BaseDynamic" title="corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only use this class for defining custom variables.  For CORR-specified
+variables, use <code class="docutils literal notranslate"><span class="pre">cohort.add_variable()</span></code> directly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>dynamic</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>requires</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RequirementsDict</span></code>]</span>)</p></li>
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>py</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableCallable</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>py_ready_polars</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>allow_caching</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>)</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class">
+<span class="sig-name descname"><span class="pre">extractor_class</span></span><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class" title="Link to this definition">#</a></dt>
+<dd><p>Extractor the variable builds to reach the backing store. Rebind it on
+this class (or on a subclass) to plug in a deployment’s own query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>)</p></li>
+<li><p><strong>time_window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeWindow" title="corr_vars.utils.time.TimeWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeWindow</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>table</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>where</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>columns</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+<li><p><strong>value_dtype</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p>alias of <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.NativeExtractor" title="corr_vars.sources.local_datasource.extract.NativeExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">NativeExtractor</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.NativeDynamic.extract_from_db">
+<span class="sig-name descname"><span class="pre">extract_from_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#NativeDynamic.extract_from_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extract_from_db" title="Link to this definition">#</a></dt>
+<dd><p>Return raw variable data; called by <code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code> on a cache miss.</p>
+<p>The returned DataFrame must <strong>not</strong> yet have time-window columns or
+cleaning applied — those are handled by the shared pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p></li>
+<li><p><strong>id_column</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'case_id'</span></code>, <code class="docutils literal notranslate"><span class="pre">'patient_id'</span></code>]</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.ComplexVariable">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">ComplexVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">py_ready_polars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_caching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screened_obs_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#ComplexVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.ComplexVariable" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.BaseDynamic" title="corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a></p>
+<p>Variable extracted entirely by a custom <code class="docutils literal notranslate"><span class="pre">py()</span></code> function.</p>
+<p>No database query is issued; the variable function receives <code class="docutils literal notranslate"><span class="pre">required_vars</span></code>
+and must return a <code class="docutils literal notranslate"><span class="pre">pl.DataFrame</span></code>.  Time-filtering is applied only when
+the function adds <code class="docutils literal notranslate"><span class="pre">case_tmin</span></code>/<code class="docutils literal notranslate"><span class="pre">case_tmax</span></code> columns to the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Name of the variable.</p></li>
+<li><p><strong>dynamic</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether the variable is dynamic.</p></li>
+<li><p><strong>requires</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RequirementsDict</span></code>]</span>) – Variables loaded and passed to the function.</p></li>
+<li><p><strong>tmin</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Minimum time anchor.</p></li>
+<li><p><strong>tmax</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <a class="reference internal" href="utils_time.html#corr_vars.utils.time.TimeAnchor" title="corr_vars.utils.time.TimeAnchor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeAnchor</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Maximum time anchor.</p></li>
+<li><p><strong>py</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableCallable</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Variable function that produces the data.</p></li>
+<li><p><strong>py_ready_polars</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether <code class="docutils literal notranslate"><span class="pre">py</span></code> accepts and returns polars DataFrames.</p></li>
+<li><p><strong>cleaning</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'low'</span></code>, <code class="docutils literal notranslate"><span class="pre">'high'</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Dictionary of cleaning rules.</p></li>
+<li><p><strong>allow_caching</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Whether to allow caching.</p></li>
+<li><p><strong>screened_obs_level</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'patient'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hospital_stay'</span></code>]]</span>) – Observation level used for scoping the cache key.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.ComplexVariable.extract_from_db">
+<span class="sig-name descname"><span class="pre">extract_from_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#ComplexVariable.extract_from_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract_from_db" title="Link to this definition">#</a></dt>
+<dd><p>Return raw variable data; called by <a class="reference internal" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract" title="corr_vars.sources.local_datasource.extract.ComplexVariable.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a> on a cache miss.</p>
+<p>The returned DataFrame must <strong>not</strong> yet have time-window columns or
+cleaning applied — those are handled by the shared pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p></li>
+<li><p><strong>id_column</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">'case_id'</span></code>, <code class="docutils literal notranslate"><span class="pre">'patient_id'</span></code>]</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.ComplexVariable.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cohort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#ComplexVariable.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract" title="Link to this definition">#</a></dt>
+<dd><p>Extracts data from the datasource. Usually follows this pattern.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load &amp; Extract required variables</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_get_required_vars</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># This should change self.data either by returning or side effect</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_extraction</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="c1"># Calls variable function to transform extracted data</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_call_var_function</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_add_time_window</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+    <span class="c1"># Expects case_tmin, case_tmax for each primary key</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_timefilter</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_apply_cleaning</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cohort</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="cohort.html#corr_vars.core.cohort.Cohort" title="corr_vars.core.cohort.Cohort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cohort</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.extract.VariableLoader">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.extract.</span></span><span class="sig-name descname"><span class="pre">VariableLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/extract.html#VariableLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.extract.VariableLoader" title="Link to this definition">#</a></dt>
+<dd><p>Factory function to create the correct variable type based on the arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="core.html#corr_vars.core.variable.Variable" title="corr_vars.core.variable.base.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="corr_vars.sources.local_datasource.cohort.load_data">
+<span class="sig-prename descclassname"><span class="pre">corr_vars.sources.local_datasource.cohort.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/corr_vars/sources/local_datasource/cohort.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#corr_vars.sources.local_datasource.cohort.load_data" title="Link to this definition">#</a></dt>
+<dd><p>Build the cohort’s observation frame from the backing store.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obs_level</strong> (<em>ObsLevel</em>) – Level of observation the frame is keyed at.</p></li>
+<li><p><strong>source_kwargs</strong> (<em>SourceDict</em>) – This source’s resolved configuration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One row per observation, carrying at least the level’s
+primary key and its <code class="docutils literal notranslate"><span class="pre">t_min</span></code> / <code class="docutils literal notranslate"><span class="pre">t_max</span></code> anchor columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Always. <code class="docutils literal notranslate"><span class="pre">local_datasource</span></code> is a source skeleton;
+    replace this function to bind it to a store.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reprodicu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">reprodICU Data Source</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aggregation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Aggregated Variables</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-seams">The two seams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cohort-load-data-the-observation-frame">1. <code class="docutils literal notranslate"><span class="pre">cohort.load_data</span></code> — the observation frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nativeextractor-extract-the-raw-rows">2. <code class="docutils literal notranslate"><span class="pre">NativeExtractor.extract</span></code> — the raw rows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-a-folder-of-parquet-files">Worked example: a folder of parquet files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-definitions">Variable definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-vars-json"><code class="docutils literal notranslate"><span class="pre">mapping/vars.json</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-variables-py"><code class="docutils literal notranslate"><span class="pre">mapping/variables.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-reference">Class Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic"><code class="docutils literal notranslate"><span class="pre">BaseDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.screened_obs_level"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.screened_obs_level</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract_from_db"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.extract_from_db()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.BaseDynamic.extract"><code class="docutils literal notranslate"><span class="pre">BaseDynamic.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor"><code class="docutils literal notranslate"><span class="pre">NativeExtractor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.value_dtype"><code class="docutils literal notranslate"><span class="pre">NativeExtractor.value_dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeExtractor.extract"><code class="docutils literal notranslate"><span class="pre">NativeExtractor.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic"><code class="docutils literal notranslate"><span class="pre">NativeDynamic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extractor_class"><code class="docutils literal notranslate"><span class="pre">NativeDynamic.extractor_class</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.NativeDynamic.extract_from_db"><code class="docutils literal notranslate"><span class="pre">NativeDynamic.extract_from_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable"><code class="docutils literal notranslate"><span class="pre">ComplexVariable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract_from_db"><code class="docutils literal notranslate"><span class="pre">ComplexVariable.extract_from_db()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.ComplexVariable.extract"><code class="docutils literal notranslate"><span class="pre">ComplexVariable.extract()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.extract.VariableLoader"><code class="docutils literal notranslate"><span class="pre">VariableLoader()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corr_vars.sources.local_datasource.cohort.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

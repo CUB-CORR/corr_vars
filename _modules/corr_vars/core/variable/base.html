@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>corr_vars.core.variable.base &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/corr_vars/core/variable/base';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../../../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../../../../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2F_modules/corr_vars/core/variable/base.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for corr_vars.core.variable.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">__</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.core.steps</span><span class="w"> </span><span class="kn">import</span> <span class="n">CleaningStep</span><span class="p">,</span> <span class="n">PyFuncStep</span><span class="p">,</span> <span class="n">TimeFilterStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">guess_variable_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeAnchor</span><span class="p">,</span> <span class="n">TimeWindow</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">INHERIT</span><span class="p">,</span> <span class="n">ExtractedVariable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">CleaningDict</span><span class="p">,</span>
+        <span class="n">RequirementsDict</span><span class="p">,</span>
+        <span class="n">RequirementsIterable</span><span class="p">,</span>
+        <span class="n">TimeAnchorColumn</span><span class="p">,</span>
+        <span class="n">VariableCallable</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Variable">
+<a class="viewcode-back" href="../../../../api/core.html#corr_vars.core.variable.Variable">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Base class for all variables.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): The variable name.</span>
+<span class="sd">        dynamic (bool): True if the variable is dynamic (time-series).</span>
+<span class="sd">        requires (RequirementsIterable): List of variables or dict of variables with tmin/tmax required to calculate the variable (default: []).</span>
+<span class="sd">        tmin (TimeAnchorColumn | None): The tmin argument. Can either be a string (column name) or a tuple of (column name, timedelta).</span>
+<span class="sd">        tmax (TimeAnchorColumn | None): The tmax argument. Can either be a string (column name) or a tuple of (column name, timedelta).</span>
+<span class="sd">        py (Callable): The function to call to calculate the variable.</span>
+<span class="sd">        py_ready_polars (bool): True if the variable code can accept polars dataframes as input and return a polars dataframe.</span>
+<span class="sd">        cleaning (CleaningDict): Dictionary with cleaning rules for the variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        contributor_key (str): Identity of this variable within its</span>
+<span class="sd">            :class:`~corr_vars.sources.var_loader.MultiSourceVariable`. Defaults</span>
+<span class="sd">            to `var_name` and is overwritten with the contributor key when the</span>
+<span class="sd">            variable is one of several sharing a name, such as the members of a</span>
+<span class="sd">            concept group.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        tmin and tmax can be None when you create a Variable object, but must be set before extraction.</span>
+<span class="sd">        If you add the variable via cohort.add_variable(), it will be automatically set to the cohort's tmin and tmax.</span>
+
+<span class="sd">        This base class should not be used directly; use one of the subclasses instead. These are specified in the sources submodule.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Basic cleaning configuration:</span>
+
+<span class="sd">        &gt;&gt;&gt; cleaning = {"value": {"low": 10, "high": 80}}</span>
+
+<span class="sd">        Time constraints with relative offsets:</span>
+
+<span class="sd">        &gt;&gt;&gt; # Extract data from 2 hours before to 6 hours after ICU admission</span>
+<span class="sd">        &gt;&gt;&gt; tmin = ("icu_admission", "-2h")</span>
+<span class="sd">        &gt;&gt;&gt; tmax = ("icu_admission", "+6h")</span>
+
+<span class="sd">        Variable with dependencies:</span>
+
+<span class="sd">        &gt;&gt;&gt; # This variable requires other variables to be loaded first</span>
+<span class="sd">        &gt;&gt;&gt; requires = ["blood_pressure_sys", "blood_pressure_dia"]</span>
+
+<span class="sd">        &gt;&gt;&gt; # This variable requires other variables with fixed tmin/tmax to be loaded first</span>
+<span class="sd">        &gt;&gt;&gt; requires = {</span>
+<span class="sd">        ...     "blood_pressure_sys_hospital": {</span>
+<span class="sd">        ...         "template": "blood_pressure_sys"</span>
+<span class="sd">        ...         "tmin": "hospital_admission",</span>
+<span class="sd">        ...         "tmax": "hospital_discharge"</span>
+<span class="sd">        ...     },</span>
+<span class="sd">        ...     "blood_pressure_dia_hospital": {</span>
+<span class="sd">        ...         "template": "blood_pressure_dia"</span>
+<span class="sd">        ...         "tmin": "hospital_admission",</span>
+<span class="sd">        ...         "tmax": "hospital_discharge"</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        ... }</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># VariableContext</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">dynamic</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span>
+    <span class="n">required_vars</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ExtractedVariable</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span>
+
+    <span class="c1"># Additional fields</span>
+    <span class="n">requirements</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RequirementsDict</span><span class="p">]</span>
+    <span class="n">py</span><span class="p">:</span> <span class="n">VariableCallable</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">py_ready_polars</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">cleaning</span><span class="p">:</span> <span class="n">CleaningDict</span> <span class="o">|</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dynamic</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">tmin</span><span class="p">:</span> <span class="n">TimeAnchorColumn</span> <span class="o">|</span> <span class="n">TimeAnchor</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tmax</span><span class="p">:</span> <span class="n">TimeAnchorColumn</span> <span class="o">|</span> <span class="n">TimeAnchor</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">requires</span><span class="p">:</span> <span class="n">RequirementsIterable</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">py</span><span class="p">:</span> <span class="n">VariableCallable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">py_ready_polars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">cleaning</span><span class="p">:</span> <span class="n">CleaningDict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_name</span> <span class="o">=</span> <span class="n">var_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span> <span class="o">=</span> <span class="n">dynamic</span>
+
+        <span class="c1"># Identity within the variable. Several contributors may share a</span>
+        <span class="c1"># var_name — the members of a concept group do — and anything filed per</span>
+        <span class="c1"># variable, such as the extraction cache, has to tell them apart.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contributor_key</span> <span class="o">=</span> <span class="n">var_name</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_window</span> <span class="o">=</span> <span class="n">TimeWindow</span><span class="p">(</span><span class="n">tmin</span><span class="o">=</span><span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="n">tmax</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">requires</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">requires</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">r</span><span class="p">:</span> <span class="p">{</span><span class="s2">"template"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"tmin"</span><span class="p">:</span> <span class="n">INHERIT</span><span class="p">,</span> <span class="s2">"tmax"</span><span class="p">:</span> <span class="n">INHERIT</span><span class="p">}</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">requires</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_vars</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">py</span> <span class="o">=</span> <span class="n">py</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">py_ready_polars</span> <span class="o">=</span> <span class="n">py_ready_polars</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning</span> <span class="o">=</span> <span class="n">cleaning</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">guessed_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">guess_variable_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_dependency_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Sources a dependency of this variable is looked up in.</span>
+
+<span class="sd">        A variable that belongs to one of the cohort's configured sources keeps</span>
+<span class="sd">        its dependencies inside that source. One that does not — above all the</span>
+<span class="sd">        source-agnostic aggregation classes of ``local_datasource``, constructed</span>
+<span class="sd">        by hand over a cohort built from other sources — lets them resolve</span>
+<span class="sd">        across every source the cohort was configured with.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cohort (Cohort): Cohort whose configured sources decide the scope.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[str] | None: The single source to restrict the lookup to, or</span>
+<span class="sd">            ``None`` for all of the cohort's sources.</span>
+<span class="sd">        """</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">guessed_source</span>
+        <span class="n">configured</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="s2">"sources"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">configured</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">source</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Variable.from_time_window">
+<a class="viewcode-back" href="../../../../api/core.html#corr_vars.core.variable.Variable.from_time_window">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_time_window</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variable</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">"tmin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_window</span><span class="o">.</span><span class="n">tmin</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">"tmax"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_window</span><span class="o">.</span><span class="n">tmax</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Variable.extract">
+<a class="viewcode-back" href="../../../../api/core.html#corr_vars.core.variable.Variable.extract">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Extracts data from the datasource. Usually follows this pattern.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            # Load &amp; Extract required variables</span>
+<span class="sd">            self._get_required_vars(cohort)</span>
+
+<span class="sd">            # This should change self.data either by returning or side effect</span>
+<span class="sd">            self.data = self._custom_extraction(cohort)</span>
+
+<span class="sd">            # Calls variable function to transform extracted data</span>
+<span class="sd">            self._call_var_function(cohort)</span>
+
+<span class="sd">            if self.dynamic:</span>
+<span class="sd">                self._add_time_window(cohort)</span>
+<span class="sd">                # Expects case_tmin, case_tmax for each primary key</span>
+<span class="sd">                self._timefilter()</span>
+<span class="sd">                self._apply_cleaning()</span>
+<span class="sd">        """</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_required_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Load required variables for this variable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cohort (Cohort): The cohort instance to load variables from.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None: Sets self.required_vars with loaded Variable objects.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span><span class="s2">"No dependencies loaded for '</span><span class="si">{var_name}</span><span class="s2">'."</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_name</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Print dependency tree before extraction</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span><span class="s2">"Loading dependencies for '</span><span class="si">{var_name}</span><span class="s2">':"</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_name</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">log_collection</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">save_as</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">var_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"template"</span><span class="p">]</span>
+
+            <span class="n">include_sources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dependency_sources</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+
+            <span class="c1"># "inherit" (optionally with a delta) -&gt; parent's window; otherwise</span>
+            <span class="c1"># the configured anchor, or None (TimeWindow fills</span>
+            <span class="c1"># datetime.min / datetime.max -&gt; unbounded).</span>
+            <span class="n">tmin</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">resolve_time_anchor</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"tmin"</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_window</span><span class="o">.</span><span class="n">tmin</span><span class="p">)</span>
+            <span class="n">tmax</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">resolve_time_anchor</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"tmax"</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_window</span><span class="o">.</span><span class="n">tmax</span><span class="p">)</span>
+
+            <span class="c1"># Any remaining key overrides that field of the required variable's own</span>
+            <span class="c1"># vars.json entry, for this requirement only (e.g. screened_obs_level).</span>
+            <span class="n">overrides</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"template"</span><span class="p">,</span> <span class="s2">"tmin"</span><span class="p">,</span> <span class="s2">"tmax"</span><span class="p">)</span>
+            <span class="p">}</span>
+
+            <span class="n">var</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">load_variable</span><span class="p">(</span>
+                <span class="n">variable</span><span class="o">=</span><span class="p">(</span>
+                    <span class="n">var_name</span><span class="p">,</span>
+                    <span class="n">TimeWindow</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">),</span>
+                <span class="p">),</span>
+                <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span>
+                <span class="n">overrides</span><span class="o">=</span><span class="n">overrides</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">required_vars</span><span class="p">[</span><span class="n">save_as</span><span class="p">]</span> <span class="o">=</span> <span class="n">ExtractedVariable</span><span class="p">(</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">dynamic</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_call_var_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Call the variable function if it exists.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cohort (Cohort)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the function was called, False otherwise.</span>
+<span class="sd">            Operations are applied to Variable.data directly.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">py</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span>
+                    <span class="s2">"Variable function not called for </span><span class="si">{var_name}</span><span class="s2">"</span><span class="p">,</span>
+                    <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">py_func_step</span> <span class="o">=</span> <span class="n">PyFuncStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">py_ready_polars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">py_ready_polars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">py_func_step</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">required_vars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">required_vars</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add_time_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">join_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Adds tmin / tmax / join key / primary key from cohort.obs to self.data.</span>
+
+<span class="sd">        This might duplicate data if the join_key (default: cohort.primary_key) is not unique in obs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cohort (Cohort): The cohort instance containing time constraint information.</span>
+<span class="sd">            join_key (str | None): Whether to apply filtering even if case_tmin/case_tmax columns don't exist (default: cohort.primary_key if set to None).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None: Modifies self.data to add tmin / tmax / join key / primary key columns.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">"_add_time_window was called before extraction, skipping."</span><span class="p">,</span> <span class="ne">UserWarning</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">time_filter_step</span> <span class="o">=</span> <span class="n">TimeFilterStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_window</span><span class="p">,</span> <span class="n">join_key</span><span class="o">=</span><span class="n">join_key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">time_filter_step</span><span class="o">.</span><span class="n">add_window_columns</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cohort</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_timefilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Apply time-based filtering to variable data based on tmin/tmax constraints."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">"_timefilter was called before extraction, skipping."</span><span class="p">,</span> <span class="ne">UserWarning</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">time_filter_step</span> <span class="o">=</span> <span class="n">TimeFilterStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_window</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">time_filter_step</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_apply_cleaning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Apply cleaning rules to filter out invalid values.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the data was cleaned,</span>
+<span class="sd">            False otherwise.</span>
+
+<span class="sd">            Operations will be applied to Variable.data directly.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">"_apply_cleaning was called before extraction, skipping."</span><span class="p">,</span> <span class="ne">UserWarning</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">cleaning_step</span> <span class="o">=</span> <span class="n">CleaningStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleaning</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_name</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">applied</span> <span class="o">=</span> <span class="n">cleaning_step</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">applied</span>
+
+    <span class="c1"># System methods</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span><span class="se">\</span>
+<span class="s2">            Variable: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="s2">"dynamic"</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">"static"</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">            ├── time_window: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_window</span><span class="si">}</span>
+<span class="s2">            └── data: </span><span class="si">{</span><span class="s2">"Not extracted"</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span>
+<span class="s2">            """</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

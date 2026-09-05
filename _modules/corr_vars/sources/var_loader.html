@@ -1,0 +1,1504 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>corr_vars.sources.var_loader &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=ce394494"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/corr_vars/sources/var_loader';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../../../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2F_modules/corr_vars/sources/var_loader.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for corr_vars.sources.var_loader</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars.selectors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cs</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">corr_vars.sources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">corr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">__</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.concepts.spec</span><span class="w"> </span><span class="kn">import</span> <span class="n">contributor_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">COL_ORDER</span><span class="p">,</span> <span class="n">DYN_COLUMNS</span><span class="p">,</span> <span class="n">PRIMARY_KEYS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ConceptsApiError</span><span class="p">,</span>
+    <span class="n">ObsLevelNotSupportedError</span><span class="p">,</span>
+    <span class="n">VariableNotFoundError</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeAnchor</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.concepts.resolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConceptResolver</span><span class="p">,</span> <span class="n">ResolvedConcept</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.concepts.spec</span><span class="w"> </span><span class="kn">import</span> <span class="n">VariableSpec</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.core.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">ObsLevel</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.utils.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeWindow</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">MutableMapping</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.definitions.typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">ObsLevelName</span><span class="p">,</span>
+        <span class="n">VariableLoaderProtocol</span><span class="p">,</span>
+        <span class="n">VariableProtocol</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># MultiSourceVariable with pre and post-processors</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_primary_key</span><span class="p">(</span><span class="n">var_df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">primary_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Validate that the primary key is known and present in the variable DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_df (pl.DataFrame): The variable data to validate.</span>
+<span class="sd">        primary_key (str): The primary key column name.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the primary key is not in `PRIMARY_KEYS` or absent from `var_df`.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">primary_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PRIMARY_KEYS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Primary key </span><span class="si">{</span><span class="n">primary_key</span><span class="si">}</span><span class="s2"> must be one of </span><span class="si">{</span><span class="n">PRIMARY_KEYS</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">primary_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">var_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Primary key </span><span class="si">{</span><span class="n">primary_key</span><span class="si">}</span><span class="s2"> not in data columns."</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_relative_times</span><span class="p">(</span>
+    <span class="n">reference_df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">var_df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">reference_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">join_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"_relative"</span><span class="p">,</span>
+    <span class="n">include_time_cols</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Add relative time columns to dynamic variable data.</span>
+
+<span class="sd">    For each temporal column in `var_df` (optionally restricted to</span>
+<span class="sd">    `include_time_cols`), computes the signed difference from `reference_col`</span>
+<span class="sd">    in seconds and appends the result as a new column with `suffix` appended to</span>
+<span class="sd">    the original column name. The reference column is dropped from the result.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_df (pl.DataFrame): DataFrame containing the reference time column.</span>
+<span class="sd">        var_df (pl.DataFrame): DataFrame containing the variable data.</span>
+<span class="sd">        reference_col (str): Column in `reference_df` holding the reference timestamp.</span>
+<span class="sd">        join_col (str): Column used to join `reference_df` onto `var_df`.</span>
+<span class="sd">        suffix (str): Suffix appended to each relative-time column name. Defaults to</span>
+<span class="sd">            `"_relative"`.</span>
+<span class="sd">        include_time_cols (Collection[str] | None): Restrict relative-time computation</span>
+<span class="sd">            to these temporal columns. All temporal columns are used when `None`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pl.DataFrame: `var_df` with relative time columns added and `reference_col` dropped.</span>
+<span class="sd">    """</span>
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">var_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">reference_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">join_col</span><span class="p">,</span> <span class="n">reference_col</span><span class="p">),</span>
+        <span class="n">on</span><span class="o">=</span><span class="n">join_col</span><span class="p">,</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">temporal</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">include_time_cols</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">selector</span> <span class="o">&amp;=</span> <span class="n">cs</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="n">include_time_cols</span><span class="p">,</span> <span class="n">require_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">var_df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+        <span class="n">selector</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">time_difference</span><span class="p">,</span>
+            <span class="n">reference_col</span><span class="o">=</span><span class="n">reference_col</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span>
+            <span class="n">total</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">suffix</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Drop the reference time column</span>
+    <span class="k">return</span> <span class="n">var_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">reference_col</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">unify_and_order_columns</span><span class="p">(</span><span class="n">var_df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Enforce `COL_ORDER` and fill missing dynamic columns with null.</span>
+
+<span class="sd">    Columns outside `COL_ORDER` that are not in `DYN_COLUMNS` trigger a</span>
+<span class="sd">    deprecation warning and are appended after the ordered columns until the</span>
+<span class="sd">    `attributes` migration is complete.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_df (pl.DataFrame): The variable DataFrame to standardize.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pl.DataFrame: `var_df` with columns reordered and missing dynamic columns added as null.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Add missing dynamic columns (no keys) with null values</span>
+    <span class="n">missing_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">DYN_COLUMNS</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">var_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing_cols</span><span class="p">:</span>
+        <span class="n">var_df</span> <span class="o">=</span> <span class="n">var_df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">missing_cols</span><span class="p">)</span>
+
+    <span class="c1"># Order columns according to COL_ORDER, then add remaining columns</span>
+    <span class="n">data_cols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">var_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">ordered_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">COL_ORDER</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data_cols</span><span class="p">]</span>
+    <span class="n">remaining_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data_cols</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COL_ORDER</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remaining_cols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">"🚨 DEPRECATION ALERT 🚨</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="s2">"Unknown columns found.</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="s2">"- Please update the variable definition to move these to attributes.</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="s2">"- Unknown columns are no longer supported and might be deprecated soon!</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="s2">"- Columns: "</span> <span class="o">+</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">remaining_cols</span><span class="p">),</span>
+            <span class="ne">UserWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">var_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">ordered_cols</span> <span class="o">+</span> <span class="n">remaining_cols</span><span class="p">)</span>
+
+    <span class="c1"># Uncomment after user warning</span>
+    <span class="c1"># var_df = var_df.select(ordered_cols)</span>
+    <span class="k">return</span> <span class="n">var_df</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiSourceVariable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Holds one :class:`~corr_vars.definitions.typing.VariableProtocol` per contributor</span>
+<span class="sd">    and extracts, post-validates, and post-processes each before concatenating the results.</span>
+
+<span class="sd">    A contributor is normally one data source. A variable whose name resolves to</span>
+<span class="sd">    a group of concepts has one contributor per source and group member, keyed by</span>
+<span class="sd">    :func:`~corr_vars.concepts.spec.contributor_key`; every contributor produces</span>
+<span class="sd">    the same columns and the frames are concatenated the same way.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Shared variable name across all contributors.</span>
+<span class="sd">        variables (Mapping[str, VariableProtocol]): Mapping from contributor key</span>
+<span class="sd">            to the source-specific variable implementation.</span>
+<span class="sd">    """</span>
+
+    <span class="n">variables</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">VariableProtocol</span><span class="p">]</span>
+
+    <span class="n">data</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span>
+
+    <span class="n">_var_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">_dynamic</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">_time_window</span><span class="p">:</span> <span class="n">TimeWindow</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">VariableProtocol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_validate</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pre_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No variables to concatenate"</span><span class="p">)</span>
+
+        <span class="c1"># Assign dynamic, tmin and tmax after veryfing variables is not empty</span>
+        <span class="n">first_variable</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span> <span class="o">=</span> <span class="n">first_variable</span><span class="o">.</span><span class="n">var_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dynamic</span> <span class="o">=</span> <span class="n">first_variable</span><span class="o">.</span><span class="n">dynamic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_window</span> <span class="o">=</span> <span class="n">first_variable</span><span class="o">.</span><span class="n">time_window</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">var_name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span>
+            <span class="p">),</span> <span class="sa">f</span><span class="s2">"Variable name mismatch for </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dynamic</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamic</span>
+            <span class="p">),</span> <span class="sa">f</span><span class="s2">"Dynamic status mismatch for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">dynamic</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_dynamic</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">time_window</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_window</span>
+            <span class="p">),</span> <span class="sa">f</span><span class="s2">"Timebound mismatch for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">time_window</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_window</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">with_source_column</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">var_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="c1"># Extract and validate data</span>
+            <span class="n">extracted</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_post_validate</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="n">extracted</span><span class="p">)</span>
+
+            <span class="c1"># Transform Data</span>
+            <span class="n">extracted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_process</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="n">extracted</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">with_source_column</span><span class="p">:</span>
+                <span class="n">extracted</span> <span class="o">=</span> <span class="n">extracted</span><span class="o">.</span><span class="n">insert_column</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"data_source"</span><span class="p">))</span>
+
+            <span class="c1"># Add to list</span>
+            <span class="n">var_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extracted</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span>
+                    <span class="s2">"SUCCESS: Extracted </span><span class="si">{var_name}</span><span class="s2"> from </span><span class="si">{key}</span><span class="s2">"</span><span class="p">,</span>
+                    <span class="n">var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span><span class="p">,</span>
+                    <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Concatenate data</span>
+        <span class="n">combined_data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">var_data</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"diagonal_relaxed"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">combined_data</span>
+        <span class="k">return</span> <span class="n">combined_data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_post_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">var_data</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">var_data</span>
+
+        <span class="n">processed</span> <span class="o">=</span> <span class="n">var_data</span>
+        <span class="n">include_time_cols</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"recordtime"</span><span class="p">,</span> <span class="s2">"recordtime_end"</span><span class="p">)</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="s2">"_relative"</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">frozenset</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">include_time_cols</span><span class="p">)</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span>
+            <span class="nb">frozenset</span><span class="p">(</span><span class="n">var_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">processed</span> <span class="o">=</span> <span class="n">add_relative_times</span><span class="p">(</span>
+                <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">,</span>
+                <span class="n">processed</span><span class="p">,</span>
+                <span class="n">reference_col</span><span class="o">=</span><span class="n">cohort</span><span class="o">.</span><span class="n">t_min</span><span class="p">,</span>
+                <span class="n">join_col</span><span class="o">=</span><span class="n">cohort</span><span class="o">.</span><span class="n">primary_key</span><span class="p">,</span>
+                <span class="n">suffix</span><span class="o">=</span><span class="n">suffix</span><span class="p">,</span>
+                <span class="n">include_time_cols</span><span class="o">=</span><span class="n">include_time_cols</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">unify_and_order_columns</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_post_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">var_data</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">validate_primary_key</span><span class="p">(</span><span class="n">var_data</span><span class="p">,</span> <span class="n">cohort</span><span class="o">.</span><span class="n">primary_key</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">var_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span>
+
+    <span class="nd">@var_name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">var_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Cannot set var_name"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamic</span>
+
+    <span class="nd">@dynamic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Cannot set dynamic"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">time_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TimeWindow</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_window</span>
+
+    <span class="nd">@time_window</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">time_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot set time_window"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"MultiSourceVariable(var_name='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_name</span><span class="si">}</span><span class="s2">', "</span>
+            <span class="sa">f</span><span class="s2">"dynamic=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_dynamic</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"time_window=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_window</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"contributors=</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"extracted=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># load_raw_variable_configs -&gt; dict[str, dict[str, object]]</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="c1">#: Placeholder configuration used for a variable that is only known by name,</span>
+<span class="c1">#: because its definition lives behind a Concepts API endpoint rather than in a</span>
+<span class="c1">#: bundled ``vars.json``. The search widget renders whatever dict it is given,</span>
+<span class="c1">#: so an empty one would show a name with a blank body; this says why.</span>
+<span class="n">API_ROUTED_PLACEHOLDER_CONFIG</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"source"</span><span class="p">:</span> <span class="s2">"concepts-api"</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_raw_variable_configs</span><span class="p">(</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">resolver</span><span class="p">:</span> <span class="n">ConceptResolver</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">"""Collect the searchable variable configs of every source.</span>
+
+<span class="sd">    Two kinds of source are collected:</span>
+
+<span class="sd">    - A source with a local ``VARS`` dict contributes its full ``vars.json``</span>
+<span class="sd">      ``variables`` mapping, as before.</span>
+<span class="sd">    - A source routed to a Concepts API endpoint has no local definitions at</span>
+<span class="sd">      all. When a `resolver` is given, its variable *names* are listed from the</span>
+<span class="sd">      endpoint so the search widget can still find them; each name maps to</span>
+<span class="sd">      :data:`API_ROUTED_PLACEHOLDER_CONFIG` instead of a definition. Without a</span>
+<span class="sd">      resolver, or when the endpoint cannot be reached, the source is skipped</span>
+<span class="sd">      — the search widget is a convenience and must never raise.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        include_sources (Iterable[str] | None): Restrict the lookup to these sources.</span>
+<span class="sd">            All discovered sources are searched when `None`.</span>
+<span class="sd">        resolver (ConceptResolver | None): The cohort's concept resolver, used to</span>
+<span class="sd">            list the names of API-routed sources. When `None`, sources without a</span>
+<span class="sd">            local ``VARS`` are skipped.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, dict[str, dict[str, object]]]: Mapping from source name to its</span>
+<span class="sd">        raw variable config dict. Sources that contribute nothing are absent.</span>
+<span class="sd">    """</span>
+    <span class="n">var_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">src_mapping_module</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">get_src_module_mapping</span><span class="p">(</span>
+        <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span> <span class="n">submodule</span><span class="o">=</span><span class="s2">"mapping"</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">src_VARS</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">src_mapping_module</span><span class="p">,</span> <span class="s2">"VARS"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">src_VARS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">var_dict</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="n">src_VARS</span><span class="p">[</span><span class="s2">"variables"</span><span class="p">]</span>
+            <span class="k">continue</span>
+
+        <span class="n">names</span> <span class="o">=</span> <span class="n">_list_remote_variable_names</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">resolver</span><span class="o">=</span><span class="n">resolver</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">var_dict</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">name</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">API_ROUTED_PLACEHOLDER_CONFIG</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+            <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">var_dict</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_list_remote_variable_names</span><span class="p">(</span>
+    <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">resolver</span><span class="p">:</span> <span class="n">ConceptResolver</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""List the variable names an API-routed source publishes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        src (str): Source name, known to have no local ``VARS``.</span>
+<span class="sd">        resolver (ConceptResolver | None): The cohort's concept resolver. Without</span>
+<span class="sd">            one there is nothing to ask, and the source yields no names.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: Fully-qualified concept names, or an empty list when the</span>
+<span class="sd">        source is not remote, no resolver was given, or the endpoint could not</span>
+<span class="sd">        be reached.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">resolver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"Source </span><span class="si">{src}</span><span class="s2"> ships no local variable definitions and no concept "</span>
+                <span class="s2">"resolver was given, so its variables are not listed."</span><span class="p">,</span>
+                <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resolver</span><span class="o">.</span><span class="n">is_remote</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"Source </span><span class="si">{src}</span><span class="s2"> ships no local variable definitions and is not routed "</span>
+                <span class="s2">"to a Concepts API endpoint, so its variables are not listed."</span><span class="p">,</span>
+                <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="n">client_for</span><span class="p">(</span><span class="n">resolver</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="n">src</span><span class="p">))</span>  <span class="c1"># type: ignore[arg-type]</span>
+        <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">list_concept_names</span><span class="p">(</span><span class="n">resolver</span><span class="o">.</span><span class="n">default_taxonomy</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">src</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ConceptsApiError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"Could not list the variable names of source </span><span class="si">{src}</span><span class="s2"> from the Concepts "</span>
+                <span class="s2">"API (</span><span class="si">{error}</span><span class="s2">); it is left out of the search widget."</span><span class="p">,</span>
+                <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span>
+                <span class="n">error</span><span class="o">=</span><span class="n">exc</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># _load_variable_configs -&gt; dict[str, dict[str, object]]</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_collect_local_variable_config</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Read the `vars.json` entry for `var_name` from the sources' `mapping` modules.</span>
+
+<span class="sd">    Also resolves the `py` callable from `mapping/variables.py` and injects it</span>
+<span class="sd">    into the returned config dict under the `"py"` key when a matching function exists.</span>
+
+<span class="sd">    A source routed to a Concepts API endpoint ships no local definitions at all</span>
+<span class="sd">    — its `mapping` module has no `VARS` — and is skipped here by design; its</span>
+<span class="sd">    configuration comes from :meth:`~corr_vars.concepts.resolver.ConceptResolver.fetch_configs`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable to look up.</span>
+<span class="sd">        include_sources (Iterable[str]): Sources to read from.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, dict[str, Any]]: Mapping from source name to its variable config</span>
+<span class="sd">        dict (with `"py"` injected where applicable). Sources whose `vars.json`</span>
+<span class="sd">        has no entry for `var_name`, and sources with no local definitions at</span>
+<span class="sd">        all, are absent.</span>
+<span class="sd">    """</span>
+    <span class="n">var_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">src_mapping_module</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">get_src_module_mapping</span><span class="p">(</span>
+        <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span> <span class="n">submodule</span><span class="o">=</span><span class="s2">"mapping"</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">src_VARS</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">src_mapping_module</span><span class="p">,</span> <span class="s2">"VARS"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">src_VARS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">src_VARS_variables</span> <span class="o">=</span> <span class="n">src_VARS</span><span class="p">[</span><span class="s2">"variables"</span><span class="p">]</span>
+        <span class="n">src_VARCODE</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">src_mapping_module</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">var_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">src_VARS_variables</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">src_vardict</span> <span class="o">=</span> <span class="n">src_VARS_variables</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">src_VARCODE</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">src_VARCODE</span><span class="p">,</span> <span class="n">var_name</span><span class="p">):</span>
+            <span class="n">src_vardict</span><span class="p">[</span><span class="s2">"py"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">src_VARCODE</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)</span>
+
+        <span class="n">var_dict</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="n">src_vardict</span>
+
+    <span class="k">return</span> <span class="n">var_dict</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_collect_variable_configs_by_source</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">resolver</span><span class="p">:</span> <span class="n">ConceptResolver</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">VariableSpec</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">resolutions</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ResolvedConcept</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Collect the variable configuration for `var_name` from every source.</span>
+
+<span class="sd">    This is the routing seam. Each source is resolved independently:</span>
+
+<span class="sd">    - Sources routed to a Concepts API endpoint get their definition from that</span>
+<span class="sd">      endpoint. The declarative config, the compiled ``py`` function, and the</span>
+<span class="sd">      variable's attached data files all come from there, and there is **no**</span>
+<span class="sd">      fallback to the bundled ``vars.json`` — a cohort assembled from a stale</span>
+<span class="sd">      local definition while recording a remote version number would misdescribe</span>
+<span class="sd">      its own data.</span>
+<span class="sd">    - Sources routed to local (pinned or unmatched, and every source when no</span>
+<span class="sd">      `resolver` is given) behave exactly as before: the entry is read from the</span>
+<span class="sd">      source's ``mapping`` module and the matching ``variables.py`` function is</span>
+<span class="sd">      injected as ``py``.</span>
+
+<span class="sd">    Keys are contributor keys (see</span>
+<span class="sd">    :func:`~corr_vars.concepts.spec.contributor_key`): a plain source name, or</span>
+<span class="sd">    ``source#concept_id`` for one member of a group the name resolved to.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable to look up.</span>
+<span class="sd">        include_sources (Iterable[str] | None): Restrict the lookup to these sources.</span>
+<span class="sd">            All discovered sources are searched when `None`.</span>
+<span class="sd">        resolver (ConceptResolver | None): The cohort's concept resolver. When</span>
+<span class="sd">            `None`, every source is treated as local.</span>
+<span class="sd">        spec (VariableSpec | None): The resolved variable reference, deciding</span>
+<span class="sd">            which taxonomy and version the API serves. Defaults to the resolver's</span>
+<span class="sd">            cohort-wide default for `var_name`.</span>
+<span class="sd">        resolutions (MutableMapping[str, ResolvedConcept] | None): Optional</span>
+<span class="sd">            mapping that receives the provenance record for each contributor</span>
+<span class="sd">            that supplied a configuration.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, dict[str, object]]: Mapping from contributor key to its</span>
+<span class="sd">        variable config dict (with `"py"` resolved where applicable).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AmbiguousConceptError: If a version-pinned `spec` names a group.</span>
+<span class="sd">        ConceptsApiError: If an API-routed source could not be served.</span>
+<span class="sd">    """</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="n">corr</span><span class="o">.</span><span class="n">SOURCES</span> <span class="k">if</span> <span class="n">include_sources</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">include_sources</span>  <span class="c1"># type: ignore[arg-type]</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">resolver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">var_dict</span> <span class="o">=</span> <span class="n">_collect_local_variable_config</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">sources</span><span class="p">)</span>
+        <span class="n">_record_local_resolutions</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">var_dict</span><span class="p">,</span> <span class="n">resolutions</span><span class="o">=</span><span class="n">resolutions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">var_dict</span>  <span class="c1"># type: ignore[return-value]</span>
+
+    <span class="n">local_sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">src</span> <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sources</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">resolver</span><span class="o">.</span><span class="n">is_remote</span><span class="p">(</span><span class="n">src</span><span class="p">)]</span>
+    <span class="n">remote_sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">src</span> <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sources</span> <span class="k">if</span> <span class="n">resolver</span><span class="o">.</span><span class="n">is_remote</span><span class="p">(</span><span class="n">src</span><span class="p">)]</span>
+
+    <span class="n">var_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">_collect_local_variable_config</span><span class="p">(</span>
+        <span class="n">var_name</span><span class="p">,</span> <span class="n">local_sources</span>
+    <span class="p">)</span>
+    <span class="n">_record_local_resolutions</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">var_dict</span><span class="p">,</span> <span class="n">resolutions</span><span class="o">=</span><span class="n">resolutions</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remote_sources</span><span class="p">:</span>
+        <span class="n">resolved_spec</span> <span class="o">=</span> <span class="n">spec</span> <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">resolver</span><span class="o">.</span><span class="n">default_spec</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">fetched</span> <span class="ow">in</span> <span class="n">resolver</span><span class="o">.</span><span class="n">fetch_configs</span><span class="p">(</span>
+            <span class="n">resolved_spec</span><span class="p">,</span> <span class="n">remote_sources</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">var_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">fetched</span><span class="o">.</span><span class="n">config</span>
+            <span class="k">if</span> <span class="n">resolutions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">resolutions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">fetched</span><span class="o">.</span><span class="n">resolution</span>
+
+    <span class="k">return</span> <span class="n">var_dict</span>  <span class="c1"># type: ignore[return-value]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_record_local_resolutions</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">var_dict</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">resolutions</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ResolvedConcept</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Record a provenance entry for every locally resolved source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable.</span>
+<span class="sd">        var_dict (Mapping[str, dict[str, Any]]): Configs collected locally.</span>
+<span class="sd">        resolutions (MutableMapping[str, ResolvedConcept] | None): Mapping that</span>
+<span class="sd">            receives the records; nothing happens when `None`.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">resolutions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.concepts.resolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResolvedConcept</span>
+
+    <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">var_dict</span><span class="p">:</span>
+        <span class="n">resolutions</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="n">ResolvedConcept</span><span class="p">(</span>
+            <span class="n">taxonomy</span><span class="o">=</span><span class="s2">"local"</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">src</span><span class="p">,</span>
+            <span class="n">origin</span><span class="o">=</span><span class="s2">"local"</span><span class="p">,</span>
+            <span class="n">requested</span><span class="o">=</span><span class="s2">"local"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_expand_override_to_contributors</span><span class="p">(</span>
+    <span class="n">override</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">variable_configs_by_source</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Spread a per-source override across that source's contributors.</span>
+
+<span class="sd">    Overrides are declared per source. When a grouped name gave a source several</span>
+<span class="sd">    contributors, the override applies to each of them, so a project-local tweak</span>
+<span class="sd">    reaches every member of the group. An override for a source that supplied no</span>
+<span class="sd">    configuration is kept under the bare source name, which is what lets a purely</span>
+<span class="sd">    project-local variable definition introduce a source of its own.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        override (Mapping[str, dict[str, Any]]): Overrides keyed by source name.</span>
+<span class="sd">        variable_configs_by_source (Mapping[str, dict[str, Any]]): Configs keyed</span>
+<span class="sd">            by contributor key.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, dict[str, Any]]: The overrides keyed by contributor key.</span>
+<span class="sd">    """</span>
+    <span class="n">contributors</span> <span class="o">=</span> <span class="p">{</span><span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">variable_configs_by_source</span><span class="p">}</span>
+    <span class="n">expanded</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">override</span><span class="p">[</span><span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">variable_configs_by_source</span>
+        <span class="k">if</span> <span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="n">override</span>
+    <span class="p">}</span>
+    <span class="n">expanded</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">src</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">override</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">src</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">contributors</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">expanded</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_load_variable_configs</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">VariableSpec</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Load and merge variable configurations for all requested sources.</span>
+
+<span class="sd">    Retrieves the config for `var_name` via</span>
+<span class="sd">    :func:`_collect_variable_configs_by_source` — per source, from the Concepts</span>
+<span class="sd">    API or from the bundled ``mapping`` module — then overlays any project-local</span>
+<span class="sd">    overrides from :meth:`~corr_vars.core.cohort.Cohort.get_variable_definition`.</span>
+<span class="sd">    Project-local overrides layer on top of API-fetched configs exactly as they</span>
+<span class="sd">    do on top of local ones.</span>
+
+<span class="sd">    The resolved ``(taxonomy, name, version)`` of each contributing source is</span>
+<span class="sd">    recorded on the cohort, so :meth:`~corr_vars.core.cohort.Cohort.save` can</span>
+<span class="sd">    persist what the cohort was built from.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable to load configuration for.</span>
+<span class="sd">        cohort (Cohort): Cohort whose resolver and project overrides are applied.</span>
+<span class="sd">        include_sources (Iterable[str] | None): Sources to consider.</span>
+<span class="sd">            All sources are used when `None`.</span>
+<span class="sd">        spec (VariableSpec | None): The resolved variable reference. Defaults to</span>
+<span class="sd">            the cohort-wide default for `var_name`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, dict[str, object]]: Merged per-source variable configuration mapping.</span>
+<span class="sd">    """</span>
+
+    <span class="n">resolutions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ResolvedConcept</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Get variable configuration for each source defined in cohort</span>
+    <span class="n">variable_configs_by_source</span> <span class="o">=</span> <span class="n">_collect_variable_configs_by_source</span><span class="p">(</span>
+        <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+        <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span>
+        <span class="n">resolver</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="s2">"concepts"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span>
+        <span class="n">resolutions</span><span class="o">=</span><span class="n">resolutions</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">resolutions</span><span class="p">:</span>
+        <span class="n">cohort</span><span class="o">.</span><span class="n">_record_concept_versions</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">resolutions</span><span class="p">)</span>
+
+    <span class="c1"># Apply project specific overrides</span>
+    <span class="n">override</span> <span class="o">=</span> <span class="n">_expand_override_to_contributors</span><span class="p">(</span>
+        <span class="n">cohort</span><span class="o">.</span><span class="n">get_variable_definition</span><span class="p">(</span><span class="n">var_name</span><span class="p">),</span> <span class="n">variable_configs_by_source</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">deep_merge</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">variable_configs_by_source</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="n">override</span><span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># load_variable -&gt; MultiSourceVariable</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_transfer_time_window_from_variable_config</span><span class="p">(</span>
+    <span class="n">variable_configs_by_source</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]],</span> <span class="n">TimeWindow</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Extract `tmin`/`tmax` overrides from source configs into the time window.</span>
+
+<span class="sd">    If any source config contains a `"tmin"` or `"tmax"` key, those values are</span>
+<span class="sd">    popped from the config and written to a copy of `time_window`, overriding whatever</span>
+<span class="sd">    was passed in. A warning is logged for each override.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        variable_configs_by_source (dict[str, dict[str, Any]]): Per-source config dicts.</span>
+<span class="sd">        time_window (TimeWindow): The original time window.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[dict[str, dict[str, object]], TimeWindow]: Deep copies of the config dict</span>
+<span class="sd">        and time window, updated with any embedded overrides.</span>
+<span class="sd">    """</span>
+    <span class="n">time_window_cp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">time_window</span><span class="p">)</span>
+    <span class="n">variable_configs_by_source_cp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">variable_configs_by_source</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">var_config</span> <span class="ow">in</span> <span class="n">variable_configs_by_source_cp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s2">"tmin"</span> <span class="ow">in</span> <span class="n">var_config</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span>
+                    <span class="s2">"For this variable tmin is already frozen to </span><span class="si">{tmin}</span><span class="s2">. Any other tmin will be ignored."</span><span class="p">,</span>
+                    <span class="n">tmin</span><span class="o">=</span><span class="n">var_config</span><span class="p">[</span><span class="s2">"tmin"</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">tmin</span> <span class="o">=</span> <span class="n">var_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"tmin"</span><span class="p">)</span>
+            <span class="n">time_window_cp</span><span class="o">.</span><span class="n">tmin</span> <span class="o">=</span> <span class="n">TimeAnchor</span><span class="p">(</span><span class="n">tmin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">"tmax"</span> <span class="ow">in</span> <span class="n">var_config</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span>
+                    <span class="s2">"For this variable tmax is already frozen to </span><span class="si">{tmax}</span><span class="s2">. Any other tmax will be ignored."</span><span class="p">,</span>
+                    <span class="n">tmax</span><span class="o">=</span><span class="n">var_config</span><span class="p">[</span><span class="s2">"tmax"</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">tmax</span> <span class="o">=</span> <span class="n">var_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"tmax"</span><span class="p">)</span>
+            <span class="n">time_window_cp</span><span class="o">.</span><span class="n">tmax</span> <span class="o">=</span> <span class="n">TimeAnchor</span><span class="p">(</span><span class="n">tmax</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">variable_configs_by_source_cp</span><span class="p">,</span> <span class="n">time_window_cp</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_ensure_compatibility</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variable_configs_by_source</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">obs_level</span><span class="p">:</span> <span class="n">ObsLevel</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Raise if `var_name` is incompatible with the cohort's observation level.</span>
+
+<span class="sd">    Pops `"compatible_with"` from each source config dict (mutates in-place) and</span>
+<span class="sd">    raises :exc:`~corr_vars.definitions.exceptions.ObsLevelNotSupportedError` if the</span>
+<span class="sd">    cohort's obs level is not listed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Variable name (used in the error message).</span>
+<span class="sd">        variable_configs_by_source (dict[str, dict[str, Any]]): Per-source config dicts.</span>
+<span class="sd">        obs_level (ObsLevel): The cohort's current observation level.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ObsLevelNotSupportedError: If `obs_level` is not in `compatible_with`.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">var_config</span> <span class="ow">in</span> <span class="n">variable_configs_by_source</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s2">"compatible_with"</span> <span class="ow">in</span> <span class="n">var_config</span><span class="p">:</span>
+            <span class="n">compatible_obs_level</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ObsLevelName</span><span class="p">]</span> <span class="o">=</span> <span class="n">var_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"compatible_with"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">obs_level</span><span class="o">.</span><span class="n">lower_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">compatible_obs_level</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ObsLevelNotSupportedError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Obs level </span><span class="si">{</span><span class="n">obs_level</span><span class="o">.</span><span class="n">lower_name</span><span class="si">}</span><span class="s2"> is not compatible with </span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2">"</span>
+                <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_variable_loader_args_kwargs</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+    <span class="n">var_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Log the arguments that will be passed to a source's `VariableLoader`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Variable name being created.</span>
+<span class="sd">        time_window (TimeWindow): Time window used for extraction.</span>
+<span class="sd">        var_config (dict[str, object]): Keyword arguments forwarded to the loader.</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="s2">"Creating variable </span><span class="si">{var_name}</span><span class="s2"> with:"</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">))</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">"└──"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">var_config</span> <span class="k">else</span> <span class="s2">"├──"</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="n">__</span><span class="p">(</span>
+            <span class="s2">"</span><span class="si">{prefix}</span><span class="s2"> time_window: </span><span class="si">{time_window}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
+            <span class="n">time_window</span><span class="o">=</span><span class="n">time_window</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">var_config</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"└── kwargs:"</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">log_dict</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="n">var_config</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">json_indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_load_variables_from_config</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variable_configs_by_source</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+    <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">VariableProtocol</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Instantiate a variable for each entry in `variable_configs_by_source`.</span>
+
+<span class="sd">    For each contributor, retrieves its source's `VariableLoader` factory, calls it</span>
+<span class="sd">    with `var_name`, `time_window`, and the contributor's config dict as keyword</span>
+<span class="sd">    arguments, and stores the resulting</span>
+<span class="sd">    :class:`~corr_vars.definitions.typing.VariableProtocol` in the output mapping.</span>
+<span class="sd">    Two contributors that share a source — the members of a concept group — are</span>
+<span class="sd">    instantiated separately from the same factory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable to instantiate.</span>
+<span class="sd">        variable_configs_by_source (dict[str, dict[str, Any]]): Config dicts keyed</span>
+<span class="sd">            by contributor key, whose keys determine which contributors are visited.</span>
+<span class="sd">        cohort (Cohort): The cohort (used to skip sources not in `cohort.sources`).</span>
+<span class="sd">        time_window (TimeWindow): Time window forwarded to every `VariableLoader`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, VariableProtocol]: Mapping from contributor key to the</span>
+<span class="sd">        instantiated variable.</span>
+<span class="sd">    """</span>
+    <span class="n">src_var_mapping</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">VariableProtocol</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">src_modules</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">get_src_module_mapping</span><span class="p">(</span>
+        <span class="n">include_sources</span><span class="o">=</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span>
+            <span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">variable_configs_by_source</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Load from other sources</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">var_config</span> <span class="ow">in</span> <span class="n">variable_configs_by_source</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">contributor_source</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">src</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="n">__</span><span class="p">(</span><span class="s2">"Source </span><span class="si">{src}</span><span class="s2"> not requested in cohort. Skipping..."</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Load kwargs</span>
+        <span class="n">_log_variable_loader_args_kwargs</span><span class="p">(</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span> <span class="n">time_window</span><span class="o">=</span><span class="n">time_window</span><span class="p">,</span> <span class="n">var_config</span><span class="o">=</span><span class="n">var_config</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get VariableLoaderProtocol (adapter) to load VariableProtocol</span>
+        <span class="n">SrcVariableLoader</span><span class="p">:</span> <span class="n">VariableLoaderProtocol</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">src_modules</span><span class="p">[</span><span class="n">src</span><span class="p">],</span> <span class="s2">"VariableLoader"</span>
+        <span class="p">)</span>
+        <span class="n">SrcVariable</span><span class="p">:</span> <span class="n">VariableProtocol</span> <span class="o">=</span> <span class="n">SrcVariableLoader</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span> <span class="n">time_window</span><span class="o">=</span><span class="n">time_window</span><span class="p">,</span> <span class="o">**</span><span class="n">var_config</span>
+        <span class="p">)</span>
+        <span class="c1"># Contributors sharing a source share var_name, so anything a source</span>
+        <span class="c1"># files per variable — the extraction cache above all — needs the</span>
+        <span class="c1"># contributor key to keep them apart.</span>
+        <span class="n">SrcVariable</span><span class="o">.</span><span class="n">contributor_key</span> <span class="o">=</span> <span class="n">key</span>  <span class="c1"># type: ignore[attr-defined]</span>
+        <span class="n">src_var_mapping</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">SrcVariable</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"Variable </span><span class="si">{var_name}</span><span class="s2"> found in source </span><span class="si">{src}</span><span class="s2"> (</span><span class="si">{key}</span><span class="s2">)"</span><span class="p">,</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+                <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">src_var_mapping</span>
+
+
+<div class="viewcode-block" id="load_variable">
+<a class="viewcode-back" href="../../../api/sources.html#corr_vars.sources.var_loader.load_variable">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_variable</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span>
+    <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span><span class="p">,</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overrides</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">VariableSpec</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultiSourceVariable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Load `var_name` from all configured sources and wrap it in a :class:`MultiSourceVariable`.</span>
+
+<span class="sd">    Orchestrates config loading, project-override merging, time-window transfer,</span>
+<span class="sd">    compatibility checks, and per-source variable instantiation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): Name of the variable to load.</span>
+<span class="sd">        cohort (Cohort): Cohort that supplies source configs and project overrides.</span>
+<span class="sd">        time_window (TimeWindow): Time window for variable extraction.</span>
+<span class="sd">        include_sources (Iterable[str] | None): Restrict to these sources.</span>
+<span class="sd">            All cohort sources are used when `None`.</span>
+<span class="sd">        overrides (dict[str, Any] | None): Config fields merged onto every source's</span>
+<span class="sd">            `vars.json` entry, for this load only. Applied after the cohort's</span>
+<span class="sd">            project-local overrides, so these win.</span>
+<span class="sd">        spec (VariableSpec | None): Resolved variable reference deciding which</span>
+<span class="sd">            taxonomy and version API-routed sources serve. Defaults to the</span>
+<span class="sd">            cohort-wide default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MultiSourceVariable: Variable ready for extraction.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        VariableNotFoundError: If `var_name` is not found in any source config, or if</span>
+<span class="sd">            no source variable could be instantiated.</span>
+<span class="sd">        AmbiguousConceptError: If `spec` pins a version and the name resolves to a</span>
+<span class="sd">            group of concepts.</span>
+<span class="sd">        ConceptsApiError: If an API-routed source could not be served.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Get lookup sources</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">include_sources</span> <span class="ow">or</span> <span class="n">cohort</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="c1"># Get variable configuration for each source defined in cohort</span>
+    <span class="n">variable_configs_by_source</span> <span class="o">=</span> <span class="n">_load_variable_configs</span><span class="p">(</span>
+        <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span> <span class="n">cohort</span><span class="o">=</span><span class="n">cohort</span><span class="p">,</span> <span class="n">include_sources</span><span class="o">=</span><span class="n">sources</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="n">spec</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Raise error if no source was found</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">variable_configs_by_source</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span>
+            <span class="n">_variable_not_found_message</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">cohort</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Per-load overrides win over the vars.json entry and the project-local overrides.</span>
+    <span class="k">if</span> <span class="n">overrides</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="n">__</span><span class="p">(</span>
+                <span class="s2">"Applying per-load overrides to </span><span class="si">{var_name}</span><span class="s2">:"</span><span class="p">,</span>
+                <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">log_dict</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">overrides</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+        <span class="n">variable_configs_by_source</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">deep_merge</span><span class="p">(</span>
+            <span class="n">base</span><span class="o">=</span><span class="n">variable_configs_by_source</span><span class="p">,</span>
+            <span class="n">override</span><span class="o">=</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">variable_configs_by_source</span><span class="p">,</span> <span class="n">overrides</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Debug logging</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="s2">"Loaded config for </span><span class="si">{var_name}</span><span class="s2">:"</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">))</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">log_dict</span><span class="p">(</span>
+        <span class="n">logger</span><span class="p">,</span> <span class="n">variable_configs_by_source</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">json_indent</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Transfers "tmin", "tmax" from dict to time_window (pops from config; overrides time_window)</span>
+    <span class="p">(</span>
+        <span class="n">variable_configs_by_source</span><span class="p">,</span>
+        <span class="n">time_window</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_transfer_time_window_from_variable_config</span><span class="p">(</span>
+        <span class="n">variable_configs_by_source</span><span class="p">,</span> <span class="n">time_window</span>
+    <span class="p">)</span>
+
+    <span class="c1"># STOP if not compatible with obs level</span>
+    <span class="n">_ensure_compatibility</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="n">variable_configs_by_source</span><span class="p">,</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs_level</span><span class="p">)</span>
+
+    <span class="c1"># Get variable for each variable configuration by source</span>
+    <span class="n">variable_by_source</span> <span class="o">=</span> <span class="n">_load_variables_from_config</span><span class="p">(</span>
+        <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+        <span class="n">variable_configs_by_source</span><span class="o">=</span><span class="n">variable_configs_by_source</span><span class="p">,</span>
+        <span class="n">cohort</span><span class="o">=</span><span class="n">cohort</span><span class="p">,</span>
+        <span class="n">time_window</span><span class="o">=</span><span class="n">time_window</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Raise error if no variable was found</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">variable_by_source</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VariableNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Variable </span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> not found in any source (looked in </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">MultiSourceVariable</span><span class="p">(</span><span class="n">variable_by_source</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_variable_not_found_message</span><span class="p">(</span>
+    <span class="n">var_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span>
+    <span class="n">sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">VariableSpec</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Build an actionable "variable not found" message.</span>
+
+<span class="sd">    Names where each source was looked up, so a miss caused by an unpublished</span>
+<span class="sd">    concept is not mistaken for a typo in the variable name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        var_name (str): The variable that could not be found.</span>
+<span class="sd">        cohort (Cohort): Cohort whose resolver describes the routing.</span>
+<span class="sd">        sources (Iterable[str]): Sources that were searched.</span>
+<span class="sd">        spec (VariableSpec | None): The reference that was requested.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A message listing the per-source lookup locations.</span>
+<span class="sd">    """</span>
+    <span class="n">resolver</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span> <span class="s2">"concepts"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span> <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">var_name</span>
+
+    <span class="k">if</span> <span class="n">resolver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Variable </span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s2"> not found in the bundled vars.json of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+    <span class="n">locations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">route</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="n">where</span> <span class="o">=</span> <span class="n">route</span><span class="o">.</span><span class="n">url</span> <span class="k">if</span> <span class="n">route</span><span class="o">.</span><span class="n">is_remote</span> <span class="k">else</span> <span class="s2">"bundled vars.json"</span>
+        <span class="n">locations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">src</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">where</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Variable </span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="s2"> not found. Looked in: </span><span class="si">{</span><span class="s1">'; '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">locations</span><span class="p">)</span><span class="si">}</span><span class="s2">. "</span>
+        <span class="s2">"Sources routed to a Concepts API endpoint are never served from the "</span>
+        <span class="s2">"bundled vars.json, so a concept that has not been published there yet "</span>
+        <span class="s2">"resolves to nothing."</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># load_default_variables -&gt; list[MultiSourceVariable]</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_collect_default_variable_list_by_source</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="p">:</span> <span class="n">ObsLevel</span><span class="p">,</span>
+    <span class="n">include_sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Collect the default variable list each source declares.</span>
+
+<span class="sd">    The defaults are corr_vars configuration, not clinical concepts, so they stay</span>
+<span class="sd">    local even for a source whose definitions are served by the Concepts API:</span>
+<span class="sd">    every source exposes them as a `DEFAULT_VARS` attribute on its `mapping`</span>
+<span class="sd">    module, mapping `"global"` and each obs-level name to a list of variable</span>
+<span class="sd">    names. Sources that declare none are skipped.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obs_level (ObsLevel): Observation level used to select level-specific defaults.</span>
+<span class="sd">        include_sources (Iterable[str] | None): Restrict to these sources.</span>
+<span class="sd">            All discovered sources are checked when `None`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, list[str]]: Mapping from source name to its list of default variable names.</span>
+<span class="sd">    """</span>
+    <span class="n">src_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">src_mapping_module</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">get_src_module_mapping</span><span class="p">(</span>
+        <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span> <span class="n">submodule</span><span class="o">=</span><span class="s2">"mapping"</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">default_vars</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">src_mapping_module</span><span class="p">,</span> <span class="s2">"DEFAULT_VARS"</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">default_vars</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">global_defaults</span> <span class="o">=</span> <span class="n">default_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"global"</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">obs_level_defaults</span> <span class="o">=</span> <span class="n">default_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">obs_level</span><span class="o">.</span><span class="n">lower_name</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">all_defaults</span> <span class="o">=</span> <span class="n">global_defaults</span> <span class="o">+</span> <span class="n">obs_level_defaults</span>
+        <span class="n">src_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">all_defaults</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">src_dict</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_default_variables</span><span class="p">(</span>
+    <span class="n">cohort</span><span class="p">:</span> <span class="n">Cohort</span><span class="p">,</span> <span class="n">time_window</span><span class="p">:</span> <span class="n">TimeWindow</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">MultiSourceVariable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Load the default variables for the cohort's observation level.</span>
+
+<span class="sd">    Aggregates the default variable lists from all cohort sources, then loads each</span>
+<span class="sd">    variable restricted to the sources that declared it.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cohort (Cohort): Cohort whose observation level and sources determine which</span>
+<span class="sd">            defaults are loaded.</span>
+<span class="sd">        time_window (TimeWindow): Time window forwarded to every variable loader.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[MultiSourceVariable]: One :class:`MultiSourceVariable` per unique default</span>
+<span class="sd">        variable name, ready for extraction.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Get default variables per source</span>
+    <span class="n">source_default_variables_mapping</span> <span class="o">=</span> <span class="n">_collect_default_variable_list_by_source</span><span class="p">(</span>
+        <span class="n">obs_level</span><span class="o">=</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs_level</span><span class="p">,</span> <span class="n">include_sources</span><span class="o">=</span><span class="n">cohort</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Invert mapping</span>
+    <span class="n">variable_source_mapping</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">default_variables</span> <span class="ow">in</span> <span class="n">source_default_variables_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">default_variables</span><span class="p">:</span>
+            <span class="n">variable_source_mapping</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">variable_source_mapping</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+
+    <span class="c1"># Load variable for included sources only</span>
+    <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MultiSourceVariable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">include_sources</span> <span class="ow">in</span> <span class="n">variable_source_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># TODO: Loading only included sources can be tricky,</span>
+        <span class="c1"># if the variable is loaded in other sources later</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="n">load_variable</span><span class="p">(</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+            <span class="n">cohort</span><span class="o">=</span><span class="n">cohort</span><span class="p">,</span>
+            <span class="n">time_window</span><span class="o">=</span><span class="n">time_window</span><span class="p">,</span>
+            <span class="n">include_sources</span><span class="o">=</span><span class="n">include_sources</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">variables</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

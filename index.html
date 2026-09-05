@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quick Start &#8212; CORR-Variables 2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=ce394494"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials and Getting Started" href="tutorials.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0.0" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/edit/main/docs/index.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cub-corr/corr-vars/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/index.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Quick Start</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Quick Start</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-corr-cohort">Your First CORR Cohort</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="pst-show_toc_level nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#core-architecture">Core Architecture</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real-World Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#community-support">Community &amp; Support</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div style="text-align: center; margin: 40px 0;">
+  <img src="_static/corr_favicon.png" alt="CORR-Vars Logo" style="width: 120px; height: 120px; margin-bottom: 20px;">
+  <h1 style="font-size: 3em; margin: 0; color: #2c3e50;">CORR-Variables</h1>
+  <p style="font-size: 1.3em; color: #7f8c8d; margin: 10px 0 30px 0;">
+    Streamlining clinical research with real-world data
+  </p>
+</div><div class="note admonition">
+<p class="admonition-title">🚀 <strong>What is CORR-Vars?</strong></p>
+<p>CORR-Variables is a <strong>Python package</strong> for building clinical study cohorts from ICU and hospital data sources, developed by the <strong>Charité Outcomes Research Repository (CORR)</strong> team.</p>
+<p>It functions as a high-level connector on top of a data source, preprocessing raw clinical data into <strong>clinically meaningful, quality-checked variables</strong> whose definitions are served and versioned by the CORR Concepts API, to streamline research with real-world data.</p>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🏥 <strong>Clinical Focus</strong></div>
+<p class="sd-card-text">Pre-defined clinical variables validated by medical experts</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+⚡ <strong>High Performance</strong></div>
+<p class="sd-card-text">Built on Polars for fast processing of large datasets</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔗 <strong>Easy Integration</strong></div>
+<p class="sd-card-text">Simple API that works with existing analysis workflows</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h1>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+📦 <strong>Install</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>git+https://github.com/CUB-CORR/corr-vars.git
+</pre></div>
+</div>
+<p>Requires Python ≥ 3.10.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+🔐 <strong>Concepts API access</strong></label><div class="sd-tab-content docutils">
+<p>Variable definitions are served by the CORR Concepts API. A cohort needs a
+project and a key:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CORR_CONCEPTS_API_KEY</span><span class="o">=</span><span class="s2">"corr_..."</span>
+</pre></div>
+</div>
+<p>The project is passed per cohort: <code class="docutils literal notranslate"><span class="pre">Cohort(project=&quot;my_project&quot;)</span></code>.</p>
+</div>
+</div>
+</section>
+<section id="your-first-corr-cohort">
+<h1>Your First CORR Cohort<a class="headerlink" href="#your-first-corr-cohort" title="Link to this heading">#</a></h1>
+<p>Get started in under 5 minutes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the main class</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="c1"># Create your first cohort</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Add clinical variables</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_sodium"</span><span class="p">)</span>
+
+<span class="c1"># View your data</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">🎯 <strong>Next Steps</strong></p>
+<ul class="simple">
+<li><p><strong>New to CORR-Vars?</strong> → Start with our <a class="reference internal" href="tutorials.html"><span class="doc">Tutorials and Getting Started</span></a></p></li>
+<li><p><strong>Need a specific variable?</strong> → Browse the <a class="reference external" href="https://concepts.example.edu">Concept Browser</a></p></li>
+<li><p><strong>Want to contribute?</strong> → Read our <a class="reference internal" href="contributing_variables.html"><span class="doc">Contributing New Variables</span></a> guide</p></li>
+</ul>
+</div>
+</section>
+<section id="documentation-structure">
+<h1>Documentation Structure<a class="headerlink" href="#documentation-structure" title="Link to this heading">#</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📚 <strong>Learning Resources</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Getting Started Tutorial</strong> - Your first analysis in 30 minutes</p></li>
+<li><p class="sd-card-text"><strong>Custom Variables Guide</strong> - Create your own clinical variables</p></li>
+<li><p class="sd-card-text"><strong>Contributing Guide</strong> - Add variables to the community catalog</p></li>
+<li><p class="sd-card-text"><strong>Troubleshooting</strong> - Solutions for common issues</p></li>
+</ul>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="tutorials.html"><span class="doc">Tutorials and Getting Started</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔧 <strong>API Documentation</strong></div>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Cohort Class</strong> - Main interface for building cohorts</p></li>
+<li><p class="sd-card-text"><strong>Variable Types</strong> - Native, derived, and aggregation variables</p></li>
+<li><p class="sd-card-text"><strong>Data Sources</strong> - ReprodICU, the local source skeleton, and the source plugin system</p></li>
+<li><p class="sd-card-text"><strong>Legacy Interface</strong> - Pandas compatibility layer</p></li>
+</ul>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="api/cohort.html"><span class="doc">Cohort</span></a></div>
+</div>
+</div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-light sd-bg-text-light">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-book" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path></svg></span><span class="sd-summary-text">📖 <strong>Complete Table of Contents</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials and Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#getting-started-your-first-analysis">Getting Started - Your First Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-1-environment-setup">Step 1: Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-2-basic-cohort-creation">Step 2: Basic Cohort Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-3-exploring-your-cohort">Step 3: Exploring Your Cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-4-adding-your-first-variables">Step 4: Adding Your First Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-5-examining-the-data">Step 5: Examining the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-6-creating-aggregated-variables">Step 6: Creating Aggregated Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-7-setting-eligibility-and-inclusion-criteria">Step 7: Setting Eligibility and Inclusion Criteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-8-applying-inclusion-criteria">Step 8: Applying Inclusion Criteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-9-generate-summary-statistics">Step 9: Generate Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#step-10-save-your-work">Step 10: Save Your Work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#tutorial-2-advanced-variable-creation">Tutorial 2: Advanced Variable Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#custom-aggregation-variables">Custom Aggregation Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#tutorial-3-multi-source-analysis">Tutorial 3: Multi-Source Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#tutorial-4-working-with-time-series-data">Tutorial 4: Working with Time-Series Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#tutorial-5-complete-research-workflow-template">Tutorial 5: Complete Research Workflow Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html#next-steps-in-your-corr-vars-journey">Next Steps in Your CORR-Vars Journey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_variables.html">Custom Variables Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#understanding-variable-architecture">Understanding Variable Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#the-two-paths">The two paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#derived-variables-with-custom-functions-py-parameter">Derived Variables with Custom Functions (py Parameter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#native-variables-store-extraction">Native Variables (store extraction)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#debugging-and-testing">Debugging and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#common-patterns">Common Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_variables.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_variables.html">Contributing New Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#development-workflow-overview">Development Workflow Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-1-create-a-github-issue">Step 1: Create a GitHub Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-2-set-up-development-environment-and-create-feature-branch">Step 2: Set Up Development Environment and Create Feature Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-3-explore-and-prototype-in-jupyter-notebook">Step 3: Explore and Prototype in Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-4-implement-clean-code-in-configuration-files">Step 4: Implement Clean Code in Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-5-verify-everything-works">Step 5: Verify Everything Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-6-create-pull-request">Step 6: Create Pull Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-7-continuous-integration">Step 7: Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#step-8-request-review-and-merge">Step 8: Request Review and Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#post-merge-follow-up">Post-Merge Follow-up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#common-pitfalls-and-tips">Common Pitfalls and Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_variables.html#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#concepts-api-issues">Concepts API Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#variable-loading-issues">Variable Loading Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#memory-issues">Memory Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#data-quality-issues">Data Quality Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#time-related-issues">Time-Related Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#custom-variable-issues">Custom Variable Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#performance-issues">Performance Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#file-and-save-load-issues">File and Save/Load Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/cohort.html">Cohort</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/cohort.html#cohort-workflow">Cohort Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/cohort.html#class-reference">Class Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/core.html">Core Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/core.html#variable-architecture">Variable Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/core.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/core.html#class-reference">Class Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/sources.html">Data Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#available-sources">Available Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#multi-source-configuration">Multi-Source Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#source-specific-variables">Source-Specific Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#variable-loader">Variable Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sources.html#module-corr_vars.sources">Base Sources Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils_debug.html">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</details></section>
+<section id="core-architecture">
+<h1>Core Architecture<a class="headerlink" href="#core-architecture" title="Link to this heading">#</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🏥 <strong>Observation Levels</strong></div>
+<p class="sd-card-text"><strong>Choose your analysis unit:</strong></p>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Patient</strong> - One row per unique patient (<code class="docutils literal notranslate"><span class="pre">patient_id</span></code>)</p></li>
+<li><p class="sd-card-text"><strong>Hospital Stay</strong> - Complete hospitalization periods (<code class="docutils literal notranslate"><span class="pre">case_id</span></code>)</p></li>
+<li><p class="sd-card-text"><strong>ICU Stay</strong> - Individual intensive care episodes (<code class="docutils literal notranslate"><span class="pre">icu_stay_id</span></code>)</p></li>
+<li><p class="sd-card-text"><strong>Procedure</strong> - Specific surgical/medical procedures (<code class="docutils literal notranslate"><span class="pre">procedure_id</span></code>)</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/cv_obs_levels.png"><img alt="_images/cv_obs_levels.png" src="_images/cv_obs_levels.png" style="width: 100%;" />
+</a>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📊 <strong>Variable Types</strong></div>
+<p class="sd-card-text"><strong>Rich clinical data hierarchy:</strong></p>
+<ul class="simple">
+<li><p class="sd-card-text"><strong>Native</strong> - Direct database extractions</p></li>
+<li><p class="sd-card-text"><strong>Derived</strong> - Computed from existing variables</p></li>
+<li><p class="sd-card-text"><strong>Static</strong> - Single values per observation</p></li>
+<li><p class="sd-card-text"><strong>Dynamic</strong> - Time-series measurements</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/cv_var_hierarchy.png"><img alt="_images/cv_var_hierarchy.png" src="_images/cv_var_hierarchy.png" style="width: 100%;" />
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">🔍 <strong>Explore Available Variables</strong></p>
+<p>Browse our <strong>300+</strong> pre-defined clinical variables in the interactive <a class="reference external" href="https://concepts.example.edu">Concept Browser</a></p>
+</div>
+</section>
+<section id="real-world-example">
+<h1>Real-World Example<a class="headerlink" href="#real-world-example" title="Link to this heading">#</a></h1>
+<p>Here’s how researchers use CORR-Vars for clinical studies:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build an ICU sepsis cohort</span>
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"reprodicu"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/path/to/reprodICU_files"</span><span class="p">}},</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my_project"</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Add a static variable</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"sofa_score_imputed"</span><span class="p">)</span>
+
+<span class="c1"># Add time-series biomarkers</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_lactate"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_creatinine"</span><span class="p">)</span>
+
+<span class="c1"># Apply inclusion criteria</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span> <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adults"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"sofa_score_imputed"</span><span class="p">,</span> <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 2"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Organ dysfunction"</span><span class="p">}</span>
+<span class="p">])</span>
+
+<span class="c1"># Generate publication-ready summary</span>
+<span class="n">table1</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">tableone</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="s2">"inhospital_death"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Study cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2"> patients"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">📈 <strong>Publication Ready</strong></p>
+<p>CORR-Vars concepts are quality-checked by attending physicians at Charité Berlin before being used for:</p>
+<ul class="simple">
+<li><p>Critical care outcomes research</p></li>
+<li><p>Machine learning model development</p></li>
+<li><p>Health services research</p></li>
+<li><p>Quality improvement studies</p></li>
+</ul>
+</div>
+</section>
+<section id="community-support">
+<h1>Community &amp; Support<a class="headerlink" href="#community-support" title="Link to this heading">#</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🐛 <strong>Found a Bug?</strong></div>
+<p class="sd-card-text">Report issues or request features on GitHub</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/cub-corr/corr-vars/issues"><span>https://github.com/cub-corr/corr-vars/issues</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+💬 <strong>Need Help?</strong></div>
+<p class="sd-card-text">Check our <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting Guide</span></a> guide or contact the team</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🤝 <strong>Want to Contribute?</strong></div>
+<p class="sd-card-text">Add new variables to help the research community</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="contributing_variables.html"><span class="doc">Contributing New Variables</span></a></div>
+</div>
+</div>
+</div>
+<p>—</p>
+<div style="background: #004d9b; color: white; padding: 30px; border-radius: 15px; margin: 40px 0; text-align: center;">
+  <h3 style="margin: 0 0 15px 0; color: white;">🏥 Developed at Charité Berlin</h3>
+  <p style="margin: 0; font-size: 1.1em;">
+    Advancing clinical research through innovative data science tools
+  </p>
+</div><p><strong>Development Team:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="mailto:moritz&#46;thiele&#37;&#52;&#48;charite&#46;de">Moritz Thiele</a></p></li>
+<li><p><a class="reference external" href="mailto:pedram&#46;ramezani&#37;&#52;&#48;charite&#46;de">Pedram Ramezani</a></p></li>
+<li><p><a class="reference external" href="mailto:noel&#46;kronenberg&#37;&#52;&#48;charite&#46;de">Noel Kronenberg</a></p></li>
+<li><p><a class="reference external" href="mailto:julian&#46;felber&#37;&#52;&#48;charite&#46;de">Julian Felber</a></p></li>
+<li><p><a class="reference external" href="mailto:sophie&#46;hollerbach&#37;&#52;&#48;charite&#46;de">Sophie Hollerbach</a></p></li>
+<li><p><a class="reference external" href="mailto:dario&#46;von-wedel&#37;&#52;&#48;charite&#46;de">Dario von Wedel</a></p></li>
+</ul>
+<p>…and the entire <strong>CORR team</strong> 🙏</p>
+<div class="note admonition">
+<p class="admonition-title">📊 <strong>Project Stats</strong></p>
+<ul class="simple">
+<li><p><strong>🏥 Version</strong>: 2.0.0</p></li>
+<li><p><strong>📅 Active Development</strong>: Since September 2024</p></li>
+<li><p><strong>📈 Publications</strong>: 10+ active projects pending publication</p></li>
+<li><p><strong>👥 Users</strong>: Research teams across Charité departments with a focus on critical care outcomes research</p></li>
+<li><p><strong>🔗 GitHub</strong>: <a class="reference external" href="https://github.com/cub-corr/corr-vars">CORR-Vars Repository</a></p></li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="tutorials.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tutorials and Getting Started</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Quick Start</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-corr-cohort">Your First CORR Cohort</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="pst-show_toc_level nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#core-architecture">Core Architecture</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real-World Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#community-support">Community &amp; Support</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Noel Kronenberg, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Moritz Thiele, Noel Kronenberg, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
