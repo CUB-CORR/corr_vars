@@ -1,0 +1,43 @@
+#
+# Concept routing — GLOBAL configuration, shipped inside the corr_vars package.
+#
+# This file decides, per data source, whether variable definitions are fetched
+# from a remote Concepts API or read from the source's bundled ``mapping``
+# module (its local ``VARS`` dict).
+#
+# It is deliberately NOT user-scoped: there is no ``~/.config`` file and no
+# environment variable that rewrites it. The only override mechanism is
+# ``Cohort(...)`` keyword arguments (``taxonomy``, ``version``, ``date``,
+# ``project``, ``api_key``, ``concepts_api_url``).
+#
+# Resolution order for a source:
+#   1. ``[local].sources``  — pinned local, wins over everything below.
+#   2. ``[[endpoint]]``     — first entry whose ``sources`` matches, in file order.
+#   3. otherwise            — local.
+#
+# ``sources`` entries are exact source names or the wildcard ``"*"``.
+#
+
+[defaults]
+# Taxonomy every unqualified variable reference is resolved in.
+taxonomy = "corr_v1"
+# Version selector applied when a reference carries no ``::version`` suffix.
+# One of: "latest", "vN", "YYYY-MM-DD", "draftNNNN".
+version = "latest"
+
+
+# --- Pinned local -----------------------------------------------------------
+[local]
+# Sources listed here are never fetched from the Concepts API: their definitions
+# are read from the source's bundled ``mapping`` module, with no network and no
+# API key.
+#
+# local_datasource is the source skeleton: it bundles its own (empty) vars.json
+# and must keep working offline, so it is pinned rather than routed.
+sources = ["local_datasource"]
+
+
+# --- Endpoints --------------------------------------------------------------
+[[endpoint]]
+url = "https://concepts.example.edu/api"
+sources = ["*"]

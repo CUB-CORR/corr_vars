@@ -1,0 +1,12 @@
+{
+  "corr_defaults": {
+    "default_vars": {
+      "global": [],
+      "patient": [],
+      "hospital_stay": [],
+      "icu_stay": [],
+      "procedure": []
+    }
+  },
+  "variables": {}
+}

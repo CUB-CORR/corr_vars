@@ -1,0 +1,88 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: CORR-Vars
+abstract: >-
+  CORR-Vars is a Python library for building reproducible clinical study cohorts
+  from intensive-care and hospital data sources. A cohort is assembled at an
+  explicit observation level — patient, hospital stay, ICU stay or procedure —
+  and static and time-series variables are added to it from one or more
+  pluggable data sources. Inclusion and exclusion steps are tracked as they are
+  applied, so the resulting flowchart and baseline tables are generated from the
+  cohort itself rather than maintained alongside it. Variable definitions are not
+  bundled with the software: they are fetched per concept and per source from the
+  CORR Concepts API, which records the exact definition version served, allowing
+  a whole cohort — including every derived variable's dependencies — to be frozen
+  to a date and rebuilt later. Results export to Stata, CSV, Excel and LaTeX or
+  Markdown baseline tables.
+type: software
+authors:
+- family-names: von Wedel
+  given-names: Dario
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Thiele
+  given-names: Moritz
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Hardenberg
+  given-names: Jan-Hendrik
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Nephrology and Medical Intensive Care, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Felber
+  given-names: Julian
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Ramezani
+  given-names: Pedram
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Daum
+  given-names: Nils
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Anesthesiology and Intensive Care Medicine (CCM/CVK), Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Grimm
+  given-names: Aline M.
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Hollerbach
+  given-names: Sophie
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Nolte
+  given-names: Emil
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Nephrology and Medical Intensive Care, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Kunz
+  given-names: Julius V.
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Nephrology and Medical Intensive Care, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Philipp
+  given-names: Susanne
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Nephrology and Medical Intensive Care, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Hegermann
+  given-names: Henriette
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany; Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Anesthesiology and Intensive Care Medicine (CBF), Hindenburgdamm 30, 12203 Berlin, Germany
+- family-names: Kronenberg
+  given-names: Noel
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Fassbender
+  given-names: Finn S.
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Grünewald
+  given-names: Elias
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Spies
+  given-names: Claudia
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Anesthesiology and Intensive Care Medicine (CCM/CVK), Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Treskatsch
+  given-names: Sascha
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Anesthesiology and Intensive Care Medicine (CBF), Hindenburgdamm 30, 12203 Berlin, Germany
+- family-names: Witzenrath
+  given-names: Martin
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Eckardt
+  given-names: Kai-Uwe
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Department of Nephrology and Medical Intensive Care, Charitéplatz 1, 10117 Berlin, Germany
+- family-names: Mittermaier
+  given-names: Mirja
+  affiliation: 'Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Joint Department: Infectious Diseases, Respiratory Medicine and Critical Care Medicine, Charitéplatz 1, 10117 Berlin, Germany'
+- family-names: Balzer
+  given-names: Felix
+  affiliation: Charité – Universitätsmedizin Berlin, corporate member of Freie Universität Berlin and Humboldt-Universität zu Berlin, Institute of Medical Informatics, Charitéplatz 1, 10117 Berlin, Germany
+- name: CORR Group
+repository-code: https://github.com/CUB-CORR/corr-vars
+url: https://docs.corr-vars.de
+license: MIT
+license-url: https://opensource.org/licenses/MIT
+version: 2.0.0
+date-released: '2026-09-05'

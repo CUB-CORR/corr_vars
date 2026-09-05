@@ -1,0 +1,6 @@
+[flake8]
+ignore = E501, F821, E402, W503, E203, E704, E712
+exclude =
+    .git,
+    .github,
+    docs,

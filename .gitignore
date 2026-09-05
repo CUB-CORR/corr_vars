@@ -1,0 +1,19 @@
+**/__editable__.corr_vars*
+**/__pycache__/
+**/*.log
+**/corr_vars.egg-info/
+**/*.pyc
+.coverage
+.DS_Store
+.env
+.hypothesis/
+*.pem
+.pytest_cache/
+.ruff_cache/
+.venv/
+CLAUDE.md
+dist
+docs/_build/
+
+# uv lockfile: this is a library, resolution is left to the consumer
+uv.lock
