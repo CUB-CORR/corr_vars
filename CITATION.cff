@@ -85,7 +85,7 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.22346472
     description: Zenodo archive of the released versions
-repository-code: https://github.com/CUB-CORR/corr-vars
+repository-code: https://github.com/CUB-CORR/corr_vars
 url: https://docs.corr-vars.de
 license: MIT
 license-url: https://opensource.org/licenses/MIT

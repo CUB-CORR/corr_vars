@@ -67,9 +67,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/CUB-CORR/corr-vars"
+Homepage = "https://github.com/CUB-CORR/corr_vars"
 Documentation = "https://docs.corr-vars.de"
-"Bug Tracker" = "https://github.com/CUB-CORR/corr-vars/issues"
+"Bug Tracker" = "https://github.com/CUB-CORR/corr_vars/issues"
 
 [tool.hatch.version]
 path = "src/corr_vars/__init__.py"

@@ -78,7 +78,7 @@ copybutton_format_func = None
 # Theme options for copy button
 html_theme_options = {
     "use_repository_button": True,
-    "repository_url": "https://github.com/cub-corr/corr-vars",
+    "repository_url": "https://github.com/CUB-CORR/corr_vars",
     "repository_branch": "main",
     "path_to_docs": "docs",
     "use_edit_page_button": True,

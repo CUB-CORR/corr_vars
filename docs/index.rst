@@ -45,7 +45,7 @@ Quick Start
 
       .. code-block:: bash
 
-         uv add git+https://github.com/CUB-CORR/corr-vars.git
+         uv add git+https://github.com/CUB-CORR/corr_vars.git
 
       Requires Python ≥ 3.10.
 
@@ -225,7 +225,7 @@ Community & Support
 .. grid:: 1 1 3 3
 
    .. grid-item-card:: 🐛 **Found a Bug?**
-      :link: https://github.com/cub-corr/corr-vars/issues
+      :link: https://github.com/CUB-CORR/corr_vars/issues
       :link-type: url
       :class-header: bg-warning text-white
       
@@ -272,7 +272,7 @@ Community & Support
    * **📅 Active Development**: Since September 2024
    * **📈 Publications**: 10+ active projects pending publication
    * **👥 Users**: Research teams across Charité departments with a focus on critical care outcomes research
-   * **🔗 GitHub**: `CORR-Vars Repository <https://github.com/cub-corr/corr-vars>`_
+   * **🔗 GitHub**: `CORR-Vars Repository <https://github.com/CUB-CORR/corr_vars>`_
 
 .. .. admonition:: 📄 **Citation**
 ..    :class: tip

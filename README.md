@@ -8,7 +8,7 @@ Build and manage clinical study cohorts from ICU and hospital data sources. Add,
 ## Installation
 
 ```shell
-uv add git+https://github.com/CUB-CORR/corr-vars.git
+uv add git+https://github.com/CUB-CORR/corr_vars.git
 ```
 
 Requires Python ≥ 3.10.
@@ -159,8 +159,8 @@ listed there.
 ### Setup
 
 ```shell
-git clone https://github.com/CUB-CORR/corr-vars.git
-cd corr-vars
+git clone https://github.com/CUB-CORR/corr_vars.git
+cd corr_vars
 uv sync --group dev
 uv run pre-commit install
 ```
