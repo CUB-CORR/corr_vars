@@ -179,7 +179,7 @@ def _day_grid(bounds: pl.DataFrame, *, primary_key: str) -> pl.DataFrame:
         bounds.with_columns(
             pl.int_ranges(0, pl.max_horizontal(pl.col(_N_DAYS), 0)).alias(_DAY)
         )
-        .explode(_DAY)
+        .explode(_DAY, empty_as_null=True)
         # Exploding an empty range yields a single null row, not zero rows; a
         # non-positive horizon must contribute no day-blocks at all.
         .drop_nulls(_DAY)

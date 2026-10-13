@@ -3,11 +3,19 @@ import os
 import pytest
 
 from corr_vars import Cohort
+from corr_vars.concepts.client import API_KEY_ENV_VAR
+
+#: Environment these hand-run tests need: the reprodICU parquet files plus a
+#: Concepts API project and key. Without them the tests skip instead of erroring.
+REQUIRED_ENV_VARS = ("REPRODICU_PATH", "CORR_CONCEPTS_PROJECT", API_KEY_ENV_VAR)
 
 
 @pytest.fixture
 def cohort_kwargs():
     """Base fixture for cohort creation with default arguments"""
+    missing = [name for name in REQUIRED_ENV_VARS if not os.getenv(name)]
+    if missing:
+        pytest.skip(f"reprodICU source tests need {', '.join(missing)}")
     return {
         "sources": {
             "reprodicu": {"path": os.environ["REPRODICU_PATH"]},

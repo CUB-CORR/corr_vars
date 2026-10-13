@@ -23,7 +23,7 @@ def plot_movements(cohort: Cohort, case_id: str) -> Figure:
     ).filter(pl.col("case_id").eq(case_id))
 
     if gr["icu_id"].dtype == pl.List(pl.Utf8):
-        gr = gr.explode("icu_id")
+        gr = gr.explode("icu_id", empty_as_null=True)
 
     gr = gr.sort("icu_admission")
 

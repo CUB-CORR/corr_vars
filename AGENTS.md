@@ -565,15 +565,20 @@ For an API-routed source a `py` function is authored and published as part of th
 ## Running tests
 
 ```shell
-uv run pytest tests/integration/    # no DB, no network — what CI runs
+uv run pytest    # = tests/integration: no DB, no network — what CI runs
 ```
+
+Pytest config lives in `pyproject.toml` (`[tool.pytest.ini_options]`);
+`testpaths` limits a bare run to `tests/integration`. The suite runs with **no
+warnings** and no blanket `filterwarnings` — fix a new warning at its cause.
 
 CI (`.github/workflows/tests.yml`) runs `pytest -n auto tests/integration` on
 every push to `main` and every pull request against it. It needs no credentials
 and touches no network.
 
 `tests/sources/` is hand-run: it needs the source's own data (for reprodicu, the
-parquet files at `REPRODICU_PATH`) plus a Concepts API project and key.
+parquet files at `REPRODICU_PATH`) plus a Concepts API project and key, and
+skips when any of them is unset. Run it by naming it: `uv run pytest tests/sources`.
 
 ## Building the documentation
 

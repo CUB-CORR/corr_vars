@@ -219,7 +219,7 @@ def merge_consecutive(
     primary_key: str,  # Deprecated!
     recordtime: str = "recordtime",
     recordtime_end: str = "recordtime_end",
-    time_threshold: pd.Timedelta = pd.Timedelta(minutes=30),
+    time_threshold: pd.Timedelta = pd.Timedelta(30, unit="min"),
 ) -> pd.Series:
     """Combine consecutive sessions (<30min separation) of ecmo_vv_icu into a single session.
 

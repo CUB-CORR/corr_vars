@@ -276,8 +276,12 @@ def convert_to_tableone(
         )
 
         for b in boolean:
-            # Only override order if unspecified
-            categorical_order.setdefault(b, [replace_booleans[0], replace_booleans[1]])
+            # Only override order if unspecified. List only labels that occur:
+            # tableone warns about an order value absent from the column.
+            present = set(df.get_column(b).unique().to_list())
+            labels = [label for label in replace_booleans if label in present]
+            if labels:
+                categorical_order.setdefault(b, labels)
 
     pd_df = convert_to_pandas_df(df)
     if filter_query:
@@ -512,6 +516,9 @@ def remove_asof(
         by=by,
         strategy=strategy,
         tolerance=tolerance,
+        # Both sides are sorted by (by, on) above; polars cannot verify
+        # sortedness within `by` groups and would warn on every call.
+        check_sortedness=False,
     )
     return matched.filter(pl.col(marker).is_null()).drop(marker)
 
@@ -647,6 +654,9 @@ def attach_asof_value(
         by=by,
         strategy=strategy,
         tolerance=tolerance,
+        # Both sides are sorted by (by, on) above; polars cannot verify
+        # sortedness within `by` groups and would warn on every call.
+        check_sortedness=False,
     )
 
 
@@ -984,7 +994,7 @@ def interval_bucket_agg(
                 # Generate buckets
                 lf_clipped.with_columns(
                     datetime_ranges_expr.alias(START_SPLIT)
-                ).explode(START_SPLIT)
+                ).explode(START_SPLIT, empty_as_null=True)
                 # Revert correction offset
                 .with_columns(
                     pl.col(START_SPLIT).add(correction_expr),
@@ -1003,7 +1013,7 @@ def interval_bucket_agg(
                 # Generate buckets
                 lf_clipped.with_columns(
                     datetime_ranges_expr.alias(START_SPLIT)
-                ).explode(START_SPLIT)
+                ).explode(START_SPLIT, empty_as_null=True)
             )
 
         lf_distributed = (
@@ -1042,7 +1052,7 @@ def interval_bucket_agg(
             )
             .otherwise(pl.col(END_CLIPPED_TMIN_TMAX).cast(pl.List(pl.Datetime)))
             .alias(END_SPLIT),
-        ).explode(START_SPLIT, END_SPLIT)
+        ).explode(START_SPLIT, END_SPLIT, empty_as_null=True)
 
     # Do nothing: Split times are equal to previous times and not exploded
     else:

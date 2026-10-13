@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import random
+
 import polars as pl
 import pytest
+from hypothesis import HealthCheck, Phase, Verbosity, given, settings
 from hypothesis_cohort import obs_dataframe
 from hypothesis_var import var_dataframe
 
@@ -11,7 +14,7 @@ from corr_vars.core.cohort import Cohort
 from corr_vars.core.variable import Variable
 from corr_vars.sources.var_loader import MultiSourceVariable
 
-from typing import TYPE_CHECKING, Any, Literal, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, TypedDict, TypeVar
 
 if TYPE_CHECKING:
     from corr_vars.concepts.spec import VariableSpec
@@ -19,11 +22,39 @@ if TYPE_CHECKING:
     from corr_vars.utils.time import TimeWindow
 
     from collections.abc import Callable, Iterable
+    from hypothesis.strategies import SearchStrategy
     from corr_vars.definitions.typing import ObsLevelName, SourceDict
+
+T = TypeVar("T")
+
+
+def draw_example(strategy: SearchStrategy[T]) -> T:
+    """Draw one random value from a Hypothesis strategy, for fixture data.
+
+    Equivalent to ``strategy.example()`` — a quiet ``@given`` run over a small
+    batch, one value picked at random — without the
+    ``NonInteractiveExampleWarning`` that method raises under pytest.
+    """
+    examples: list[T] = []
+
+    @given(strategy)
+    @settings(
+        database=None,
+        max_examples=10,
+        deadline=None,
+        verbosity=Verbosity.quiet,
+        phases=(Phase.generate,),
+        suppress_health_check=list(HealthCheck),
+    )
+    def collect(example: T) -> None:
+        examples.append(example)
+
+    collect()
+    return random.choice(examples)
 
 
 def _dummy_load_cohort_data(sources: SourceDict, obs_level: ObsLevel):
-    return obs_dataframe(obs_level=obs_level).example()
+    return draw_example(obs_dataframe(obs_level=obs_level))
 
 
 class EmptyCohort(Cohort):
@@ -106,9 +137,9 @@ class DummyVariable(Variable):
         )
 
     def extract(self, cohort: Cohort) -> pl.DataFrame:
-        self.data = var_dataframe(
-            vtype=self.df_type, obs_level=cohort.obs_level
-        ).example()
+        self.data = draw_example(
+            var_dataframe(vtype=self.df_type, obs_level=cohort.obs_level)
+        )
 
         if self.dynamic:
             # Expects case_tmin, case_tmax for each primary key

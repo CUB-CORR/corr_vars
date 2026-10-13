@@ -78,6 +78,20 @@ if TYPE_CHECKING:
     )
 
 
+def _extract_archive(tar_path: str | PathLike[str], dest: str | PathLike[str]) -> None:
+    """Extract a saved-cohort tar archive into *dest*.
+
+    Uses the ``"data"`` extraction filter, which rejects absolute paths, links
+    out of *dest* and special files. The filter exists from Python 3.10.12;
+    older patch releases extract unfiltered.
+    """
+    with tarfile.open(tar_path, "r") as tar:
+        if hasattr(tarfile, "data_filter"):
+            tar.extractall(dest, filter="data")
+        else:
+            tar.extractall(dest)
+
+
 def _as_concept_version_records(entry: Any) -> list[dict[str, Any]]:
     """Return one variable's provenance records as a list.
 
@@ -910,7 +924,7 @@ class Cohort:
             tmin=tmin or self.t_min,
             tmax=tmax or self.t_max,
         )
-        time_window_specified = (tmin is not None, tmax is not None)
+        time_window_specified = tmin is not None or tmax is not None
 
         spec: VariableSpec | None = None
         if isinstance(variable, str):
@@ -1381,7 +1395,7 @@ class Cohort:
         match mode:
             case "include":
                 self._obs = self._obs.filter(
-                    pl.col(self.primary_key).is_in(operation_ids)
+                    pl.col(self.primary_key).is_in(operation_ids.implode())
                 )
                 self._change_tracker.add_step(
                     description=f"Included {operations_done}",
@@ -1390,7 +1404,7 @@ class Cohort:
                 )
             case "exclude":
                 self._obs = self._obs.remove(
-                    pl.col(self.primary_key).is_in(operation_ids)
+                    pl.col(self.primary_key).is_in(operation_ids.implode())
                 )
                 self._change_tracker.add_step(
                     description=f"Excluded {operations_done}",
@@ -1814,8 +1828,7 @@ class Cohort:
             with open(filename, "rb") as inp, open(tar_path, "wb") as out:
                 out.write(dctx.decompress(inp.read()))
 
-            with tarfile.open(tar_path, "r") as tar:
-                tar.extractall(tmpdir)
+            _extract_archive(tar_path, tmpdir)
 
             # Load state dict
             state_path = os.path.join(tmpdir, "state.pkl")
@@ -1898,8 +1911,7 @@ class Cohort:
             with open(filename, "rb") as inp, open(tar_path, "wb") as out:
                 out.write(dctx.decompress(inp.read()))
 
-            with tarfile.open(tar_path, "r") as tar:
-                tar.extractall(tmpdir)
+            _extract_archive(tar_path, tmpdir)
 
             # Check VERSION file
             with open(os.path.join(tmpdir, "VERSION.txt"), encoding="utf8") as f:

@@ -172,12 +172,12 @@ Pre-commit hooks enforce uniform formatting and catch common errors. When a hook
 If you have developed new features, please add relevant tests to the `tests/` folder.
 
 ```shell
-uv run pytest tests/integration
+uv run pytest
 ```
 
 Integration tests (`tests/integration`) run automatically once a pull request to `main` is opened. Results are attached to the pull request and a test report will be generated. Do not merge until tests pass.
 
-`tests/sources` is hand-run: it needs the source's own data files plus a Concepts API project and key. CI runs `tests/integration` only, which needs neither.
+`tests/sources` is hand-run: it needs the source's own data files plus a Concepts API project and key, skips when they are missing, and runs only when named (`uv run pytest tests/sources`). A bare `uv run pytest` runs `tests/integration` only, like CI, which needs neither.
 
 ### Building the Documentation
 

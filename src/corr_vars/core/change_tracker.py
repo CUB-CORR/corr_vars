@@ -47,7 +47,7 @@ class ChangeTrackerSnapshot:
         use_hash: bool = True,
     ) -> ChangeTrackerSnapshot:
         lf = convert_to_polars_lf(df)
-        rows = cast("int", lf.select(pl.count()).collect().item())
+        rows = cast("int", lf.select(pl.len()).collect().item())
         nuniques = cast(
             "int", lf.select(pl.col(primary_key).n_unique()).collect().item()
         )

@@ -6,11 +6,12 @@ import httpx
 import polars as pl
 import pytest
 
+from conftest import _dummy_load_cohort_data
 from corr_vars.concepts.client import API_KEY_ENV_VAR, ConceptsApiClient
 from corr_vars.concepts.resolver import ConceptResolver
 from corr_vars.concepts.routing import ConceptRouting, Endpoint
 from corr_vars.concepts.spec import VersionSelector
-from corr_vars.core.cohort import Cohort
+from corr_vars.core.cohort import Cohort, _extract_archive
 from corr_vars.definitions.exceptions import (
     AmbiguousConceptError,
     CohortDataError,
@@ -318,7 +319,6 @@ def dummy_sources(monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
     resolver, ``var_loader``, extraction — stays real.
     """
     import corr_vars.core.cohort as cohort_module
-    from conftest import _dummy_load_cohort_data
     from corr_vars.concepts import resolver as resolver_module
 
     monkeypatch.setattr(
@@ -1149,8 +1149,7 @@ class TestSaveRoundTrip:
         tar_path = extracted / "archive.tar"
         with open(path, "rb") as src, open(tar_path, "wb") as dst:
             dst.write(zstd.ZstdDecompressor().decompress(src.read()))
-        with tarfile.open(tar_path) as tar:
-            tar.extractall(extracted)
+        _extract_archive(tar_path, extracted)
         tar_path.unlink()
 
         state_path = extracted / "cohort.json"
@@ -1186,7 +1185,6 @@ class TestSaveRoundTrip:
         self, dummy_sources: dict[str, Any], tmp_path
     ) -> None:
         import json
-        import tarfile
         import tempfile
 
         import zstandard as zstd
@@ -1199,8 +1197,7 @@ class TestSaveRoundTrip:
             tar_path = f"{extracted}/archive.tar"
             with open(path, "rb") as src, open(tar_path, "wb") as dst:
                 dst.write(zstd.ZstdDecompressor().decompress(src.read()))
-            with tarfile.open(tar_path) as tar:
-                tar.extractall(extracted)
+            _extract_archive(tar_path, extracted)
             with open(f"{extracted}/cohort.json") as f:
                 state = json.loads(f.read())
 

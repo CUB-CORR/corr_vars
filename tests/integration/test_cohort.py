@@ -626,11 +626,12 @@ def test_validate_cohort(obs: pl.DataFrame) -> None:
 @given(
     obs=dataframes(
         cols=[
-            # Allow filtering by providing ID columns
-            column("patient_id", dtype=pl.Utf8),
-            column("case_id", dtype=pl.Utf8),
-            column("icu_stay_id", dtype=pl.Utf8),
-            column("procedure_id", dtype=pl.Utf8),
+            # Allow filtering by providing ID columns. Unique, as the change
+            # tracker counts observations by their primary key.
+            column("patient_id", dtype=pl.Utf8, unique=True),
+            column("case_id", dtype=pl.Utf8, unique=True),
+            column("icu_stay_id", dtype=pl.Utf8, unique=True),
+            column("procedure_id", dtype=pl.Utf8, unique=True),
             column("eligible_time", dtype=pl.Datetime),
             column("wrong_type", dtype=pl.Float64),
         ],
@@ -642,8 +643,9 @@ def test_set_t_eligible_and_drop_ineligible(
     dummy_cohort: Cohort, obs: pl.DataFrame
 ) -> None:
     """Test setting t_eligible column"""
-    # Add a datetime column to obs
+    # Add a datetime column to obs, and track from the replaced obs onwards
     dummy_cohort._obs = obs
+    dummy_cohort._setup_change_tracker()
     dummy_cohort.set_t_eligible("eligible_time", drop_ineligible=False)
     assert dummy_cohort.t_eligible == "eligible_time"
 

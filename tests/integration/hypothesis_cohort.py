@@ -193,7 +193,7 @@ def _icu_stays(obs: pl.DataFrame) -> pl.DataFrame:
             ).alias("hospital_lenth_of_stay_days"),
             pl.int_ranges(0, pl.col("icu_stays")).alias("icu_stay_num"),
         )
-        .explode("icu_stay_num")
+        .explode("icu_stay_num", empty_as_null=True)
         .with_columns(
             pl.col("hospital_lenth_of_stay_days")
             .sub(pl.col("icu_stays").sub(1).mul(2))
@@ -247,7 +247,7 @@ def _procedures(obs: pl.DataFrame) -> pl.DataFrame:
             ).alias("hospital_lenth_of_stay_hours"),
             pl.int_ranges(0, pl.col("procedures")).alias("procedure_num"),
         )
-        .explode("procedure_num")
+        .explode("procedure_num", empty_as_null=True)
         .with_columns(
             pl.col("hospital_lenth_of_stay_hours")
             .sub(pl.col("procedures").sub(1).mul(12))

@@ -24,7 +24,7 @@ dependencies = [
     "numpy>=2.0.0",
     "pandas>=2.2.0,<3.0.0",
     "plotly>=5.0.0",
-    "polars>=1.31.0",
+    "polars==1.44.1",
     "tableone>=0.7.10",
     "scipy>=1.10.0",
     "tqdm>=4.65",
@@ -85,6 +85,15 @@ include = [
     "src/corr_vars/sources/**/*.pkl",
     "src/corr_vars/style/*.rc",
 ]
+
+[tool.pytest.ini_options]
+# A bare `pytest` runs the offline suite only. tests/sources needs local data
+# and Concepts API credentials, so it runs only when named explicitly.
+testpaths = ["tests/integration"]
+markers = [
+    "db: marks tests requiring a live database connection",
+]
+addopts = "-v --tb=short"
 
 [tool.coverage.run]
 branch = true
