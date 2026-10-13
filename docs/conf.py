@@ -18,14 +18,14 @@ from corr_vars import __version__ as release
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "CORR-Variables"
-authors = ["Moritz Thiele", "Noel Kronenberg", "Dario von Wedel"]
+authors = ["Moritz Thiele", "Pedram Ramezani", "Dario von Wedel"]
 
 if len(authors) > 1:
     author = ", ".join(authors[:-1]) + ", and " + authors[-1]
 else:
     author = authors[0]
 
-copyright = f"2025, {author}"
+copyright = f"2026, {author}"
 version = release
 
 # -- General configuration ---------------------------------------------------
