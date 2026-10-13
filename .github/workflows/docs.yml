@@ -28,11 +28,14 @@ jobs:
       - name: Build Sphinx documentation
         run: uv run sphinx-build -M html docs docs/_build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # Pull requests only build, so a broken docs build fails the check.
+      # Pushes to main publish the HTML to the orphan `docs-html` branch.
+      - name: Publish HTML to docs branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_build/html
-          publish_branch: gh-pages
+          publish_branch: docs
           force_orphan: true
-          cname: docs.corr-vars.de
+          commit_message: "docs: build ${{ github.sha }}"
