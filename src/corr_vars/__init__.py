@@ -1,6 +1,6 @@
 """corr_vars - Build clinical study cohorts from ICU and hospital data sources."""
 
-__version__ = "2.0.1"
+__version__ = "2.0.2"
 __author__ = "Moritz Thiele"
 
 import contextlib
