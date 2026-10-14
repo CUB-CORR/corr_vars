@@ -71,7 +71,10 @@ class EmptyCohort(Cohort):
     def __init__(
         self,
         obs_level: ObsLevelName = "icu_stay",
+        *,
+        obs: pl.DataFrame | None = None,
     ) -> None:
+        self._initial_obs = obs if obs is not None else pl.DataFrame()
         return super().__init__(
             obs_level=obs_level,
             sources={},
@@ -84,12 +87,10 @@ class EmptyCohort(Cohort):
     def with_obs(
         cls, obs: pl.DataFrame, obs_level: ObsLevelName = "hospital_stay"
     ) -> EmptyCohort:
-        cls._obs = obs
-        return cls(obs_level=obs_level)
+        return cls(obs_level=obs_level, obs=obs)
 
     def _load_obs_level_data(self):
-        if not hasattr(self, "_obs"):
-            self._obs = pl.DataFrame()
+        self._obs = self._initial_obs
 
     def _setup_change_tracker(self):
         if not self._obs.is_empty():

@@ -49,16 +49,8 @@ class _StubCohort(EmptyCohort):
 
     @classmethod
     def build(cls, obs: pl.DataFrame, **stubs: _StubVariable) -> _StubCohort:
-        """Construct a cohort over `obs`, resolving variables from `stubs`.
-
-        ``EmptyCohort`` keeps ``_obs`` as a *class* attribute, so a cohort built
-        by another test module would otherwise be inherited here and fail the
-        change tracker's primary-key count. Setting it on this subclass first
-        shadows whatever is on the parent.
-        """
-        cls._obs = obs
-        cohort = cls(obs_level="icu_stay")
-        cohort._obs = obs
+        """Construct a cohort over `obs`, resolving variables from `stubs`."""
+        cohort = cls.with_obs(obs, obs_level="icu_stay")
         cohort._stubs = stubs
         return cohort
 
@@ -327,7 +319,7 @@ class TestVariableLoader:
 
 
 class _ForeignCohort(EmptyCohort):
-    """Cohort whose own ``_obs`` never touches ``EmptyCohort``'s class attribute."""
+    """``EmptyCohort`` for cohorts that claim sources it never loads from."""
 
 
 class TestHandBuiltVariablesOnForeignCohort:
@@ -355,11 +347,7 @@ class TestHandBuiltVariablesOnForeignCohort:
     @pytest.fixture
     def reprodicu_cohort(self, obs: pl.DataFrame) -> _ForeignCohort:
         """A cohort over `obs` that claims a single, foreign source."""
-        # `_obs` is a class attribute on EmptyCohort. Building through the
-        # subclass keeps this frame off the parent, where other test modules
-        # would inherit it (see `_StubCohort.build`).
         cohort = _ForeignCohort.with_obs(obs, obs_level="icu_stay")
-        cohort._obs = obs
         # EmptyCohort loads no defaults, so neither of these is set for it.
         cohort.constant_vars = []
         cohort.sources = {"reprodicu": {}}
