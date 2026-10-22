@@ -27,6 +27,7 @@ import time
 import warnings
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import httpx
 import ibis
@@ -160,18 +161,77 @@ def fetch_manifest(path: str) -> dict[str, Any]:
     return manifest
 
 
-def resolve_files(path: str, files: Iterable[str]) -> list[str]:
+#: A manifest-relative data file path: plain segments of safe characters ending
+#: in ``.parquet`` (no scheme, drive letter, backslash or absolute path).
+_SAFE_FILE_PATTERN: Final[re.Pattern[str]] = re.compile(r"[A-Za-z0-9_./=-]+\.parquet")
+
+
+def validate_file_path(rel: object, dataset: str | None = None) -> str:
+    """Check that a manifest-supplied file path stays inside the dataset.
+
+    The manifest comes from the server (or a local folder) and is not trusted:
+    a path such as ``../x.parquet`` or ``/etc/x.parquet`` would otherwise be
+    read from, or downloaded to, a location outside the dataset folder.
+
+    Args:
+        rel (object): The path as listed in the manifest.
+        dataset (str | None): The manifest's ``dataset`` name; when given the
+            path must lie under ``<dataset>/``.
+
+    Returns:
+        str: `rel`, unchanged.
+
+    Raises:
+        ValueError: If `rel` is absolute, carries a scheme or drive letter,
+            contains a backslash or a ``.``/``..``/empty segment, is not a
+            ``.parquet`` file of safe characters, or lies outside ``<dataset>/``.
+    """
+    reason = None
+    if not isinstance(rel, str) or not rel:
+        reason = "not a non-empty string"
+    elif "\\" in rel:
+        reason = "contains a backslash"
+    elif rel.startswith("/") or re.match(r"^[A-Za-z]:", rel):
+        reason = "is absolute"
+    elif ":" in rel:
+        reason = "carries a scheme"
+    elif any(seg in ("", ".", "..") for seg in rel.split("/")):
+        reason = "contains an empty, '.' or '..' segment"
+    elif not _SAFE_FILE_PATTERN.fullmatch(rel):
+        reason = "is not a '.parquet' file of characters [A-Za-z0-9_./=-]"
+    elif dataset is not None and not rel.startswith(f"{dataset}/"):
+        reason = f"lies outside the dataset folder {dataset!r}"
+    if reason is not None:
+        raise ValueError(
+            f"Refusing unsafe file path {rel!r} in the charite_demo manifest: "
+            f"it {reason}."
+        )
+    return rel
+
+
+def resolve_files(
+    path: str, files: Iterable[str], dataset: str | None = None
+) -> list[str]:
     """Turn manifest-relative file paths into absolute URLs or paths.
+
+    Every path is checked with :func:`validate_file_path` first, so a manifest
+    cannot point a view at a file outside the dataset.
 
     Args:
         path (str): Normalised dataset location.
         files (Iterable[str]): File paths relative to the manifest.
+        dataset (str | None): The manifest's ``dataset`` name; when given every
+            path must lie under ``<dataset>/``.
 
     Returns:
         list[str]: Absolute URLs for a remote dataset, absolute paths otherwise.
+
+    Raises:
+        ValueError: If a path is unsafe (see :func:`validate_file_path`).
     """
+    files = [validate_file_path(f, dataset) for f in files]
     if is_url(path):
-        return [f"{path}/{f.lstrip('/')}" for f in files]
+        return [f"{path}/{f}" for f in files]
     return [str(Path(path) / f) for f in files]
 
 
@@ -257,7 +317,15 @@ class DuckDBConnector:
         value = self.manifest.get("reference_now")
         if not value:
             return None
-        return datetime.fromisoformat(str(value).rstrip("Z")).replace(tzinfo=None)
+        text = str(value)
+        # ``fromisoformat`` accepts a trailing ``Z`` only from Python 3.11 on.
+        if text.endswith(("Z", "z")):
+            text = text[:-1] + "+00:00"
+        parsed = datetime.fromisoformat(text)
+        if parsed.tzinfo is not None:
+            # The dataset's timestamps are naive Europe/Berlin wall-clock times.
+            parsed = parsed.astimezone(ZoneInfo(SESSION_TIME_ZONE))
+        return parsed.replace(tzinfo=None)
 
     @property
     def tables(self) -> list[str]:
@@ -303,8 +371,10 @@ class DuckDBConnector:
         raw = self.conn.con
         schema = _sql_identifier(self.database)
         raw.execute(f"CREATE SCHEMA IF NOT EXISTS {schema}")
+        dataset = self.manifest.get("dataset")
+        dataset = dataset if isinstance(dataset, str) else None
         for table, info in self.manifest["tables"].items():
-            files = resolve_files(self.path, info.get("files", []))
+            files = resolve_files(self.path, info.get("files", []), dataset)
             if not files:
                 logger.warning(
                     __(

@@ -15,13 +15,19 @@ import logging
 import re
 import threading
 from datetime import datetime, timedelta
+from pathlib import Path
 from uuid import uuid4
 
 import ibis
 import polars as pl
 
 from corr_vars import __, logger, utils
-from corr_vars.sources.charite_demo.connector import DuckDBConnector, normalize_path
+from corr_vars.sources.charite_demo.connector import (
+    MANIFEST_FILE,
+    DuckDBConnector,
+    is_url,
+    normalize_path,
+)
 from corr_vars.sources.charite_demo.mapping import TABLES
 
 from dataclasses import dataclass
@@ -109,8 +115,32 @@ def get_databases(cohort_or_config: Cohort | DemoSourceDict) -> SourceDatabases:
 get_cub_hdp_config = get_source_config
 get_cub_hdp_database = get_databases
 
-_CONNECTORS: dict[tuple[str, str], DuckDBConnector] = {}
+#: Cached connectors by ``(path, database)``, each with the identity of the
+#: manifest it was built from (see :func:`_manifest_identity`).
+_CONNECTORS: dict[tuple[str, str], tuple[object, DuckDBConnector]] = {}
 _CONNECTORS_LOCK = threading.Lock()
+
+
+def _manifest_identity(path: str) -> object:
+    """Identify the manifest a connector for `path` would read.
+
+    A local dataset is identified by its ``manifest.json``'s modification time
+    and size, so a folder refreshed by :func:`download` (or by hand) is picked
+    up; a URL is assumed to be stable for the life of the process.
+
+    Args:
+        path (str): Normalised dataset location.
+
+    Returns:
+        object: A comparable token; ``None`` for a URL or a missing manifest.
+    """
+    if is_url(path):
+        return None
+    try:
+        stat = (Path(path) / MANIFEST_FILE).stat()
+    except OSError:
+        return None
+    return (stat.st_mtime_ns, stat.st_size)
 
 
 def reinit_conn(cohort_or_config: Cohort | DemoSourceDict) -> DuckDBConnector:
@@ -121,7 +151,8 @@ def reinit_conn(cohort_or_config: Cohort | DemoSourceDict) -> DuckDBConnector:
     It has to: the views and the temporary tables created by
     :class:`temporary_table` live inside that one in-process DuckDB, and a
     second connection would see neither. The name is kept so ported code reads
-    the same.
+    the same. When the ``manifest.json`` of a local dataset has changed since
+    the connector was built, the connector is closed and rebuilt.
 
     Args:
         cohort_or_config: A cohort object or a charite_demo source config dict.
@@ -135,20 +166,34 @@ def reinit_conn(cohort_or_config: Cohort | DemoSourceDict) -> DuckDBConnector:
     """
     config = get_source_config(cohort_or_config)
     key = (normalize_path(config["path"]), config["database"])
+    identity = _manifest_identity(key[0])
     with _CONNECTORS_LOCK:
-        conn = _CONNECTORS.get(key)
-        if conn is None:
-            conn = DuckDBConnector(path=key[0], database=key[1])
-            _CONNECTORS[key] = conn
+        cached = _CONNECTORS.get(key)
+        if cached is not None and cached[0] == identity:
+            return cached[1]
+        if cached is not None:
+            logger.info(
+                __("charite_demo dataset at {path} changed; reconnecting", path=key[0])
+            )
+            cached[1].close()
+            del _CONNECTORS[key]
+        conn = DuckDBConnector(path=key[0], database=key[1])
+        _CONNECTORS[key] = (identity, conn)
         return conn
 
 
-def clear_connections() -> None:
-    """Close and forget every cached connector (and with it its temporary tables)."""
+def clear_connections(path: str | None = None) -> None:
+    """Close and forget cached connectors (and with them their temporary tables).
+
+    Args:
+        path (str | None): Only forget the connectors of this dataset location;
+            every connector when ``None``.
+    """
+    target = normalize_path(path) if path is not None else None
     with _CONNECTORS_LOCK:
-        for conn in _CONNECTORS.values():
-            conn.close()
-        _CONNECTORS.clear()
+        for key in list(_CONNECTORS):
+            if target is None or key[0] == target:
+                _CONNECTORS.pop(key)[1].close()
 
 
 # ------------------------
@@ -321,6 +366,10 @@ def filter_by_tmp_table(
 
 _CAST_PATTERN = re.compile(r"(?<![\w.])CAST\s*\(", flags=re.IGNORECASE)
 
+#: A quoted span: a string literal (``''`` escapes a quote) or a quoted
+#: identifier (``""`` escapes a quote). An unterminated span runs to the end.
+_QUOTED_PATTERN = re.compile(r"'(?:[^']|'')*(?:'|$)|\"(?:[^\"]|\"\")*(?:\"|$)")
+
 
 def try_cast_sql(fragment: str) -> str:
     """Rewrite ``CAST(`` to ``TRY_CAST(`` in a raw SQL fragment.
@@ -328,8 +377,9 @@ def try_cast_sql(fragment: str) -> str:
     Concept definitions were written for Impala, where a cast that fails yields
     ``NULL``. DuckDB's ``CAST`` raises instead, so a single malformed value in a
     free-text column would abort the whole extraction; ``TRY_CAST`` restores the
-    Impala behaviour. ``TRY_CAST`` itself and identifiers merely ending in
-    ``cast`` are left alone.
+    Impala behaviour. ``TRY_CAST`` itself, identifiers merely ending in
+    ``cast`` and text inside string literals (``'...'``) or quoted identifiers
+    (``"..."``) are left alone.
 
     Args:
         fragment: Raw SQL (a ``WHERE`` body or a projected expression).
@@ -337,7 +387,14 @@ def try_cast_sql(fragment: str) -> str:
     Returns:
         The fragment with every ``CAST(`` call turned into ``TRY_CAST(``.
     """
-    return _CAST_PATTERN.sub("TRY_CAST(", fragment)
+    out: list[str] = []
+    pos = 0
+    for quoted in _QUOTED_PATTERN.finditer(fragment):
+        out.append(_CAST_PATTERN.sub("TRY_CAST(", fragment[pos : quoted.start()]))
+        out.append(quoted.group())
+        pos = quoted.end()
+    out.append(_CAST_PATTERN.sub("TRY_CAST(", fragment[pos:]))
+    return "".join(out)
 
 
 def apply_sql_where(table: ibis.Table, where: str | None) -> ibis.Table:

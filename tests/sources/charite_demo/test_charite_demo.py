@@ -33,7 +33,11 @@ from corr_vars.sources.charite_demo import (
     download,
     helpers,
 )
-from corr_vars.sources.charite_demo.connector import DuckDBConnector
+from corr_vars.sources.charite_demo.connector import (
+    DuckDBConnector,
+    resolve_files,
+    validate_file_path,
+)
 from corr_vars.sources.config_loader import _load_source_defaults
 from corr_vars.utils.time import TimeWindow
 
@@ -102,6 +106,20 @@ class TestConnector:
         assert conn.path == str(dataset_dir.resolve())
         conn.close()
 
+    @pytest.mark.parametrize(
+        ("value", "expected"),
+        [
+            ("2025-12-31T23:59:59", datetime(2025, 12, 31, 23, 59, 59)),
+            ("2025-12-31T22:59:59Z", datetime(2025, 12, 31, 23, 59, 59)),
+            ("2025-07-01T12:00:00+00:00", datetime(2025, 7, 1, 14, 0)),
+            ("2025-07-01T12:00:00+02:00", datetime(2025, 7, 1, 12, 0)),
+            (None, None),
+        ],
+    )
+    def test_reference_now_is_berlin_wall_clock(self, value, expected) -> None:
+        stub = SimpleNamespace(manifest={"reference_now": value})
+        assert DuckDBConnector.reference_now.fget(stub) == expected
+
     def test_missing_manifest_names_the_fix(self, tmp_path: Path) -> None:
         with pytest.raises(FileNotFoundError, match="download"):
             DuckDBConnector(str(tmp_path))
@@ -124,6 +142,56 @@ class TestConnector:
         conn.close()
 
 
+class TestManifestPaths:
+    @pytest.mark.parametrize(
+        "rel",
+        [
+            "../x.parquet",
+            "charite_mockdata/../../x.parquet",
+            "charite_mockdata/./x.parquet",
+            "charite_mockdata//x.parquet",
+            "/etc/x.parquet",
+            "C:/x.parquet",
+            "charite_mockdata\\x.parquet",
+            "http://evil.example/x.parquet",
+            "file:x.parquet",
+            "charite_mockdata/x.txt",
+            "",
+            None,
+        ],
+    )
+    def test_unsafe_paths_rejected(self, rel) -> None:
+        with pytest.raises(ValueError, match="unsafe file path"):
+            validate_file_path(rel)
+        for base in ("/data/demo", "https://example.org/demo"):
+            with pytest.raises(ValueError, match="unsafe file path"):
+                resolve_files(base, ["charite_mockdata/ok.parquet", rel])
+
+    def test_outside_dataset_rejected(self) -> None:
+        with pytest.raises(ValueError, match="outside the dataset folder"):
+            validate_file_path("ground_truth/x.parquet", "charite_mockdata")
+
+    def test_nested_path_resolves(self) -> None:
+        rel = (
+            "charite_mockdata/it_copra6_hierarchy_v2/part-000-vital_IBP=1-ab12.parquet"
+        )
+        assert validate_file_path(rel, "charite_mockdata") == rel
+        assert resolve_files("https://example.org/demo", [rel], "charite_mockdata") == [
+            f"https://example.org/demo/{rel}"
+        ]
+        assert resolve_files("/data/demo", [rel]) == [str(Path("/data/demo", rel))]
+
+    def test_connector_rejects_unsafe_manifest(
+        self, tmp_path: Path, make_dataset
+    ) -> None:
+        root = make_dataset(tmp_path / "ds")
+        manifest = json.loads((root / "manifest.json").read_text())
+        manifest["tables"]["it_ishmed_fall"]["files"] = ["../outside.parquet"]
+        (root / "manifest.json").write_text(json.dumps(manifest))
+        with pytest.raises(ValueError, match="'../outside.parquet'"):
+            DuckDBConnector(str(root))
+
+
 class TestReinitConn:
     def test_one_connector_per_dataset(
         self, dataset_dir: Path, tmp_path: Path, make_dataset
@@ -134,6 +202,22 @@ class TestReinitConn:
 
         other = source_config(make_dataset(tmp_path / "other"))
         assert helpers.reinit_conn(other) is not helpers.reinit_conn(cfg)
+
+    def test_changed_local_manifest_reconnects(
+        self, tmp_path: Path, make_dataset
+    ) -> None:
+        root = make_dataset(tmp_path / "ds")
+        cfg = source_config(root)
+        first = helpers.reinit_conn(cfg)
+        assert "it_ishmed_labor" in first.tables
+
+        manifest = json.loads((root / "manifest.json").read_text())
+        del manifest["tables"]["it_ishmed_labor"]
+        (root / "manifest.json").write_text(json.dumps(manifest))
+        second = helpers.reinit_conn(cfg)
+        assert second is not first
+        assert "it_ishmed_labor" not in second.tables
+        assert helpers.reinit_conn(cfg) is second
 
     def test_databases(self, dataset_dir: Path) -> None:
         dbs = helpers.get_databases(source_config(dataset_dir))
@@ -182,6 +266,23 @@ class TestTryCast:
             ("TRY_CAST(c_wert AS float)", "TRY_CAST(c_wert AS float)"),
             ("my_cast(c_wert)", "my_cast(c_wert)"),
             ("c_value = 'CAST'", "c_value = 'CAST'"),
+            (
+                "c_text = 'cast(x)' AND CAST(a AS int) > 1",
+                "c_text = 'cast(x)' AND TRY_CAST(a AS int) > 1",
+            ),
+            (
+                "c_text = 'it''s cast(x)' OR cast(a as int) = 1",
+                "c_text = 'it''s cast(x)' OR TRY_CAST(a as int) = 1",
+            ),
+            (
+                '"cast(col" = 1 AND CAST(b AS int) = 2',
+                '"cast(col" = 1 AND TRY_CAST(b AS int) = 2',
+            ),
+            ("CAST(c_systolic AS float)", "TRY_CAST(c_systolic AS float)"),
+            (
+                "c_var_name = 'Score_SOFA_Total' AND CAST(c_value AS double) BETWEEN 0 AND 24",
+                "c_var_name = 'Score_SOFA_Total' AND TRY_CAST(c_value AS double) BETWEEN 0 AND 24",
+            ),
         ],
     )
     def test_rewrite(self, fragment: str, expected: str) -> None:
@@ -426,6 +527,12 @@ class _RangeHandler(http.server.SimpleHTTPRequestHandler):
         size = path.stat().st_size
         start_s, _, end_s = rng.removeprefix("bytes=").partition("-")
         start = int(start_s) if start_s else size - int(end_s)
+        if start >= size:
+            self.send_response(416)
+            self.send_header("Content-Range", f"bytes */{size}")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return None
         end = int(end_s) if start_s and end_s else size - 1
         end = min(end, size - 1)
         fh = path.open("rb")
@@ -447,10 +554,25 @@ class _RangeHandler(http.server.SimpleHTTPRequestHandler):
         self._remaining = None
 
 
+class _NoLengthHandler(_RangeHandler):
+    """Range handler whose ``HEAD`` answers carry no ``Content-Length``."""
+
+    def do_HEAD(self) -> None:  # noqa: N802
+        self.send_response(200)
+        self.end_headers()
+
+
+class _NoRangeHandler(http.server.SimpleHTTPRequestHandler):
+    """Static file handler that ignores ``Range`` and always answers 200."""
+
+    def log_message(self, format: str, *args: object) -> None:
+        pass
+
+
 @contextlib.contextmanager
-def _serve(directory: Path):
+def _serve(directory: Path, handler_class: type = _RangeHandler):
     """Serve `directory` over HTTP on localhost; yields the base URL."""
-    handler = functools.partial(_RangeHandler, directory=str(directory))
+    handler = functools.partial(handler_class, directory=str(directory))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -585,3 +707,141 @@ class TestHttp:
     def test_read_over_http(self, served_dataset: str) -> None:
         obs = cohort.load_data(ObsLevel.ICU_STAY, source_config(served_dataset))
         assert obs.height == 3
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "../x.parquet",
+            "charite_mockdata/../../x.parquet",
+            "/ABSOLUTE/abs.parquet",
+            "charite_mockdata\\..\\..\\x.parquet",
+            "http://evil.example/x.parquet",
+        ],
+    )
+    def test_download_rejects_unsafe_manifest_paths(
+        self, dataset_dir: Path, tmp_path: Path, bad: str
+    ) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        outside = tmp_path / "outside"
+        bad = bad.replace("/ABSOLUTE", str(outside))
+        manifest = json.loads((release / "manifest.json").read_text())
+        # the unsafe path comes after a valid table: nothing may be written
+        manifest["tables"]["zz_evil"] = {"files": [bad]}
+        (release / "manifest.json").write_text(json.dumps(manifest))
+        (release / "x.parquet").write_bytes(b"evil")
+
+        target = tmp_path / "copy" / "nested"
+        with (
+            _serve(release) as url,
+            pytest.raises(ValueError, match="unsafe file path"),
+        ):
+            download(target, base_url=url)
+        assert not (tmp_path / "copy").exists()
+        assert not (tmp_path / "x.parquet").exists()
+        assert not outside.exists()
+
+    def test_download_nested_valid_path(
+        self, dataset_dir: Path, tmp_path: Path
+    ) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        manifest = json.loads((release / "manifest.json").read_text())
+        nested = [
+            f
+            for f in manifest["tables"]["it_copra6_hierarchy_v2"]["files"]
+            if f.count("/") == 2
+        ]
+        assert nested
+        with _serve(release) as url:
+            target = Path(download(tmp_path / "copy", base_url=url))
+        assert all((target / f).is_file() for f in nested)
+
+    def test_subset_refresh_keeps_other_tables(
+        self, dataset_dir: Path, tmp_path: Path
+    ) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        manifest = json.loads((release / "manifest.json").read_text())
+        target = tmp_path / "copy"
+        db = target / "charite_mockdata"
+        with _serve(release) as url:
+            download(target, base_url=url)
+            # a stale file of the refreshed table and one of another table
+            (db / "it_ishmed_fall-0123456789ab.parquet").write_bytes(b"old")
+            (db / "it_ishmed_patient-0123456789ab.parquet").write_bytes(b"old")
+            # a damaged copy of another table is dropped from the manifest
+            diagnose = manifest["tables"]["it_ishmed_diagnose"]["files"][0]
+            (target / diagnose).write_bytes(b"broken")
+
+            download(target, base_url=url, tables=["it_ishmed_fall"])
+
+        local = json.loads((target / "manifest.json").read_text())
+        expected = set(manifest["tables"]) - {"it_ishmed_diagnose"}
+        assert set(local["tables"]) == expected
+        kept = {f for t in expected for f in manifest["tables"][t]["files"]}
+        assert set(local["files"]) == kept
+        assert all((target / f).is_file() for f in kept)
+        assert not (db / "it_ishmed_fall-0123456789ab.parquet").exists()
+        assert (db / "it_ishmed_patient-0123456789ab.parquet").exists()
+        assert DuckDBConnector(str(target)).tables == sorted(expected)
+
+    def test_redownload_refreshes_cached_connector(
+        self, dataset_dir: Path, tmp_path: Path, make_dataset
+    ) -> None:
+        target = tmp_path / "copy"
+        cfg = source_config(target)
+        count = "SELECT count(*) FROM charite_mockdata.it_ishmed_fall"
+
+        with _serve(_hashed_release(dataset_dir, tmp_path / "v1")) as url:
+            download(target, base_url=url)
+        first = helpers.reinit_conn(cfg)
+        assert first.execute(count) == [(4,)]
+
+        # a new release with one case less: new hashed file names
+        src = make_dataset(tmp_path / "src2")
+        fall = src / "charite_mockdata" / "it_ishmed_fall.parquet"
+        pl.read_parquet(fall).filter(pl.col("c_falnr") != F4).write_parquet(fall)
+        with _serve(_hashed_release(src, tmp_path / "v2")) as url:
+            download(target, base_url=url)
+
+        second = helpers.reinit_conn(cfg)
+        assert second is not first
+        assert second.execute(count) == [(3,)]
+        obs = cohort.load_data(ObsLevel.HOSPITAL_STAY, cfg)
+        assert sorted(obs["case_id"]) == [F1, F2]
+
+    def test_complete_partial_file(self, dataset_dir: Path, tmp_path: Path) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        manifest = json.loads((release / "manifest.json").read_text())
+        rel = manifest["tables"]["it_ishmed_fall"]["files"][0]
+        target = tmp_path / "copy"
+        good = (release / rel).read_bytes()
+
+        def complete_part() -> None:
+            (target / rel).unlink()
+            (target / (rel + ".part")).write_bytes(good)
+
+        with _serve(release) as url:
+            download(target, base_url=url)
+            complete_part()
+            download(target, base_url=url)
+            assert (target / rel).read_bytes() == good
+        # without a content-length the resume hits 416 and is verified instead
+        with _serve(release, _NoLengthHandler) as url:
+            complete_part()
+            download(target, base_url=url)
+            assert (target / rel).read_bytes() == good
+            assert not (target / (rel + ".part")).exists()
+
+    def test_server_ignoring_range_restarts(
+        self, dataset_dir: Path, tmp_path: Path
+    ) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        manifest = json.loads((release / "manifest.json").read_text())
+        rel = manifest["tables"]["it_ishmed_fall"]["files"][0]
+        target = tmp_path / "copy"
+        good = (release / rel).read_bytes()
+        with _serve(release, _NoRangeHandler) as url:
+            download(target, base_url=url)
+            (target / rel).unlink()
+            (target / (rel + ".part")).write_bytes(b"garbage")
+            download(target, base_url=url)
+        assert (target / rel).read_bytes() == good

@@ -23,9 +23,11 @@ from corr_vars.sources.charite_demo.connector import (
     fetch_manifest,
     is_url,
     normalize_path,
+    validate_file_path,
 )
+from corr_vars.sources.charite_demo.helpers import clear_connections
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -35,6 +37,9 @@ DOWNLOAD_TIMEOUT: float = 60.0
 
 #: Chunk size (bytes) files are streamed in.
 CHUNK_SIZE: int = 1 << 20
+
+#: A valid ``dataset`` name: the subfolder the table files live in.
+_DATASET_PATTERN = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_.-]*")
 
 
 def download(
@@ -55,7 +60,16 @@ def download(
     files. Parquet files under the dataset's own subfolder (``<dest>/<dataset>/``,
     e.g. ``charite_mockdata/``) that the new manifest does not list are removed
     after the download; nothing outside that subfolder is touched. The folder
-    gets its own ``manifest.json`` listing exactly the downloaded tables.
+    gets its own ``manifest.json`` listing exactly the tables on disk.
+
+    With `tables`, the download refreshes only those tables: the other tables of
+    an existing local copy stay listed (as long as their files are present and
+    match their recorded size and sha256), and only stale files of the
+    requested tables are removed.
+
+    Every file path in the manifest must be a ``.parquet`` file under
+    ``<dataset>/``; a manifest listing any other path (absolute, with ``..``,
+    a backslash or a scheme) is rejected before anything is written.
 
     .. code-block:: python
 
@@ -73,8 +87,8 @@ def download(
         str: The absolute path of `dest`, usable as the source's ``path``.
 
     Raises:
-        ValueError: If `base_url` is not a URL, or `tables` names a table the
-            manifest does not list.
+        ValueError: If `base_url` is not a URL, `tables` names a table the
+            manifest does not list, or the manifest lists an unsafe file path.
         ConnectionError: If the manifest cannot be fetched.
         httpx.HTTPError: If a file cannot be downloaded or fails its checksum.
     """
@@ -82,10 +96,10 @@ def download(
     if not is_url(base):
         raise ValueError(f"base_url must be an http(s) URL, got {base_url!r}")
     target = Path(dest).expanduser().resolve()
-    target.mkdir(parents=True, exist_ok=True)
 
     manifest = fetch_manifest(base)
     available = manifest["tables"]
+    wanted: list[str] | None = None
     if tables is not None:
         wanted = list(dict.fromkeys(tables))
         unknown = sorted(set(wanted) - set(available))
@@ -95,25 +109,48 @@ def download(
             )
         manifest = {**manifest, "tables": {t: available[t] for t in wanted}}
 
+    dataset = manifest.get("dataset")
+    if not isinstance(dataset, str) or not _DATASET_PATTERN.fullmatch(dataset):
+        raise ValueError(
+            f"The charite_demo manifest at {base} names no valid 'dataset' folder: "
+            f"{dataset!r}"
+        )
     files = [f for info in manifest["tables"].values() for f in info.get("files", [])]
+    # Validate every path before anything is written.
+    for rel in files:
+        _check_target_path(target, rel, dataset)
     index = manifest.get("files") if isinstance(manifest.get("files"), dict) else {}
+
+    target.mkdir(parents=True, exist_ok=True)
+    # A subset refresh keeps the other tables of an existing local copy.
+    kept_tables, kept_index = (
+        _kept_tables(target, dataset, exclude=set(wanted))
+        if wanted is not None
+        else ({}, {})
+    )
+    # The cached connector of this folder would point at replaced files.
+    clear_connections(str(target))
+
     with httpx.Client(
         timeout=httpx.Timeout(DOWNLOAD_TIMEOUT), follow_redirects=True
     ) as client:
         for rel in tqdm(files, desc="charite_demo", unit="file"):
             info = index.get(rel) if isinstance(index.get(rel), dict) else {}
-            _download_file(
-                client, f"{base}/{rel.lstrip('/')}", target / rel, info.get("sha256")
-            )
+            _download_file(client, f"{base}/{rel}", target / rel, info.get("sha256"))
 
-    # The local manifest describes exactly what was downloaded (the evaluation
+    # The local manifest describes exactly what is on disk (the evaluation
     # sidecar under "ground_truth" is not downloaded, so it is not listed).
     local = {k: v for k, v in manifest.items() if k != "ground_truth"}
-    if index:
-        local["files"] = {f: index[f] for f in files if f in index}
+    local["tables"] = {**kept_tables, **manifest["tables"]}
+    local_index = {**kept_index, **{f: index[f] for f in files if f in index}}
+    if local_index:
+        local["files"] = local_index
+    else:
+        local.pop("files", None)
     # Written last: a folder with a manifest is a complete dataset.
     (target / MANIFEST_FILE).write_text(json.dumps(local, indent=2))
-    removed = _remove_stale(target, manifest.get("dataset"), files)
+    keep = [f for info in local["tables"].values() for f in info.get("files", [])]
+    removed = _remove_stale(target, dataset, keep, tables=wanted)
     logger.info(
         __(
             "Downloaded {n} charite_demo file(s) to {target} ({removed} stale file(s) removed)",
@@ -125,6 +162,90 @@ def download(
     return str(target)
 
 
+def _check_target_path(target: Path, rel: object, dataset: str) -> Path:
+    """Validate a manifest file path and return where it is stored under `target`.
+
+    Args:
+        target (Path): The resolved download folder.
+        rel (object): The manifest-relative path.
+        dataset (str): The manifest's ``dataset`` name.
+
+    Returns:
+        Path: ``target / rel``.
+
+    Raises:
+        ValueError: If `rel` is unsafe (see
+            :func:`~corr_vars.sources.charite_demo.connector.validate_file_path`)
+            or would resolve outside `target`.
+    """
+    rel = validate_file_path(rel, dataset)
+    path = target / rel
+    if not path.resolve().is_relative_to(target):
+        raise ValueError(
+            f"Refusing unsafe file path {rel!r} in the charite_demo manifest: "
+            f"it resolves outside {target}."
+        )
+    return path
+
+
+def _kept_tables(
+    target: Path, dataset: str, exclude: set[str]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Tables of an existing local copy that a subset download should keep.
+
+    A table is kept when it is not being downloaded and every one of its files
+    is present, safe and matches the size and sha256 its index entry records.
+
+    Args:
+        target (Path): The resolved download folder.
+        dataset (str): The dataset name of the release being downloaded.
+        exclude (set[str]): Tables being downloaded now.
+
+    Returns:
+        tuple: ``(tables, files)`` entries to carry over into the new manifest.
+    """
+    try:
+        old = json.loads((target / MANIFEST_FILE).read_text())
+    except (OSError, ValueError):
+        return {}, {}
+    if not isinstance(old, dict) or not isinstance(old.get("tables"), dict):
+        return {}, {}
+    old_index = old.get("files") if isinstance(old.get("files"), dict) else {}
+    tables: dict[str, Any] = {}
+    index: dict[str, Any] = {}
+    for table, info in old["tables"].items():
+        if table in exclude or not isinstance(info, dict):
+            continue
+        files = info.get("files", [])
+        try:
+            paths = [_check_target_path(target, f, dataset) for f in files]
+        except (TypeError, ValueError) as error:
+            logger.warning(
+                __("Dropping local table {table}: {error}", table=table, error=error)
+            )
+            continue
+        entries = {f: old_index[f] for f in files if isinstance(old_index.get(f), dict)}
+        if not paths or not all(
+            _matches(path, entries.get(f, {})) for f, path in zip(files, paths)
+        ):
+            logger.info(__("Dropping incomplete local table {table}", table=table))
+            continue
+        tables[table] = info
+        index.update(entries)
+    return tables, index
+
+
+def _matches(path: Path, entry: dict[str, Any]) -> bool:
+    """Whether `path` exists and matches the ``bytes``/``sha256`` of its index entry."""
+    if not path.is_file():
+        return False
+    size = entry.get("bytes")
+    if isinstance(size, int) and path.stat().st_size != size:
+        return False
+    sha256 = entry.get("sha256")
+    return not sha256 or _sha256(path) == sha256
+
+
 def _sha256(path: Path) -> str:
     """Hex sha256 of a file."""
     digest = hashlib.sha256()
@@ -134,31 +255,34 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _remove_stale(target: Path, dataset: object, files: list[str]) -> int:
+def _remove_stale(
+    target: Path, dataset: object, files: list[str], tables: list[str] | None = None
+) -> int:
     """Delete Parquet files under ``<target>/<dataset>/`` that `files` does not list.
 
     Only ``*.parquet`` files (and their ``*.parquet.part`` leftovers) inside the
     dataset's own subfolder are candidates; anything else is left alone, and
-    nothing is removed when the subfolder cannot be determined safely.
+    nothing is removed when the subfolder cannot be determined safely. With
+    `tables`, only files of those tables (``<table>[-<hash>].parquet`` or
+    anything under ``<table>/``) are candidates.
 
     Args:
         target (Path): The download folder.
         dataset (object): The manifest's ``dataset`` name (the subfolder).
         files (list[str]): Manifest-relative paths that must be kept.
+        tables (list[str] | None): Restrict removal to these tables' files.
 
     Returns:
         int: Number of files removed.
     """
-    if not isinstance(dataset, str) or not re.fullmatch(
-        r"[A-Za-z0-9_][A-Za-z0-9_.-]*", dataset
-    ):
+    if not isinstance(dataset, str) or not _DATASET_PATTERN.fullmatch(dataset):
         return 0
-    if not files or not all(f.lstrip("/").startswith(f"{dataset}/") for f in files):
+    if not files or not all(f.startswith(f"{dataset}/") for f in files):
         return 0
     root = (target / dataset).resolve()
     if not root.is_dir() or root.parent != target:
         return 0
-    keep = {(target / f.lstrip("/")).resolve() for f in files}
+    keep = {(target / f).resolve() for f in files}
     removed = 0
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.is_symlink():
@@ -169,6 +293,8 @@ def _remove_stale(target: Path, dataset: object, files: list[str]) -> int:
         owner = path.with_name(path.name.removesuffix(".part"))
         if owner.resolve() in keep:
             continue
+        if tables is not None and not _belongs_to(owner.relative_to(root), tables):
+            continue
         path.unlink()
         removed += 1
         logger.debug(__("Removed stale {path}", path=path))
@@ -176,6 +302,15 @@ def _remove_stale(target: Path, dataset: object, files: list[str]) -> int:
         if not any(d.iterdir()):
             d.rmdir()
     return removed
+
+
+def _belongs_to(rel: Path, tables: list[str]) -> bool:
+    """Whether a file under the dataset folder holds data of one of `tables`."""
+    if len(rel.parts) > 1:
+        return rel.parts[0] in tables
+    return any(
+        re.fullmatch(rf"{re.escape(t)}(-[0-9a-f]+)?\.parquet", rel.name) for t in tables
+    )
 
 
 def _download_file(
@@ -211,15 +346,8 @@ def _download_file(
     offset = partial.stat().st_size if partial.is_file() else 0
     if size >= 0 and offset > size:
         offset = 0
-    headers = {"Range": f"bytes={offset}-"} if offset else {}
-
-    with client.stream("GET", url, headers=headers) as response:
-        response.raise_for_status()
-        # A server that ignores the range answers 200 with the whole file.
-        mode = "ab" if offset and response.status_code == 206 else "wb"
-        with partial.open(mode) as fh:
-            for chunk in response.iter_bytes(CHUNK_SIZE):
-                fh.write(chunk)
+    if not (size >= 0 and offset == size):
+        _fetch(client, url, partial, offset)
 
     if size >= 0 and partial.stat().st_size != size:
         raise httpx.HTTPError(
@@ -231,3 +359,32 @@ def _download_file(
             f"Checksum mismatch for {url}; the partial file was removed"
         )
     partial.replace(path)
+
+
+def _fetch(client: httpx.Client, url: str, partial: Path, offset: int) -> None:
+    """Stream `url` into `partial`, resuming at `offset` when the server allows.
+
+    A ``416 Range Not Satisfiable`` answer to a resume means the partial file
+    is already complete; it is left for the caller to verify. A server that
+    ignores the range answers ``200`` with the whole file, which then replaces
+    the partial file.
+
+    Args:
+        client (httpx.Client): Client to download with.
+        url (str): File URL.
+        partial (Path): The ``.part`` file to write.
+        offset (int): Bytes already in `partial`.
+
+    Raises:
+        httpx.HTTPError: If the request fails.
+    """
+    headers = {"Range": f"bytes={offset}-"} if offset else {}
+    with client.stream("GET", url, headers=headers) as response:
+        if offset and response.status_code == 416:
+            logger.debug(__("{url}: partial file already complete", url=url))
+            return
+        response.raise_for_status()
+        mode = "ab" if offset and response.status_code == 206 else "wb"
+        with partial.open(mode) as fh:
+            for chunk in response.iter_bytes(CHUNK_SIZE):
+                fh.write(chunk)
