@@ -208,10 +208,12 @@ class Cohort:
             - ``"procedure"`` per surgical procedure (``procedure_id``).
 
         sources (dict[str, dict]):
-            Dictionary of data sources to use for data extraction. Available option is "reprodicu".
+            Dictionary of data sources to use for data extraction. Available options are "reprodicu" and "charite_demo".
             Source configurations:
 
             - **reprodicu**: ``path``, ``exclude_datasets``, ``include_datasets``
+            - **charite_demo**: ``path`` (dataset URL or local folder, defaults to the published
+              synthetic dataset), ``database``, ``filter``, ``icu_stay``
 
             Note: reprodicu does not yet implement variable extraction, only cohort data.
         project_vars (dict):

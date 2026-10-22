@@ -27,9 +27,19 @@ class TestPackagedRoutingFile:
         assert routing.taxonomy == "corr_v1"
         assert routing.version == "latest"
 
-    def test_single_wildcard_endpoint(self, routing: ConceptRouting) -> None:
+    def test_demo_endpoint_then_wildcard(self, routing: ConceptRouting) -> None:
         assert routing.endpoints == (
+            Endpoint(
+                url="https://demo-concepts.corr.icu/api", sources=("charite_demo",)
+            ),
             Endpoint(url="https://concepts.example.edu/api", sources=("*",)),
+        )
+
+    def test_charite_demo_routes_to_the_demo_endpoint(
+        self, routing: ConceptRouting
+    ) -> None:
+        assert routing.resolve("charite_demo") == ApiRoute(
+            url="https://demo-concepts.corr.icu/api"
         )
 
     def test_local_datasource_is_pinned_local(self, routing: ConceptRouting) -> None:
@@ -117,7 +127,10 @@ class TestOverrides:
     ) -> None:
         routing.with_overrides(taxonomy="other", api_url="https://x")
         assert routing.taxonomy == "corr_v1"
-        assert routing.endpoints[0].url == "https://concepts.example.edu/api"
+        assert [e.url for e in routing.endpoints] == [
+            "https://demo-concepts.corr.icu/api",
+            "https://concepts.example.edu/api",
+        ]
 
     def test_none_keeps_existing_values(self, routing: ConceptRouting) -> None:
         assert routing.with_overrides() == routing

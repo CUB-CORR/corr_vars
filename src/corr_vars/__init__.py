@@ -125,7 +125,7 @@ if STATA_DIR and os.path.isdir(STATA_DIR):
 
 # Import commonly used classes and functions
 from .core.cohort import Cohort  # noqa: E402
-from .sources import local_datasource, reprodicu  # noqa: E402
+from .sources import charite_demo, local_datasource, reprodicu  # noqa: E402
 
 __all__ = [
     "Cohort",
@@ -140,6 +140,7 @@ __all__ = [
     # Forgo dynamic import for now.
     # Stub file was not dynamic anyway and was causing
     # Cohort.obs / Cohort.obsm typechecking to not work
+    "charite_demo",
     "local_datasource",
     "reprodicu",
 ]
