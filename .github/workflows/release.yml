@@ -1,41 +1,180 @@
 name: Release
 
+# Push a `vX.Y.Z` tag (matching __version__) to test, build, publish to PyPI and
+# create the GitHub release. Run manually (workflow_dispatch) for a dry run that
+# publishes to TestPyPI instead. Both use PyPI Trusted Publishing (OIDC): no API
+# tokens. One-time setup: see "Releasing" in README.md.
+
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  release:
+  check-version:
+    name: Check tag matches package version
     runs-on: ubuntu-24.04
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
 
-      - name: Check the tag matches the package version
+      - name: Compare tag, __version__ and CITATION.cff
+        env:
+          IS_TAG: ${{ github.ref_type == 'tag' }}
         run: |
-          tag="${GITHUB_REF_NAME#v}"
           version="$(uv run --no-project python -c "
           import re, pathlib
           text = pathlib.Path('src/corr_vars/__init__.py').read_text()
           print(re.search(r'__version__ = \"([^\"]+)\"', text).group(1))
           ")"
-          if [ "$tag" != "$version" ]; then
+          cff="$(sed -n 's/^version: *//p' CITATION.cff | tr -d '"')"
+          echo "__version__ = $version, CITATION.cff = $cff"
+          if [ "$cff" != "$version" ]; then
+            echo "CITATION.cff version $cff does not match __version__ $version" >&2
+            exit 1
+          fi
+          if [ "$IS_TAG" = "true" ] && [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
             echo "Tag $GITHUB_REF_NAME does not match __version__ $version" >&2
             exit 1
           fi
 
-      - name: Build the distributions
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.13"]
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: uv sync --group test --python ${{ matrix.python-version }}
+
+      - name: Run integration tests
+        run: uv run pytest -n auto tests/integration
+
+  build:
+    name: Build distribution
+    needs:
+      - check-version
+      - test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Build a binary wheel and a source tarball
         run: uv build
+
+      - name: Check the distribution metadata
+        run: uvx twine check --strict dist/*
+
+      - name: Smoke-test the wheel in a clean environment
+        run: |
+          wheel="$(ls "$PWD"/dist/*.whl)"
+          uv venv /tmp/smoke --python 3.12
+          VIRTUAL_ENV=/tmp/smoke uv pip install "${wheel}[charite-demo]"
+          cd /tmp && /tmp/smoke/bin/python -I -c "
+          import corr_vars
+          import corr_vars.sources.charite_demo
+          from corr_vars.sources.charite_demo.mapping import loader
+          from corr_vars.concepts.routing import load_routing
+          assert loader.TABLES and loader.GLOBAL_VARS
+          load_routing()
+          print('corr_vars', corr_vars.__version__, 'OK')
+          "
+
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  publish-to-pypi:
+    name: Publish Python distribution to PyPI
+    if: github.ref_type == 'tag'
+    needs:
+      - build
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/corr-vars
+    permissions:
+      id-token: write
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v6
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: Create the GitHub release
+    if: github.ref_type == 'tag'
+    needs:
+      - publish-to-pypi
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v6
+        with:
+          name: python-package-distributions
+          path: dist/
 
       - name: Create the GitHub release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
           generate_release_notes: true
+
+  publish-to-testpypi:
+    name: Publish Python distribution to TestPyPI
+    if: github.event_name == 'workflow_dispatch'
+    needs:
+      - build
+    runs-on: ubuntu-24.04
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/corr-vars
+    permissions:
+      id-token: write
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v6
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish distribution to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          # TestPyPI never accepts the same version twice; repeat dry runs of
+          # an unchanged version are a no-op instead of a failure.
+          skip-existing: true

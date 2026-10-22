@@ -208,6 +208,24 @@ make clean && make html
 
 The HTML output is written to `docs/_build/html/`. Documentation is automatically published to [docs.corr-vars.de](https://docs.corr-vars.de) on merge to `main`.
 
+### Releasing
+
+Releases are published to PyPI as `corr_vars` by [`.github/workflows/release.yml`](.github/workflows/release.yml) using [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC). No API token is stored anywhere.
+
+**One-time setup**
+
+1. On [PyPI](https://pypi.org/manage/account/publishing/), add a *pending* trusted publisher. Use PyPI project name `corr_vars`, owner `CUB-CORR`, repository `corr_vars`, workflow `release.yml` and environment `pypi`. The first successful publish creates the project.
+2. Do the same on [TestPyPI](https://test.pypi.org/manage/account/publishing/) with environment `testpypi`.
+3. In the GitHub repository, under *Settings → Environments*, create the environments `pypi` and `testpypi`. You can optionally add required reviewers to `pypi` and restrict it to `v*` tags.
+
+**Release procedure**
+
+1. Bump `__version__` in `src/corr_vars/__init__.py` and `version` / `date-released` in `CITATION.cff`, then merge to `main`.
+2. Optionally, dry-run on TestPyPI: *Actions → Release → Run workflow*.
+3. Tag and push: `git tag v2.0.3 && git push origin v2.0.3`.
+
+The workflow first checks that the tag, `__version__` and `CITATION.cff` agree. It then runs the tests, builds and checks the sdist and wheel, publishes to PyPI and creates the GitHub release with the built files attached.
+
 ### Contributing
 
 See the [Contributing Variables](https://docs.corr-vars.de/contributing_variables.html) guide for variable contributions in the documentation.

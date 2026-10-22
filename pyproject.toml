@@ -18,6 +18,20 @@ maintainers = [
     {email = "noel.kronenberg@charite.de"},
     {email = "dario.von-wedel@charite.de"},
 ]
+keywords = ["clinical research", "cohort", "ICU", "electronic health records", "epidemiology"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
 dependencies = [
     # Main
     "corr_vars_widget>=0.0.8",
@@ -77,20 +91,22 @@ dev = [
 Homepage = "https://github.com/CUB-CORR/corr_vars"
 Documentation = "https://docs.corr-vars.de"
 "Bug Tracker" = "https://github.com/CUB-CORR/corr_vars/issues"
+Source = "https://github.com/CUB-CORR/corr_vars"
 
 [tool.hatch.version]
 path = "src/corr_vars/__init__.py"
 
-[tool.hatch.build]
+[tool.hatch.build.targets.wheel]
+# Every non-gitignored file under src/corr_vars ships: code plus package data
+# (concepts/routing.toml, sources/**/mapping/*.json, style/matplotlibrc, ...).
 packages = ["src/corr_vars"]
+
+[tool.hatch.build.targets.sdist]
 include = [
-    "src/corr_vars/concepts/*.toml",
-    "src/corr_vars/sources/**/*.json",
-    "src/corr_vars/sources/**/*.yaml",
-    "src/corr_vars/sources/**/*.csv",
-    "src/corr_vars/sources/**/*.parquet",
-    "src/corr_vars/sources/**/*.pkl",
-    "src/corr_vars/style/*.rc",
+    "src/corr_vars",
+    "/README.md",
+    "/LICENSE.md",
+    "/CITATION.cff",
 ]
 
 [tool.pytest.ini_options]
