@@ -57,6 +57,7 @@ cohort = Cohort(
 
 Install with the extra (`uv add "corr_vars[charite-demo] @ git+https://github.com/CUB-CORR/corr_vars.git"`)
 and follow the [demo tutorial](https://docs.corr-vars.de/tutorials/charite_demo.html).
+For a hands-on notebook to run yourself, see [`examples/`](examples/).
 
 ## Observation Levels
 

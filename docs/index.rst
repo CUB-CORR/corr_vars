@@ -91,7 +91,8 @@ Get started in under 5 minutes:
 
    No data access yet? The :doc:`tutorials/charite_demo` tutorial runs a complete study
    on a public, fully synthetic ICU dataset (20'000 ICU stays) with the public demo
-   Concepts API, no account needed.
+   Concepts API, no account needed. To run it yourself, download the
+   `quickstart notebook <https://github.com/CUB-CORR/corr_vars/tree/main/examples>`_.
 
 .. admonition:: 🎯 **Next Steps**
    :class: tip
