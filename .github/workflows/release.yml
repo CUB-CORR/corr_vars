@@ -1,15 +1,13 @@
 name: Release
 
 # Push a `vX.Y.Z` tag (matching __version__) to test, build, publish to PyPI and
-# create the GitHub release. Run manually (workflow_dispatch) for a dry run that
-# publishes to TestPyPI instead. Both use PyPI Trusted Publishing (OIDC): no API
+# create the GitHub release. Uses PyPI Trusted Publishing (OIDC): no API
 # tokens. One-time setup: see "Releasing" in README.md.
 
 on:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -119,7 +117,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment:
       name: pypi
-      url: https://pypi.org/p/corr-vars
+      url: https://pypi.org/p/corr_vars
     permissions:
       id-token: write
     steps:
@@ -152,29 +150,3 @@ jobs:
         with:
           files: dist/*
           generate_release_notes: true
-
-  publish-to-testpypi:
-    name: Publish Python distribution to TestPyPI
-    if: github.event_name == 'workflow_dispatch'
-    needs:
-      - build
-    runs-on: ubuntu-24.04
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/corr-vars
-    permissions:
-      id-token: write
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v6
-        with:
-          name: python-package-distributions
-          path: dist/
-
-      - name: Publish distribution to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          # TestPyPI never accepts the same version twice; repeat dry runs of
-          # an unchanged version are a no-op instead of a failure.
-          skip-existing: true

@@ -607,9 +607,8 @@ Pages: `index.rst`, `tutorials.rst`, `contributing_variables.rst`,
 `.github/workflows/release.yml` runs on a `v*` tag push. It checks that the tag,
 `__version__` (`src/corr_vars/__init__.py`, the single source read by hatch) and
 `CITATION.cff` agree, then tests, builds, publishes to PyPI via Trusted Publishing
-(environment `pypi`) and creates the GitHub release. `workflow_dispatch` runs a
-dry run to TestPyPI (environment `testpypi`). For the setup and the procedure,
-see "Releasing" in README.md.
+(environment `pypi`) and creates the GitHub release. There is no TestPyPI step.
+For the setup and the procedure, see "Releasing" in README.md.
 
 - Package data ships if it is under `src/corr_vars/` and not gitignored. Build
   config lives in `[tool.hatch.build.targets.wheel]`/`.sdist` — do not move
