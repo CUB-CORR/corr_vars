@@ -30,7 +30,8 @@ class TestPackagedRoutingFile:
     def test_demo_endpoint_then_wildcard(self, routing: ConceptRouting) -> None:
         assert routing.endpoints == (
             Endpoint(
-                url="https://demo-concepts.corr.icu/api", sources=("charite_demo",)
+                url="https://demo-concepts.corr.icu/api",
+                sources=("charite_demo", "reprodicu"),
             ),
             Endpoint(url="https://concepts.example.edu/api", sources=("*",)),
         )
@@ -54,9 +55,10 @@ class TestPackagedRoutingFile:
             url="https://concepts.example.edu/api"
         )
 
-    def test_reprodicu_routes_to_the_api(self, routing: ConceptRouting) -> None:
-        # Routed on purpose even though its definitions are not imported yet.
-        assert routing.resolve("reprodicu").is_remote is True
+    def test_reprodicu_routes_to_the_demo_endpoint(self, routing: ConceptRouting) -> None:
+        assert routing.resolve("reprodicu") == ApiRoute(
+            url="https://demo-concepts.corr.icu/api"
+        )
 
     def test_every_discovered_source_resolves(self, routing: ConceptRouting) -> None:
         resolved = routing.resolve_all(SOURCES)

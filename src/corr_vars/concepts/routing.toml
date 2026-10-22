@@ -38,11 +38,11 @@ sources = ["local_datasource"]
 
 
 # --- Endpoints --------------------------------------------------------------
-# charite_demo's concepts are published on the public demo endpoint. Listed
-# before the wildcard, since the first matching entry wins.
+# charite_demo and reprodicu are both served by the public demo Concepts API.
+# Listed before the wildcard, since the first matching entry wins.
 [[endpoint]]
 url = "https://demo-concepts.corr.icu/api"
-sources = ["charite_demo"]
+sources = ["charite_demo", "reprodicu"]
 
 [[endpoint]]
 url = "https://concepts.example.edu/api"
