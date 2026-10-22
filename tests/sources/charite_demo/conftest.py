@@ -55,7 +55,7 @@ def _patient() -> pl.DataFrame:
         (P1, "M", dt("1960-05-01 00:00"), "DE", "DE", "DE", "10117", None),
         (
             P2,
-            "W",
+            "F",
             dt("1950-03-01 00:00"),
             "DE",
             "DE",
@@ -63,7 +63,7 @@ def _patient() -> pl.DataFrame:
             "13353",
             dt("2024-02-03 06:00"),
         ),
-        (P3, "W", dt("1980-01-01 00:00"), "DE", "DE", "DE", "10115", None),
+        (P3, "F", dt("1980-01-01 00:00"), "DE", "DE", "DE", "10115", None),
         (P4, "M", dt("2014-01-01 00:00"), "DE", "DE", "DE", "10117", None),
     ]
     return pl.DataFrame(rows, schema=schema, orient="row")
@@ -478,6 +478,17 @@ def write_dataset(root: Path) -> Path:
 def dataset_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """The synthetic dataset, written once per test session."""
     return write_dataset(tmp_path_factory.mktemp("charite_mockdata"))
+
+
+@pytest.fixture
+def make_dataset():
+    """:func:`write_dataset`, for tests that need a second dataset folder.
+
+    Handed out as a fixture because ``from conftest import ...`` resolves to
+    whichever ``conftest`` module pytest imported first, which in a full-suite
+    run is another directory's.
+    """
+    return write_dataset
 
 
 @pytest.fixture(autouse=True)

@@ -832,7 +832,10 @@ class NativeStatic(_ScreenedRequirements, BaseVariable):
         # Apply where clause filtering
         if self.where:
             if self.where.startswith("!"):
-                where_func, where_params, _ = helpers.parse_select(self.where)
+                where_func, where_column, where_values = (
+                    helpers.parse_where_function(self.where)
+                )
+                where_params = (where_column, where_values)
                 match where_func:
                     case "isin":
                         base_data = base_data.filter(

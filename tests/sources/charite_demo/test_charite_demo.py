@@ -121,14 +121,14 @@ class TestConnector:
 
 
 class TestReinitConn:
-    def test_one_connector_per_dataset(self, dataset_dir: Path, tmp_path: Path) -> None:
+    def test_one_connector_per_dataset(
+        self, dataset_dir: Path, tmp_path: Path, make_dataset
+    ) -> None:
         cfg = source_config(dataset_dir)
         same = source_config(f"{dataset_dir}/")
         assert helpers.reinit_conn(cfg) is helpers.reinit_conn(same)
 
-        from conftest import write_dataset
-
-        other = source_config(write_dataset(tmp_path / "other"))
+        other = source_config(make_dataset(tmp_path / "other"))
         assert helpers.reinit_conn(other) is not helpers.reinit_conn(cfg)
 
     def test_databases(self, dataset_dir: Path) -> None:
@@ -287,6 +287,8 @@ class TestLoadData:
     def test_cohort_uses_the_source(self, demo_cohort: Cohort) -> None:
         assert demo_cohort.obs.height == 3
         assert demo_cohort.obs["data_source"].unique().to_list() == ["charite_demo"]
+        # Sex is passed through as coded in the dataset (M/F, like production).
+        assert set(demo_cohort.obs["sex"].to_list()) <= {"M", "F"}
 
 
 # --------------------------------------------------------------------------

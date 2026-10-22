@@ -121,6 +121,30 @@ class TestNativeStatic:
             "3": 1,
         }
 
+    @pytest.mark.parametrize(
+        ("where", "expected"),
+        [
+            # The list must stay intact: splitting it on commas used to turn the
+            # first element into the prefix "[" and the rest into characters.
+            ("!startswith(value, ['15', '14'])", {"1": True, "2": False, "3": True}),
+            ("!startswith(value, ['15'])", {"1": True, "2": False, "3": False}),
+            ("!startswith(value, '13')", {"1": False, "2": True, "3": False}),
+            ("!endswith(value, ['2', '8'])", {"1": True, "2": False, "3": True}),
+            ("!isin(value, ['133', '148'])", {"1": False, "2": True, "3": True}),
+        ],
+    )
+    def test_magic_where_keeps_list_arguments_intact(
+        self, sodium_cohort: _StubCohort, where: str, expected: dict[str, bool]
+    ) -> None:
+        stub = sodium_cohort._stubs["blood_sodium"]
+        stub.data = stub.data.with_columns(
+            pl.col("value").cast(pl.Int64).cast(pl.Utf8)
+        )
+        data = self._extract(
+            sodium_cohort, var_name="flag", select="!any", where=where
+        )
+        assert dict(zip(data["icu_stay_id"], data["flag"])) == expected
+
     def test_first_recordtime_is_a_usable_time_anchor(
         self, sodium_cohort: _StubCohort
     ) -> None:
@@ -469,3 +493,30 @@ class TestDependencySources:
         cohort = _ForeignCohort(obs_level="icu_stay")
         cohort.sources = sources  # type: ignore[assignment]
         assert variable._dependency_sources(cohort) is None
+
+
+class TestParseWhereFunction:
+    """``!func(column, [values])`` filters of NativeStatic."""
+
+    def test_list_argument(self) -> None:
+        from corr_vars.sources.local_datasource.helpers import parse_where_function
+
+        assert parse_where_function(
+            "!startswith(value, ['I09.9', 'I11.0', 'I43', 'I50'])"
+        ) == ("startswith", "value", ["I09.9", "I11.0", "I43", "I50"])
+
+    def test_scalar_and_bare_arguments(self) -> None:
+        from corr_vars.sources.local_datasource.helpers import parse_where_function
+
+        assert parse_where_function("!isin(value, 'A')") == ("isin", "value", ["A"])
+        assert parse_where_function("!isin(value, A, B)") == (
+            "isin",
+            "value",
+            ["A", "B"],
+        )
+
+    def test_malformed(self) -> None:
+        from corr_vars.sources.local_datasource.helpers import parse_where_function
+
+        with pytest.raises(ValueError, match="Cannot parse"):
+            parse_where_function("!startswith value")
