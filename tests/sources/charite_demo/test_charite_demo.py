@@ -6,8 +6,11 @@ tests serve that folder from a local, range-capable server.
 
 from __future__ import annotations
 
+import contextlib
 import functools
+import hashlib
 import http.server
+import json
 import os
 import threading
 from datetime import datetime
@@ -15,6 +18,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import duckdb
+import httpx
 import polars as pl
 import pytest
 
@@ -443,10 +447,10 @@ class _RangeHandler(http.server.SimpleHTTPRequestHandler):
         self._remaining = None
 
 
-@pytest.fixture
-def served_dataset(dataset_dir: Path):
-    """Serve the dataset folder over HTTP on localhost; yields the base URL."""
-    handler = functools.partial(_RangeHandler, directory=str(dataset_dir))
+@contextlib.contextmanager
+def _serve(directory: Path):
+    """Serve `directory` over HTTP on localhost; yields the base URL."""
+    handler = functools.partial(_RangeHandler, directory=str(directory))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -455,6 +459,43 @@ def served_dataset(dataset_dir: Path):
     finally:
         server.shutdown()
         server.server_close()
+
+
+@pytest.fixture
+def served_dataset(dataset_dir: Path):
+    """Serve the dataset folder over HTTP on localhost; yields the base URL."""
+    with _serve(dataset_dir) as url:
+        yield url
+
+
+def _hashed_release(src: Path, dest: Path) -> Path:
+    """Copy `src` as a release with content-hashed names and a sha256 index.
+
+    Mirrors the published layout: ``<stem>-<sha256[:12]>.parquet``, the manifest
+    listing the hashed paths and ``files: {path: {sha256, bytes}}``, plus a
+    ``ground_truth`` sidecar that is not a table.
+    """
+    manifest = json.loads((src / "manifest.json").read_text())
+    index: dict[str, dict] = {}
+    for info in manifest["tables"].values():
+        renamed = []
+        for rel in info["files"]:
+            data = (src / rel).read_bytes()
+            digest = hashlib.sha256(data).hexdigest()
+            new = f"{rel.removesuffix('.parquet')}-{digest[:12]}.parquet"
+            (dest / new).parent.mkdir(parents=True, exist_ok=True)
+            (dest / new).write_bytes(data)
+            index[new] = {"sha256": digest, "bytes": len(data)}
+            renamed.append(new)
+        info["files"] = renamed
+    (dest / "ground_truth").mkdir(parents=True, exist_ok=True)
+    (dest / "ground_truth" / "stays-000000000000.parquet").write_bytes(b"x")
+    manifest["ground_truth"] = {
+        "stays": {"files": ["ground_truth/stays-000000000000.parquet"]}
+    }
+    manifest["files"] = index
+    (dest / "manifest.json").write_text(json.dumps(manifest))
+    return dest
 
 
 def _httpfs_available() -> bool:
@@ -480,6 +521,54 @@ class TestHttp:
 
         obs = cohort.load_data(ObsLevel.HOSPITAL_STAY, source_config(target))
         assert sorted(obs["case_id"]) == [F1, F2]
+
+    def test_download_verifies_sha256_and_removes_stale_files(
+        self, dataset_dir: Path, tmp_path: Path
+    ) -> None:
+        release = _hashed_release(dataset_dir, tmp_path / "release")
+        manifest = json.loads((release / "manifest.json").read_text())
+        target = tmp_path / "copy"
+        db = target / "charite_mockdata"
+        # leftovers of an older release + files that must survive
+        db.mkdir(parents=True)
+        (db / "it_ishmed_fall-0123456789ab.parquet").write_bytes(b"old")
+        (db / "it_copra6_hierarchy_v2").mkdir()
+        (db / "it_copra6_hierarchy_v2" / "part-000-aaaaaaaaaaaa.parquet").write_bytes(
+            b"old"
+        )
+        (db / "gone-bbbbbbbbbbbb.parquet.part").write_bytes(b"old")
+        (db / "notes.txt").write_text("mine")
+        (target / "elsewhere.parquet").write_bytes(b"mine")
+
+        with _serve(release) as url:
+            download(target, base_url=url)
+
+            listed = {f for t in manifest["tables"].values() for f in t["files"]}
+            on_disk = {str(p.relative_to(target)) for p in db.rglob("*.parquet*")}
+            assert on_disk == listed
+            assert (db / "notes.txt").read_text() == "mine"
+            assert (target / "elsewhere.parquet").read_bytes() == b"mine"
+            assert not (target / "ground_truth").exists()
+            local = json.loads((target / "manifest.json").read_text())
+            assert "ground_truth" not in local
+            assert set(local["files"]) == listed
+            obs = cohort.load_data(ObsLevel.HOSPITAL_STAY, source_config(target))
+            assert sorted(obs["case_id"]) == [F1, F2]
+
+            # a corrupted copy of the same size fails its checksum and is fetched again
+            rel = manifest["tables"]["it_ishmed_fall"]["files"][0]
+            good = (target / rel).read_bytes()
+            (target / rel).write_bytes(bytes(len(good)))
+            download(target, base_url=url)
+            assert (target / rel).read_bytes() == good
+
+            # a server file that does not match the manifest's sha256 is rejected
+            (release / rel).write_bytes(bytes(len(good)))
+            (target / rel).unlink()
+            with pytest.raises(httpx.HTTPError, match="Checksum mismatch"):
+                download(target, base_url=url)
+            assert not (target / rel).exists()
+            assert not (target / (rel + ".part")).exists()
 
     def test_download_subset(self, served_dataset: str, tmp_path: Path) -> None:
         target = download(
