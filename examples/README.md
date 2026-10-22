@@ -27,7 +27,7 @@ With [uv](https://docs.astral.sh/uv/), no installation step needed. Download
 `charite_demo_quickstart.ipynb` and run, in the same folder:
 
 ```shell
-uv run --with "corr_vars[charite-demo] @ git+https://github.com/CUB-CORR/corr_vars.git" \
+uv run --with "corr-vars[charite-demo]" \
     --with jupyterlab jupyter lab charite_demo_quickstart.ipynb
 ```
 

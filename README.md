@@ -1,5 +1,6 @@
 # CORR-VARS – Streamlining Real-World Evidence Studies and Bedside Use <img src="docs/_static/corr_favicon.png" align="right" width="100"/>
 [![CI](https://img.shields.io/github/actions/workflow/status/CUB-CORR/corr_vars/tests.yml?branch=main)](https://github.com/CUB-CORR/corr_vars/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/corr-vars)](https://pypi.org/project/corr-vars/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22346471.svg)](https://doi.org/10.5281/zenodo.22346471)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -8,8 +9,11 @@ Build and manage clinical study cohorts from ICU and hospital data sources. Add,
 ## Installation
 
 ```shell
-uv add git+https://github.com/CUB-CORR/corr_vars.git
+uv add corr-vars
 ```
+
+or `pip install corr-vars`. The development version (latest `main`) is available via
+`uv add git+https://github.com/CUB-CORR/corr_vars`.
 
 Requires Python ≥ 3.10.
 
@@ -55,7 +59,7 @@ cohort = Cohort(
 )
 ```
 
-Install with the extra (`uv add "corr_vars[charite-demo] @ git+https://github.com/CUB-CORR/corr_vars.git"`)
+Install with the extra (`uv add "corr-vars[charite-demo]"`)
 and follow the [demo tutorial](https://docs.corr-vars.de/tutorials/charite_demo.html).
 For a hands-on notebook to run yourself, see [`examples/`](examples/).
 
