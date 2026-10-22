@@ -297,8 +297,9 @@ Exploration
    cohort.obsm.to_widget("blood_sodium")  # renders a single variable
 
    # Inclusion / exclusion flowchart
-   cohort.figureone                       # returns a graphviz.Digraph object
-   cohort.to_figureone()                  # returns a graphviz.Digraph object
+   cohort.figureone                       # returns a matplotlib Figure (cascade layout)
+   cohort.to_figureone(layout="profile")  # trial profile: screened, excluded, included
+   cohort.to_figureone(output_file="flowchart.pdf")  # also save; format from extension
 
    # Print debug information (helpful when filing a GitHub issue)
    cohort.debug_print()

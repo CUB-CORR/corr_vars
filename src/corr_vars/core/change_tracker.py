@@ -4,10 +4,10 @@ import hashlib
 
 import numpy as np
 import polars as pl
-from graphviz import Digraph
 from polars._utils.parse import parse_into_list_of_expressions
 from polars._utils.wrap import wrap_expr
 
+from corr_vars.plot.flowchart import cascade_flowchart, profile_flowchart
 from corr_vars.utils import convert_to_polars_lf
 
 from dataclasses import dataclass, field
@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from os import PathLike
 
     import pandas as pd
+    from matplotlib.figure import Figure
 
     from corr_vars.definitions import Cohort, IntoExprColumn
 
@@ -244,62 +245,48 @@ class ChangeTrackerPipeline:
 
     def create_flowchart(
         self,
-        title: str = "Study Inclusion Flowchart",
+        title: str | None = None,
         output_file: PathLike | str | None = None,
-    ) -> Digraph:
-        """Creates a PRISMA-style flowchart of the tracked changes using the
-        ChangeTrackerPipeline dataclasses (initial snapshot, steps and substeps).
+        *,
+        layout: Literal["cascade", "profile"] = "cascade",
+        obs: pl.DataFrame | None = None,
+        **kwargs: Any,
+    ) -> Figure:
+        """Draws a flowchart of the tracked changes with matplotlib.
 
-        Returns a graphviz.Digraph.
+        Args:
+            title: Optional title above the chart.
+            output_file: If given, save the figure there; the format follows the
+                extension (``.pdf``, ``.svg``, ``.png``, ...).
+            layout: ``"cascade"`` draws every step with a dashed box of what it
+                removed (substeps listed). ``"profile"`` draws a trial profile:
+                screened, one box with all exclusion reasons, included and optional
+                arms; it requires a simple narrowing chain.
+            obs: Observations of the final cohort, needed by ``layout="profile"``
+                with ``groupby``.
+            **kwargs: Passed to :func:`corr_vars.plot.flowchart.cascade_flowchart` or
+                :func:`corr_vars.plot.flowchart.profile_flowchart` (text templates,
+                ``screen_step``, ``labels``, ``groupby``, ``group_labels``,
+                ``group_order``) and style fields of
+                :class:`corr_vars.plot.flowchart.FlowchartStyle` (e.g.
+                ``thousands_sep``, ``font_family``, ``page_width``).
+
+        Returns:
+            matplotlib.figure.Figure: The flowchart.
+
+        Examples:
+            >>> fig = tracker.create_flowchart(layout="profile", thousands_sep="'")
+            >>> fig.savefig("flowchart.pdf")
         """
-        dot = Digraph(comment=title)
-        dot.attr(rankdir="TB", newrank="true")
-        dot.attr("node", shape="box", style="rounded")
-
-        # initial node
-        init_id = "init"
-        init_label = f"{self.initial_description}\n(n={self.initial_snapshot.nuniques})"
-        dot.node(init_id, init_label)
-
-        # build nodes/edges and collect ranks
-        ranks: dict[int, list[str]] = {0: [init_id]}
-        prev_id = init_id
-
-        for i, step in enumerate(self.steps):
-            step_id = f"s{i}"
-            step_label = f"{step.description}\n(n={step.after.nuniques})"
-            dot.node(step_id, step_label)
-            dot.edge(prev_id, step_id)
-
-            # put main step and its substeps/dropped node on the same rank (horizontal alignment)
-            rank = i + 1
-            ranks.setdefault(rank, []).append(step_id)
-
-            dropped_uniques = max(0, step.before.nuniques - step.after.nuniques)
-            drop_id = f"s{i}_dropped"
-            drop_label = f"Dropped (n={dropped_uniques})"
-            if step.substeps:
-                sub_lines = []
-                for sub in step.substeps:
-                    sub_lines.append(f"- {sub.description} (n={sub.after.nuniques})")
-                sub_label = "\n".join(sub_lines)
-                drop_label += "\n" + sub_label
-            dot.node(drop_id, drop_label, style="dashed")
-            dot.edge(step_id, drop_id)
-            ranks.setdefault(rank, []).append(drop_id)
-
-            prev_id = step_id
-
-        # enforce same-rank groups
-        for rank in sorted(ranks.keys()):
-            nodes_at_rank = ranks[rank]
-            if nodes_at_rank:
-                dot.body.append(f"{{rank = same; {' '.join(nodes_at_rank)}}}")
-
-        if output_file:
-            dot.render(output_file, format="svg", view=False, cleanup=True)
-
-        return dot
+        if layout == "cascade":
+            return cascade_flowchart(
+                self, title=title, output_file=output_file, **kwargs
+            )
+        if layout == "profile":
+            return profile_flowchart(
+                self, obs, title=title, output_file=output_file, **kwargs
+            )
+        raise ValueError(f"Unknown layout {layout!r}; use 'cascade' or 'profile'.")
 
     def __repr__(self) -> str:
         current_step = self.current_step

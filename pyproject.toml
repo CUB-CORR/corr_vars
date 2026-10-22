@@ -45,7 +45,6 @@ dependencies = [
     "xlsxwriter>=3.2.5",
     "zstandard>=0.23.0",
     # Plot
-    "graphviz>=0.21",
     "matplotlib>=3.10.8",
     "networkx>=3.4.1",
     "seaborn>=0.13.2",

@@ -66,6 +66,7 @@ src/corr_vars/
 │   ├── tableone.py        # TableOne → LaTeX / Markdown / HTML / PDF export
 │   └── time.py            # TimeAnchor, TimeWindow, WindowRelation, WindowOverlap
 ├── plot/                  # Visualisation helpers
+│   └── flowchart.py       # matplotlib cohort flowcharts (cascade / profile layouts)
 tests/                     # Unit tests
 ├── assets/data/           # Static test fixtures
 ├── sources/               # Source-specific tests

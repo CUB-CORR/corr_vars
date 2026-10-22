@@ -38,9 +38,7 @@ uv run --extra charite-demo --with jupyterlab jupyter lab examples/charite_demo_
 ```
 
 The `charite-demo` extra adds `pycomorb` (Elixhauser score); everything else the notebook
-uses (polars, matplotlib, tableone, graphviz) comes with `corr_vars`. Drawing the
-inclusion flowchart needs the [Graphviz](https://graphviz.org/download/) `dot` program on
-your system (e.g. `brew install graphviz`, `apt install graphviz`).
+uses (polars, matplotlib, tableone) comes with `corr_vars`.
 
 Optional: to run against a mirror or a local copy of the dataset, set
 `CORR_DEMO_DATA_URL` (a URL or a folder) and/or `CORR_DEMO_CONCEPTS_URL` before starting

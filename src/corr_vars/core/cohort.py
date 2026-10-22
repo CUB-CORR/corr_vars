@@ -52,7 +52,7 @@ if TYPE_CHECKING:
     from itertools import chain
 
     import pandas as pd
-    from graphviz import Digraph
+    from matplotlib.figure import Figure
     from tableone import TableOne
 
     from corr_vars.concepts.resolver import ConceptResolver, ResolvedConcept
@@ -2339,9 +2339,31 @@ class Cohort:
     def tableone(self) -> TableOne:
         return self.to_tableone()
 
-    def to_figureone(self) -> Digraph:
-        return self._change_tracker.create_flowchart()
+    def to_figureone(
+        self,
+        layout: Literal["cascade", "profile"] = "cascade",
+        **kwargs: Any,
+    ) -> Figure:
+        """Draw the inclusion/exclusion flowchart of the cohort with matplotlib.
+
+        Args:
+            layout: ``"cascade"`` (every step with what it removed) or ``"profile"``
+                (trial profile: screened, excluded with all reasons, included, arms).
+            **kwargs: Passed to :meth:`ChangeTrackerPipeline.create_flowchart`, e.g.
+                ``output_file``, ``title``, ``screen_step``, ``labels``, ``groupby``,
+                ``group_labels``, ``group_order``, ``thousands_sep``.
+
+        Returns:
+            matplotlib.figure.Figure: The flowchart.
+
+        Examples:
+            >>> cohort.to_figureone(output_file="flowchart.pdf")
+            >>> cohort.to_figureone(layout="profile", groupby="sex")
+        """
+        return self._change_tracker.create_flowchart(
+            layout=layout, obs=self._obs, **kwargs
+        )
 
     @property
-    def figureone(self) -> Digraph:
+    def figureone(self) -> Figure:
         return self.to_figureone()
