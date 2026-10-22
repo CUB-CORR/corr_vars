@@ -49,10 +49,17 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_autodoc_typehints",
     "sphinx_design",  # Modern responsive design components
+    "myst_nb",  # Jupyter notebooks (tutorials/*.ipynb)
 ] + optional_extensions
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**.ipynb_checkpoints"]
+
+# Notebooks are rendered from their stored outputs; the build never executes
+# them (they need network access to the demo services). Re-execute and commit a
+# notebook when its content changes. corr_vars logs to stderr, which is hidden.
+nb_execution_mode = "off"
+nb_output_stderr = "remove"
 
 
 # -- Options for HTML output -------------------------------------------------

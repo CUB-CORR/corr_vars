@@ -40,6 +40,25 @@ cohort.save("my_cohort.corr3")
 cohort.to_csv("output/")
 ```
 
+### Try it with the demo dataset
+
+The `charite_demo` source reads a public, fully synthetic ICU dataset (20'000 ICU
+stays), and the public demo Concepts API serves its variable definitions, so you can
+try `corr_vars` without data access or an account:
+
+```python
+cohort = Cohort(
+    obs_level="icu_stay",
+    sources={"charite_demo": {}},
+    project="demo",
+    api_key="cak_demo_0d2b53ac",   # public demo key
+)
+```
+
+Install with the extra (`uv add "corr_vars[charite-demo] @ git+https://github.com/CUB-CORR/corr_vars.git"`)
+and follow the [demo tutorial](https://docs.corr-vars.de/tutorials/charite_demo.html).
+For a hands-on notebook to run yourself, see [`examples/`](examples/).
+
 ## Observation Levels
 
 | `obs_level`      | Primary key      | One row per …         |
@@ -188,6 +207,22 @@ make clean && make html
 ```
 
 The HTML output is written to `docs/_build/html/`. Documentation is automatically published to [docs.corr-vars.de](https://docs.corr-vars.de) on merge to `main`.
+
+### Releasing
+
+Releases are published to PyPI as `corr_vars` by [`.github/workflows/release.yml`](.github/workflows/release.yml) using [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC). No API token is stored anywhere.
+
+**One-time setup**
+
+1. On [PyPI](https://pypi.org/manage/account/publishing/), add a *pending* trusted publisher. Use PyPI project name `corr_vars`, owner `CUB-CORR`, repository `corr_vars`, workflow `release.yml` and environment `pypi`. The first successful publish creates the project.
+2. In the GitHub repository, under *Settings → Environments*, create the environment `pypi`. You can optionally add required reviewers to `pypi` and restrict it to `v*` tags.
+
+**Release procedure**
+
+1. Bump `__version__` in `src/corr_vars/__init__.py` and `version` / `date-released` in `CITATION.cff`, then merge to `main`.
+2. Tag and push: `git tag v2.0.3 && git push origin v2.0.3`.
+
+The workflow first checks that the tag, `__version__` and `CITATION.cff` agree. It then runs the tests, builds and checks the sdist and wheel, publishes to PyPI and creates the GitHub release with the built files attached.
 
 ### Contributing
 

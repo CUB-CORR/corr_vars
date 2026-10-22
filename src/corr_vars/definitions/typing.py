@@ -33,6 +33,12 @@ if TYPE_CHECKING:
     from corr_vars.core.cohort import Cohort
 
     # TODO: Import dynamically
+    from corr_vars.sources.charite_demo import (
+        SourceDict as ChariteDemoSourceDict,
+    )
+    from corr_vars.sources.charite_demo import (
+        SourceDictPartial as ChariteDemoSourceDictPartial,
+    )
     from corr_vars.sources.local_datasource import (
         SourceDict as LocalDatasourceSourceDict,
     )
@@ -354,10 +360,12 @@ assert (
 #   Source Dicts   #
 ####################
 class SourceDictPartial(TypedDict, total=False):
+    charite_demo: ChariteDemoSourceDictPartial
     local_datasource: LocalDatasourceSourceDictPartial
     reprodicu: ReprodIcuSourceDictPartial
 
 
 class SourceDict(TypedDict, total=False):
+    charite_demo: ChariteDemoSourceDict
     local_datasource: LocalDatasourceSourceDict
     reprodicu: ReprodIcuSourceDict

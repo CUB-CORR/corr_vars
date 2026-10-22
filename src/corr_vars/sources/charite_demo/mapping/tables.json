@@ -1,0 +1,104 @@
+{
+    "it_ishmed_labor": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_dokument_timestamp",
+        "value": "c_wert",
+        "value_unit":"c_wert_einheit",
+        "attributes_storetime": "c_wert_timestamp"
+    },
+    "it_copra6_hierarchy_v2": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_var_timestamp",
+        "value": "c_value"
+    },
+    "it_ishmed_diagnose": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_diagnose_timestamp",
+        "value": "c_diagnose_1"
+    },
+    "it_ishmed_procedure": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_prozedur_begin",
+        "value": "c_prozedur_code",
+        "recordtime_end": "c_prozedur_ende"
+    },
+    "it_ishmed_bewegung": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_begin",
+        "value": "c_pflege_oe_id",
+        "value_unit":"'ward_id'",
+        "recordtime_end": "c_ende",
+        "attributes_lfd_nr": "c_laufende_nummer",
+        "attributes_pflege_oe_id": "c_pflege_oe_id",
+        "attributes_fachliche_oe_id": "c_fachliche_oe_id",
+        "attributes_pflege_oe_nicename": "c_pflege_oe",
+        "attributes_fachliche_oe_nicename": "c_fachliche_oe",
+        "attributes_bw_art": "c_bewegungsart",
+        "attributes_bw_typ": "c_bewegungstyp",
+        "attributes_bw_kategorie": "c_bewegungskategory",
+        "attributes_room_number": "c_zimmer",
+        "attributes_bed_number": "c_bett"
+    },
+    "it_ishmed_observation": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_valtimestamp",
+        "value": "c_value",
+        "unit":"c_unit"
+    },
+    "it_copra6_medication": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_application_start",
+        "recordtime_end": "c_application_end",
+        "value": "c_amount_total",
+        "value_unit": "c_amount_unit",
+        "attributes_drugname": "c_drug_name",
+        "attributes_drugid": "c_drug_id",
+        "attributes_genericname": "c_generic_name",
+        "attributes_rate_value": "c_rate",
+        "attributes_rate_unit": "c_rate_unit",
+        "attributes_application":"c_application_location",
+        "attributes_volume_total": "c_volume_mixture",
+        "attributes_volume_unit": "c_volume_unit",
+        "attributes_concentration": "c_concentration"
+    },
+    "it_copra6_therapy": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_start",
+        "recordtime_end": "c_end",
+        "value": "c_apparat_mode",
+        "attributes_category": "c_apparat_type",
+        "attributes_devicename": "c_apparat_name"
+    },
+    "it_ishmed_caredegree": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_valid_from",
+        "value": "c_degree"
+    },
+    "it_copra6_fluid_balance": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_h_date_time",
+        "value": "c_balance",
+        "attributes_output": "c_sum_output",
+        "attributes_input": "c_sum_input"
+    },
+    "it_ishmed_fall": {
+        "patient_id": "c_patnr",
+        "case_id": "c_falnr",
+        "recordtime": "c_aufnahme",
+        "recordtime_end": "c_entlassung",
+        "value": "c_entlassungsart",
+        "value_unit": "'discharge_type'",
+        "attributes_admission_origin": "c_admission_hospital",
+        "attributes_discharge_destination": "c_discharge_hospital"
+    }
+}

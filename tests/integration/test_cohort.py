@@ -757,6 +757,30 @@ def test_inclusion(dummy_cohort: Cohort) -> None:
     assert len(dummy_cohort._change_tracker.steps) == 2
 
 
+@pytest.mark.parametrize("level", ["WARNING", "INFO"])
+def test_add_variable_leaves_polars_number_format_alone(
+    dummy_cohort: Cohort, level: str
+) -> None:
+    """The INFO summary's pl.Config (German separators) must not leak.
+
+    It used to be applied on construction and only restored when the summary
+    was actually rendered, so at WARNING level every later table showed
+    "16.563,50".
+    """
+    from corr_vars.core import cohort as cohort_module
+
+    previous = cohort_module.logger.level
+    cohort_module.logger.setLevel(level)
+    try:
+        dummy_cohort.add_variable("age_on_admission")
+    finally:
+        cohort_module.logger.setLevel(previous)
+
+    shown = repr(pl.DataFrame({"x": [16563.5]}))
+    assert "16563.5" in shown
+    assert "16.563" not in shown and "16563,5" not in shown
+
+
 def test_exclusion(dummy_cohort: Cohort) -> None:
     """Test exclusion"""
     dummy_cohort.add_variable("age_on_admission")

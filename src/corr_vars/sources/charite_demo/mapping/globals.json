@@ -1,0 +1,23 @@
+{
+    "hospital_data": {
+        "ward_ids": {
+            "adult_icu_ids": ["ICU-MED1", "ICU-MED2", "ICU-SURG1", "ICU-SURG2", "ICU-CARD", "ICU-NEURO", "IMC-1"],
+            "ped_neo_icu_ids": ["PICU", "NICU"],
+            "ed_ids": ["ED.*"],
+            "op_ids": [".*OR.*"]
+        },
+        "mv_types": {
+            "Admission_ED": ["1A", "1K", "1S"],
+            "Admission": ["A", "AE", "AR", "UB"],
+            "Transfer": ["V", "Z"],
+            "Operation": ["OP"],
+            "Companion": ["BM", "B"],
+            "Brain_death": ["PO"]
+        },
+        "discharge_types": {
+            "Discharge_regular": ["E"],
+            "Discharge_death": ["EH", "T"],
+            "Discharge_external": ["X"]
+        }
+    }
+}

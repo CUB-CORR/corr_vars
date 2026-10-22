@@ -208,10 +208,12 @@ class Cohort:
             - ``"procedure"`` per surgical procedure (``procedure_id``).
 
         sources (dict[str, dict]):
-            Dictionary of data sources to use for data extraction. Available option is "reprodicu".
+            Dictionary of data sources to use for data extraction. Available options are "reprodicu" and "charite_demo".
             Source configurations:
 
             - **reprodicu**: ``path``, ``exclude_datasets``, ``include_datasets``
+            - **charite_demo**: ``path`` (dataset URL or local folder, defaults to the published
+              synthetic dataset), ``database``, ``filter``, ``icu_stay``
 
             Note: reprodicu does not yet implement variable extraction, only cohort data.
         project_vars (dict):
@@ -1107,7 +1109,11 @@ class Cohort:
         def nunique_info() -> int:
             return data.select(pl.col(self.primary_key)).n_unique()
 
+        # apply_on_context_enter: pl.Config applies its options on construction
+        # otherwise, and they would leak into every later repr whenever the
+        # INFO summary below is never rendered (e.g. at WARNING level).
         summary_config = pl.Config(
+            apply_on_context_enter=True,
             tbl_formatting="UTF8_FULL_CONDENSED",
             tbl_hide_column_data_types=True,
             tbl_hide_dataframe_shape=True,
