@@ -62,6 +62,11 @@ def download(
     after the download; nothing outside that subfolder is touched. The folder
     gets its own ``manifest.json`` listing exactly the tables on disk.
 
+    The release also carries a validation set (manifest key ``validation``,
+    folder ``validation/``: the generator's parameters per ICU stay and case,
+    fully synthetic) for checking concept implementations. Cohorts do not need
+    it, so it is not downloaded; read it from the release URL if needed.
+
     With `tables`, the download refreshes only those tables: the other tables of
     an existing local copy stay listed (as long as their files are present and
     match their recorded size and sha256), and only stale files of the
@@ -138,9 +143,9 @@ def download(
             info = index.get(rel) if isinstance(index.get(rel), dict) else {}
             _download_file(client, f"{base}/{rel}", target / rel, info.get("sha256"))
 
-    # The local manifest describes exactly what is on disk (the evaluation
-    # sidecar under "ground_truth" is not downloaded, so it is not listed).
-    local = {k: v for k, v in manifest.items() if k != "ground_truth"}
+    # The local manifest describes exactly what is on disk (the validation set
+    # under "validation" is not downloaded, so it is not listed).
+    local = {k: v for k, v in manifest.items() if k != "validation"}
     local["tables"] = {**kept_tables, **manifest["tables"]}
     local_index = {**kept_index, **{f: index[f] for f in files if f in index}}
     if local_index:

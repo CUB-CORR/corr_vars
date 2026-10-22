@@ -169,7 +169,7 @@ class TestManifestPaths:
 
     def test_outside_dataset_rejected(self) -> None:
         with pytest.raises(ValueError, match="outside the dataset folder"):
-            validate_file_path("ground_truth/x.parquet", "charite_mockdata")
+            validate_file_path("validation/x.parquet", "charite_mockdata")
 
     def test_nested_path_resolves(self) -> None:
         rel = (
@@ -595,7 +595,7 @@ def _hashed_release(src: Path, dest: Path) -> Path:
 
     Mirrors the published layout: ``<stem>-<sha256[:12]>.parquet``, the manifest
     listing the hashed paths and ``files: {path: {sha256, bytes}}``, plus a
-    ``ground_truth`` sidecar that is not a table.
+    ``validation`` sidecar that is not a table.
     """
     manifest = json.loads((src / "manifest.json").read_text())
     index: dict[str, dict] = {}
@@ -610,10 +610,10 @@ def _hashed_release(src: Path, dest: Path) -> Path:
             index[new] = {"sha256": digest, "bytes": len(data)}
             renamed.append(new)
         info["files"] = renamed
-    (dest / "ground_truth").mkdir(parents=True, exist_ok=True)
-    (dest / "ground_truth" / "stays-000000000000.parquet").write_bytes(b"x")
-    manifest["ground_truth"] = {
-        "stays": {"files": ["ground_truth/stays-000000000000.parquet"]}
+    (dest / "validation").mkdir(parents=True, exist_ok=True)
+    (dest / "validation" / "stays-000000000000.parquet").write_bytes(b"x")
+    manifest["validation"] = {
+        "stays": {"files": ["validation/stays-000000000000.parquet"]}
     }
     manifest["files"] = index
     (dest / "manifest.json").write_text(json.dumps(manifest))
@@ -670,9 +670,9 @@ class TestHttp:
             assert on_disk == listed
             assert (db / "notes.txt").read_text() == "mine"
             assert (target / "elsewhere.parquet").read_bytes() == b"mine"
-            assert not (target / "ground_truth").exists()
+            assert not (target / "validation").exists()
             local = json.loads((target / "manifest.json").read_text())
-            assert "ground_truth" not in local
+            assert "validation" not in local
             assert set(local["files"]) == listed
             obs = cohort.load_data(ObsLevel.HOSPITAL_STAY, source_config(target))
             assert sorted(obs["case_id"]) == [F1, F2]
