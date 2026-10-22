@@ -97,7 +97,7 @@ Step 1: Environment Setup
 
       .. code-block:: bash
 
-          uv add git+https://github.com/CUB-CORR/corr_vars.git
+          uv add corr-vars
 
    .. tab-item:: 💻 **Local Development**
 

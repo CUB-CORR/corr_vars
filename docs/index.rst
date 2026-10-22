@@ -45,7 +45,7 @@ Quick Start
 
       .. code-block:: bash
 
-         uv add git+https://github.com/CUB-CORR/corr_vars.git
+         uv add corr-vars
 
       Requires Python ≥ 3.10.
 
