@@ -63,7 +63,8 @@ def parse_where_function(where_str: str) -> tuple[str, str, list[str]]:
         without brackets becomes a one-element list.
 
     Raises:
-        ValueError: If the string is not of that form.
+        ValueError: If the string is not of that form, or its value list is
+            empty.
 
     Examples:
         >>> parse_where_function("!startswith(value, ['I50', 'I42.0'])")
@@ -89,4 +90,9 @@ def parse_where_function(where_str: str) -> tuple[str, str, list[str]]:
         values = [v.strip().strip("'\"") for v in values_str.split(",") if v.strip()]
     if isinstance(values, (str, int, float)):
         values = [values]
+    if not values:
+        raise ValueError(
+            f"Where filter {where_str!r} has an empty value list; "
+            "give at least one value, e.g. '!func(column, ['A'])'"
+        )
     return func_name, column.strip(), [str(v) for v in values]

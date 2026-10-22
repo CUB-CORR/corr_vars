@@ -137,12 +137,8 @@ class TestNativeStatic:
         self, sodium_cohort: _StubCohort, where: str, expected: dict[str, bool]
     ) -> None:
         stub = sodium_cohort._stubs["blood_sodium"]
-        stub.data = stub.data.with_columns(
-            pl.col("value").cast(pl.Int64).cast(pl.Utf8)
-        )
-        data = self._extract(
-            sodium_cohort, var_name="flag", select="!any", where=where
-        )
+        stub.data = stub.data.with_columns(pl.col("value").cast(pl.Int64).cast(pl.Utf8))
+        data = self._extract(sodium_cohort, var_name="flag", select="!any", where=where)
         assert dict(zip(data["icu_stay_id"], data["flag"])) == expected
 
     def test_first_recordtime_is_a_usable_time_anchor(
@@ -520,3 +516,11 @@ class TestParseWhereFunction:
 
         with pytest.raises(ValueError, match="Cannot parse"):
             parse_where_function("!startswith value")
+
+    def test_empty_value_list(self) -> None:
+        from corr_vars.sources.local_datasource.helpers import parse_where_function
+
+        for where in ("!startswith(value, [])", "!isin(value, )"):
+            with pytest.raises(ValueError, match="empty value list") as info:
+                parse_where_function(where)
+            assert where in str(info.value)
