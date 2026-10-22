@@ -1109,7 +1109,11 @@ class Cohort:
         def nunique_info() -> int:
             return data.select(pl.col(self.primary_key)).n_unique()
 
+        # apply_on_context_enter: pl.Config applies its options on construction
+        # otherwise, and they would leak into every later repr whenever the
+        # INFO summary below is never rendered (e.g. at WARNING level).
         summary_config = pl.Config(
+            apply_on_context_enter=True,
             tbl_formatting="UTF8_FULL_CONDENSED",
             tbl_hide_column_data_types=True,
             tbl_hide_dataframe_shape=True,
