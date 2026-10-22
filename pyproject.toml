@@ -66,6 +66,7 @@ docs = [
     "sphinx-design>=0.5.0",
     "sphinx-autodoc-typehints",
     "sphinx-copybutton",
+    "myst-nb>=1.1",
 ]
 dev = [
     {include-group = "test"},

@@ -40,6 +40,24 @@ cohort.save("my_cohort.corr3")
 cohort.to_csv("output/")
 ```
 
+### Try it with the demo dataset
+
+The `charite_demo` source reads a public, fully synthetic ICU dataset (20'000 ICU
+stays), and the public demo Concepts API serves its variable definitions, so you can
+try `corr_vars` without data access or an account:
+
+```python
+cohort = Cohort(
+    obs_level="icu_stay",
+    sources={"charite_demo": {}},
+    project="demo",
+    api_key="cak_demo_0d2b53ac",   # public demo key
+)
+```
+
+Install with the extra (`uv add "corr_vars[charite-demo] @ git+https://github.com/CUB-CORR/corr_vars.git"`)
+and follow the [demo tutorial](https://docs.corr-vars.de/tutorials/charite_demo.html).
+
 ## Observation Levels
 
 | `obs_level`      | Primary key      | One row per …         |

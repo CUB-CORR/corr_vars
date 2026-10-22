@@ -86,6 +86,13 @@ Get started in under 5 minutes:
    print(f"Cohort: {len(cohort.obs)} patients")
    print(cohort.obs.head())
 
+.. admonition:: 🧪 **Try it with the demo dataset**
+   :class: tip
+
+   No data access yet? The :doc:`tutorials/charite_demo` tutorial runs a complete study
+   on a public, fully synthetic ICU dataset (20'000 ICU stays) with the public demo
+   Concepts API, no account needed.
+
 .. admonition:: 🎯 **Next Steps**
    :class: tip
 
@@ -127,6 +134,7 @@ Documentation Structure
       :caption: Learning Resources
       
       tutorials
+      tutorials/charite_demo
       custom_variables
       contributing_variables
       troubleshooting
