@@ -1,0 +1,1832 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tutorial: a first study on the Charité demo dataset &#8212; CORR-Variables 2.1.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2080b43f" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=891ff365"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ee1b9d3f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/charite_demo';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/copy-button-enhancement.js?v=25b28c08"></script>
+    <link rel="icon" href="../_static/corr_favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom Variables Guide" href="../custom_variables.html" />
+    <link rel="prev" title="Tutorials and Getting Started" href="../tutorials.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.1.1" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CORR-Variables 2.1.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Learning Resources</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials and Getting Started</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial: a first study on the Charité demo dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_variables.html">Custom Variables Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_variables.html">Contributing New Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/cohort.html">Cohort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/core.html">Core Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/sources.html">Data Sources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/reprodicu.html">reprodICU Data Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/local_datasource.html">Local Data Source (skeleton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/aggregation.html">Aggregated Variables</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/utils.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_time.html">Time Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_base.html">Base Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_frames.html">DataFrame Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_outcomes.html">Free-Day Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_helpers.html">Extraction Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_tableone.html">TableOne Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/utils_debug.html">Debug</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/CUB-CORR/corr_vars" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CUB-CORR/corr_vars/edit/main/docs/tutorials/charite_demo.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/CUB-CORR/corr_vars/issues/new?title=Issue%20on%20page%20%2Ftutorials/charite_demo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/charite_demo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tutorial: a first study on the Charité demo dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">1. Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting">Connecting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inclusion-criteria-and-the-flowchart">2. Inclusion criteria and the flowchart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-variables">3. Static variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-and-time-windows">4. Time series and time windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derived-concepts-resolve-their-dependencies">Derived concepts resolve their dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-time-series-to-analysis-features">From time series to analysis features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes">5. Outcomes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acute-kidney-injury">Acute kidney injury</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surgical-patients-anchoring-the-window-at-hospital-admission">Surgical patients: anchoring the window at hospital admission</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-1-and-plots">6. Table 1 and plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-1-oxygenation-over-the-first-three-days">Plot 1: oxygenation over the first three days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-2-blood-pressure-and-norepinephrine-in-one-stay">Plot 2: blood pressure and norepinephrine in one stay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-3-highest-aki-stage-by-early-ventilation">Plot 3: highest AKI stage by early ventilation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-a-variable-come-from-and-exporting">7. Where does a variable come from? And exporting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-a-definition">Inspecting a definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting">Exporting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tutorial-a-first-study-on-the-charite-demo-dataset">
+<h1>Tutorial: a first study on the Charité demo dataset<a class="headerlink" href="#tutorial-a-first-study-on-the-charite-demo-dataset" title="Link to this heading">#</a></h1>
+<p>This tutorial walks through a small, realistic study with <code class="docutils literal notranslate"><span class="pre">corr_vars</span></code> from start to
+finish. The question is a classic one in intensive care:</p>
+<blockquote>
+<div><p><strong>In adults admitted to the ICU, how do patients who are invasively ventilated within
+the first 24 hours differ from those who are not, in oxygenation, vasopressor
+support, kidney injury and survival?</strong></p>
+</div></blockquote>
+<p>You will build a cohort, apply inclusion criteria with a flowchart, add static and
+time-series variables, condense time series into analysis features over defined time
+windows, and finish with a Table 1, three plots and an export.</p>
+<div class="warning admonition">
+<p class="admonition-title">Synthetic data only</p>
+<p>Everything here runs on <strong><code class="docutils literal notranslate"><span class="pre">charite_mockdata</span></code></strong>, a <em>fully synthetic</em> dataset in the table
+layout of the Charité data warehouse: 20’000 ICU stays (2019–2025), generated from 22
+disease archetypes so that ventilation, vasopressors, kidney injury, SOFA and outcomes
+form coherent courses. It contains no real patient data and is <strong>not clinically
+valid</strong>. The numbers below demonstrate the workflow; they are not findings.</p>
+</div>
+<p><strong>Two public services stand behind this tutorial, and neither needs an account:</strong></p>
+<ul class="simple">
+<li><p>the dataset, a set of Parquet files at <a class="reference external" href="https://demo-data.corr.icu">https://demo-data.corr.icu</a> (manifest:
+<a class="reference external" href="https://demo-data.corr.icu/v1/manifest.json">https://demo-data.corr.icu/v1/manifest.json</a>), read on demand over HTTPS;</p></li>
+<li><p>the variable definitions, served by the demo
+<a class="reference external" href="https://demo-concepts.corr.icu">Concepts Browser</a> (project <code class="docutils literal notranslate"><span class="pre">demo</span></code>, public key
+<code class="docutils literal notranslate"><span class="pre">cak_demo_0d2b53ac</span></code>; sign in as <code class="docutils literal notranslate"><span class="pre">demo</span></code> to browse the definitions in the web app).</p></li>
+</ul>
+<section id="setup">
+<h2>1. Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>Install <code class="docutils literal notranslate"><span class="pre">corr-vars</span></code> (from PyPI) with the <code class="docutils literal notranslate"><span class="pre">charite-demo</span></code> extra (it adds <code class="docutils literal notranslate"><span class="pre">pycomorb</span></code>, which the
+Elixhauser comorbidity score needs):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span><span class="s2">"corr-vars[charite-demo]"</span>
+<span class="c1"># or, without uv:</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"corr-vars[charite-demo]"</span>
+</pre></div>
+</div>
+<section id="connecting">
+<h3>Connecting<a class="headerlink" href="#connecting" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Cohort</span></code> is the central object. It needs an <strong>observation level</strong> (here one row per ICU
+stay), the <strong>data source</strong> and the <strong>Concepts API project and key</strong> that serve the
+variable definitions. <code class="docutils literal notranslate"><span class="pre">{&quot;charite_demo&quot;:</span> <span class="pre">{}}</span></code> uses the source defaults, i.e. the public
+dataset URL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cohort</span>
+
+<span class="n">cohort</span> <span class="o">=</span> <span class="n">Cohort</span><span class="p">(</span>
+    <span class="n">obs_level</span><span class="o">=</span><span class="s2">"icu_stay"</span><span class="p">,</span>  <span class="c1"># one row per ICU stay</span>
+    <span class="n">sources</span><span class="o">=</span><span class="p">{</span><span class="s2">"charite_demo"</span><span class="p">:</span> <span class="p">{}},</span>  <span class="c1"># the public synthetic dataset, read over HTTPS</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"demo"</span><span class="p">,</span>  <span class="c1"># project on the demo Concepts API</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s2">"cak_demo_0d2b53ac"</span><span class="p">,</span>  <span class="c1"># public demo key</span>
+    <span class="n">load_default_vars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># start from the bare cohort frame</span>
+<span class="p">)</span>
+
+<span class="n">obs</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> ICU stays, </span><span class="si">{</span><span class="n">obs</span><span class="p">[</span><span class="s1">'case_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> hospital cases, "</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">obs</span><span class="p">[</span><span class="s1">'patient_id'</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> patients"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20,000 ICU stays, 14,362 hospital cases, 13,556 patients
+</pre></div>
+</div>
+</div>
+</div>
+<p>Building the cohort loads only the small administrative tables (a few MB). Clinical
+data are fetched later, variable by variable, and only the parts a query needs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code> is a <a class="reference external" href="https://pola.rs">polars</a> DataFrame with one row per ICU stay. It
+already contains the identifiers (<code class="docutils literal notranslate"><span class="pre">patient_id</span></code>, <code class="docutils literal notranslate"><span class="pre">case_id</span></code>, <code class="docutils literal notranslate"><span class="pre">icu_stay_id</span></code>),
+demographics (<code class="docutils literal notranslate"><span class="pre">age_on_admission</span></code>, <code class="docutils literal notranslate"><span class="pre">sex</span></code>), the time anchors (<code class="docutils literal notranslate"><span class="pre">hospital_admission</span></code>,
+<code class="docutils literal notranslate"><span class="pre">hospital_discharge</span></code>, <code class="docutils literal notranslate"><span class="pre">icu_admission</span></code>, <code class="docutils literal notranslate"><span class="pre">icu_discharge</span></code>), the ICD-10 codes coded at ICU
+admission (<code class="docutils literal notranslate"><span class="pre">icu_admission_diagnoses</span></code>) and <code class="docutils literal notranslate"><span class="pre">inhospital_death</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+    <span class="s2">"case_id"</span><span class="p">,</span>
+    <span class="s2">"age_on_admission"</span><span class="p">,</span>
+    <span class="s2">"sex"</span><span class="p">,</span>
+    <span class="s2">"hospital_admission"</span><span class="p">,</span>
+    <span class="s2">"icu_admission"</span><span class="p">,</span>
+    <span class="s2">"icu_discharge"</span><span class="p">,</span>
+    <span class="s2">"icu_admission_diagnoses"</span><span class="p">,</span>
+    <span class="s2">"inhospital_death"</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 9)</small><table border="1" class="dataframe"><thead><tr><th>icu_stay_id</th><th>case_id</th><th>age_on_admission</th><th>sex</th><th>hospital_admission</th><th>icu_admission</th><th>icu_discharge</th><th>icu_admission_diagnoses</th><th>inhospital_death</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>str</td><td>datetime[μs]</td><td>datetime[μs]</td><td>datetime[μs]</td><td>list[str]</td><td>bool</td></tr></thead><tbody><tr><td>&quot;0040000000_1&quot;</td><td>&quot;0040000000&quot;</td><td>59</td><td>&quot;F&quot;</td><td>2019-01-01 00:55:00</td><td>2019-01-01 03:42:00</td><td>2019-01-03 20:05:00</td><td>[&quot;K25.0&quot;]</td><td>false</td></tr><tr><td>&quot;0040000000_2&quot;</td><td>&quot;0040000000&quot;</td><td>59</td><td>&quot;F&quot;</td><td>2019-01-01 00:55:00</td><td>2019-01-12 12:51:00</td><td>2019-01-12 22:15:00</td><td>[&quot;K25.0&quot;]</td><td>false</td></tr><tr><td>&quot;0040000001_1&quot;</td><td>&quot;0040000001&quot;</td><td>60</td><td>&quot;M&quot;</td><td>2019-01-01 07:24:00</td><td>2019-01-01 10:41:00</td><td>2019-01-02 02:52:00</td><td>[&quot;T42.4&quot;]</td><td>false</td></tr><tr><td>&quot;0040000001_2&quot;</td><td>&quot;0040000001&quot;</td><td>60</td><td>&quot;M&quot;</td><td>2019-01-01 07:24:00</td><td>2019-01-07 19:21:00</td><td>2019-01-10 21:16:00</td><td>[&quot;T42.4&quot;]</td><td>false</td></tr><tr><td>&quot;0040000001_3&quot;</td><td>&quot;0040000001&quot;</td><td>60</td><td>&quot;M&quot;</td><td>2019-01-01 07:24:00</td><td>2019-01-15 23:21:00</td><td>2019-01-18 02:30:00</td><td>[&quot;T42.4&quot;]</td><td>false</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"age_on_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"median age"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"F"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"female (share)"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"in-hospital death (share)"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"first ICU admission"</span><span class="p">),</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"last ICU admission"</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1, 5)</small><table border="1" class="dataframe"><thead><tr><th>median age</th><th>female (share)</th><th>in-hospital death (share)</th><th>first ICU admission</th><th>last ICU admission</th></tr><tr><td>f64</td><td>f64</td><td>f64</td><td>date</td><td>date</td></tr></thead><tbody><tr><td>68.0</td><td>0.382</td><td>0.127</td><td>2019-01-01</td><td>2025-12-31</td></tr></tbody></table></div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Working offline</p>
+<p>Reading over HTTPS transfers only what each query touches, but every query pays network
+round-trips. For repeated work, download the dataset once (about 195 MB) and point the
+source at the folder:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from corr_vars.sources import charite_demo
+
+path = charite_demo.download("~/data/charite_mockdata")  # resumes if interrupted
+cohort = Cohort(
+    obs_level="icu_stay",
+    sources={"charite_demo": {"path": path}},
+    project="demo",
+    api_key="cak_demo_0d2b53ac",
+)
+</pre></div>
+</div>
+<p>The variable definitions still come from the Concepts API, so the key is still needed.</p>
+</div>
+</section>
+</section>
+<section id="inclusion-criteria-and-the-flowchart">
+<h2>2. Inclusion criteria and the flowchart<a class="headerlink" href="#inclusion-criteria-and-the-flowchart" title="Link to this heading">#</a></h2>
+<p>Every inclusion or exclusion step is recorded by the cohort’s change tracker, which
+draws the study flowchart for you. There are two ways to add a step:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cohort.include_list([...])</span></code> / <code class="docutils literal notranslate"><span class="pre">cohort.exclude_list([...])</span></code> for criteria on a variable,
+written as <code class="docutils literal notranslate"><span class="pre">{&quot;variable&quot;:</span> <span class="pre">...,</span> <span class="pre">&quot;operation&quot;:</span> <span class="pre">...}</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">cohort.change_tracker(...)</span> <span class="pre">as</span> <span class="pre">track:</span></code> for any polars expression on <code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code>.</p></li>
+</ul>
+<p>Our criteria: adults, the <strong>first ICU stay of each hospital case</strong> (so that every patient
+episode enters once) and an ICU stay of <strong>at least 24 hours</strong> (so that the first-24-hour
+features below are defined).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span><span class="o">.</span><span class="n">include_list</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"age_on_admission"</span><span class="p">,</span>
+            <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"&gt;= 18"</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Adults"</span><span class="p">,</span>
+            <span class="s2">"operations_done"</span><span class="p">:</span> <span class="s2">"adults (age &gt;= 18 years)"</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Number the ICU stays within each hospital case by admission time</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">icu_stay_number</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="s2">"ordinal"</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">"case_id"</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="n">cohort</span><span class="o">.</span><span class="n">change_tracker</span><span class="p">(</span><span class="s2">"first ICU stay of each hospital case"</span><span class="p">)</span> <span class="k">as</span> <span class="n">track</span><span class="p">:</span>
+    <span class="n">track</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_stay_number"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">cohort</span><span class="o">.</span><span class="n">change_tracker</span><span class="p">(</span><span class="s2">"ICU stays of at least 24 h"</span><span class="p">)</span> <span class="k">as</span> <span class="n">track</span><span class="p">:</span>
+    <span class="n">track</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_discharge"</span><span class="p">)</span> <span class="o">-</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">pl</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Study cohort: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> ICU stays"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">figureone</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Study cohort: 11,882 ICU stays
+</pre></div>
+</div>
+<img alt="../_images/075c384f8f58afc9e12ec6cdbaa7daf920a3aed3fb8756e5841182b3bfa462a1.svg" src="../_images/075c384f8f58afc9e12ec6cdbaa7daf920a3aed3fb8756e5841182b3bfa462a1.svg" />
+</div>
+</div>
+<p>The source already restricts the dataset to adults by default (its
+<code class="docutils literal notranslate"><span class="pre">filter.include_adults_only</span></code> option), so the first step removes nobody; it is kept here
+because a protocol states it explicitly. <code class="docutils literal notranslate"><span class="pre">cohort.figureone</span></code> returns a matplotlib figure;
+use <code class="docutils literal notranslate"><span class="pre">cohort.to_figureone(output_file=&quot;flowchart.pdf&quot;)</span></code> to save it, or
+<code class="docutils literal notranslate"><span class="pre">cohort.to_figureone(layout=&quot;profile&quot;)</span></code> for a trial-profile layout.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The 24-hour criterion is computed from the raw time stamps on purpose. The
+<code class="docutils literal notranslate"><span class="pre">icu_length_of_stay</span></code> concept (next section) reports the length of stay in days with a
+<strong>floor of 1.0</strong>, so <code class="docutils literal notranslate"><span class="pre">icu_length_of_stay</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code> would keep every stay. Reading a concept’s
+definition before using it as a criterion pays off; see section 7.</p>
+</div>
+</section>
+<section id="static-variables">
+<h2>3. Static variables<a class="headerlink" href="#static-variables" title="Link to this heading">#</a></h2>
+<p>A <em>concept</em> is a curated, versioned variable definition. <code class="docutils literal notranslate"><span class="pre">cohort.add_variable(name)</span></code>
+fetches the definition for this source from the Concepts API, runs it against the data and
+stores the result. <strong>Static</strong> concepts (one value per stay) become columns of
+<code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="s2">"icu_length_of_stay"</span><span class="p">,</span>  <span class="c1"># days</span>
+    <span class="s2">"icu_admiss_type"</span><span class="p">,</span>  <span class="c1"># surgical / medical</span>
+    <span class="s2">"icu_admission_apache_iii"</span><span class="p">,</span>  <span class="c1"># APACHE III admission diagnosis group</span>
+    <span class="s2">"elix_total_vw"</span><span class="p">,</span>  <span class="c1"># Elixhauser comorbidity index (van Walraven weights)</span>
+    <span class="s2">"elixhauser_icd10_chf"</span><span class="p">,</span>  <span class="c1"># congestive heart failure (Elixhauser ICD-10 codes)</span>
+<span class="p">]:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+    <span class="s2">"age_on_admission"</span><span class="p">,</span>
+    <span class="s2">"icu_length_of_stay"</span><span class="p">,</span>
+    <span class="s2">"icu_admiss_type"</span><span class="p">,</span>
+    <span class="s2">"icu_admission_apache_iii"</span><span class="p">,</span>
+    <span class="s2">"elix_total_vw"</span><span class="p">,</span>
+    <span class="s2">"elixhauser_icd10_chf"</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 7)</small><table border="1" class="dataframe"><thead><tr><th>icu_stay_id</th><th>age_on_admission</th><th>icu_length_of_stay</th><th>icu_admiss_type</th><th>icu_admission_apache_iii</th><th>elix_total_vw</th><th>elixhauser_icd10_chf</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>i64</td><td>bool</td></tr></thead><tbody><tr><td>&quot;0040000000_1&quot;</td><td>59</td><td>2.682639</td><td>&quot;medical&quot;</td><td>&quot;Gastrointestinal&quot;</td><td>0</td><td>false</td></tr><tr><td>&quot;0040000002_1&quot;</td><td>75</td><td>1.682639</td><td>&quot;surgical&quot;</td><td>&quot;Cardiovascular&quot;</td><td>5</td><td>false</td></tr><tr><td>&quot;0040000003_1&quot;</td><td>44</td><td>9.554861</td><td>&quot;surgical&quot;</td><td>&quot;Neurologic&quot;</td><td>-3</td><td>false</td></tr><tr><td>&quot;0040000005_1&quot;</td><td>70</td><td>4.334722</td><td>&quot;medical&quot;</td><td>&quot;Cardiovascular&quot;</td><td>-2</td><td>false</td></tr><tr><td>&quot;0040000006_1&quot;</td><td>65</td><td>5.361806</td><td>&quot;medical&quot;</td><td>&quot;Gastrointestinal&quot;</td><td>-5</td><td>false</td></tr></tbody></table></div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">age_on_admission</span></code> needs no <code class="docutils literal notranslate"><span class="pre">add_variable</span></code> call: it is part of the cohort frame from the
+start, like <code class="docutils literal notranslate"><span class="pre">sex</span></code> and <code class="docutils literal notranslate"><span class="pre">inhospital_death</span></code>.</p>
+<p>Some concepts bring companion columns. <code class="docutils literal notranslate"><span class="pre">elix_total_vw</span></code> adds <code class="docutils literal notranslate"><span class="pre">elix_total_vw_detail</span></code>, a
+struct with one 0/1 flag per Elixhauser comorbidity group. Unnesting it gives the
+prevalence of each group:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"elix_total_vw_detail"</span><span class="p">)</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">unnest</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">include_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header_name</span><span class="o">=</span><span class="s2">"comorbidity"</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"share"</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"share"</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (8, 2)</small><table border="1" class="dataframe"><thead><tr><th>comorbidity</th><th>share</th></tr><tr><td>str</td><td>f64</td></tr></thead><tbody><tr><td>&quot;Hypertension uncomplicated&quot;</td><td>0.357095</td></tr><tr><td>&quot;Fluid and electrolyte disorder…</td><td>0.324188</td></tr><tr><td>&quot;Cardiac arrhythmias&quot;</td><td>0.293217</td></tr><tr><td>&quot;Congestive heart failure&quot;</td><td>0.24777</td></tr><tr><td>&quot;Chronic pulmonary disease&quot;</td><td>0.176233</td></tr><tr><td>&quot;Solid tumor without metastasis&quot;</td><td>0.162346</td></tr><tr><td>&quot;Obesity&quot;</td><td>0.142484</td></tr><tr><td>&quot;Renal failure&quot;</td><td>0.141474</td></tr></tbody></table></div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">elix_total_vw</span></code> is computed from the diagnoses time-stamped <em>inside</em> the observation
+window. In this dataset, diagnoses are coded during the first ICU stay of a case, so a
+later ICU stay of the same case has no diagnoses and gets a null score (about 23 % of all
+ICU stays). Restricting the cohort to the first ICU stay per case removes them:</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"elix_total_vw missing: </span><span class="si">{</span><span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">'elix_total_vw'</span><span class="p">]</span><span class="o">.</span><span class="n">null_count</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> stays"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>elix_total_vw missing: 0 of 11,882 stays
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not every concept is a single value. <code class="docutils literal notranslate"><span class="pre">dx_diabetes_mellitus_any</span></code> returns <strong>every matching
+diagnosis</strong> with its time stamp, so it lands in <code class="docutils literal notranslate"><span class="pre">cohort.obsm</span></code>, the dictionary of
+time-series variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"dx_diabetes_mellitus_any"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"dx_diabetes_mellitus_any"</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">,</span> <span class="s2">"value"</span>
+<span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small><table border="1" class="dataframe"><thead><tr><th>icu_stay_id</th><th>recordtime</th><th>value</th></tr><tr><td>str</td><td>datetime[μs]</td><td>str</td></tr></thead><tbody><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-03 16:38:00</td><td>&quot;E11.72&quot;</td></tr><tr><td>&quot;0040000005_1&quot;</td><td>2019-01-03 12:34:00</td><td>&quot;E10.20&quot;</td></tr><tr><td>&quot;0040000007_1&quot;</td><td>2019-01-11 08:58:00</td><td>&quot;E11.91&quot;</td></tr><tr><td>&quot;0040000010_1&quot;</td><td>2019-01-04 06:07:00</td><td>&quot;E10.20&quot;</td></tr><tr><td>&quot;0040000011_1&quot;</td><td>2019-01-03 23:46:00</td><td>&quot;E11.90&quot;</td></tr></tbody></table></div></div></div>
+</div>
+<p>To turn an event list into one value per stay, wrap it in an aggregation variable.
+<code class="docutils literal notranslate"><span class="pre">NativeStatic</span></code> takes a <code class="docutils literal notranslate"><span class="pre">base_var</span></code>, an aggregation in <code class="docutils literal notranslate"><span class="pre">select</span></code> and a time window. Here
+<code class="docutils literal notranslate"><span class="pre">&quot;!any&quot;</span></code> asks “is there at least one matching diagnosis during the hospital case?”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">corr_vars.sources.charite_demo</span><span class="w"> </span><span class="kn">import</span> <span class="n">NativeStatic</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span>
+    <span class="n">NativeStatic</span><span class="p">(</span>
+        <span class="s2">"diabetes"</span><span class="p">,</span>
+        <span class="n">select</span><span class="o">=</span><span class="s2">"!any"</span><span class="p">,</span>
+        <span class="n">base_var</span><span class="o">=</span><span class="s2">"dx_diabetes_mellitus_any"</span><span class="p">,</span>
+        <span class="n">tmin</span><span class="o">=</span><span class="s2">"hospital_admission"</span><span class="p">,</span>
+        <span class="n">tmax</span><span class="o">=</span><span class="s2">"hospital_discharge"</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"diabetes"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2, 2)</small><table border="1" class="dataframe"><thead><tr><th>diabetes</th><th>count</th></tr><tr><td>bool</td><td>u32</td></tr></thead><tbody><tr><td>false</td><td>9119</td></tr><tr><td>true</td><td>2763</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+<section id="time-series-and-time-windows">
+<h2>4. Time series and time windows<a class="headerlink" href="#time-series-and-time-windows" title="Link to this heading">#</a></h2>
+<p><strong>Dynamic</strong> concepts return one row per measurement or per interval, with the columns
+<code class="docutils literal notranslate"><span class="pre">recordtime</span></code> (and <code class="docutils literal notranslate"><span class="pre">recordtime_end</span></code> for intervals), <code class="docutils literal notranslate"><span class="pre">value</span></code>, <code class="docutils literal notranslate"><span class="pre">value_unit</span></code> and
+<code class="docutils literal notranslate"><span class="pre">attributes</span></code> (a struct with concept-specific details). <code class="docutils literal notranslate"><span class="pre">recordtime_relative</span></code> is the time
+in seconds since ICU admission.</p>
+<p>By default a dynamic variable covers the observation itself, here from <code class="docutils literal notranslate"><span class="pre">icu_admission</span></code> to
+<code class="docutils literal notranslate"><span class="pre">icu_discharge</span></code>. Mean arterial pressure is the largest concept in the demo (about
+19 million invasive and non-invasive readings for all ICU stays), so this cell takes
+roughly 10–20 seconds:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"blood_pressure_mean"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"norepinephrine"</span><span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"norepinephrine"</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span>
+    <span class="s2">"recordtime"</span><span class="p">,</span>
+    <span class="s2">"recordtime_end"</span><span class="p">,</span>
+    <span class="s2">"value"</span><span class="p">,</span>
+    <span class="s2">"value_unit"</span><span class="p">,</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"attributes"</span><span class="p">)</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">"rate_value"</span><span class="p">,</span> <span class="s2">"rate_unit"</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 7)</small><table border="1" class="dataframe"><thead><tr><th>icu_stay_id</th><th>recordtime</th><th>recordtime_end</th><th>value</th><th>value_unit</th><th>rate_value</th><th>rate_unit</th></tr><tr><td>str</td><td>datetime[μs]</td><td>datetime[μs]</td><td>f64</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-02 13:38:00</td><td>2019-01-02 14:38:00</td><td>0.2439</td><td>&quot;mg&quot;</td><td>&quot;0.06&quot;</td><td>&quot;µg/kg/min&quot;</td></tr><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-02 14:38:00</td><td>2019-01-02 15:38:00</td><td>0.2846</td><td>&quot;mg&quot;</td><td>&quot;0.07&quot;</td><td>&quot;µg/kg/min&quot;</td></tr><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-02 15:38:00</td><td>2019-01-02 16:38:00</td><td>0.2033</td><td>&quot;mg&quot;</td><td>&quot;0.05&quot;</td><td>&quot;µg/kg/min&quot;</td></tr><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-02 16:38:00</td><td>2019-01-02 17:38:00</td><td>0.122</td><td>&quot;mg&quot;</td><td>&quot;0.03&quot;</td><td>&quot;µg/kg/min&quot;</td></tr><tr><td>&quot;0040000005_1&quot;</td><td>2019-01-01 12:53:00</td><td>2019-01-01 13:53:00</td><td>1.5405</td><td>&quot;mg&quot;</td><td>&quot;0.25&quot;</td><td>&quot;µg/kg/min&quot;</td></tr></tbody></table></div></div></div>
+</div>
+<p>For norepinephrine, <code class="docutils literal notranslate"><span class="pre">value</span></code> is the amount given per charted interval (mg), and the
+infusion rate as charted (µg/kg/min) sits in <code class="docutils literal notranslate"><span class="pre">attributes</span></code>.</p>
+<section id="derived-concepts-resolve-their-dependencies">
+<h3>Derived concepts resolve their dependencies<a class="headerlink" href="#derived-concepts-resolve-their-dependencies" title="Link to this heading">#</a></h3>
+<p>The P/F ratio (PaO₂ / FiO₂) is not charted anywhere. Its definition <em>requires</em> two other
+concepts, arterial PaO₂ (<code class="docutils literal notranslate"><span class="pre">blood_pao2_arterial</span></code>) and the FiO₂ setting (<code class="docutils literal notranslate"><span class="pre">vent_fio2</span></code>), and
+pairs each blood gas with the closest FiO₂. <code class="docutils literal notranslate"><span class="pre">corr_vars</span></code> fetches and extracts the
+requirements (and theirs, recursively) on its own:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"pf_ratio"</span><span class="p">)</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">"charite_demo"</span><span class="p">]</span><span class="o">.</span><span class="n">requirements</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'blood_pao2_arterial': {'template': 'blood_pao2_arterial',
+  'tmin': 'inherit',
+  'tmax': 'inherit'},
+ 'vent_fio2': {'template': 'vent_fio2', 'tmin': 'inherit', 'tmax': 'inherit'}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every definition that was used, including the indirect ones, is recorded with its
+version in <code class="docutils literal notranslate"><span class="pre">cohort.concept_versions</span></code>. This is what makes a cohort reproducible: you can
+see (and later pin) exactly which version of each definition built it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"concept"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">"version"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"version"</span><span class="p">],</span> <span class="s2">"status"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">concept_versions</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">records</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (22, 3)</small><table border="1" class="dataframe"><thead><tr><th>concept</th><th>version</th><th>status</th></tr><tr><td>str</td><td>i64</td><td>str</td></tr></thead><tbody><tr><td>&quot;icu_length_of_stay&quot;</td><td>2</td><td>&quot;published&quot;</td></tr><tr><td>&quot;icu_admiss_type&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;any_surgery_ops&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;surgery_ops&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;icu_admission_apache_iii&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr><tr><td>&quot;fio2_set&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;fio2_set_helper&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;ventilator_mode_automatic_stan…</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;ventilator_mode_automatic&quot;</td><td>1</td><td>&quot;published&quot;</td></tr><tr><td>&quot;fio2_observed&quot;</td><td>1</td><td>&quot;published&quot;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"invasive_vent"</span><span class="p">,</span> <span class="s2">"endotracheal_tube"</span><span class="p">,</span> <span class="s2">"sofa_score_total"</span><span class="p">]:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"invasive_vent"</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">,</span> <span class="s2">"recordtime_end"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">,</span> <span class="s2">"value_unit"</span><span class="p">,</span> <span class="s2">"attributes"</span>
+<span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"recordtime"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 6)</small><table border="1" class="dataframe"><thead><tr><th>icu_stay_id</th><th>recordtime</th><th>recordtime_end</th><th>value</th><th>value_unit</th><th>attributes</th></tr><tr><td>str</td><td>datetime[μs]</td><td>datetime[μs]</td><td>f64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;0040000000_1&quot;</td><td>2019-01-01 23:04:00</td><td>2019-01-03 00:18:00</td><td>25.233333</td><td>&quot;hours&quot;</td><td>&quot;endotracheal&quot;</td></tr><tr><td>&quot;0040000002_1&quot;</td><td>2019-01-02 08:52:00</td><td>2019-01-02 14:56:00</td><td>6.066667</td><td>&quot;hours&quot;</td><td>&quot;endotracheal&quot;</td></tr><tr><td>&quot;0040000003_1&quot;</td><td>2019-01-01 13:30:00</td><td>2019-01-10 17:43:00</td><td>220.216667</td><td>&quot;hours&quot;</td><td>&quot;endotracheal&quot;</td></tr><tr><td>&quot;0040000005_1&quot;</td><td>2019-01-03 03:14:00</td><td>2019-01-05 18:32:00</td><td>63.3</td><td>&quot;hours&quot;</td><td>&quot;endotracheal&quot;</td></tr><tr><td>&quot;0040000010_1&quot;</td><td>2019-01-02 00:33:00</td><td>2019-01-05 22:11:00</td><td>93.633333</td><td>&quot;hours&quot;</td><td>&quot;endotracheal&quot;</td></tr></tbody></table></div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">invasive_vent</span></code> has one row per ventilation episode (start, end, duration in hours, and
+the airway in <code class="docutils literal notranslate"><span class="pre">attributes</span></code>); <code class="docutils literal notranslate"><span class="pre">endotracheal_tube</span></code> holds the tube insertions and removals;
+<code class="docutils literal notranslate"><span class="pre">sofa_score_total</span></code> holds the daily SOFA scores.</p>
+</section>
+<section id="from-time-series-to-analysis-features">
+<h3>From time series to analysis features<a class="headerlink" href="#from-time-series-to-analysis-features" title="Link to this heading">#</a></h3>
+<p>An analysis usually needs one value per stay: the worst P/F in the first 24 hours, the
+lowest MAP, whether norepinephrine was running. Two arguments define such a feature:</p>
+<ul class="simple">
+<li><p><strong>the aggregation</strong> (<code class="docutils literal notranslate"><span class="pre">select</span></code>): <code class="docutils literal notranslate"><span class="pre">!first</span></code>, <code class="docutils literal notranslate"><span class="pre">!last</span></code>, <code class="docutils literal notranslate"><span class="pre">!min</span></code>, <code class="docutils literal notranslate"><span class="pre">!max</span></code>, <code class="docutils literal notranslate"><span class="pre">!mean</span></code>, <code class="docutils literal notranslate"><span class="pre">!median</span></code>,
+<code class="docutils literal notranslate"><span class="pre">!sum</span></code>, <code class="docutils literal notranslate"><span class="pre">!count</span></code>, <code class="docutils literal notranslate"><span class="pre">!any</span></code>, <code class="docutils literal notranslate"><span class="pre">!perc(q)</span></code>, <code class="docutils literal notranslate"><span class="pre">!closest(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">!sum_interval</span></code>
+(see <a class="reference internal" href="../api/aggregation.html"><span class="doc">Aggregated Variables</span></a>);</p></li>
+<li><p><strong>the time window</strong> (<code class="docutils literal notranslate"><span class="pre">tmin</span></code>, <code class="docutils literal notranslate"><span class="pre">tmax</span></code>): a column of <code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code>, or a
+<code class="docutils literal notranslate"><span class="pre">(column,</span> <span class="pre">offset)</span></code> tuple such as <code class="docutils literal notranslate"><span class="pre">(&quot;icu_admission&quot;,</span> <span class="pre">&quot;+24h&quot;)</span></code>.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Always pass <code class="docutils literal notranslate"><span class="pre">tmin</span></code> and <code class="docutils literal notranslate"><span class="pre">tmax</span></code> to <code class="docutils literal notranslate"><span class="pre">NativeStatic</span></code>. Without them the window is
+<strong>unbounded</strong> and the aggregation runs over everything the base variable returns, not
+just this ICU stay.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_24h</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tmin"</span><span class="p">:</span> <span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"tmax"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"+24h"</span><span class="p">)}</span>
+<span class="n">whole_icu_stay</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tmin"</span><span class="p">:</span> <span class="s2">"icu_admission"</span><span class="p">,</span> <span class="s2">"tmax"</span><span class="p">:</span> <span class="s2">"icu_discharge"</span><span class="p">}</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"pf_worst_24h"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!min value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"pf_ratio"</span><span class="p">,</span> <span class="o">**</span><span class="n">first_24h</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"map_lowest_24h"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!min value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"blood_pressure_mean"</span><span class="p">,</span> <span class="o">**</span><span class="n">first_24h</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"norepinephrine_24h"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!any"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"norepinephrine"</span><span class="p">,</span> <span class="o">**</span><span class="n">first_24h</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"invasive_vent_24h"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!any"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"invasive_vent"</span><span class="p">,</span> <span class="o">**</span><span class="n">first_24h</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"sofa_first"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!first value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"sofa_score_total"</span><span class="p">,</span> <span class="o">**</span><span class="n">first_24h</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"sofa_max"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"sofa_score_total"</span><span class="p">,</span> <span class="o">**</span><span class="n">whole_icu_stay</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"vent_hours_icu"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!sum_interval value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"invasive_vent"</span><span class="p">,</span> <span class="o">**</span><span class="n">whole_icu_stay</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="s2">"pf_worst_24h"</span><span class="p">,</span> <span class="s2">"map_lowest_24h"</span><span class="p">,</span> <span class="s2">"norepinephrine_24h"</span><span class="p">,</span> <span class="s2">"invasive_vent_24h"</span><span class="p">,</span>
+    <span class="s2">"sofa_first"</span><span class="p">,</span> <span class="s2">"sofa_max"</span><span class="p">,</span> <span class="s2">"vent_hours_icu"</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 8)</small><table border="1" class="dataframe"><thead><tr><th>statistic</th><th>pf_worst_24h</th><th>map_lowest_24h</th><th>norepinephrine_24h</th><th>invasive_vent_24h</th><th>sofa_first</th><th>sofa_max</th><th>vent_hours_icu</th></tr><tr><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td></tr></thead><tbody><tr><td>&quot;count&quot;</td><td>5613.0</td><td>11882.0</td><td>11882.0</td><td>11882.0</td><td>11766.0</td><td>11871.0</td><td>11882.0</td></tr><tr><td>&quot;null_count&quot;</td><td>6269.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>116.0</td><td>11.0</td><td>0.0</td></tr><tr><td>&quot;mean&quot;</td><td>205.193642</td><td>65.383016</td><td>0.47896</td><td>0.255008</td><td>8.635475</td><td>8.816528</td><td>34.957709</td></tr><tr><td>&quot;std&quot;</td><td>63.973246</td><td>9.37471</td><td>null</td><td>null</td><td>3.233899</td><td>3.367249</td><td>84.61143</td></tr><tr><td>&quot;min&quot;</td><td>37.0</td><td>38.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><td>&quot;25%&quot;</td><td>161.290323</td><td>58.0</td><td>null</td><td>null</td><td>6.0</td><td>6.0</td><td>0.0</td></tr><tr><td>&quot;50%&quot;</td><td>209.210526</td><td>64.0</td><td>null</td><td>null</td><td>8.0</td><td>9.0</td><td>0.033333</td></tr><tr><td>&quot;75%&quot;</td><td>253.225806</td><td>72.0</td><td>null</td><td>null</td><td>11.0</td><td>11.0</td><td>33.1</td></tr><tr><td>&quot;max&quot;</td><td>433.448276</td><td>100.0</td><td>1.0</td><td>1.0</td><td>20.0</td><td>20.0</td><td>1675.85</td></tr></tbody></table></div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">!sum_interval</span></code> sums interval values weighted by how much of each interval falls inside
+the window, so a ventilation episode that started in the operating room counts only with
+its ICU hours.</p>
+<p>Anything the aggregation syntax does not cover is a few lines of polars on
+<code class="docutils literal notranslate"><span class="pre">cohort.obsm</span></code>. The highest norepinephrine <strong>rate</strong> in the first 24 hours, for example,
+lives in the <code class="docutils literal notranslate"><span class="pre">attributes</span></code> struct:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norepi_max_rate</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"norepinephrine"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime_relative"</span><span class="p">)</span><span class="o">.</span><span class="n">is_between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"attributes"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">"rate_value"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Float64</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"norepi_max_rate_24h"</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">norepi_max_rate</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">"norepi_max_rate_24h"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 2)</small><table border="1" class="dataframe"><thead><tr><th>statistic</th><th>value</th></tr><tr><td>str</td><td>f64</td></tr></thead><tbody><tr><td>&quot;count&quot;</td><td>5691.0</td></tr><tr><td>&quot;null_count&quot;</td><td>6191.0</td></tr><tr><td>&quot;mean&quot;</td><td>0.258216</td></tr><tr><td>&quot;std&quot;</td><td>0.15796</td></tr><tr><td>&quot;min&quot;</td><td>0.03</td></tr><tr><td>&quot;25%&quot;</td><td>0.15</td></tr><tr><td>&quot;50%&quot;</td><td>0.22</td></tr><tr><td>&quot;75%&quot;</td><td>0.33</td></tr><tr><td>&quot;max&quot;</td><td>1.52</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+</section>
+<section id="outcomes">
+<h2>5. Outcomes<a class="headerlink" href="#outcomes" title="Link to this heading">#</a></h2>
+<section id="acute-kidney-injury">
+<h3>Acute kidney injury<a class="headerlink" href="#acute-kidney-injury" title="Link to this heading">#</a></h3>
+<p>The demo has both KDIGO criteria as hourly or per-sample stage series: creatinine-based
+(<code class="docutils literal notranslate"><span class="pre">aki_crea_based</span></code>) and urine-output-based (<code class="docutils literal notranslate"><span class="pre">aki_urine_output</span></code>). Stage <code class="docutils literal notranslate"><span class="pre">-1</span></code> marks
+dialysis-dependent chronic kidney disease (not assessable). The outcome is the highest
+stage reached during the ICU stay by either criterion:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"aki_crea_max"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"aki_crea_based"</span><span class="p">,</span> <span class="o">**</span><span class="n">whole_icu_stay</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"aki_uo_max"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!max value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"aki_urine_output"</span><span class="p">,</span> <span class="o">**</span><span class="n">whole_icu_stay</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">aki_labels</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="s2">"Dialysis-dependent CKD"</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s2">"No AKI"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">"Stage 1"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">"Stage 2"</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">"Stage 3"</span><span class="p">}</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">aki_stage_max</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">min_horizontal</span><span class="p">(</span><span class="s2">"aki_crea_max"</span><span class="p">,</span> <span class="s2">"aki_uo_max"</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">max_horizontal</span><span class="p">(</span><span class="s2">"aki_crea_max"</span><span class="p">,</span> <span class="s2">"aki_uo_max"</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span><span class="o">.</span><span class="n">replace_strict</span><span class="p">(</span><span class="n">aki_labels</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"label"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small><table border="1" class="dataframe"><thead><tr><th>aki_stage_max</th><th>len</th><th>label</th></tr><tr><td>i32</td><td>u32</td><td>str</td></tr></thead><tbody><tr><td>-1</td><td>365</td><td>&quot;Dialysis-dependent CKD&quot;</td></tr><tr><td>0</td><td>6320</td><td>&quot;No AKI&quot;</td></tr><tr><td>1</td><td>1771</td><td>&quot;Stage 1&quot;</td></tr><tr><td>2</td><td>1674</td><td>&quot;Stage 2&quot;</td></tr><tr><td>3</td><td>1752</td><td>&quot;Stage 3&quot;</td></tr></tbody></table></div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">inhospital_death</span></code> is already in <code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code>. For outcomes over a fixed horizon (for
+example ventilator-free days to day 28) see <code class="docutils literal notranslate"><span class="pre">Cohort.add_horizon_variable</span></code>.</p>
+</section>
+<section id="surgical-patients-anchoring-the-window-at-hospital-admission">
+<h3>Surgical patients: anchoring the window at hospital admission<a class="headerlink" href="#surgical-patients-anchoring-the-window-at-hospital-admission" title="Link to this heading">#</a></h3>
+<p>About a third of the ICU admissions in the demo follow surgery. The anaesthesia record
+(ASA physical status, urgency of the operation) is charted in the operating room, i.e.
+<strong>before</strong> ICU admission. With the default window, which starts at ICU admission, these
+concepts are almost empty:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">"asa_physical_status"</span><span class="p">)</span>
+<span class="n">n_with_asa</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"asa_physical_status"</span><span class="p">][</span><span class="s2">"icu_stay_id"</span><span class="p">]</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ASA within the ICU stay: </span><span class="si">{</span><span class="n">n_with_asa</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cohort</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> stays"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ASA within the ICU stay: 572 of 11,882 stays
+</pre></div>
+</div>
+</div>
+</div>
+<p>A window from hospital admission to ICU admission captures the operation that led to the
+ICU stay. <code class="docutils literal notranslate"><span class="pre">!last</span></code> keeps the most recent record before the ICU admission:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">before_icu</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tmin"</span><span class="p">:</span> <span class="s2">"hospital_admission"</span><span class="p">,</span> <span class="s2">"tmax"</span><span class="p">:</span> <span class="s2">"icu_admission"</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"surgery_before_icu"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!any"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"surgery"</span><span class="p">,</span> <span class="o">**</span><span class="n">before_icu</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"asa"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!last value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"asa_physical_status"</span><span class="p">,</span> <span class="o">**</span><span class="n">before_icu</span><span class="p">),</span>
+    <span class="n">NativeStatic</span><span class="p">(</span><span class="s2">"surgery_urgency_last"</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">"!last value"</span><span class="p">,</span> <span class="n">base_var</span><span class="o">=</span><span class="s2">"surgery_urgency"</span><span class="p">,</span> <span class="o">**</span><span class="n">before_icu</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_admiss_type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"surgical"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"asa"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">len</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"asa"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 2)</small><table border="1" class="dataframe"><thead><tr><th>asa</th><th>len</th></tr><tr><td>i64</td><td>u32</td></tr></thead><tbody><tr><td>null</td><td>425</td></tr><tr><td>2</td><td>686</td></tr><tr><td>3</td><td>1652</td></tr><tr><td>4</td><td>1471</td></tr><tr><td>5</td><td>315</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"icu_admiss_type"</span><span class="p">,</span> <span class="s2">"surgery_before_icu"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">len</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"icu_admiss_type"</span><span class="p">,</span> <span class="s2">"surgery_before_icu"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 3)</small><table border="1" class="dataframe"><thead><tr><th>icu_admiss_type</th><th>surgery_before_icu</th><th>len</th></tr><tr><td>str</td><td>bool</td><td>u32</td></tr></thead><tbody><tr><td>&quot;medical&quot;</td><td>false</td><td>7333</td></tr><tr><td>&quot;surgical&quot;</td><td>false</td><td>425</td></tr><tr><td>&quot;surgical&quot;</td><td>true</td><td>4124</td></tr></tbody></table></div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">surgery_urgency</span></code> uses the Charité coding <code class="docutils literal notranslate"><span class="pre">N0</span></code>–<code class="docutils literal notranslate"><span class="pre">N5</span></code>, where <code class="docutils literal notranslate"><span class="pre">N0</span></code> is an elective operation
+and <code class="docutils literal notranslate"><span class="pre">N1</span></code>–<code class="docutils literal notranslate"><span class="pre">N5</span></code> are emergency categories of increasing urgency.</p>
+</section>
+</section>
+<section id="table-1-and-plots">
+<h2>6. Table 1 and plots<a class="headerlink" href="#table-1-and-plots" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cohort.to_tableone()</span></code> builds a <a class="reference external" href="https://tableone.readthedocs.io">TableOne</a> from
+<code class="docutils literal notranslate"><span class="pre">cohort.obs</span></code> (or from a DataFrame you pass). Numeric columns are summarised as median
+[Q1, Q3], booleans and strings as counts. Preparing a small, labelled frame first gives a
+clean table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_df</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"invasive_vent_24h"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"Ventilated in first 24 h"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">"Not ventilated"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"group"</span><span class="p">),</span>
+    <span class="s2">"age_on_admission"</span><span class="p">,</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span><span class="o">.</span><span class="n">replace_strict</span><span class="p">({</span><span class="s2">"F"</span><span class="p">:</span> <span class="s2">"female"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"male"</span><span class="p">}),</span>
+    <span class="s2">"icu_admiss_type"</span><span class="p">,</span>
+    <span class="s2">"elix_total_vw"</span><span class="p">,</span>
+    <span class="s2">"elixhauser_icd10_chf"</span><span class="p">,</span>
+    <span class="s2">"diabetes"</span><span class="p">,</span>
+    <span class="s2">"sofa_first"</span><span class="p">,</span>
+    <span class="s2">"pf_worst_24h"</span><span class="p">,</span>
+    <span class="s2">"map_lowest_24h"</span><span class="p">,</span>
+    <span class="s2">"norepinephrine_24h"</span><span class="p">,</span>
+    <span class="s2">"vent_hours_icu"</span><span class="p">,</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span><span class="o">.</span><span class="n">replace_strict</span><span class="p">(</span><span class="n">aki_labels</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_dtype</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">Utf8</span><span class="p">),</span>
+    <span class="s2">"icu_length_of_stay"</span><span class="p">,</span>
+    <span class="s2">"inhospital_death"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">table1</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">to_tableone</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">table_df</span><span class="p">,</span>
+    <span class="n">groupby</span><span class="o">=</span><span class="s2">"group"</span><span class="p">,</span>
+    <span class="n">overall</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="p">{</span><span class="s2">"aki_stage_max"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">aki_labels</span><span class="o">.</span><span class="n">values</span><span class="p">())},</span>
+    <span class="n">rename</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"age_on_admission"</span><span class="p">:</span> <span class="s2">"Age, years"</span><span class="p">,</span>
+        <span class="s2">"sex"</span><span class="p">:</span> <span class="s2">"Sex"</span><span class="p">,</span>
+        <span class="s2">"icu_admiss_type"</span><span class="p">:</span> <span class="s2">"ICU admission type"</span><span class="p">,</span>
+        <span class="s2">"elix_total_vw"</span><span class="p">:</span> <span class="s2">"Elixhauser index (van Walraven)"</span><span class="p">,</span>
+        <span class="s2">"elixhauser_icd10_chf"</span><span class="p">:</span> <span class="s2">"Congestive heart failure"</span><span class="p">,</span>
+        <span class="s2">"diabetes"</span><span class="p">:</span> <span class="s2">"Diabetes mellitus"</span><span class="p">,</span>
+        <span class="s2">"sofa_first"</span><span class="p">:</span> <span class="s2">"SOFA, first 24 h"</span><span class="p">,</span>
+        <span class="s2">"pf_worst_24h"</span><span class="p">:</span> <span class="s2">"Worst P/F, first 24 h, mmHg"</span><span class="p">,</span>
+        <span class="s2">"map_lowest_24h"</span><span class="p">:</span> <span class="s2">"Lowest MAP, first 24 h, mmHg"</span><span class="p">,</span>
+        <span class="s2">"norepinephrine_24h"</span><span class="p">:</span> <span class="s2">"Norepinephrine, first 24 h"</span><span class="p">,</span>
+        <span class="s2">"vent_hours_icu"</span><span class="p">:</span> <span class="s2">"Invasive ventilation in ICU, h"</span><span class="p">,</span>
+        <span class="s2">"aki_stage_max"</span><span class="p">:</span> <span class="s2">"Highest AKI stage in ICU"</span><span class="p">,</span>
+        <span class="s2">"icu_length_of_stay"</span><span class="p">:</span> <span class="s2">"ICU length of stay, days"</span><span class="p">,</span>
+        <span class="s2">"inhospital_death"</span><span class="p">:</span> <span class="s2">"In-hospital death"</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">table1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="4" halign="left">Grouped by group</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Missing</th>
+      <th>Overall</th>
+      <th>Not ventilated</th>
+      <th>Ventilated in first 24 h</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>n</th>
+      <th></th>
+      <td></td>
+      <td>11882</td>
+      <td>8852</td>
+      <td>3030</td>
+    </tr>
+    <tr>
+      <th>Age, years, median [Q1,Q3]</th>
+      <th></th>
+      <td>0</td>
+      <td>68.0 [58.0,76.0]</td>
+      <td>68.0 [58.0,76.0]</td>
+      <td>68.0 [58.0,76.0]</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sex, n (%)</th>
+      <th>female</th>
+      <td></td>
+      <td>4591 (38.6)</td>
+      <td>3448 (39.0)</td>
+      <td>1143 (37.7)</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td></td>
+      <td>7291 (61.4)</td>
+      <td>5404 (61.0)</td>
+      <td>1887 (62.3)</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">ICU admission type, n (%)</th>
+      <th>medical</th>
+      <td></td>
+      <td>7333 (61.7)</td>
+      <td>4713 (53.2)</td>
+      <td>2620 (86.5)</td>
+    </tr>
+    <tr>
+      <th>surgical</th>
+      <td></td>
+      <td>4549 (38.3)</td>
+      <td>4139 (46.8)</td>
+      <td>410 (13.5)</td>
+    </tr>
+    <tr>
+      <th>Elixhauser index (van Walraven), median [Q1,Q3]</th>
+      <th></th>
+      <td>0</td>
+      <td>7.0 [3.0,12.0]</td>
+      <td>7.0 [3.0,12.0]</td>
+      <td>7.0 [2.0,12.0]</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Congestive heart failure, n (%)</th>
+      <th>Yes</th>
+      <td></td>
+      <td>2944 (24.8)</td>
+      <td>2168 (24.5)</td>
+      <td>776 (25.6)</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td></td>
+      <td>8938 (75.2)</td>
+      <td>6684 (75.5)</td>
+      <td>2254 (74.4)</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Diabetes mellitus, n (%)</th>
+      <th>Yes</th>
+      <td></td>
+      <td>2763 (23.3)</td>
+      <td>2095 (23.7)</td>
+      <td>668 (22.0)</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td></td>
+      <td>9119 (76.7)</td>
+      <td>6757 (76.3)</td>
+      <td>2362 (78.0)</td>
+    </tr>
+    <tr>
+      <th>SOFA, first 24 h, median [Q1,Q3]</th>
+      <th></th>
+      <td>116</td>
+      <td>8.0 [6.0,11.0]</td>
+      <td>8.0 [6.0,10.0]</td>
+      <td>11.0 [9.0,13.0]</td>
+    </tr>
+    <tr>
+      <th>Worst P/F, first 24 h, mmHg, median [Q1,Q3]</th>
+      <th></th>
+      <td>6269</td>
+      <td>209.2 [161.3,253.2]</td>
+      <td>240.3 [202.9,263.7]</td>
+      <td>171.6 [127.7,220.3]</td>
+    </tr>
+    <tr>
+      <th>Lowest MAP, first 24 h, mmHg, median [Q1,Q3]</th>
+      <th></th>
+      <td>0</td>
+      <td>64.0 [58.0,72.0]</td>
+      <td>66.0 [60.0,74.0]</td>
+      <td>59.0 [56.0,64.0]</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Norepinephrine, first 24 h, n (%)</th>
+      <th>Yes</th>
+      <td></td>
+      <td>5691 (47.9)</td>
+      <td>3539 (40.0)</td>
+      <td>2152 (71.0)</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td></td>
+      <td>6191 (52.1)</td>
+      <td>5313 (60.0)</td>
+      <td>878 (29.0)</td>
+    </tr>
+    <tr>
+      <th>Invasive ventilation in ICU, h, median [Q1,Q3]</th>
+      <th></th>
+      <td>0</td>
+      <td>0.0 [0.0,33.1]</td>
+      <td>0.0 [0.0,1.3]</td>
+      <td>64.2 [29.3,136.5]</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">Highest AKI stage in ICU, n (%)</th>
+      <th>Dialysis-dependent CKD</th>
+      <td></td>
+      <td>365 (3.1)</td>
+      <td>275 (3.1)</td>
+      <td>90 (3.0)</td>
+    </tr>
+    <tr>
+      <th>No AKI</th>
+      <td></td>
+      <td>6320 (53.2)</td>
+      <td>5158 (58.3)</td>
+      <td>1162 (38.3)</td>
+    </tr>
+    <tr>
+      <th>Stage 1</th>
+      <td></td>
+      <td>1771 (14.9)</td>
+      <td>1246 (14.1)</td>
+      <td>525 (17.3)</td>
+    </tr>
+    <tr>
+      <th>Stage 2</th>
+      <td></td>
+      <td>1674 (14.1)</td>
+      <td>1102 (12.4)</td>
+      <td>572 (18.9)</td>
+    </tr>
+    <tr>
+      <th>Stage 3</th>
+      <td></td>
+      <td>1752 (14.7)</td>
+      <td>1071 (12.1)</td>
+      <td>681 (22.5)</td>
+    </tr>
+    <tr>
+      <th>ICU length of stay, days, median [Q1,Q3]</th>
+      <th></th>
+      <td>0</td>
+      <td>3.1 [1.8,6.1]</td>
+      <td>2.7 [1.7,5.0]</td>
+      <td>5.0 [2.7,9.5]</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">In-hospital death, n (%)</th>
+      <th>Yes</th>
+      <td></td>
+      <td>1659 (14.0)</td>
+      <td>881 (10.0)</td>
+      <td>778 (25.7)</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td></td>
+      <td>10178 (85.7)</td>
+      <td>7939 (89.7)</td>
+      <td>2239 (73.9)</td>
+    </tr>
+    <tr>
+      <th>None</th>
+      <td></td>
+      <td>45 (0.4)</td>
+      <td>32 (0.4)</td>
+      <td>13 (0.4)</td>
+    </tr>
+  </tbody>
+</table>
+</div><br /></div></div>
+</div>
+<p>The P/F ratio needs a charted FiO₂, which exists mainly for patients on a ventilator or a
+high-flow device; hence the many missing values. <code class="docutils literal notranslate"><span class="pre">In-hospital</span> <span class="pre">death</span></code> is unknown (<code class="docutils literal notranslate"><span class="pre">None</span></code>)
+for cases that were still open on the dataset’s reference date (31 Dec 2025). To use the table in a manuscript, export it:
+<code class="docutils literal notranslate"><span class="pre">table1.to_excel(&quot;table1.xlsx&quot;)</span></code>, or with the helpers in <code class="docutils literal notranslate"><span class="pre">corr_vars.utils</span></code>:
+<code class="docutils literal notranslate"><span class="pre">tableone_to_latex</span></code>, <code class="docutils literal notranslate"><span class="pre">tableone_to_markdown</span></code>, <code class="docutils literal notranslate"><span class="pre">tableone_to_html</span></code>, <code class="docutils literal notranslate"><span class="pre">tableone_to_pdf</span></code>.</p>
+<section id="plot-1-oxygenation-over-the-first-three-days">
+<h3>Plot 1: oxygenation over the first three days<a class="headerlink" href="#plot-1-oxygenation-over-the-first-three-days" title="Link to this heading">#</a></h3>
+<p>Median and interquartile range of the P/F ratio in 6-hour bins, for patients ventilated
+within 24 hours, by survival:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ventilated</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"invasive_vent_24h"</span><span class="p">))</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="s2">"inhospital_death"</span><span class="p">)</span>
+
+<span class="n">pf_course</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"pf_ratio"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ventilated</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"icu_stay_id"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime_relative"</span><span class="p">)</span><span class="o">.</span><span class="n">is_between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">72</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">"left"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime_relative"</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">))</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">,</span> <span class="s2">"hour"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"median"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"q1"</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"q3"</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">drop_nulls</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"hour"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">died</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">"Survivors"</span><span class="p">,</span> <span class="s2">"#2a7ab9"</span><span class="p">),</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"Non-survivors"</span><span class="p">,</span> <span class="s2">"#d1495b"</span><span class="p">)]:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">pf_course</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"inhospital_death"</span><span class="p">)</span> <span class="o">==</span> <span class="n">died</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"hour"</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">"median"</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"hour"</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">"q1"</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">"q3"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">"Hours since ICU admission"</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">"P/F ratio (mmHg)"</span><span class="p">,</span>
+    <span class="n">xticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"P/F ratio in patients ventilated within 24 h"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/73fa59598465deb516428414b56c3e8d0ead1bded7224b0f16d34900f3e85f17.png" src="../_images/73fa59598465deb516428414b56c3e8d0ead1bded7224b0f16d34900f3e85f17.png" />
+</div>
+</div>
+</section>
+<section id="plot-2-blood-pressure-and-norepinephrine-in-one-stay">
+<h3>Plot 2: blood pressure and norepinephrine in one stay<a class="headerlink" href="#plot-2-blood-pressure-and-norepinephrine-in-one-stay" title="Link to this heading">#</a></h3>
+<p>Time series are easiest to sanity-check one patient at a time. Here, the ventilated stay
+with the highest norepinephrine rate in the first 24 hours:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stay_id</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cohort</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"invasive_vent_24h"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"norepi_max_rate_24h"</span><span class="p">,</span> <span class="s2">"icu_stay_id"</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">nulls_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"icu_stay_id"</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">hours</span> <span class="o">=</span> <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime_relative"</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"hours"</span><span class="p">)</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"recordtime_relative"</span><span class="p">)</span><span class="o">.</span><span class="n">is_between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">72</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span>
+
+<span class="n">map_stay</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"blood_pressure_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span> <span class="o">==</span> <span class="n">stay_id</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">window</span>
+<span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">)</span>
+<span class="n">norepi_stay</span> <span class="o">=</span> <span class="n">cohort</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">"norepinephrine"</span><span class="p">]</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"icu_stay_id"</span><span class="p">)</span> <span class="o">==</span> <span class="n">stay_id</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">window</span>
+<span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">hours</span><span class="p">,</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"attributes"</span><span class="p">)</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">"rate_value"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Float64</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"rate"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">map_stay</span><span class="p">[</span><span class="s2">"hours"</span><span class="p">],</span> <span class="n">map_stay</span><span class="p">[</span><span class="s2">"value"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2a7ab9"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2a7ab9"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">"Hours since ICU admission"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">"MAP (mmHg)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"One ICU stay, first 72 h"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">"#2a7ab9"</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">norepi_stay</span><span class="p">[</span><span class="s2">"hours"</span><span class="p">],</span> <span class="n">norepi_stay</span><span class="p">[</span><span class="s2">"rate"</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#d1495b"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Norepinephrine (µg/kg/min)"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#d1495b"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ax2</span><span class="p">):</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s2">"top"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8d6c185e0cc6d367fe61ac1e7a51e07e1398258f60815d2ab977a8522968a58e.png" src="../_images/8d6c185e0cc6d367fe61ac1e7a51e07e1398258f60815d2ab977a8522968a58e.png" />
+</div>
+</div>
+</section>
+<section id="plot-3-highest-aki-stage-by-early-ventilation">
+<h3>Plot 3: highest AKI stage by early ventilation<a class="headerlink" href="#plot-3-highest-aki-stage-by-early-ventilation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aki_share</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">table_df</span><span class="o">.</span><span class="n">drop_nulls</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">"group"</span><span class="p">,</span> <span class="s2">"aki_stage_max"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">len</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">share</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"len"</span><span class="p">)</span> <span class="o">/</span> <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"len"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">"group"</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">stages</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">aki_labels</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Not ventilated"</span><span class="p">,</span> <span class="s2">"Ventilated in first 24 h"</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#9e9e9e"</span><span class="p">,</span> <span class="s2">"#cfe3f1"</span><span class="p">,</span> <span class="s2">"#f6c28b"</span><span class="p">,</span> <span class="s2">"#e8875b"</span><span class="p">,</span> <span class="s2">"#c0392b"</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">))</span>
+<span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">stage</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">stages</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">widths</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">aki_share</span><span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"group"</span><span class="p">)</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"aki_stage_max"</span><span class="p">)</span> <span class="o">==</span> <span class="n">stage</span><span class="p">))[</span><span class="s2">"share"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span>
+    <span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">widths</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="n">left</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">stage</span><span class="p">)</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="n">w</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">widths</span><span class="p">)]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">"Share of ICU stays"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Highest AKI stage during the ICU stay"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">PercentFormatter</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper center"</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9ec69541fd7055bd710e8f81516b6ae32aef958733326d3062c2813559aef863.png" src="../_images/9ec69541fd7055bd710e8f81516b6ae32aef958733326d3062c2813559aef863.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="where-does-a-variable-come-from-and-exporting">
+<h2>7. Where does a variable come from? And exporting<a class="headerlink" href="#where-does-a-variable-come-from-and-exporting" title="Link to this heading">#</a></h2>
+<section id="inspecting-a-definition">
+<h3>Inspecting a definition<a class="headerlink" href="#inspecting-a-definition" title="Link to this heading">#</a></h3>
+<p>Each concept’s definition is open. In the browser, look a concept up in the
+<a class="reference external" href="https://demo-concepts.corr.icu">demo Concepts Browser</a> (sign in as <code class="docutils literal notranslate"><span class="pre">demo</span></code>), e.g.
+<a class="reference external" href="https://demo-concepts.corr.icu/concepts/tax/corr_v1/pf_ratio"><code class="docutils literal notranslate"><span class="pre">pf_ratio</span></code></a>: its
+documentation, the source-specific configuration, the Python code, and the full version
+history.</p>
+<p>From Python, the variable object returned by <code class="docutils literal notranslate"><span class="pre">add_variable</span></code> carries what was executed: the
+requirements shown above and, for concepts with code, the exact source text that ran:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">"charite_demo"</span><span class="p">]</span><span class="o">.</span><span class="n">py</span><span class="o">.</span><span class="n">source</span><span class="p">[:</span><span class="mi">900</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def pf_ratio(
+    var: VariableContext,
+    cohort: Cohort,
+    plusminus: pd.Timedelta = pd.Timedelta(hours=24),
+    strategy: AsofJoinStrategy = "nearest",
+) -&gt; pd.DataFrame:
+    """
+    Calculate the PF ratio by matching each PaO2 value to the closest FiO2 value within a specified time window,
+    and filter PF ratios to keep only values between 10 and 1000.
+
+    Args:
+        var: VariableContext container with required data for PaO2 and FiO2.
+        cohort: Cohort object containing the primary key.
+        plusminus (pd.Timedelta): Optional time range within which to find the closest FiO2 for each PaO2.
+                                  Defaults to 24 hours.
+        strategy (str): Strategy for asof join - "nearest", "backward", or "forward". Defaults to "nearest".
+
+    Returns:
+        pd.DataFrame: DataFrame with the primary key, PaO2, closest FiO2, and calculated, cleaned PF rat ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cohort</span><span class="o">.</span><span class="n">concept_versions</span><span class="p">[</span><span class="s2">"pf_ratio"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"endpoint"</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'taxonomy': 'corr_v1',
+ 'name': 'pf_ratio',
+ 'source': 'charite_demo',
+ 'origin': 'api',
+ 'concept_id': 29,
+ 'requested': 'latest',
+ 'version': 1,
+ 'source_version': 1,
+ 'status': 'published',
+ 'committed_at': '2026-10-22T11:45:14.054017',
+ 'deprecated_at': None,
+ 'successor_id': None,
+ 'pointer_deprecated_at': None,
+ 'warning': None}
+</pre></div>
+</div>
+</div>
+</div>
+<p>To freeze a study, pin the definitions: <code class="docutils literal notranslate"><span class="pre">Cohort(...,</span> <span class="pre">date=&quot;2026-10-22&quot;)</span></code> resolves every
+concept (and every dependency) as of that day, and <code class="docutils literal notranslate"><span class="pre">add_variable(&quot;pf_ratio::v2&quot;)</span></code> pins a
+single one.</p>
+</section>
+<section id="exporting">
+<h3>Exporting<a class="headerlink" href="#exporting" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cohort.save()</span></code> writes the whole cohort, including all time series and the concept
+versions, to one <code class="docutils literal notranslate"><span class="pre">.corr3</span></code> file that <code class="docutils literal notranslate"><span class="pre">Cohort.load()</span></code> reads back without network access.
+For other tools, <code class="docutils literal notranslate"><span class="pre">to_parquet()</span></code>, <code class="docutils literal notranslate"><span class="pre">to_csv()</span></code> and <code class="docutils literal notranslate"><span class="pre">to_stata()</span></code> write <code class="docutils literal notranslate"><span class="pre">obs</span></code> and every
+<code class="docutils literal notranslate"><span class="pre">obsm</span></code> table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">export_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+
+<span class="n">cohort</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">export_dir</span> <span class="o">/</span> <span class="s2">"ventilation_study.corr3"</span><span class="p">)</span>
+<span class="n">cohort</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">export_dir</span> <span class="o">/</span> <span class="s2">"parquet"</span><span class="p">)</span>
+
+<span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">export_dir</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">export_dir</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['parquet/_obs.parquet',
+ 'parquet/asa_physical_status.parquet',
+ 'parquet/blood_pressure_mean.parquet',
+ 'parquet/dx_diabetes_mellitus_any.parquet',
+ 'parquet/endotracheal_tube.parquet',
+ 'parquet/invasive_vent.parquet',
+ 'parquet/norepinephrine.parquet',
+ 'parquet/pf_ratio.parquet',
+ 'parquet/sofa_score_total.parquet',
+ 'ventilation_study.corr3']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reloaded</span> <span class="o">=</span> <span class="n">Cohort</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">export_dir</span> <span class="o">/</span> <span class="s2">"ventilation_study.corr3"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reloaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">reloaded</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> stays with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">reloaded</span><span class="o">.</span><span class="n">obsm</span><span class="p">)</span><span class="si">}</span><span class="s2"> time-series variables"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reloaded 11,882 stays with 8 time-series variables
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="where-to-go-next">
+<h2>Where to go next<a class="headerlink" href="#where-to-go-next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials.html"><span class="doc">Tutorials and Getting Started</span></a>: the general tutorials (aggregation, multi-source cohorts, time
+series).</p></li>
+<li><p><a class="reference internal" href="../custom_variables.html"><span class="doc">Custom Variables Guide</span></a>: define your own variables.</p></li>
+<li><p><a class="reference internal" href="../api/cohort.html"><span class="doc">Cohort</span></a>: the full <code class="docutils literal notranslate"><span class="pre">Cohort</span></code> API.</p></li>
+<li><p>The other demo concepts: browse them in the
+<a class="reference external" href="https://demo-concepts.corr.icu">demo Concepts Browser</a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../tutorials.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorials and Getting Started</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../custom_variables.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Custom Variables Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">1. Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting">Connecting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inclusion-criteria-and-the-flowchart">2. Inclusion criteria and the flowchart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-variables">3. Static variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-and-time-windows">4. Time series and time windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derived-concepts-resolve-their-dependencies">Derived concepts resolve their dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-time-series-to-analysis-features">From time series to analysis features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes">5. Outcomes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acute-kidney-injury">Acute kidney injury</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surgical-patients-anchoring-the-window-at-hospital-admission">Surgical patients: anchoring the window at hospital admission</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-1-and-plots">6. Table 1 and plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-1-oxygenation-over-the-first-three-days">Plot 1: oxygenation over the first three days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-2-blood-pressure-and-norepinephrine-in-one-stay">Plot 2: blood pressure and norepinephrine in one stay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-3-highest-aki-stage-by-early-ventilation">Plot 3: highest AKI stage by early ventilation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-a-variable-come-from-and-exporting">7. Where does a variable come from? And exporting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-a-definition">Inspecting a definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting">Exporting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moritz Thiele, Pedram Ramezani, and Dario von Wedel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Moritz Thiele, Pedram Ramezani, and Dario von Wedel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
